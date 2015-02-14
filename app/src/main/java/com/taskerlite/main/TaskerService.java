@@ -59,7 +59,7 @@ public class TaskerService extends Service {
             					
             					if(task.isMyTaskAction(action.getActionId())){
             						
-            						mTask taskObj = (mTask) task.getObj();
+            						mTask taskObj = (mTask) task.getTaskObject();
             						taskObj.start(getApplicationContext());
             					}
             				}

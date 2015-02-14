@@ -40,7 +40,7 @@ public class FragmentTaskList extends Fragment {
 
 		this.inflater = inflater;
 		activity = getActivity();
-		context  = getActivity();
+		context  = (Context) getActivity();
 
         sceneList = MainActivity.sceneList;
 

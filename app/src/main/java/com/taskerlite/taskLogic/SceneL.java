@@ -97,12 +97,9 @@ public class SceneL {
 		public mAction getActionObject() {
 			
 			if(actionObject == null){
-				
-				Class deserializationClass = null;
-				
 				switch (actionType) {
 				case TIMER:
-					deserializationClass = aTimer.class;
+                    actionObject = new GsonBuilder().create().fromJson(actionINStr, aTimer.class);
 					break;
 				case FINISHBOOT:
 					break;
@@ -113,8 +110,6 @@ public class SceneL {
 				default:
 					break;
 				}
-				
-				actionObject = new GsonBuilder().create().fromJson(actionINStr, mAction.class);
 			}
 			
 			return actionObject;
@@ -127,7 +122,7 @@ public class SceneL {
 	
 	public class Task{
 		
-		private transient mTask obj;
+		private transient mTask taskObject;
 		private TASK_TYPE taskType;
 		private String taskINStr;
 		private String taskName; 
@@ -138,7 +133,7 @@ public class SceneL {
 		public Task(String objName, mTask obj, TASK_TYPE objType){
 			
 			this.taskName = objName;
-			this.obj = obj;	
+			this.taskObject = obj;
 			this.taskType = objType;
 			
 			taskId = System.currentTimeMillis();
@@ -146,18 +141,15 @@ public class SceneL {
 		}
 		
 		@SuppressWarnings({ "unchecked", "rawtypes" })
-		public mTask getObj() {
+		public mTask getTaskObject() {
 			
-			if(obj == null){
-				
-				Class deserializationClass = null;
-				
+			if(taskObject == null){
 				switch (taskType) {
 				case APP:
-					deserializationClass = tApp.class;
+                    taskObject = new GsonBuilder().create().fromJson(taskINStr, tApp.class);
 					break;
 				case WIFI:
-					deserializationClass = tApp.class;
+                    taskObject = new GsonBuilder().create().fromJson(taskINStr, tApp.class);
 					break;
 				case ALARM:
 					break;
@@ -166,11 +158,9 @@ public class SceneL {
 				default:
 					break;
 				}
-				
-				obj = new GsonBuilder().create().fromJson(taskINStr, mTask.class);
 			}
 			
-			return obj;
+			return taskObject;
 		}
 		public String getTaskName() {
 			return taskName;
