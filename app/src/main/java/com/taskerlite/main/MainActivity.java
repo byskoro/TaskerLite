@@ -22,7 +22,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         //sceneList = Flash.getList();
-
+//
 
         sceneList = new SceneL();
 
