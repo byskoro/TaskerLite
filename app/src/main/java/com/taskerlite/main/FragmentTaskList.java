@@ -19,6 +19,7 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
@@ -49,49 +50,55 @@ public class FragmentTaskList extends Fragment {
 		mListView.setAdapter(mAdapter);
 		mListView.setMenuCreator(creator);
 		mListView.setOnMenuItemClickListener(itemClickListener);
-		
-		return view;
+        mListView.setOnItemClickListener(onSceneClickListener);
+
+        return view;
 	}
 	
 	SwipeMenuCreator creator = new SwipeMenuCreator() {
 		@Override
 		public void create(SwipeMenu menu) {
-			// create "open" item
-			SwipeMenuItem openItem = new SwipeMenuItem(context);
-			openItem.setBackground(new ColorDrawable(Color.rgb(0xC9, 0xC9, 0xCE)));
-			// set item width
-			openItem.setWidth(dp2px(90));
-			// set item title
-			openItem.setTitle("Activate");
-			// set item title fontsize
-			openItem.setTitleSize(18);
-			// set item title font color
-			openItem.setTitleColor(Color.WHITE);
-			// add to menu
-			menu.addMenuItem(openItem);
 
-			// create "delete" item
+			SwipeMenuItem onItem = new SwipeMenuItem(context);
+			onItem.setBackground(new ColorDrawable(Color.rgb(0xC9, 0xC9, 0xCE)));
+			onItem.setWidth(dp2px(90));
+			onItem.setTitle("ON");
+			onItem.setTitleSize(18);
+			onItem.setTitleColor(Color.WHITE);
+			menu.addMenuItem(onItem);
+
+            SwipeMenuItem offItem = new SwipeMenuItem(context);
+            offItem.setBackground(new ColorDrawable(Color.rgb(0xC9, 0xC9, 0xCE)));
+            offItem.setWidth(dp2px(90));
+            offItem.setTitle("OFF");
+            offItem.setTitleSize(18);
+            offItem.setTitleColor(Color.WHITE);
+            menu.addMenuItem(offItem);
+
 			SwipeMenuItem deleteItem = new SwipeMenuItem(context);
-			// set item background
 			deleteItem.setBackground(new ColorDrawable(Color.rgb(0xF9,0x3F, 0x25)));
-			// set item width
 			deleteItem.setWidth(dp2px(90));
-			// set a icon
 			deleteItem.setIcon(R.drawable.ic_delete);
-			// add to menu
 			menu.addMenuItem(deleteItem);
 		}
 	};
+
+    AdapterView.OnItemClickListener onSceneClickListener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+            getFragmentManager().beginTransaction().
+            replace(R.id.fragmentConteiner, MainActivity.taskBuilderFragment).
+            commit();
+        }
+    };
 	
 	OnMenuItemClickListener itemClickListener = new OnMenuItemClickListener() {
 		@Override
 		public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
+
 			switch (index) {
 			case 0:
-				
-				getFragmentManager().beginTransaction().
-				replace(R.id.fragmentConteiner, new FragmentTaskBuilder()).
-				commit();
 				
 				break;
 			case 1:
@@ -141,6 +148,5 @@ public class FragmentTaskList extends Fragment {
 	
 	sl.getScene(0).addNewAction("Action_1", new aTimer(20, 31), ACTION_TYPE.TIMER, 0, 0);
 	sl.getScene(0).addNewTask("startSkype", new tApp("com.skype.raider"), TASK_TYPE.APP);
-	
 
 */

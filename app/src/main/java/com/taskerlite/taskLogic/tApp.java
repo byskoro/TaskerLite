@@ -18,7 +18,7 @@ public class tApp extends mTask{
 		
 		Intent i = new Intent(Intent.ACTION_MAIN);
     	PackageManager manager = context.getPackageManager();
-    	i = manager.getLaunchIntentForPackage("com.skype.raider").addCategory(Intent.CATEGORY_LAUNCHER);
+    	i = manager.getLaunchIntentForPackage(link).addCategory(Intent.CATEGORY_LAUNCHER);
     	context.startActivity(i);
 	}
 

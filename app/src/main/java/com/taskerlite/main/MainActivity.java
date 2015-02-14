@@ -13,8 +13,8 @@ import com.taskerlite.taskLogic.tApp;
 public class MainActivity extends Activity {
 
     public static SceneL sceneList;
-    FragmentTaskList taskListFragment;
-    FragmentTaskBuilder taskBuilderFragment;
+    public static FragmentTaskList taskListFragment;
+    public static FragmentTaskBuilder taskBuilderFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,10 +25,10 @@ public class MainActivity extends Activity {
 
         sceneList = new SceneL();
 
-        sceneList.addNewSnene("Scene 1");
+        sceneList.addNewSnene("Test Scene");
 
-        sceneList.getScene(0).addNewAction("Action_1", new aTimer(17, 27), SceneL.ACTION_TYPE.TIMER, 0, 0);
-        sceneList.getScene(0).addNewTask("startSkype", new tApp("com.skype.raider"), SceneL.TASK_TYPE.APP);
+        sceneList.getScene(0).addNewAction("Timer", new aTimer(17, 27), SceneL.ACTION_TYPE.TIMER, 0, 0);
+        sceneList.getScene(0).addNewTask("Skype", new tApp("com.skype.raider"), SceneL.TASK_TYPE.APP);
 
         Flash.saveList(sceneList);
 
