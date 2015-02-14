@@ -64,8 +64,8 @@ public class FragmentTaskList extends Fragment {
         topLayout.post(new Runnable() {
             public void run() {
                 int height = topLayout.getHeight();
-                RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(new ViewGroup.MarginLayoutParams(dp2px(56), dp2px(56)));
-                lp.setMargins(dp2px(20), height - dp2px(56 / 2), 0, 0);
+                RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(new ViewGroup.MarginLayoutParams(dp2px(40), dp2px(40)));
+                lp.setMargins(dp2px(20), height - dp2px(40 / 2), 0, 0);
                 buttonPlus.setLayoutParams(lp);
             }
         });
