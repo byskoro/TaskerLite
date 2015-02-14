@@ -56,7 +56,7 @@ public class SceneL {
 			taskList.add(new Task(objName, obj, objType));
 			
 			//for test
-			taskList.get(0).setTaskActioId(actionList.get(0).getActionId());
+			taskList.get(0).setTaskActionId(actionList.get(0).getActionId());
 		}		
 		
 		public String getName() {
@@ -114,7 +114,7 @@ public class SceneL {
 					break;
 				}
 				
-				actionObject = new GsonBuilder().create().fromJson(actionINStr, deserializationClass);
+				actionObject = new GsonBuilder().create().fromJson(actionINStr, mAction.class);
 			}
 			
 			return actionObject;
@@ -131,7 +131,7 @@ public class SceneL {
 		private TASK_TYPE taskType;
 		private String taskINStr;
 		private String taskName; 
-		private long taskActioId;
+		private long taskActionId;
 		private long taskId;
 		private int xCoordinate, yCoordinate;
 		
@@ -167,7 +167,7 @@ public class SceneL {
 					break;
 				}
 				
-				obj = new GsonBuilder().create().fromJson(taskINStr, deserializationClass);
+				obj = new GsonBuilder().create().fromJson(taskINStr, mTask.class);
 			}
 			
 			return obj;
@@ -179,10 +179,10 @@ public class SceneL {
 			return id == taskId ? true : false;
 		}
 		public boolean isMyTaskAction(long id) {
-			return id == taskActioId ? true : false;
+			return id == taskActionId ? true : false;
 		}		
-		public void setTaskActioId(long taskActioId) {
-			this.taskActioId = taskActioId;
+		public void setTaskActionId(long taskActionId) {
+			this.taskActionId = taskActionId;
 		}
 		public int getXCoordinate() {
 			return xCoordinate;
