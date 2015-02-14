@@ -58,7 +58,6 @@ public class FragmentTaskList extends Fragment {
         mListView.setOnMenuItemClickListener(itemClickListener);
         mListView.setOnItemClickListener(onSceneClickListener);
 
-
         topLayout = (LinearLayout) view.findViewById(R.id.topLayout);
         buttonPlus = (ImageButton) view.findViewById(R.id.btnPlus);
 
@@ -106,8 +105,8 @@ public class FragmentTaskList extends Fragment {
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
             getFragmentManager().beginTransaction().
-                    replace(R.id.fragmentConteiner, MainActivity.taskBuilderFragment).
-                    commit();
+            replace(R.id.fragmentConteiner, MainActivity.taskBuilderFragment).
+            commit();
         }
     };
 
