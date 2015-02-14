@@ -1,6 +1,7 @@
 package com.taskerlite.main;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -42,4 +43,15 @@ public class MainActivity extends Activity {
             startService(new Intent(this, TaskerService.class));
     }
 
+    @Override
+    public void onBackPressed() {
+
+        Fragment f = getFragmentManager().findFragmentById(R.id.fragmentConteiner);
+        if (f instanceof FragmentTaskList)
+            super.onBackPressed();
+
+        getFragmentManager().beginTransaction().
+                replace(R.id.fragmentConteiner, MainActivity.taskListFragment).
+                commit();
+    }
 }
