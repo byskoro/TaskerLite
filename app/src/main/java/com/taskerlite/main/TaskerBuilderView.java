@@ -22,7 +22,7 @@ public class TaskerBuilderView extends View{
         public void shortPress(MotionEvent event);
         public void longPress(MotionEvent event);
         public void movement(MotionEvent event);
-        public void drawView(Canvas canvas, MotionEvent event);
+        public void onDrawView(Canvas canvas, MotionEvent event);
         public void prepareResource(int w, int h);
     }
 
@@ -89,6 +89,6 @@ public class TaskerBuilderView extends View{
     }
 
     public void draw(Canvas canvas) {
-        viewCallBack.drawView(canvas, event);
+        viewCallBack.onDrawView(canvas, event);
 	}
 }

@@ -61,7 +61,7 @@ public class TaskBuilder extends Fragment {
         }
 
         @Override
-        public void drawView(Canvas canvas, MotionEvent event) {
+        public void onDrawView(Canvas canvas, MotionEvent event) {
 
             try{
 
