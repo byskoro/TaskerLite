@@ -41,9 +41,9 @@ public class TaskerView extends View{
     
     final Handler handler = new Handler(); 
     Runnable mLongPressed = new Runnable() { 
-        public void run() { 
-            Toast.makeText(context, "Long press", Toast.LENGTH_SHORT).show();
-            Vibro.playShort(context);
+        public void run() {
+            Vibro.playLong(context);
+            isOnClick = false;
         }   
     };
     
@@ -54,28 +54,33 @@ public class TaskerView extends View{
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-  /*  	
-    	if(event.getAction() == MotionEvent.ACTION_DOWN) 
-    		handler.postDelayed(mLongPressed, 1000); 
-    	if((event.getAction() == MotionEvent.ACTION_UP)) 
-    		handler.removeCallbacks(mLongPressed);     	
-   */ 	
+
     	switch (event.getAction() & MotionEvent.ACTION_MASK) {
-    		case MotionEvent.ACTION_DOWN: 
+    		case MotionEvent.ACTION_DOWN:
+
     			mDownX = event.getX(); 
     			mDownY = event.getY(); 
     			isOnClick = true;
-    			break;
+                handler.postDelayed(mLongPressed, 1000);
+
+                break;
     		case MotionEvent.ACTION_CANCEL:
     		case MotionEvent.ACTION_MOVE:
-    			if (isOnClick && (Math.abs(mDownX - event.getX()) > SCROLL_THRESHOLD ||Math.abs(mDownY - event.getY()) > SCROLL_THRESHOLD)) {   
-    				// movement detected
-    				isOnClick = false; 
+
+    			if (isOnClick && (Math.abs(mDownX - event.getX()) > SCROLL_THRESHOLD ||Math.abs(mDownY - event.getY()) > SCROLL_THRESHOLD)) {
+    				isOnClick = false;
+                    handler.removeCallbacks(mLongPressed);
+                    Vibro.playMovement(context);
     			}
+
     			break; 
     		case MotionEvent.ACTION_UP:
+
+                handler.removeCallbacks(mLongPressed);
+
     			if (isOnClick) {
-    				// onClick code 
+                    Vibro.playShort(context);
+
     			}
     			break; 
     		}  

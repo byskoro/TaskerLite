@@ -119,6 +119,9 @@ public class FragmentTaskList extends Fragment {
 
                     break;
                 case 1:
+
+                    break;
+                case 2:
                     sceneList.removeSceneFromList(position);
                     mAdapter.notifyDataSetChanged();
                     break;
