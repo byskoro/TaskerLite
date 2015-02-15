@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <com.taskerlite.ui.TaskerView
+    <com.taskerlite.main.TaskerBuilderView
         android:id="@+id/dot"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

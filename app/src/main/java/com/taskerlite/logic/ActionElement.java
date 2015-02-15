@@ -3,9 +3,9 @@ package com.taskerlite.logic;
 import com.google.gson.GsonBuilder;
 import com.taskerlite.logic.actions.aTimer;
 import com.taskerlite.logic.actions.mAction;
-import com.taskerlite.logic.SceneList.*;
+import com.taskerlite.logic.actions.mAction.*;
 
-public class ActionDescription {
+public class ActionElement {
 
     private transient mAction actionObject;
     private ACTION_TYPE actionType;
@@ -14,7 +14,7 @@ public class ActionDescription {
     private long actionId;
     private int xCoordinate, yCoordinate;
 
-    public ActionDescription(String actionName, mAction actionObject, ACTION_TYPE actionType, int xCoordinate, int yCoordinate){
+    public ActionElement(String actionName, mAction actionObject, ACTION_TYPE actionType, int xCoordinate, int yCoordinate){
 
         this.actionName = actionName;
         this.actionType = actionType;
@@ -26,7 +26,6 @@ public class ActionDescription {
         actionINStr = new GsonBuilder().create().toJson(actionObject);
     }
 
-    @SuppressWarnings({ "unchecked", "rawtypes" })
     public mAction getActionObject() {
 
         if(actionObject == null){

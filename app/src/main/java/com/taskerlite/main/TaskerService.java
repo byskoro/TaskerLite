@@ -3,6 +3,7 @@ package com.taskerlite.main;
 import java.util.Calendar;
 
 import com.taskerlite.logic.actions.mAction;
+import com.taskerlite.logic.actions.mAction.*;
 import com.taskerlite.other.Flash;
 import com.taskerlite.logic.SceneList.*;
 import com.taskerlite.logic.*;
@@ -26,7 +27,7 @@ public class TaskerService extends Service {
 
     	newDataCome = true;
         
-    	serviceHandler.sendEmptyMessageDelayed(0, generateOfsetTime());
+    	serviceHandler.sendEmptyMessageDelayed(0, generateOffsetTime());
     	
         return Service.START_STICKY;
     }
@@ -51,13 +52,13 @@ public class TaskerService extends Service {
             	
             	for(Scene scene : sceneList.getSceneList()){
             		
-            		for(ActionDescription action : scene.getActionList()){
+            		for(ActionElement action : scene.getActionList()){
             			
             			mAction actionObj = (mAction) action.getActionObject();
             			
             			if(actionObj.isMyAction(getApplicationContext(), ACTION_TYPE.TIMER)){
             				
-            				for(TaskDescription task : scene.getTaskList()){
+            				for(TaskElement task : scene.getTaskList()){
             					
             					if(task.isMyTaskAction(action.getActionId())){
             						
@@ -71,7 +72,7 @@ public class TaskerService extends Service {
         		
 			} catch (Exception e) { }
         	
-        	serviceHandler.sendEmptyMessageDelayed(0, generateOfsetTime());
+        	serviceHandler.sendEmptyMessageDelayed(0, generateOffsetTime());
         };
     };
     
@@ -87,7 +88,7 @@ public class TaskerService extends Service {
         return false;
     }
     
-    private long generateOfsetTime(){
+    private long generateOffsetTime(){
     	
     	Calendar cal = Calendar.getInstance();
     	int minutes = cal.get(Calendar.MINUTE);

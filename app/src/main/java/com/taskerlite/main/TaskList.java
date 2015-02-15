@@ -26,7 +26,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-public class FragmentTaskList extends Fragment {
+public class TaskList extends Fragment {
 
     SceneList sceneList;
 

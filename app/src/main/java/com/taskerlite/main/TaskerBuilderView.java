@@ -1,4 +1,4 @@
-package com.taskerlite.ui;
+package com.taskerlite.main;
 
 import com.taskerlite.other.ScreenConverter;
 import com.taskerlite.other.Vibro;
@@ -13,7 +13,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
-public class TaskerView extends View{
+public class TaskerBuilderView extends View{
 	
     Context context;
 
@@ -22,7 +22,7 @@ public class TaskerView extends View{
     private Paint myPaint;
     private Paint backgroundPaint;
 
-    public TaskerView(Context context, AttributeSet attrs) {
+    public TaskerBuilderView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         this.context = context;

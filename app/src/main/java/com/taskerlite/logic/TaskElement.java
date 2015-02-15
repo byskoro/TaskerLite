@@ -2,10 +2,10 @@ package com.taskerlite.logic;
 
 import com.google.gson.GsonBuilder;
 import com.taskerlite.logic.tasks.mTask;
+import com.taskerlite.logic.tasks.mTask.*;
 import com.taskerlite.logic.tasks.tApp;
-import com.taskerlite.logic.SceneList.*;
 
-public class TaskDescription {
+public class TaskElement {
 
     private transient mTask taskObject;
     private TASK_TYPE taskType;
@@ -15,7 +15,7 @@ public class TaskDescription {
     private long taskId;
     private int xCoordinate, yCoordinate;
 
-    public TaskDescription(String objName, mTask obj, TASK_TYPE objType){
+    public TaskElement(String objName, mTask obj, TASK_TYPE objType){
 
         this.taskName = objName;
         this.taskObject = obj;
@@ -25,7 +25,6 @@ public class TaskDescription {
         taskINStr = new GsonBuilder().create().toJson(obj);
     }
 
-    @SuppressWarnings({ "unchecked", "rawtypes" })
     public mTask getTaskObject() {
 
         if(taskObject == null){

@@ -1,15 +1,12 @@
 package com.taskerlite.logic;
 
 import com.taskerlite.logic.actions.mAction;
+import com.taskerlite.logic.actions.mAction.*;
 import com.taskerlite.logic.tasks.mTask;
-
+import com.taskerlite.logic.tasks.mTask.*;
 import java.util.ArrayList;
 
-
 public class SceneList {
-
-	public static enum ACTION_TYPE {TIMER, FINISHBOOT, SCREENON, SCREENOFF};
-	public static enum TASK_TYPE {APP, ALARM, WIFI, MOBILEDATA};
 	
 	private ArrayList<Scene> sceneList = new ArrayList<Scene>();
 	
@@ -39,8 +36,8 @@ public class SceneList {
 	public class Scene{
 		
 		private String name;
-		private ArrayList<ActionDescription> actionList = new ArrayList<ActionDescription>();
-		private ArrayList<TaskDescription>   taskList = new ArrayList<TaskDescription>();
+		private ArrayList<ActionElement> actionList = new ArrayList<ActionElement>();
+		private ArrayList<TaskElement>   taskList = new ArrayList<TaskElement>();
 		
 		public Scene(String sceneName){
 			
@@ -49,12 +46,12 @@ public class SceneList {
 		
 		public void addNewAction(String actionName, mAction actionObject, ACTION_TYPE actionType, int xCoordinate, int yCoordinate){
 			
-			actionList.add(new ActionDescription(actionName, actionObject, actionType, xCoordinate, yCoordinate));
+			actionList.add(new ActionElement(actionName, actionObject, actionType, xCoordinate, yCoordinate));
 		}
 		
 		public void addNewTask(String objName, mTask obj, TASK_TYPE objType){
 			
-			taskList.add(new TaskDescription(objName, obj, objType));
+			taskList.add(new TaskElement(objName, obj, objType));
 			
 			//for test
 			taskList.get(0).setTaskActionId(actionList.get(0).getActionId());
@@ -63,10 +60,10 @@ public class SceneList {
 		public String getName() {
 			return name;
 		}
-		public ArrayList<TaskDescription> getTaskList() {
+		public ArrayList<TaskElement> getTaskList() {
 			return taskList;
 		}
-		public ArrayList<ActionDescription> getActionList() {
+		public ArrayList<ActionElement> getActionList() {
 			return actionList;
 		}
 	}
