@@ -11,7 +11,6 @@ import android.os.Handler;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Toast;
 
 public class TaskerBuilderView extends View{
 	
@@ -21,6 +20,19 @@ public class TaskerBuilderView extends View{
     private float y = 0;
     private Paint myPaint;
     private Paint backgroundPaint;
+
+    private float mDownX;
+    private float mDownY;
+    private float SCROLL_THRESHOLD = 10;
+    private boolean isOnClick;
+
+    interface ViewCallBack{
+        public void shortPress();
+        public void longPress();
+        public void movement();
+    }
+
+    ViewCallBack viewCallBack;
 
     public TaskerBuilderView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -34,19 +46,18 @@ public class TaskerBuilderView extends View{
         myPaint.setColor(Color.WHITE);
         myPaint.setAntiAlias(true);
     }
+
+    public void setViewCallBack(ViewCallBack viewCallBack){
+        this.viewCallBack = viewCallBack;
+    }
     
     final Handler handler = new Handler(); 
-    Runnable mLongPressed = new Runnable() { 
+    Runnable mLongPressed = new Runnable() {
         public void run() {
-            Vibro.playLong(context);
             isOnClick = false;
+            viewCallBack.longPress();
         }   
     };
-
-    private float mDownX;
-    private float mDownY;
-    private float SCROLL_THRESHOLD = 10;
-    private boolean isOnClick;
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -67,12 +78,10 @@ public class TaskerBuilderView extends View{
 
     				isOnClick = false;
                     handler.removeCallbacks(mLongPressed);
-                    Vibro.playMovement(context);
+                    viewCallBack.movement();
 
                     x = event.getX();
                     y = event.getY();
-
-                    postInvalidate();
     			}
 
     			break; 
@@ -80,10 +89,9 @@ public class TaskerBuilderView extends View{
 
                 handler.removeCallbacks(mLongPressed);
 
-    			if (isOnClick) {
-                    Vibro.playShort(context);
+    			if (isOnClick)
+                    viewCallBack.shortPress();
 
-    			}
     			break; 
     		}  
     
@@ -96,7 +104,5 @@ public class TaskerBuilderView extends View{
 		int height = canvas.getHeight();
 		canvas.drawRect(0, 0, width, height, backgroundPaint);
         canvas.drawRect(x, y, x + ScreenConverter.dp2px(context, 56), y + ScreenConverter.dp2px(context, 56), myPaint);
-		//invalidate();
 	}
-
 }
