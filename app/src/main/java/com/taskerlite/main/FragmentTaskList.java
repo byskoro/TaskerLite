@@ -6,8 +6,8 @@ import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.baoyz.swipemenulistview.SwipeMenuListView.OnMenuItemClickListener;
 import com.taskerlite.R;
-import com.taskerlite.taskLogic.SceneL;
-import com.taskerlite.taskLogic.SceneL.*;
+import com.taskerlite.logic.SceneList;
+import com.taskerlite.logic.SceneList.*;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -28,7 +28,7 @@ import android.widget.TextView;
 
 public class FragmentTaskList extends Fragment {
 
-    SceneL sceneList;
+    SceneList sceneList;
 
     LayoutInflater inflater;
     Activity activity;
@@ -161,13 +161,3 @@ public class FragmentTaskList extends Fragment {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, getResources().getDisplayMetrics());
     }
 }
-
-/*
-
-	sl.addNewSnene("Scene 1");
-	
-	sl.getScene(0).addNewAction("Action_1", new aTimer(20, 31), ACTION_TYPE.TIMER, 0, 0);
-	sl.getScene(0).addNewTask("startSkype", new tApp("com.skype.raider"), TASK_TYPE.APP);
-	
-
-*/

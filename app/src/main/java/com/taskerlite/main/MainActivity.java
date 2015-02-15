@@ -1,19 +1,18 @@
 package com.taskerlite.main;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 
 import com.taskerlite.R;
+import com.taskerlite.logic.actions.aTimer;
 import com.taskerlite.other.Flash;
-import com.taskerlite.taskLogic.SceneL;
-import com.taskerlite.taskLogic.aTimer;
-import com.taskerlite.taskLogic.tApp;
+import com.taskerlite.logic.SceneList;
+import com.taskerlite.logic.tasks.tApp;
 
 public class MainActivity extends Activity {
 
-    public static SceneL sceneList;
+    public static SceneList sceneList;
     public static FragmentTaskList taskListFragment;
     public static FragmentTaskBuilder taskBuilderFragment;
 
@@ -24,10 +23,10 @@ public class MainActivity extends Activity {
 
         //sceneList = Flash.getList();
 
-        sceneList = new SceneL();
+        sceneList = new SceneList();
         sceneList.addNewSnene("Test Scene");
-        sceneList.getScene(0).addNewAction("Timer", new aTimer(17, 27), SceneL.ACTION_TYPE.TIMER, 0, 0);
-        sceneList.getScene(0).addNewTask("Skype", new tApp("com.skype.raider"), SceneL.TASK_TYPE.APP);
+        sceneList.getScene(0).addNewAction("Timer", new aTimer(17, 27), SceneList.ACTION_TYPE.TIMER, 0, 0);
+        sceneList.getScene(0).addNewTask("Skype", new tApp("com.skype.raider"), SceneList.TASK_TYPE.APP);
         Flash.saveList(sceneList);
 
         taskListFragment    = new FragmentTaskList();

@@ -1,10 +1,10 @@
-package com.taskerlite.taskLogic;
+package com.taskerlite.logic.tasks;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 
-public class tApp extends mTask{
+public class tApp extends mTask {
 		
 	String link;	
 	

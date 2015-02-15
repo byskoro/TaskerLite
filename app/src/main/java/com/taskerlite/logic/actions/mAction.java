@@ -1,7 +1,7 @@
-package com.taskerlite.taskLogic;
+package com.taskerlite.logic.actions;
 
 import android.content.Context;
-import com.taskerlite.taskLogic.SceneL.*;
+import com.taskerlite.logic.SceneList.*;
 
 public abstract class mAction {
 

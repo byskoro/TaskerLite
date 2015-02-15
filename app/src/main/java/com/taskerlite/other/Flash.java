@@ -11,11 +11,11 @@ import android.os.Environment;
 
 import com.google.gson.GsonBuilder;
 import com.taskerlite.main.TaskerService;
-import com.taskerlite.taskLogic.SceneL;
+import com.taskerlite.logic.SceneList;
 
 public class Flash {
 
-	public static void saveList(SceneL obj){
+	public static void saveList(SceneList obj){
 		
 		try {
 			
@@ -37,9 +37,9 @@ public class Flash {
 		} catch (Exception e) { }
 	}
 	
-	public static SceneL getList(){
+	public static SceneList getList(){
 		
-		SceneL sl = null;
+		SceneList sl = null;
 		String rBuffer = "";
 		
 		try {
@@ -52,10 +52,10 @@ public class Flash {
 	            rBuffer += aDataRow ;
 	        myReader.close();
 	        
-	        sl = new GsonBuilder().create().fromJson(rBuffer, SceneL.class);
+	        sl = new GsonBuilder().create().fromJson(rBuffer, SceneList.class);
 			
 		} catch (Exception e) { }		
 
-		return sl == null ? new SceneL() : sl;
+		return sl == null ? new SceneList() : sl;
 	} 
 }

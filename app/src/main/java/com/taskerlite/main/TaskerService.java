@@ -2,9 +2,11 @@ package com.taskerlite.main;
 
 import java.util.Calendar;
 
+import com.taskerlite.logic.actions.mAction;
 import com.taskerlite.other.Flash;
-import com.taskerlite.taskLogic.SceneL.*;
-import com.taskerlite.taskLogic.*;
+import com.taskerlite.logic.SceneList.*;
+import com.taskerlite.logic.*;
+import com.taskerlite.logic.tasks.mTask;
 
 import android.app.ActivityManager;
 import android.app.Service;
@@ -17,7 +19,7 @@ import android.os.Message;
 public class TaskerService extends Service {
 
 	public static boolean newDataCome = false;
-	private SceneL sceneList;
+	private SceneList sceneList;
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -49,13 +51,13 @@ public class TaskerService extends Service {
             	
             	for(Scene scene : sceneList.getSceneList()){
             		
-            		for(Action action : scene.getActionList()){
+            		for(ActionDescription action : scene.getActionList()){
             			
             			mAction actionObj = (mAction) action.getActionObject();
             			
             			if(actionObj.isMyAction(getApplicationContext(), ACTION_TYPE.TIMER)){
             				
-            				for(Task task : scene.getTaskList()){     
+            				for(TaskDescription task : scene.getTaskList()){
             					
             					if(task.isMyTaskAction(action.getActionId())){
             						

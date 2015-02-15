@@ -1,5 +1,6 @@
 package com.taskerlite.ui;
 
+import com.taskerlite.other.ScreenConverter;
 import com.taskerlite.other.Vibro;
 
 import android.content.Context;
@@ -15,14 +16,9 @@ import android.widget.Toast;
 public class TaskerView extends View{
 	
     Context context;
-    
-    private static final float RADIUS = 20;
-    private float x = 30;
-    private float y = 30;
-    private float initialX;
-    private float initialY;
-    private float offsetX;
-    private float offsetY;
+
+    private float x = 0;
+    private float y = 0;
     private Paint myPaint;
     private Paint backgroundPaint;
 
@@ -46,10 +42,10 @@ public class TaskerView extends View{
             isOnClick = false;
         }   
     };
-    
-    private float mDownX; 
+
+    private float mDownX;
     private float mDownY;
-    private final float SCROLL_THRESHOLD = 10; 
+    private float SCROLL_THRESHOLD = 10;
     private boolean isOnClick;
 
     @Override
@@ -67,10 +63,16 @@ public class TaskerView extends View{
     		case MotionEvent.ACTION_CANCEL:
     		case MotionEvent.ACTION_MOVE:
 
-    			if (isOnClick && (Math.abs(mDownX - event.getX()) > SCROLL_THRESHOLD ||Math.abs(mDownY - event.getY()) > SCROLL_THRESHOLD)) {
+    			if ((Math.abs(mDownX - event.getX()) > SCROLL_THRESHOLD ||Math.abs(mDownY - event.getY()) > SCROLL_THRESHOLD)) {
+
     				isOnClick = false;
                     handler.removeCallbacks(mLongPressed);
                     Vibro.playMovement(context);
+
+                    x = event.getX();
+                    y = event.getY();
+
+                    postInvalidate();
     			}
 
     			break; 
@@ -87,33 +89,14 @@ public class TaskerView extends View{
     
     	return true;
     }
-    	
- /*   	
-        int action = event.getAction();
-        switch (action) {
-        case MotionEvent.ACTION_DOWN:
-          initialX = x;
-          initialY = y;
-          offsetX = event.getX();
-          offsetY = event.getY();
-          break;
-        case MotionEvent.ACTION_MOVE:
-        case MotionEvent.ACTION_UP:
-        case MotionEvent.ACTION_CANCEL:
-          x = initialX + event.getX() - offsetX;
-          y = initialY + event.getY() - offsetY;
-          break;
-        }
-        return (true);
-*/
 
 	public void draw(Canvas canvas) {
 		
 		int width = canvas.getWidth();
 		int height = canvas.getHeight();
 		canvas.drawRect(0, 0, width, height, backgroundPaint);
-		canvas.drawCircle(x, y, RADIUS, myPaint);
-		invalidate();
+        canvas.drawRect(x, y, x + ScreenConverter.dp2px(context, 56), y + ScreenConverter.dp2px(context, 56), myPaint);
+		//invalidate();
 	}
 
 }

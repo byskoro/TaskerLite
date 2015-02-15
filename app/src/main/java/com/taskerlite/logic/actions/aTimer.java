@@ -1,12 +1,13 @@
-package com.taskerlite.taskLogic;
+package com.taskerlite.logic.actions;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import com.taskerlite.taskLogic.SceneL.*;
+
+import com.taskerlite.logic.SceneList.*;
 
 import android.content.Context;
 
-public class aTimer extends mAction{
+public class aTimer extends mAction {
 
 	private int hour, minutes;
 	

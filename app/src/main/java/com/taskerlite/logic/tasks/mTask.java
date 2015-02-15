@@ -1,4 +1,4 @@
-package com.taskerlite.taskLogic;
+package com.taskerlite.logic.tasks;
 
 import android.content.Context;
 
