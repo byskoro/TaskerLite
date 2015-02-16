@@ -10,6 +10,8 @@ import android.app.Fragment;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -22,8 +24,10 @@ public class TaskBuilder extends Fragment {
     private Context context;
     private Scene scene;
 
-    private int iconSize = mActivity.iconSize;
+    private float iconSize = mActivity.iconSize;
     private static int sceneIndex;
+
+    Paint p;
 
     public static TaskBuilder getInstance(int sceneIndex){
         TaskBuilder.sceneIndex = sceneIndex;
@@ -40,6 +44,11 @@ public class TaskBuilder extends Fragment {
         taskerView.setViewCallBack(viewCallBack);
 
         scene = mActivity.sceneList.getScene(sceneIndex);
+
+        p = new Paint();
+        p.setColor(Color.GREEN);
+        p.setTextSize(30);
+        p.setTextAlign(Paint.Align.CENTER);
 
 		return view;
 	}
@@ -86,16 +95,22 @@ public class TaskBuilder extends Fragment {
 
             try{
 
-                canvas.drawColor(0xffff0000);
+                //canvas.drawColor(0xffff0000);
 
                 for(ActionElement action : scene.getActionList()){
                     Bitmap icon = action.getIcon(context, iconSize);
                     canvas.drawBitmap(icon, action.getX(), action.getY(), null);
+                    float textX = action.getX() + iconSize/2;
+                    float textY = action.getY() + iconSize*1.2f;
+                    canvas.drawText(action.getActionName(), textX, textY, p);
                 }
 
                 for(TaskElement task : scene.getTaskList()){
                     Bitmap icon = task.getIcon(context, iconSize);
                     canvas.drawBitmap(icon, task.getX(), task.getY(), null);
+                    float textX = task.getX() + iconSize/2;
+                    float textY = task.getY() + iconSize*1.2f;
+                    canvas.drawText(task.getTaskName(), textX, textY, p);
                 }
 
             }catch (Exception e){ }

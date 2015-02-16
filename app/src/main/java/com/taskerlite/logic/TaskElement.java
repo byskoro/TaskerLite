@@ -58,7 +58,7 @@ public class TaskElement {
         return taskObject;
     }
 
-    public Bitmap getIcon(Context context, int size) {
+    public Bitmap getIcon(Context context, float size) {
 
         Bitmap bigIcon = null;
 
@@ -76,13 +76,13 @@ public class TaskElement {
                 default:
                     break;
             }
-            icon = Bitmap.createScaledBitmap(bigIcon, size, size, true);
+            icon = Bitmap.createScaledBitmap(bigIcon, (int)size, (int)size, true);
         }
 
         return icon;
     }
 
-    public boolean isSelected(MotionEvent event, int size){
+    public boolean isSelected(MotionEvent event, float size){
 
         if((event.getRawX() > x) && (event.getRawX() < x + size)
             && (event.getRawY() > y) && (event.getRawY() < y + size)){
@@ -97,18 +97,10 @@ public class TaskElement {
         y = (int) event.getY() - mActivity.iconSize/2;
     }
 
-    public String getTaskName() {
-        return taskName;
-    }
-    public boolean isMyTask(long id) {
-        return id == taskId ? true : false;
-    }
-    public boolean isMyTaskAction(long id) {
-        return id == taskActionId ? true : false;
-    }
-    public void setTaskActionId(long taskActionId) {
-        this.taskActionId = taskActionId;
-    }
+    public String getTaskName() { return taskName; }
+    public boolean isMyTask(long id) { return id == taskId ? true : false; }
+    public boolean isMyTaskAction(long id) { return id == taskActionId ? true : false; }
+    public void setTaskActionId(long taskActionId) { this.taskActionId = taskActionId; }
     public int getX() { return x; }
     public int getY() { return y; }
 }
