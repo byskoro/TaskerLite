@@ -3,12 +3,14 @@ package com.taskerlite.logic;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.view.MotionEvent;
 
 import com.google.gson.GsonBuilder;
 import com.taskerlite.R;
 import com.taskerlite.logic.tasks.mTask;
 import com.taskerlite.logic.tasks.mTask.*;
 import com.taskerlite.logic.tasks.tApp;
+import com.taskerlite.main.mActivity;
 
 public class TaskElement {
 
@@ -22,7 +24,7 @@ public class TaskElement {
     private String taskName;
     private long taskActionId;
     private long taskId;
-    private int xCoordinate, yCoordinate;
+    private int x, y;
 
     public TaskElement(String objName, mTask obj, TASK_TYPE objType){
 
@@ -63,7 +65,7 @@ public class TaskElement {
         if(icon == null){
             switch (taskType) {
                 case APP:
-                    bigIcon = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_launcher);
+                    bigIcon = BitmapFactory.decodeResource(context.getResources(), R.drawable.t_app);
                     break;
                 case WIFI:
                     break;
@@ -80,6 +82,21 @@ public class TaskElement {
         return icon;
     }
 
+    public boolean isSelected(MotionEvent event, int size){
+
+        if((event.getRawX() > x) && (event.getRawX() < x + size)
+            && (event.getRawY() > y) && (event.getRawY() < y + size)){
+            return true;
+        }
+        else
+            return false;
+    }
+
+    public void setNewCoordinate(MotionEvent event){
+        x = (int) event.getX() - mActivity.iconSize/2;
+        y = (int) event.getY() - mActivity.iconSize/2;
+    }
+
     public String getTaskName() {
         return taskName;
     }
@@ -92,10 +109,6 @@ public class TaskElement {
     public void setTaskActionId(long taskActionId) {
         this.taskActionId = taskActionId;
     }
-    public int getXCoordinate() {
-        return xCoordinate;
-    }
-    public int getYCoordinate() {
-        return yCoordinate;
-    }
+    public int getX() { return x; }
+    public int getY() { return y; }
 }

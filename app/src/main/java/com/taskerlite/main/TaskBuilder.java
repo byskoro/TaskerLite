@@ -1,6 +1,7 @@
 package com.taskerlite.main;
 
 import com.taskerlite.R;
+import com.taskerlite.logic.ActionElement;
 import com.taskerlite.logic.SceneList.*;
 import com.taskerlite.logic.TaskElement;
 import com.taskerlite.other.Vibro;
@@ -48,38 +49,74 @@ public class TaskBuilder extends Fragment {
         @Override
         public void shortPress(MotionEvent event) {
 
+            // open dialog for settings
             Vibro.playShort(context);
         }
 
         @Override
         public void longPress(MotionEvent event) {
 
+            // select element or show menu for create action/task
             Vibro.playLong(context);
         }
 
         @Override
         public void movement(MotionEvent event) {
 
-            Vibro.playMovement(context);
-            taskerView.postInvalidate();
+            if(findSelectedTask(event) != null) {
+
+                findSelectedTask(event).setNewCoordinate(event);
+                Vibro.playMovement(context);
+                taskerView.postInvalidate();
+
+            } else if(findSelectedAction(event) != null) {
+
+                findSelectedAction(event).setNewCoordinate(event);
+                Vibro.playMovement(context);
+                taskerView.postInvalidate();
+
+            }
         }
 
         @Override
         public void onDrawView(Canvas canvas, MotionEvent event) {
 
             // 1. Take all resource and draw picture
-            // 2. If present relationship draw lines
+            // 2. If present relationship action - task draw a lines
 
             try{
 
                 canvas.drawColor(0xffff0000);
 
+                for(ActionElement action : scene.getActionList()){
+                    Bitmap icon = action.getIcon(context, iconSize);
+                    canvas.drawBitmap(icon, action.getX(), action.getY(), null);
+                }
+
                 for(TaskElement task : scene.getTaskList()){
                     Bitmap icon = task.getIcon(context, iconSize);
-                    canvas.drawBitmap(icon, task.getXCoordinate(), task.getYCoordinate(), null);
+                    canvas.drawBitmap(icon, task.getX(), task.getY(), null);
                 }
 
             }catch (Exception e){ }
         }
     };
+
+    private TaskElement findSelectedTask(MotionEvent event){
+
+        for(TaskElement task : scene.getTaskList()){
+            if(task.isSelected(event, iconSize))
+                return task;
+        }
+        return null;
+    }
+
+    private ActionElement findSelectedAction(MotionEvent event){
+
+        for(ActionElement action : scene.getActionList()){
+            if(action.isSelected(event, iconSize))
+                return action;
+        }
+        return null;
+    }
 }
