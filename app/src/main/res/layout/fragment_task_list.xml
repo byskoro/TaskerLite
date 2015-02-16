@@ -18,7 +18,6 @@
             android:id="@+id/topLayout"
             android:background="#fffe5f55">
 
-
             <LinearLayout
                 android:id="@+id/Top"
                 android:layout_width="match_parent"
@@ -27,26 +26,28 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/timeToDoTask"
+                <com.taskerlite.AutoResizeTextView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
                     android:text="19:00"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textSize="70sp"
-                    android:layout_weight="1"
-                    android:gravity="center" />
+                    android:maxLines="1"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:textColor="#ffffffff"
+                    android:textSize="500sp" />
 
-                <TextView
+                <com.taskerlite.AutoResizeTextView
                     android:id="@+id/taskName"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:text="Name jgjhg gkg"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textSize="30sp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:textIsSelectable="false" />
+                    android:text="Name jgjhg gkg 123123 qwe qw12"
+                    android:textSize="500sp"
+                    android:textColor="#ffffffff"
+                    android:maxLines="2"
+                    android:layout_weight="0.5"
+                    android:padding="5dp"
+                    android:gravity="center" />
             </LinearLayout>
 
             <LinearLayout
@@ -91,8 +92,7 @@
                 android:id="@+id/listView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:divider="#00000000"
-                />
+                android:divider="#00000000" />
 
         </LinearLayout>
     </LinearLayout>

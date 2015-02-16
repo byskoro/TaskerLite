@@ -46,8 +46,8 @@ public class TaskBuilder extends Fragment {
         scene = mActivity.sceneList.getScene(sceneIndex);
 
         p = new Paint();
-        p.setColor(Color.GREEN);
-        p.setTextSize(30);
+        p.setColor(Color.WHITE);
+        p.setTextSize(35);
         p.setTextAlign(Paint.Align.CENTER);
 
 		return view;
@@ -95,13 +95,11 @@ public class TaskBuilder extends Fragment {
 
             try{
 
-                //canvas.drawColor(0xffff0000);
-
                 for(ActionElement action : scene.getActionList()){
                     Bitmap icon = action.getIcon(context, iconSize);
                     canvas.drawBitmap(icon, action.getX(), action.getY(), null);
                     float textX = action.getX() + iconSize/2;
-                    float textY = action.getY() + iconSize*1.2f;
+                    float textY = action.getY() + iconSize*1.3f;
                     canvas.drawText(action.getActionName(), textX, textY, p);
                 }
 
@@ -109,7 +107,7 @@ public class TaskBuilder extends Fragment {
                     Bitmap icon = task.getIcon(context, iconSize);
                     canvas.drawBitmap(icon, task.getX(), task.getY(), null);
                     float textX = task.getX() + iconSize/2;
-                    float textY = task.getY() + iconSize*1.2f;
+                    float textY = task.getY() + iconSize*1.3f;
                     canvas.drawText(task.getTaskName(), textX, textY, p);
                 }
 
