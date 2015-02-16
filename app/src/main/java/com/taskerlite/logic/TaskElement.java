@@ -1,8 +1,11 @@
 package com.taskerlite.logic;
 
+import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
 import com.google.gson.GsonBuilder;
+import com.taskerlite.R;
 import com.taskerlite.logic.tasks.mTask;
 import com.taskerlite.logic.tasks.mTask.*;
 import com.taskerlite.logic.tasks.tApp;
@@ -52,6 +55,31 @@ public class TaskElement {
 
         return taskObject;
     }
+
+    public Bitmap getIcon(Context context, int size) {
+
+        Bitmap bigIcon = null;
+
+        if(icon == null){
+            switch (taskType) {
+                case APP:
+                    bigIcon = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_launcher);
+                    break;
+                case WIFI:
+                    break;
+                case ALARM:
+                    break;
+                case MOBILEDATA:
+                    break;
+                default:
+                    break;
+            }
+            icon = Bitmap.createScaledBitmap(bigIcon, size, size, true);
+        }
+
+        return icon;
+    }
+
     public String getTaskName() {
         return taskName;
     }

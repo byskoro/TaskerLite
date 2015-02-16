@@ -49,7 +49,7 @@ public class TaskList extends Fragment {
         activity = getActivity();
         context = (Context) getActivity();
 
-        sceneList = MainActivity.sceneList;
+        sceneList = mActivity.sceneList;
 
         mListView = (SwipeMenuListView) view.findViewById(R.id.listView);
         mAdapter = new AppAdapter();
@@ -105,7 +105,7 @@ public class TaskList extends Fragment {
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
             getFragmentManager().beginTransaction().
-            replace(R.id.fragmentConteiner, MainActivity.taskBuilderFragment).
+            replace(R.id.fragmentConteiner, TaskBuilder.getInstance(position)).
             commit();
         }
     };

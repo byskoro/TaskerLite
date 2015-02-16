@@ -1,17 +1,15 @@
 package com.taskerlite.main;
 
 import com.taskerlite.R;
-import com.taskerlite.other.ScreenConverter;
+import com.taskerlite.logic.SceneList.*;
+import com.taskerlite.logic.TaskElement;
 import com.taskerlite.other.Vibro;
 
 import android.app.Fragment;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Paint;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -19,14 +17,17 @@ import android.view.ViewGroup;
 
 public class TaskBuilder extends Fragment {
 
-	TaskerBuilderView taskerView;
-    Context context;
+    private TaskerBuilderView taskerView;
+    private Context context;
+    private Scene scene;
 
-    private Bitmap background;
-    private Bitmap picture;
-    Paint paint;
+    private int iconSize = mActivity.iconSize;
+    private static int sceneIndex;
 
-    private int sizeIcon;
+    public static TaskBuilder getInstance(int sceneIndex){
+        TaskBuilder.sceneIndex = sceneIndex;
+        return new TaskBuilder();
+    }
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -37,10 +38,7 @@ public class TaskBuilder extends Fragment {
 		taskerView = (TaskerBuilderView) view.findViewById(R.id.dot);
         taskerView.setViewCallBack(viewCallBack);
 
-        paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        paint.setColor(0xFFffffff);
-        paint.setStrokeWidth(10);
-        background = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
+        scene = mActivity.sceneList.getScene(sceneIndex);
 
 		return view;
 	}
@@ -69,19 +67,19 @@ public class TaskBuilder extends Fragment {
         @Override
         public void onDrawView(Canvas canvas, MotionEvent event) {
 
+            // 1. Take all resource and draw picture
+            // 2. If present relationship draw lines
+
             try{
 
                 canvas.drawColor(0xffff0000);
-                canvas.drawBitmap(picture, event.getX() - sizeIcon/2, event.getY() - sizeIcon/2, null);
+
+                for(TaskElement task : scene.getTaskList()){
+                    Bitmap icon = task.getIcon(context, iconSize);
+                    canvas.drawBitmap(icon, task.getXCoordinate(), task.getYCoordinate(), null);
+                }
 
             }catch (Exception e){ }
-        }
-
-        @Override
-        public void prepareResource(int w, int h) {
-
-            sizeIcon = w / 5;
-            picture = Bitmap.createScaledBitmap(background, sizeIcon, sizeIcon, true);
         }
     };
 }

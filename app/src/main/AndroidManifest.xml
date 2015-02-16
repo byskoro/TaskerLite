@@ -15,7 +15,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name="com.taskerlite.main.MainActivity"
+            android:name=".main.mActivity"
             android:screenOrientation="portrait"
             android:label="@string/app_name">
             <intent-filter>

@@ -23,7 +23,6 @@ public class TaskerBuilderView extends View{
         public void longPress(MotionEvent event);
         public void movement(MotionEvent event);
         public void onDrawView(Canvas canvas, MotionEvent event);
-        public void prepareResource(int w, int h);
     }
 
     public TaskerBuilderView(Context context, AttributeSet attrs) {
@@ -81,12 +80,6 @@ public class TaskerBuilderView extends View{
             viewCallBack.longPress(event);
         };
     };
-
-    @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        super.onSizeChanged(w, h, oldw, oldh);
-        viewCallBack.prepareResource(w, h);
-    }
 
     public void draw(Canvas canvas) {
         viewCallBack.onDrawView(canvas, event);

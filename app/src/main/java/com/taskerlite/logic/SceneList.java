@@ -10,23 +10,10 @@ public class SceneList {
 	
 	private ArrayList<Scene> sceneList = new ArrayList<Scene>();
 	
-	public void addNewSnene(String sceneName){
-		
-		sceneList.add(new Scene(sceneName));
-	}
-	
-	public Scene getScene(int index){
-		
-		return sceneList.get(index);
-	}
-	
-	public ArrayList<Scene> getSceneList() {
-		return sceneList;
-	}
-	
-	public int getSceneListSize(){
-		return sceneList.size();
-	}
+	public void addNewScene(String sceneName){ sceneList.add(new Scene(sceneName)); }
+	public Scene getScene(int index){ return sceneList.get(index); }
+	public ArrayList<Scene> getSceneList() { return sceneList; }
+    public int getSceneListSize(){ return sceneList.size(); }
 	
 	public void removeSceneFromList(int index){
 		sceneList.remove(index);
@@ -57,15 +44,9 @@ public class SceneList {
 			taskList.get(0).setTaskActionId(actionList.get(0).getActionId());
 		}		
 		
-		public String getName() {
-			return name;
-		}
-		public ArrayList<TaskElement> getTaskList() {
-			return taskList;
-		}
-		public ArrayList<ActionElement> getActionList() {
-			return actionList;
-		}
+		public String getName() { return name; }
+		public ArrayList<TaskElement> getTaskList() { return taskList; }
+		public ArrayList<ActionElement> getActionList() { return actionList; }
 	}
 }
 
