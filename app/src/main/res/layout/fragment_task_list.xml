@@ -41,7 +41,7 @@
                     android:id="@+id/taskName"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:text="Name jgjhg gkg 123123 qwe qw12"
+                    android:text="Turn on Skype"
                     android:textSize="500sp"
                     android:textColor="#ffffffff"
                     android:maxLines="2"
