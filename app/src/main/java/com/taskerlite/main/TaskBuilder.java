@@ -9,7 +9,9 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -22,6 +24,7 @@ public class TaskBuilder extends Fragment {
 
     private Bitmap background;
     private Bitmap picture;
+    Paint paint;
 
     private int sizeIcon;
 	
@@ -34,7 +37,10 @@ public class TaskBuilder extends Fragment {
 		taskerView = (TaskerBuilderView) view.findViewById(R.id.dot);
         taskerView.setViewCallBack(viewCallBack);
 
-        background = BitmapFactory.decodeResource(getResources(), R.drawable.button);
+        paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        paint.setColor(0xFFffffff);
+        paint.setStrokeWidth(10);
+        background = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
 
 		return view;
 	}
@@ -65,8 +71,8 @@ public class TaskBuilder extends Fragment {
 
             try{
 
-                canvas.drawColor(0xffff00ff);
-                canvas.drawBitmap(picture, event.getX(), event.getY(), null);
+                canvas.drawColor(0xffff0000);
+                canvas.drawBitmap(picture, event.getX() - sizeIcon/2, event.getY() - sizeIcon/2, null);
 
             }catch (Exception e){ }
         }

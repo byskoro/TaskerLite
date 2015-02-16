@@ -1,5 +1,7 @@
 package com.taskerlite.logic;
 
+import android.graphics.Bitmap;
+
 import com.google.gson.GsonBuilder;
 import com.taskerlite.logic.tasks.mTask;
 import com.taskerlite.logic.tasks.mTask.*;
@@ -7,7 +9,11 @@ import com.taskerlite.logic.tasks.tApp;
 
 public class TaskElement {
 
+    // non serializable
     private transient mTask taskObject;
+    private transient Bitmap icon;
+
+    // serializable
     private TASK_TYPE taskType;
     private String taskINStr;
     private String taskName;
