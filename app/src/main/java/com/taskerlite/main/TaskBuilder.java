@@ -73,8 +73,16 @@ public class TaskBuilder extends Fragment {
             if(findSelectedTask(event) != null || findSelectedAction(event) != null) {
 
                 Toast.makeText(getActivity(),"Open element", Toast.LENGTH_SHORT).show();
+
                 Vibro.playShort(context);
             }
+
+            for(ActionElement action : scene.getActionList())
+                action.unSelectElement();
+            for(TaskElement task : scene.getTaskList())
+                task.unSelectElement();
+
+            taskerView.postInvalidate();
         }
 
         @Override
@@ -87,8 +95,6 @@ public class TaskBuilder extends Fragment {
                 else
                     findSelectedAction(event).unSelectElement();
 
-                taskerView.postInvalidate();
-
             } else if (findSelectedTask(event) != null) {
 
                 if (!findSelectedTask(event).isElementSelect())
@@ -96,11 +102,17 @@ public class TaskBuilder extends Fragment {
                 else
                     findSelectedTask(event).unSelectElement();
 
-                taskerView.postInvalidate();
+            }else{
 
-            }else
+                for(ActionElement action : scene.getActionList())
+                    action.unSelectElement();
+                for(TaskElement task : scene.getTaskList())
+                    task.unSelectElement();
+
                 showMenuDialog();
+            }
 
+            taskerView.postInvalidate();
             Vibro.playLong(context);
         }
 
@@ -160,8 +172,6 @@ public class TaskBuilder extends Fragment {
                     float textY = task.getY() + iconSize + getResources().getInteger(R.integer.icon_text_margin);
                     canvas.drawText(task.getTaskName(), textX, textY, p);
                 }
-
-
 
             }catch (Exception e){ }
         }
