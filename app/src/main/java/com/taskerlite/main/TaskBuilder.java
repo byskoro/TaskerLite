@@ -16,6 +16,8 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -23,6 +25,11 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.Toast;
+
+import com.taskerlite.logic.tasks.tApp;
+import com.taskerlite.logic.tasks.mTask.*;
+import com.taskerlite.logic.actions.aTimer;
+import com.taskerlite.logic.actions.mAction.*;
 
 public class TaskBuilder extends Fragment {
 
@@ -60,9 +67,30 @@ public class TaskBuilder extends Fragment {
 		return view;
 	}
 
+    Handler handlerLogic = new Handler() {
+        public void handleMessage(Message msg) {
+
+            if (msg.what == 0) {
+
+                for(ActionElement action : scene.getActionList())
+                    action.unSelectElement();
+                for(TaskElement task : scene.getTaskList())
+                    task.unSelectElement();
+            }
+
+            if (msg.what == 1)
+                taskerView.postInvalidate();
+        }
+    };
+
     TaskerBuilderView.ViewCallBack viewCallBack = new TaskerBuilderView.ViewCallBack(){
 
-        private boolean isActionElementMoving = false;
+        private int isAnyElementMoving = 0;
+
+        @Override
+        public void fingerUp() {
+            isAnyElementMoving = 0;
+        }
 
         @Override
         public void shortPress(MotionEvent event) {
@@ -78,7 +106,7 @@ public class TaskBuilder extends Fragment {
 
             unselectAllElements();
 
-            taskerView.postInvalidate();
+            updateScreenUI();
         }
 
         @Override
@@ -106,27 +134,31 @@ public class TaskBuilder extends Fragment {
                 showMenuDialog();
             }
 
-            taskerView.postInvalidate();
+            updateScreenUI();
             Vibro.playLong(context);
         }
 
         @Override
         public void movement(MotionEvent event) {
 
-            if(findTouchedTask(event) != null && isActionElementMoving == false) {
+            TaskElement   taskElement   = findTouchedTask(event);
+            ActionElement actionElement = findTouchedAction(event);
 
-                findTouchedTask(event).setNewCoordinate(event);
+            if( (taskElement != null && isAnyElementMoving == 0) || (taskElement != null && isAnyElementMoving == 1)) {
+
+                isAnyElementMoving = 1;
+                taskElement.setNewCoordinate(event);
                 Vibro.playMovement(context);
-                taskerView.postInvalidate();
-
-            } else if(findTouchedAction(event) != null) {
-
-                isActionElementMoving = true;
-                findTouchedAction(event).setNewCoordinate(event);
-                Vibro.playMovement(context);
-                taskerView.postInvalidate();
             }
 
+            if( (actionElement != null && isAnyElementMoving == 0) || (actionElement != null && isAnyElementMoving == 2)) {
+
+                isAnyElementMoving = 2;
+                actionElement.setNewCoordinate(event);
+                Vibro.playMovement(context);
+            }
+
+            updateScreenUI();
             unselectAllElements();
         }
 
@@ -180,29 +212,16 @@ public class TaskBuilder extends Fragment {
         }
     };
 
-    private void checkConnection( ){
+    private void updateScreenUI(){
 
-        for(ActionElement action : scene.getActionList()) {
-           if( action.isElementSelect() ){
-               for(TaskElement task : scene.getTaskList()) {
-                   if (task.isElementSelect()) {
-                       if(!action.isTaskElementIdPresent(task.getTaskId()))
-                            action.addNewTaskElementId(task.getTaskId());
-                       else
-                           action.deleteTaskElementId(task.getTaskId());
-                       unselectAllElements();
-                   }
-               }
-           }
-        }
+        if(!handlerLogic.hasMessages(1))
+            handlerLogic.sendEmptyMessageDelayed(1, 50);
     }
 
     private void unselectAllElements( ){
 
-        for(ActionElement action : scene.getActionList())
-            action.unSelectElement();
-        for(TaskElement task : scene.getTaskList())
-            task.unSelectElement();
+        if(!handlerLogic.hasMessages(0))
+            handlerLogic.sendEmptyMessageDelayed(0, 300);
     }
 
     private TaskElement findTouchedTask(MotionEvent event){
@@ -223,6 +242,23 @@ public class TaskBuilder extends Fragment {
         return null;
     }
 
+    private void checkConnection( ){
+
+        for(ActionElement action : scene.getActionList()) {
+            if( action.isElementSelect() ){
+                for(TaskElement task : scene.getTaskList()) {
+                    if (task.isElementSelect()) {
+                        if(!action.isTaskElementIdPresent(task.getTaskId()))
+                            action.addNewTaskElementId(task.getTaskId());
+                        else
+                            action.deleteTaskElementId(task.getTaskId());
+                        unselectAllElements();
+                    }
+                }
+            }
+        }
+    }
+
     private void showMenuDialog( ){
 
         dialogMenu = new Dialog(context);
@@ -233,6 +269,8 @@ public class TaskBuilder extends Fragment {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getActivity(),"Open Action List", Toast.LENGTH_SHORT).show();
+                scene.addNewAction("Timer 2", new aTimer(18, 47), ACTION_TYPE.TIMER, 0, 0);
+                updateScreenUI();
                 dialogMenu.dismiss();
             }
         });
@@ -241,6 +279,8 @@ public class TaskBuilder extends Fragment {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getActivity(),"Open Task List", Toast.LENGTH_SHORT).show();
+                scene.addNewTask("Skype 2", new tApp("com.skype.raider"), TASK_TYPE.APP);
+                updateScreenUI();
                 dialogMenu.dismiss();
             }
         });

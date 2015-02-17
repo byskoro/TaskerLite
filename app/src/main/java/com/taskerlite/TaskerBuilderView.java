@@ -19,6 +19,7 @@ public class TaskerBuilderView extends View{
     private boolean isOnClick;
 
     public interface ViewCallBack{
+        public void fingerUp();
         public void shortPress(MotionEvent event);
         public void longPress(MotionEvent event);
         public void movement(MotionEvent event);
@@ -66,6 +67,8 @@ public class TaskerBuilderView extends View{
 
     			if (isOnClick)
                     viewCallBack.shortPress(event);
+                else
+                    viewCallBack.fingerUp();
 
     			break; 
     		}  
