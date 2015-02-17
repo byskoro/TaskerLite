@@ -76,6 +76,8 @@ public class TaskBuilder extends Fragment {
                     action.unSelectElement();
                 for(TaskElement task : scene.getTaskList())
                     task.unSelectElement();
+
+                taskerView.postInvalidate();
             }
 
             if (msg.what == 1)
@@ -105,8 +107,6 @@ public class TaskBuilder extends Fragment {
             }
 
             unselectAllElements();
-
-            updateScreenUI();
         }
 
         @Override
