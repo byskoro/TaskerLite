@@ -6,6 +6,9 @@ import com.taskerlite.logic.SceneList.*;
 import com.taskerlite.logic.TaskElement;
 import com.taskerlite.other.Vibro;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -17,6 +20,8 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.Toast;
 
 public class TaskBuilder extends Fragment {
 
@@ -58,15 +63,25 @@ public class TaskBuilder extends Fragment {
         @Override
         public void shortPress(MotionEvent event) {
 
-            // open dialog for settings
-            Vibro.playShort(context);
+            if(findSelectedTask(event) != null || findSelectedAction(event) != null) {
+
+                Toast.makeText(getActivity(),"Open element", Toast.LENGTH_SHORT).show();
+                Vibro.playShort(context);
+            }
         }
 
         @Override
         public void longPress(MotionEvent event) {
 
-            // select element or show menu for create action/task
-            Vibro.playLong(context);
+            if(findSelectedTask(event) != null || findSelectedAction(event) != null) {
+
+                Toast.makeText(getActivity(),"Select element", Toast.LENGTH_SHORT).show();
+
+            }else {
+
+                showMenuDialog();
+                Vibro.playLong(context);
+            }
         }
 
         @Override
@@ -93,7 +108,6 @@ public class TaskBuilder extends Fragment {
             try{
 
                 // 1. Take all resource and draw picture
-
                 for(ActionElement action : scene.getActionList()){
                     Bitmap icon = action.getIcon(context, iconSize);
                     canvas.drawBitmap(icon, action.getX(), action.getY(), null);
@@ -134,5 +148,13 @@ public class TaskBuilder extends Fragment {
                 return action;
         }
         return null;
+    }
+
+    private void showMenuDialog(){
+
+        Dialog dialog = new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_menu);
+        dialog.show();
     }
 }
