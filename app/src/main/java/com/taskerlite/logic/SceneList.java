@@ -39,9 +39,6 @@ public class SceneList {
 		public void addNewTask(String objName, mTask obj, TASK_TYPE objType){
 			
 			taskList.add(new TaskElement(objName, obj, objType));
-			
-			//for test
-            actionList.get(0).addNewTaskElementId(taskList.get(0).getTaskId());
 		}		
 		
 		public String getName() { return name; }

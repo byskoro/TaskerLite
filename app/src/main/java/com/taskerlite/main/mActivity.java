@@ -3,6 +3,8 @@ package com.taskerlite.main;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 
 import com.taskerlite.R;
 import com.taskerlite.logic.actions.aTimer;
@@ -32,6 +34,8 @@ public class mActivity extends Activity {
         //sceneList.getScene(0).addNewAction("Timer", new aTimer(18, 47), ACTION_TYPE.TIMER, 0, 0);
         //sceneList.getScene(0).addNewTask("Skype", new tApp("com.skype.raider"), TASK_TYPE.APP);
         //Flash.saveList(sceneList);
+
+        Handler handlerLogic = new Handler();
 
         getFragmentManager().beginTransaction().
         add(R.id.fragmentConteiner, new TaskList()).

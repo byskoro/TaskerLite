@@ -62,21 +62,21 @@ public class TaskBuilder extends Fragment {
 
     TaskerBuilderView.ViewCallBack viewCallBack = new TaskerBuilderView.ViewCallBack(){
 
+        private boolean isActionElementMoving = false;
+
         @Override
         public void shortPress(MotionEvent event) {
 
-            if(findSelectedTask(event) != null || findSelectedAction(event) != null) {
+            if(findTouchedTask(event) != null || findTouchedAction(event) != null) {
 
                 Toast.makeText(getActivity(),"Open element", Toast.LENGTH_SHORT).show();
+
+                //findTouchedTask(event).getTaskObject().show();
 
                 Vibro.playShort(context);
             }
 
-            // unselect all elements
-            for(ActionElement action : scene.getActionList())
-                action.unSelectElement();
-            for(TaskElement task : scene.getTaskList())
-                task.unSelectElement();
+            unselectAllElements();
 
             taskerView.postInvalidate();
         }
@@ -84,27 +84,25 @@ public class TaskBuilder extends Fragment {
         @Override
         public void longPress(MotionEvent event) {
 
-            if (findSelectedAction(event) != null) {
+            if (findTouchedAction(event) != null) {
 
-                if (!findSelectedAction(event).isElementSelect())
-                    findSelectedAction(event).selectElement();
-                else
-                    findSelectedAction(event).unSelectElement();
+                if (!findTouchedAction(event).isElementSelect()) {
+                    findTouchedAction(event).selectElement();
+                    checkConnection();
+                }else
+                    findTouchedAction(event).unSelectElement();
 
-            } else if (findSelectedTask(event) != null) {
+            } else if (findTouchedTask(event) != null) {
 
-                if (!findSelectedTask(event).isElementSelect())
-                    findSelectedTask(event).selectElement();
-                else
-                    findSelectedTask(event).unSelectElement();
+                if (!findTouchedTask(event).isElementSelect()) {
+                    findTouchedTask(event).selectElement();
+                    checkConnection();
+                }else
+                    findTouchedTask(event).unSelectElement();
 
             }else{
 
-                for(ActionElement action : scene.getActionList())
-                    action.unSelectElement();
-                for(TaskElement task : scene.getTaskList())
-                    task.unSelectElement();
-
+                unselectAllElements();
                 showMenuDialog();
             }
 
@@ -115,18 +113,21 @@ public class TaskBuilder extends Fragment {
         @Override
         public void movement(MotionEvent event) {
 
-            if(findSelectedTask(event) != null) {
+            if(findTouchedTask(event) != null && isActionElementMoving == false) {
 
-                findSelectedTask(event).setNewCoordinate(event);
+                findTouchedTask(event).setNewCoordinate(event);
                 Vibro.playMovement(context);
                 taskerView.postInvalidate();
 
-            } else if(findSelectedAction(event) != null) {
+            } else if(findTouchedAction(event) != null) {
 
-                findSelectedAction(event).setNewCoordinate(event);
+                isActionElementMoving = true;
+                findTouchedAction(event).setNewCoordinate(event);
                 Vibro.playMovement(context);
                 taskerView.postInvalidate();
             }
+
+            unselectAllElements();
         }
 
         @Override
@@ -179,25 +180,50 @@ public class TaskBuilder extends Fragment {
         }
     };
 
-    private TaskElement findSelectedTask(MotionEvent event){
+    private void checkConnection( ){
+
+        for(ActionElement action : scene.getActionList()) {
+           if( action.isElementSelect() ){
+               for(TaskElement task : scene.getTaskList()) {
+                   if (task.isElementSelect()) {
+                       if(!action.isTaskElementIdPresent(task.getTaskId()))
+                            action.addNewTaskElementId(task.getTaskId());
+                       else
+                           action.deleteTaskElementId(task.getTaskId());
+                       unselectAllElements();
+                   }
+               }
+           }
+        }
+    }
+
+    private void unselectAllElements( ){
+
+        for(ActionElement action : scene.getActionList())
+            action.unSelectElement();
+        for(TaskElement task : scene.getTaskList())
+            task.unSelectElement();
+    }
+
+    private TaskElement findTouchedTask(MotionEvent event){
 
         for(TaskElement task : scene.getTaskList()){
-            if(task.isSelected(event, iconSize))
+            if(task.isTouched(event, iconSize))
                 return task;
         }
         return null;
     }
 
-    private ActionElement findSelectedAction(MotionEvent event){
+    private ActionElement findTouchedAction(MotionEvent event){
 
         for(ActionElement action : scene.getActionList()){
-            if(action.isSelected(event, iconSize))
+            if(action.isTouched(event, iconSize))
                 return action;
         }
         return null;
     }
 
-    private void showMenuDialog(){
+    private void showMenuDialog( ){
 
         dialogMenu = new Dialog(context);
         dialogMenu.requestWindowFeature(Window.FEATURE_NO_TITLE);
