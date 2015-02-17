@@ -38,7 +38,6 @@ public class TaskerService extends Service {
     }
 
    Handler serviceHandler = new Handler() {
-
         @Override
         public void handleMessage(Message msg) {
         	
@@ -109,5 +108,4 @@ public class TaskerService extends Service {
     	
     	return timeOffset;
     }
-
 }

@@ -83,7 +83,6 @@ public class ActionElement {
     }
 
     public boolean isSelected(MotionEvent event, float size){
-
         if((event.getRawX() > x) && (event.getRawX() < x + size)
                 && (event.getRawY() > y) && (event.getRawY() < y + size)){
             return true;

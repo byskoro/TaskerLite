@@ -90,10 +90,9 @@ public class TaskBuilder extends Fragment {
         @Override
         public void onDrawView(Canvas canvas, MotionEvent event) {
 
-            // 1. Take all resource and draw picture
-            // 2. If present relationship action - task draw a lines
-
             try{
+
+                // 1. Take all resource and draw picture
 
                 for(ActionElement action : scene.getActionList()){
                     Bitmap icon = action.getIcon(context, iconSize);
@@ -110,6 +109,10 @@ public class TaskBuilder extends Fragment {
                     float textY = task.getY() + iconSize*1.3f;
                     canvas.drawText(task.getTaskName(), textX, textY, p);
                 }
+
+                // 2. If present relationship action - task draw a lines
+
+
 
             }catch (Exception e){ }
         }
