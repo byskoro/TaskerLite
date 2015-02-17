@@ -29,14 +29,14 @@ public class TaskBuilder extends Fragment {
     private TaskerBuilderView taskerView;
     private Context context;
     private Scene scene;
-
-    private float iconSize = mActivity.iconSize;
     private static int sceneIndex;
 
-    Paint p;
+    private float iconSize = mActivity.iconSize;
     Bitmap selectIcon;
 
     Dialog dialogMenu;
+    Dialog dialogActions;
+    Dialog dialogTasks;
 
     public static TaskBuilder getInstance(int sceneIndex){
         TaskBuilder.sceneIndex = sceneIndex;
@@ -53,11 +53,6 @@ public class TaskBuilder extends Fragment {
         taskerView.setViewCallBack(viewCallBack);
 
         scene = mActivity.sceneList.getScene(sceneIndex);
-
-        p = new Paint();
-        p.setColor(Color.WHITE);
-        p.setTextSize(getResources().getInteger(R.integer.icon_text_size));
-        p.setTextAlign(Paint.Align.CENTER);
 
         Bitmap selectBigIcon = BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_select);
         selectIcon = Bitmap.createScaledBitmap(selectBigIcon, (int)iconSize, (int)iconSize, true);
@@ -77,6 +72,7 @@ public class TaskBuilder extends Fragment {
                 Vibro.playShort(context);
             }
 
+            // unselect all elements
             for(ActionElement action : scene.getActionList())
                 action.unSelectElement();
             for(TaskElement task : scene.getTaskList())
@@ -137,6 +133,12 @@ public class TaskBuilder extends Fragment {
         public void onDrawView(Canvas canvas, MotionEvent event) {
 
             try{
+
+                Paint p = new Paint();
+                p.setColor(Color.WHITE);
+                p.setTextSize(getResources().getInteger(R.integer.icon_text_size));
+                p.setTextAlign(Paint.Align.CENTER);
+                p.setStrokeWidth(5);
 
                 // 1. If present relationship between action and task - draw a lines
                 for (ActionElement action : scene.getActionList()) {

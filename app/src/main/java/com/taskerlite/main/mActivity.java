@@ -25,13 +25,13 @@ public class mActivity extends Activity {
 
         iconSize = Screen.getWidth(this)/getResources().getInteger(R.integer.icon_divider);
 
-        //sceneList = Flash.getList();
+        sceneList = Flash.getList();
 
-        sceneList = new SceneList();
-        sceneList.addNewScene("Test Scene");
-        sceneList.getScene(0).addNewAction("Timer", new aTimer(18, 47), ACTION_TYPE.TIMER, 0, 0);
-        sceneList.getScene(0).addNewTask("Skype", new tApp("com.skype.raider"), TASK_TYPE.APP);
-        Flash.saveList(sceneList);
+        //sceneList = new SceneList();
+        //sceneList.addNewScene("Test Scene");
+        //sceneList.getScene(0).addNewAction("Timer", new aTimer(18, 47), ACTION_TYPE.TIMER, 0, 0);
+        //sceneList.getScene(0).addNewTask("Skype", new tApp("com.skype.raider"), TASK_TYPE.APP);
+        //Flash.saveList(sceneList);
 
         getFragmentManager().beginTransaction().
         add(R.id.fragmentConteiner, new TaskList()).
@@ -49,6 +49,8 @@ public class mActivity extends Activity {
             super.onBackPressed();
 
         }else {
+
+            Flash.saveList(sceneList);
 
             getFragmentManager().beginTransaction().
             replace(R.id.fragmentConteiner, new TaskList()).
