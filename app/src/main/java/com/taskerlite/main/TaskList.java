@@ -8,6 +8,7 @@ import com.baoyz.swipemenulistview.SwipeMenuListView.OnMenuItemClickListener;
 import com.taskerlite.R;
 import com.taskerlite.logic.SceneList;
 import com.taskerlite.logic.SceneList.*;
+import com.taskerlite.other.Screen;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -64,8 +65,9 @@ public class TaskList extends Fragment {
         topLayout.post(new Runnable() {
             public void run() {
                 int height = topLayout.getHeight();
-                RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(new ViewGroup.MarginLayoutParams(dp2px(56), dp2px(56)));
-                lp.setMargins(dp2px(20), height - dp2px(56 / 2), 0, 0);
+                int iconSize = getResources().getInteger(R.integer.icon_size);
+                RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(new ViewGroup.MarginLayoutParams(Screen.dp2px(context, iconSize), Screen.dp2px(context, iconSize)));
+                lp.setMargins(Screen.dp2px(context, 20), height - Screen.dp2px(context, iconSize / 2), 0, 0);
                 buttonPlus.setLayoutParams(lp);
             }
         });
@@ -78,7 +80,7 @@ public class TaskList extends Fragment {
 
             SwipeMenuItem onItem = new SwipeMenuItem(context);
             onItem.setBackground(new ColorDrawable(Color.rgb(0xC9, 0xC9, 0xCE)));
-            onItem.setWidth(dp2px(90));
+            onItem.setWidth(Screen.dp2px(context, 90));
             onItem.setTitle("ON");
             onItem.setTitleSize(18);
             onItem.setTitleColor(Color.WHITE);
@@ -86,7 +88,7 @@ public class TaskList extends Fragment {
 
             SwipeMenuItem offItem = new SwipeMenuItem(context);
             offItem.setBackground(new ColorDrawable(Color.rgb(0xC9, 0xC9, 0xCE)));
-            offItem.setWidth(dp2px(90));
+            offItem.setWidth(Screen.dp2px(context, 90));
             offItem.setTitle("OFF");
             offItem.setTitleSize(18);
             offItem.setTitleColor(Color.WHITE);
@@ -94,7 +96,7 @@ public class TaskList extends Fragment {
 
             SwipeMenuItem deleteItem = new SwipeMenuItem(context);
             deleteItem.setBackground(new ColorDrawable(Color.rgb(0xF9, 0x3F, 0x25)));
-            deleteItem.setWidth(dp2px(90));
+            deleteItem.setWidth(Screen.dp2px(context, 90));
             deleteItem.setIcon(R.drawable.ic_delete);
             menu.addMenuItem(deleteItem);
         }
@@ -155,9 +157,5 @@ public class TaskList extends Fragment {
 
             return convertView;
         }
-    }
-
-    private int dp2px(int dp) {
-        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, getResources().getDisplayMetrics());
     }
 }

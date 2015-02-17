@@ -1,4 +1,4 @@
-package com.taskerlite.main;
+package com.taskerlite;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -15,10 +15,10 @@ public class TaskerBuilderView extends View{
 
     private float mDownX;
     private float mDownY;
-    private float scrollThreshold = 10;
+    private float scrollThreshold = 15;
     private boolean isOnClick;
 
-    interface ViewCallBack{
+    public interface ViewCallBack{
         public void shortPress(MotionEvent event);
         public void longPress(MotionEvent event);
         public void movement(MotionEvent event);

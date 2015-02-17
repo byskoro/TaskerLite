@@ -56,15 +56,15 @@ public class TaskerService extends Service {
             			mAction actionObj = (mAction) action.getActionObject();
             			
             			if(actionObj.isMyAction(getApplicationContext(), ACTION_TYPE.TIMER)){
-            				
-            				for(TaskElement task : scene.getTaskList()){
-            					
-            					if(task.isMyTaskAction(action.getActionId())){
-            						
-            						mTask taskObj = (mTask) task.getTaskObject();
-            						taskObj.start(getApplicationContext());
-            					}
-            				}
+
+                            for(TaskElement task : scene.getTaskList()){
+
+                                if(action.isTaskElementIdPresent(task.getTaskId())){
+
+                                     mTask taskObj = (mTask) task.getTaskObject();
+                                     taskObj.start(getApplicationContext());
+                                }
+                            }
             			}
             		}
             	}

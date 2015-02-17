@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <integer name="icon_divider">5</integer>
     <integer name="icon_size">56</integer>
+    <integer name="icon_text_size">35</integer>
+    <integer name="icon_text_margin">35</integer>
 </resources>

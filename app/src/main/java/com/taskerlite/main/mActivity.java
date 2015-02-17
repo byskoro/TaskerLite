@@ -23,13 +23,13 @@ public class mActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        iconSize = Screen.getWidth(this)/5;
+        iconSize = Screen.getWidth(this)/getResources().getInteger(R.integer.icon_divider);
 
         //sceneList = Flash.getList();
 
         sceneList = new SceneList();
         sceneList.addNewScene("Test Scene");
-        sceneList.getScene(0).addNewAction("Timer", new aTimer(17, 27), ACTION_TYPE.TIMER, 0, 0);
+        sceneList.getScene(0).addNewAction("Timer", new aTimer(18, 47), ACTION_TYPE.TIMER, 0, 0);
         sceneList.getScene(0).addNewTask("Skype", new tApp("com.skype.raider"), TASK_TYPE.APP);
         Flash.saveList(sceneList);
 

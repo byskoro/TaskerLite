@@ -17,12 +17,12 @@ public class TaskElement {
     // non serializable
     private transient mTask taskObject;
     private transient Bitmap icon;
+    private transient boolean isSelect = false;
 
     // serializable
     private TASK_TYPE taskType;
     private String taskINStr;
     private String taskName;
-    private long taskActionId;
     private long taskId;
     private int x, y;
 
@@ -32,7 +32,7 @@ public class TaskElement {
         this.taskObject = obj;
         this.taskType = objType;
 
-        taskId = System.currentTimeMillis();
+        taskId    = System.currentTimeMillis();
         taskINStr = new GsonBuilder().create().toJson(obj);
     }
 
@@ -98,9 +98,10 @@ public class TaskElement {
     }
 
     public String getTaskName() { return taskName; }
-    public boolean isMyTask(long id) { return id == taskId ? true : false; }
-    public boolean isMyTaskAction(long id) { return id == taskActionId ? true : false; }
-    public void setTaskActionId(long taskActionId) { this.taskActionId = taskActionId; }
+    public long getTaskId() { return taskId; }
     public int getX() { return x; }
     public int getY() { return y; }
+    public boolean isElementSelect(){ return isSelect; }
+    public void selectElement(){ isSelect = true; }
+    public void unSelectElement(){ isSelect = false; }
 }

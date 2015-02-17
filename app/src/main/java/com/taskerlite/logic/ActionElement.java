@@ -12,18 +12,23 @@ import com.taskerlite.logic.actions.mAction;
 import com.taskerlite.logic.actions.mAction.*;
 import com.taskerlite.main.mActivity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ActionElement {
 
     // non serializable
     private transient mAction actionObject;
     private transient Bitmap icon;
+    private transient boolean isSelect = false;
 
     // serializable
     private ACTION_TYPE actionType;
     private String actionINStr;
     private String actionName;
-    private long actionId;
+    private Integer actionId;
     private int x, y;
+    private ArrayList<Long> taskElementID = new ArrayList<Long>();
 
     public ActionElement(String actionName, mAction actionObject, ACTION_TYPE actionType, int x, int y){
 
@@ -33,7 +38,7 @@ public class ActionElement {
         this.x = x;
         this.y = y;
 
-        actionId = System.currentTimeMillis();
+        actionId = (int)System.currentTimeMillis();
         actionINStr = new GsonBuilder().create().toJson(actionObject);
     }
 
@@ -96,8 +101,25 @@ public class ActionElement {
         y = (int) event.getY() - mActivity.iconSize/2;
     }
 
-    public long getActionId() { return actionId; }
+    public void addNewTaskElementId(long id){
+        taskElementID.add(id);
+    }
+    public void deleteTaskElementId(long id){
+        taskElementID.remove((Long)id);
+    }
+    public boolean isTaskElementIdPresent(long id) {
+        for(Long item : taskElementID){
+            if (id == item) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public int getX() { return x; }
     public int getY() { return y; }
     public String getActionName() { return actionName; }
+    public boolean isElementSelect(){ return isSelect; }
+    public void selectElement(){ isSelect = true; }
+    public void unSelectElement(){ isSelect = false; }
 }
