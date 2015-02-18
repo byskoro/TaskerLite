@@ -139,7 +139,7 @@ public class TaskBuilder extends Fragment {
 
                 Toast.makeText(getActivity(),"Open Action", Toast.LENGTH_SHORT).show();
 
-                //findTouchedTask(event).getTaskObject().show();
+                //findTouchedAction(event).getTaskObject().show();
 
                 Vibro.playShort(context);
             }
