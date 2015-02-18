@@ -182,7 +182,7 @@ public class TaskBuilder extends Fragment {
         }
 
         @Override
-        public void movement(MotionEvent event) {
+        public void movement(MotionEvent event) { // present bug of move the same element
 
             TaskElement   taskElement   = findTouchedTask(event);
             ActionElement actionElement = findTouchedAction(event);
@@ -226,16 +226,10 @@ public class TaskBuilder extends Fragment {
                     }
                 }
 
-                // 2.Draw select icons
-                for(ActionElement action : scene.getActionList())
+                // 2. Print action and task icons
+                for(ActionElement action : scene.getActionList()){
                     if(action.isElementSelect())
                         canvas.drawBitmap(selectIcon, action.getX(), action.getY(), null);
-                for(TaskElement task : scene.getTaskList())
-                    if(task.isElementSelect())
-                        canvas.drawBitmap(selectIcon, task.getX(), task.getY(), null);
-
-                // 3. Take all resource and draw picture
-                for(ActionElement action : scene.getActionList()){
                     Bitmap icon = action.getIcon(context, iconSizeElement);
                     canvas.drawBitmap(icon, action.getX(), action.getY(), null);
                     float textX = action.getX() + iconSizeElement /2;
@@ -244,6 +238,8 @@ public class TaskBuilder extends Fragment {
                 }
 
                 for(TaskElement task : scene.getTaskList()){
+                    if(task.isElementSelect())
+                        canvas.drawBitmap(selectIcon, task.getX(), task.getY(), null);
                     Bitmap icon = task.getIcon(context, iconSizeElement);
                     canvas.drawBitmap(icon, task.getX(), task.getY(), null);
                     float textX = task.getX() + iconSizeElement /2;
@@ -251,7 +247,7 @@ public class TaskBuilder extends Fragment {
                     canvas.drawText(task.getTaskName(), textX, textY, p);
                 }
 
-                // 4. print delete icons
+                // 3. Print delete icons
                 for(DelElement.PressedElement element : gcElement.getDelList())
                     canvas.drawBitmap(deleteIcon, element.x, element.y, null);
 
