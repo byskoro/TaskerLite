@@ -205,6 +205,7 @@ public class TaskBuilder extends Fragment implements View.OnClickListener, TextV
             if (findActionElement != null) {
 
                 if (!findActionElement.isSelect()) {
+
                     gcElement.addPressedElement(findActionElement.getActionId(), findActionElement.getX(), findActionElement.getY());
                     findActionElement.select();
                     checkConnection();
@@ -214,6 +215,7 @@ public class TaskBuilder extends Fragment implements View.OnClickListener, TextV
             } else if (findTaskElement != null) {
 
                 if (!findTaskElement.isSelect()) {
+
                     gcElement.addPressedElement(findTaskElement.getTaskId(), findTaskElement.getX(), findTaskElement.getY());
                     findTaskElement.select();
                     checkConnection();

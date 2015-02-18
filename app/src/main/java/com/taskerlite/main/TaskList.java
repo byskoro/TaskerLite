@@ -27,7 +27,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-public class TaskList extends Fragment {
+public class TaskList extends Fragment implements View.OnClickListener{
 
     SceneList sceneList;
 
@@ -61,6 +61,7 @@ public class TaskList extends Fragment {
 
         topLayout = (LinearLayout) view.findViewById(R.id.topLayout);
         buttonPlus = (ImageButton) view.findViewById(R.id.btnPlus);
+        buttonPlus.setOnClickListener(this);
 
         topLayout.post(new Runnable() {
             public void run() {
@@ -131,6 +132,16 @@ public class TaskList extends Fragment {
             return false;
         }
     };
+
+    @Override
+    public void onClick(View view) {
+
+        sceneList.addNewScene("");
+
+        getFragmentManager().beginTransaction().
+        replace(R.id.fragmentConteiner, TaskBuilder.getInstance(sceneList.getSceneListSize() - 1)).
+        commit();
+    }
 
     class AppAdapter extends BaseAdapter {
 
