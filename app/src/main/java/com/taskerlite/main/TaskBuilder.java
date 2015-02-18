@@ -45,7 +45,7 @@ public class TaskBuilder extends Fragment {
     Bitmap selectIcon;
     Bitmap deleteIcon;
 
-    GC_Element gcElement;
+    DelElement gcElement;
 
     Dialog dialogMenu;
     Dialog dialogActions;
@@ -72,7 +72,7 @@ public class TaskBuilder extends Fragment {
         Bitmap deleteBigIcon = BitmapFactory.decodeResource(context.getResources(), R.drawable.delete);
         deleteIcon = Bitmap.createScaledBitmap(deleteBigIcon, iconSizeDelete, iconSizeDelete, true);
 
-        gcElement = new GC_Element(iconSizeDelete);
+        gcElement = new DelElement(iconSizeDelete);
 
 		return view;
 	}
@@ -111,17 +111,17 @@ public class TaskBuilder extends Fragment {
             // look for delete icon press
             if(gcElement.deleteListGetSize() != 0){
 
-                if(gcElement.idPressedElement(event) != 0){
+                if(gcElement.getIdPressedElement(event) != 0){
 
                     for(TaskElement task : scene.getTaskList()){
-                        if(task.getTaskId() == gcElement.idPressedElement(event)){
+                        if(task.getTaskId() == gcElement.getIdPressedElement(event)){
                             scene.deleteTask(task);
                             break;
                         }
                     }
 
                     for(ActionElement action : scene.getActionList()){
-                        if(action.getActionId() == gcElement.idPressedElement(event)){
+                        if(action.getActionId() == gcElement.getIdPressedElement(event)){
                             scene.deleteAction(action);
                             break;
                         }
@@ -156,7 +156,7 @@ public class TaskBuilder extends Fragment {
             if (findActionElement != null) {
 
                 if (!findActionElement.isElementSelect()) {
-                    gcElement.addElement(findActionElement.getActionId(), findActionElement.getX(), findActionElement.getY());
+                    gcElement.addPressedElement(findActionElement.getActionId(), findActionElement.getX(), findActionElement.getY());
                     findActionElement.selectElement();
                     checkConnection();
                 }else
@@ -165,7 +165,7 @@ public class TaskBuilder extends Fragment {
             } else if (findTaskElement != null) {
 
                 if (!findTaskElement.isElementSelect()) {
-                    gcElement.addElement(findTaskElement.getTaskId(), findTaskElement.getX(), findTaskElement.getY());
+                    gcElement.addPressedElement(findTaskElement.getTaskId(), findTaskElement.getX(), findTaskElement.getY());
                     findTaskElement.selectElement();
                     checkConnection();
                 }else
@@ -252,7 +252,7 @@ public class TaskBuilder extends Fragment {
                 }
 
                 // 4. print delete icons
-                for(GC_Element.DelElement element : gcElement.getDelList())
+                for(DelElement.PressedElement element : gcElement.getDelList())
                     canvas.drawBitmap(deleteIcon, element.x, element.y, null);
 
             }catch (Exception e){ }
@@ -307,20 +307,20 @@ public class TaskBuilder extends Fragment {
         }
     }
 
-    public class GC_Element{
+    public class DelElement {
 
-        private ArrayList<DelElement> delElementList = new ArrayList<DelElement>();
+        private ArrayList<PressedElement> delElementList = new ArrayList<PressedElement>();
         private int elementSize;
 
-        public GC_Element(int elementSize){
+        public DelElement(int elementSize){
             this.elementSize = elementSize;
         }
 
-        public void addElement(long id, int x, int y){
-            delElementList.add(new DelElement(id, x + iconSizeElement - elementSize/2, y - elementSize/2));
+        public void addPressedElement(long id, int x, int y){
+            delElementList.add(new PressedElement(id, x + iconSizeElement - elementSize/2, y - elementSize/2));
         }
-        public long idPressedElement(MotionEvent event){
-            for(DelElement element : delElementList) {
+        public long getIdPressedElement(MotionEvent event){
+            for(PressedElement element : delElementList) {
                 if ((event.getRawX() > element.x) && (event.getRawX() < element.x + elementSize)
                         && (event.getRawY() > element.y) && (event.getRawY() < element.y + elementSize)) {
                     return element.id;
@@ -330,12 +330,12 @@ public class TaskBuilder extends Fragment {
         }
         public void clearList(){ delElementList.clear(); }
         public int deleteListGetSize(){ return delElementList.size(); }
-        public ArrayList<DelElement> getDelList(){ return delElementList; }
+        public ArrayList<PressedElement> getDelList(){ return delElementList; }
 
-        public class DelElement {
+        public class PressedElement {
             long id;
             int x,y;
-            public DelElement(long id, int x, int y){
+            public PressedElement(long id, int x, int y){
                 this.id = id;
                 this.x = x;
                 this.y=y;
