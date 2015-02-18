@@ -139,6 +139,7 @@ public class TaskBuilder extends Fragment implements View.OnClickListener, TextV
     }
 
     Handler handlerLogic = new Handler() {
+
         public void handleMessage(Message msg) {
 
             if (msg.what == 0) {
