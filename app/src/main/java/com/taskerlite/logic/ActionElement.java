@@ -21,6 +21,7 @@ public class ActionElement {
     private transient mAction actionObject;
     private transient Bitmap icon;
     private transient boolean isSelect = false;
+    private transient boolean isMoving = false;
 
     // serializable
     private ACTION_TYPE actionType;
@@ -89,16 +90,12 @@ public class ActionElement {
 
     public boolean isTouched(int xPointer, int yPointer, float size){
 
-        boolean state = false;
-
         if((xPointer > x) && (xPointer < x + size)
                 && (yPointer > y) && (yPointer < y + size)){
-            state =  true;
+            return true;
         }
         else
-            state =  false;
-
-        return state;
+            return false;
     }
 
     public void setNewCoordinate(int xPointer, int yPointer){
@@ -142,4 +139,13 @@ public class ActionElement {
     public void select(){ isSelect = true; }
     public void unselect(){ isSelect = false; }
     public Integer getActionId() { return actionId; }
+    public boolean isMoving(){
+        return isMoving;
+    }
+    public void setMoving(){
+        isMoving = true;
+    }
+    public void clearMoving(){
+        isMoving = false;
+    }
 }

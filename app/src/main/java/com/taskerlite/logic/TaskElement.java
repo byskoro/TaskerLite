@@ -19,6 +19,7 @@ public class TaskElement {
     private transient mTask taskObject;
     private transient Bitmap icon;
     private transient boolean isSelect = false;
+    private transient boolean isMoving = false;
 
     // serializable
     private TASK_TYPE taskType;
@@ -116,4 +117,14 @@ public class TaskElement {
     public boolean isSelect(){ return isSelect; }
     public void select(){ isSelect = true; }
     public void unselect(){ isSelect = false; }
+
+    public boolean isMoving(){
+        return isMoving;
+    }
+    public void setMoving(){
+        isMoving = true;
+    }
+    public void clearMoving(){
+        isMoving = false;
+    }
 }

@@ -141,11 +141,14 @@ public class TaskBuilder extends Fragment implements View.OnClickListener, TextV
 
     TaskerBuilderView.ViewCallBack viewCallBack = new TaskerBuilderView.ViewCallBack(){
 
-        private int isAnyElementMoving = 0;
-
         @Override
         public void fingerUp() {
-            isAnyElementMoving = 0;
+
+            for(TaskElement task : scene.getTaskList())
+                task.clearMoving();
+
+            for(ActionElement action : scene.getActionList())
+                action.clearMoving();
         }
 
         @Override
@@ -209,6 +212,7 @@ public class TaskBuilder extends Fragment implements View.OnClickListener, TextV
                     gcElement.addPressedElement(findActionElement.getActionId(), findActionElement.getX(), findActionElement.getY());
                     findActionElement.select();
                     checkConnection();
+
                 }else
                     findActionElement.unselect();
 
@@ -219,6 +223,7 @@ public class TaskBuilder extends Fragment implements View.OnClickListener, TextV
                     gcElement.addPressedElement(findTaskElement.getTaskId(), findTaskElement.getX(), findTaskElement.getY());
                     findTaskElement.select();
                     checkConnection();
+
                 }else
                     findTaskElement.unselect();
 
@@ -228,28 +233,41 @@ public class TaskBuilder extends Fragment implements View.OnClickListener, TextV
                 showMenuDialog();
             }
 
-            updateScreenUI();
             Vibro.playLong(context);
+            updateScreenUI();
         }
 
         @Override
-        public void movement(int xPointer, int yPointer) { // present bug of move the same element
+        public void movement(int xPointer, int yPointer) {
 
+            boolean taskMoving = false;
+            boolean actionMoving = false;
             TaskElement   taskElement   = findTouchedTask(xPointer, yPointer);
             ActionElement actionElement = findTouchedAction(xPointer, yPointer);
 
-            if( (taskElement != null && isAnyElementMoving == 0) || (taskElement != null && isAnyElementMoving == 1)) {
-
-                isAnyElementMoving = 1;
-                taskElement.setNewCoordinate(xPointer, yPointer);
-                Vibro.playMovement(context);
+            for(TaskElement task : scene.getTaskList()) {
+                if (task.isMoving()) {
+                    taskMoving = true;
+                    break;
+                }
             }
 
-            if( (actionElement != null && isAnyElementMoving == 0) || (actionElement != null && isAnyElementMoving == 2)) {
+            for(ActionElement action : scene.getActionList()) {
+                if (action.isMoving()) {
+                    actionMoving = true;
+                    break;
+                }
+            }
 
-                isAnyElementMoving = 2;
+            if( taskElement != null &&  actionMoving == false){
+
+                taskElement.setMoving();
+                taskElement.setNewCoordinate(xPointer, yPointer);
+
+            } else if( actionElement != null &&  taskMoving == false) {
+
+                actionElement.setMoving();
                 actionElement.setNewCoordinate(xPointer, yPointer);
-                Vibro.playMovement(context);
             }
 
             updateScreenUI();
@@ -324,12 +342,24 @@ public class TaskBuilder extends Fragment implements View.OnClickListener, TextV
 
         for(TaskElement task : scene.getTaskList()){
             if(task.isTouched(xPointer, yPointer, iconSizeElement))
+                if(task.isMoving())
+                    return task;
+        }
+
+        for(TaskElement task : scene.getTaskList()){
+            if(task.isTouched(xPointer, yPointer, iconSizeElement))
                 return task;
         }
         return null;
     }
 
     private ActionElement findTouchedAction(int xPointer, int yPointer){
+
+        for(ActionElement action : scene.getActionList()){
+            if(action.isTouched(xPointer, yPointer, iconSizeElement))
+                if(action.isMoving())
+                    return action;
+        }
 
         for(ActionElement action : scene.getActionList()){
             if(action.isTouched(xPointer, yPointer, iconSizeElement))
