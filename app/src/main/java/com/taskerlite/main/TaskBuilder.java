@@ -31,6 +31,8 @@ import com.taskerlite.logic.tasks.mTask.*;
 import com.taskerlite.logic.actions.aTimer;
 import com.taskerlite.logic.actions.mAction.*;
 
+import java.util.ArrayList;
+
 public class TaskBuilder extends Fragment {
 
     private TaskerBuilderView taskerView;
@@ -38,8 +40,12 @@ public class TaskBuilder extends Fragment {
     private Scene scene;
     private static int sceneIndex;
 
-    private float iconSize = mActivity.iconSize;
+    private int iconSizeElement = mActivity.iconSizeElement;
+    private int iconSizeDelete  = mActivity.iconSizeDelete;
     Bitmap selectIcon;
+    Bitmap deleteIcon;
+
+    GC_Element gcElement;
 
     Dialog dialogMenu;
     Dialog dialogActions;
@@ -62,7 +68,11 @@ public class TaskBuilder extends Fragment {
         scene = mActivity.sceneList.getScene(sceneIndex);
 
         Bitmap selectBigIcon = BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_select);
-        selectIcon = Bitmap.createScaledBitmap(selectBigIcon, (int)iconSize, (int)iconSize, true);
+        selectIcon = Bitmap.createScaledBitmap(selectBigIcon, iconSizeElement, iconSizeElement, true);
+        Bitmap deleteBigIcon = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_launcher);
+        deleteIcon = Bitmap.createScaledBitmap(deleteBigIcon, iconSizeDelete, iconSizeDelete, true);
+
+        gcElement = new GC_Element(iconSizeDelete);
 
 		return view;
 	}
@@ -76,6 +86,8 @@ public class TaskBuilder extends Fragment {
                     action.unSelectElement();
                 for(TaskElement task : scene.getTaskList())
                     task.unSelectElement();
+
+                gcElement.clearList();
 
                 taskerView.postInvalidate();
             }
@@ -97,9 +109,35 @@ public class TaskBuilder extends Fragment {
         @Override
         public void shortPress(MotionEvent event) {
 
-            if(findTouchedTask(event) != null || findTouchedAction(event) != null) {
+            if(gcElement.deleteListGetSize() != 0){
 
-                Toast.makeText(getActivity(),"Open element", Toast.LENGTH_SHORT).show();
+                if(gcElement.idPressedElement(event) != 0){
+
+                    for(TaskElement task : scene.getTaskList()){
+                        if(task.getTaskId() == gcElement.idPressedElement(event)){
+                            scene.deleteTask(task);
+                            break;
+                        }
+                    }
+
+                    for(ActionElement action : scene.getActionList()){
+                        if(action.getActionId() == gcElement.idPressedElement(event)){
+                            scene.deleteAction(action);
+                            break;
+                        }
+                    }
+                }
+
+            }else if(findTouchedTask(event) != null) {
+
+                Toast.makeText(getActivity(),"Open Task", Toast.LENGTH_SHORT).show();
+
+                //findTouchedTask(event).getTaskObject().show();
+
+                Vibro.playShort(context);
+            } else if (findTouchedAction(event) != null){
+
+                Toast.makeText(getActivity(),"Open Action", Toast.LENGTH_SHORT).show();
 
                 //findTouchedTask(event).getTaskObject().show();
 
@@ -112,21 +150,25 @@ public class TaskBuilder extends Fragment {
         @Override
         public void longPress(MotionEvent event) {
 
-            if (findTouchedAction(event) != null) {
+            TaskElement   findTaskElement   = findTouchedTask(event);
+            ActionElement findActionElement = findTouchedAction(event);
 
-                if (!findTouchedAction(event).isElementSelect()) {
-                    findTouchedAction(event).selectElement();
+            if (findActionElement != null) {
+
+                if (!findActionElement.isElementSelect()) {
+                    gcElement.addElement(findActionElement.getActionId(), findActionElement.getX(), findActionElement.getY());
+                    findActionElement.selectElement();
                     checkConnection();
                 }else
-                    findTouchedAction(event).unSelectElement();
+                    findActionElement.unSelectElement();
 
-            } else if (findTouchedTask(event) != null) {
+            } else if (findTaskElement != null) {
 
-                if (!findTouchedTask(event).isElementSelect()) {
-                    findTouchedTask(event).selectElement();
+                if (!findTaskElement.isElementSelect()) {
+                    findTaskElement.selectElement();
                     checkConnection();
                 }else
-                    findTouchedTask(event).unSelectElement();
+                    findTaskElement.unSelectElement();
 
             }else{
 
@@ -177,8 +219,8 @@ public class TaskBuilder extends Fragment {
                 for (ActionElement action : scene.getActionList()) {
                     for (TaskElement task : scene.getTaskList()) {
                         if (action.isTaskElementIdPresent(task.getTaskId())) {
-                            canvas.drawLine(action.getX() + iconSize/2, action.getY() + iconSize/2,
-                                    task.getX() + iconSize/2, task.getY() + iconSize/2, p);
+                            canvas.drawLine(action.getX() + iconSizeElement /2, action.getY() + iconSizeElement /2,
+                                    task.getX() + iconSizeElement /2, task.getY() + iconSizeElement /2, p);
                         }
                     }
                 }
@@ -193,20 +235,24 @@ public class TaskBuilder extends Fragment {
 
                 // 3. Take all resource and draw picture
                 for(ActionElement action : scene.getActionList()){
-                    Bitmap icon = action.getIcon(context, iconSize);
+                    Bitmap icon = action.getIcon(context, iconSizeElement);
                     canvas.drawBitmap(icon, action.getX(), action.getY(), null);
-                    float textX = action.getX() + iconSize/2;
-                    float textY = action.getY() + iconSize + getResources().getInteger(R.integer.icon_text_margin);
+                    float textX = action.getX() + iconSizeElement /2;
+                    float textY = action.getY() + iconSizeElement + getResources().getInteger(R.integer.icon_text_margin);
                     canvas.drawText(action.getActionName(), textX, textY, p);
                 }
 
                 for(TaskElement task : scene.getTaskList()){
-                    Bitmap icon = task.getIcon(context, iconSize);
+                    Bitmap icon = task.getIcon(context, iconSizeElement);
                     canvas.drawBitmap(icon, task.getX(), task.getY(), null);
-                    float textX = task.getX() + iconSize/2;
-                    float textY = task.getY() + iconSize + getResources().getInteger(R.integer.icon_text_margin);
+                    float textX = task.getX() + iconSizeElement /2;
+                    float textY = task.getY() + iconSizeElement + getResources().getInteger(R.integer.icon_text_margin);
                     canvas.drawText(task.getTaskName(), textX, textY, p);
                 }
+
+                // 4. print delete icons
+                for(GC_Element.DelElement element : gcElement.getDelList())
+                    canvas.drawBitmap(deleteIcon, element.x, element.y, null);
 
             }catch (Exception e){ }
         }
@@ -227,7 +273,7 @@ public class TaskBuilder extends Fragment {
     private TaskElement findTouchedTask(MotionEvent event){
 
         for(TaskElement task : scene.getTaskList()){
-            if(task.isTouched(event, iconSize))
+            if(task.isTouched(event, iconSizeElement))
                 return task;
         }
         return null;
@@ -236,7 +282,7 @@ public class TaskBuilder extends Fragment {
     private ActionElement findTouchedAction(MotionEvent event){
 
         for(ActionElement action : scene.getActionList()){
-            if(action.isTouched(event, iconSize))
+            if(action.isTouched(event, iconSizeElement))
                 return action;
         }
         return null;
@@ -252,11 +298,49 @@ public class TaskBuilder extends Fragment {
                             action.addNewTaskElementId(task.getTaskId());
                         else
                             action.deleteTaskElementId(task.getTaskId());
+
                         unselectAllElements();
                     }
                 }
             }
         }
+    }
+
+    public class GC_Element{
+
+        private ArrayList<DelElement> delElementList = new ArrayList<DelElement>();
+        private int elementSize;
+
+        public GC_Element(int elementSize){
+            this.elementSize = elementSize;
+        }
+
+        public void addElement(long id, int x, int y){
+            delElementList.add(new DelElement(id, x + iconSizeElement - elementSize/2, y - elementSize/2));
+        }
+        public long idPressedElement(MotionEvent event){
+            for(DelElement element : delElementList) {
+                if ((event.getRawX() > element.x) && (event.getRawX() < element.x + elementSize)
+                        && (event.getRawY() > element.y) && (event.getRawY() < element.y + elementSize)) {
+                    return element.id;
+                }
+            }
+            return 0;
+        }
+        public void clearList(){ delElementList.clear(); }
+        public int deleteListGetSize(){ return delElementList.size(); }
+        public ArrayList<DelElement> getDelList(){ return delElementList; }
+
+        public class DelElement {
+            long id;
+            int x,y;
+            public DelElement(long id, int x, int y){
+                this.id = id;
+                this.x = x;
+                this.y=y;
+            }
+        }
+
     }
 
     private void showMenuDialog( ){

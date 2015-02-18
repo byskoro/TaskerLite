@@ -35,11 +35,23 @@ public class SceneList {
 			
 			actionList.add(new ActionElement(actionName, actionObject, actionType, xCoordinate, yCoordinate));
 		}
+
+        public void deleteAction(ActionElement actionElement){
+            actionList.remove(actionElement);
+            actionList.trimToSize();
+        }
 		
 		public void addNewTask(String objName, mTask obj, TASK_TYPE objType){
 			
 			taskList.add(new TaskElement(objName, obj, objType));
-		}		
+		}
+
+        public void deleteTask(TaskElement taskElement){
+            for(ActionElement actionElement : actionList)
+                actionElement.deleteTaskElementId(taskElement.getTaskId());
+            taskList.remove(taskElement);
+            taskList.trimToSize();
+        }
 		
 		public String getName() { return name; }
 		public ArrayList<TaskElement> getTaskList() { return taskList; }

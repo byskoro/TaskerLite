@@ -93,8 +93,8 @@ public class TaskElement {
     }
 
     public void setNewCoordinate(MotionEvent event){
-        x = (int) event.getX() - mActivity.iconSize/2;
-        y = (int) event.getY() - mActivity.iconSize/2;
+        x = (int) event.getX() - mActivity.iconSizeElement /2;
+        y = (int) event.getY() - mActivity.iconSizeElement /2;
     }
 
     public String getTaskName() { return taskName; }

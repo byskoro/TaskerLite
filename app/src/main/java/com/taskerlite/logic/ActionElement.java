@@ -13,7 +13,6 @@ import com.taskerlite.logic.actions.mAction.*;
 import com.taskerlite.main.mActivity;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ActionElement {
 
@@ -97,8 +96,8 @@ public class ActionElement {
     }
 
     public void setNewCoordinate(MotionEvent event){
-        x = (int) event.getX() - mActivity.iconSize/2;
-        y = (int) event.getY() - mActivity.iconSize/2;
+        x = (int) event.getX() - mActivity.iconSizeElement /2;
+        y = (int) event.getY() - mActivity.iconSizeElement /2;
     }
 
     public void addNewTaskElementId(long id){
@@ -106,6 +105,7 @@ public class ActionElement {
     }
     public void deleteTaskElementId(long id){
         taskElementID.remove((Long)id);
+        taskElementID.trimToSize();
     }
     public boolean isTaskElementIdPresent(long id) {
         for(Long item : taskElementID){
@@ -115,11 +115,11 @@ public class ActionElement {
         }
         return false;
     }
-
     public int getX() { return x; }
     public int getY() { return y; }
     public String getActionName() { return actionName; }
     public boolean isElementSelect(){ return isSelect; }
     public void selectElement(){ isSelect = true; }
     public void unSelectElement(){ isSelect = false; }
+    public Integer getActionId() { return actionId; }
 }

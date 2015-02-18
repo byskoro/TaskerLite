@@ -4,28 +4,25 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
 
 import com.taskerlite.R;
-import com.taskerlite.logic.actions.aTimer;
 import com.taskerlite.other.Flash;
 import com.taskerlite.logic.SceneList;
-import com.taskerlite.logic.tasks.tApp;
-import com.taskerlite.logic.actions.mAction.*;
-import com.taskerlite.logic.tasks.mTask.*;
 import com.taskerlite.other.Screen;
 
 public class mActivity extends Activity {
 
     public static SceneList sceneList;
-    public static int iconSize;
+    public static int iconSizeElement;
+    public static int iconSizeDelete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        iconSize = Screen.getWidth(this)/getResources().getInteger(R.integer.icon_divider);
+        iconSizeElement = Screen.getWidth(this)/getResources().getInteger(R.integer.icon_divider);
+        iconSizeDelete  = iconSizeElement/3;
 
         sceneList = Flash.getList();
 
