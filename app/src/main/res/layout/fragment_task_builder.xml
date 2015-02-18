@@ -56,7 +56,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/clearReqwestLay"
+        android:id="@+id/clearRequestLay"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:focusable="true"

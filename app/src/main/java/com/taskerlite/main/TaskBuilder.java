@@ -62,7 +62,7 @@ public class TaskBuilder extends Fragment implements View.OnClickListener, TextV
 
     Button backBtn, saveBtn, clearBtn;
     EditText nameScene;
-    LinearLayout layForClearReqwest, clearReqwestLay;
+    LinearLayout clearRequestLay;
 
     public static TaskBuilder getInstance(int sceneIndex){
         TaskBuilder.sceneIndex = sceneIndex;
@@ -88,7 +88,7 @@ public class TaskBuilder extends Fragment implements View.OnClickListener, TextV
         nameScene = (EditText) view.findViewById(R.id.sceneName);
         nameScene.setOnEditorActionListener(this);
         nameScene.setText(scene.getName());
-        clearReqwestLay = (LinearLayout) view.findViewById(R.id.clearReqwestLay);
+        clearRequestLay = (LinearLayout) view.findViewById(R.id.clearRequestLay);
 
         Bitmap selectBigIcon = BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_select);
         selectIcon = Bitmap.createScaledBitmap(selectBigIcon, iconSizeElement, iconSizeElement, true);
@@ -104,6 +104,7 @@ public class TaskBuilder extends Fragment implements View.OnClickListener, TextV
     public void onClick(View view) {
 
         switch(view.getId()){
+
             case R.id.backBtn:
                 getFragmentManager().beginTransaction().
                 replace(R.id.fragmentConteiner, new TaskList()).
@@ -118,7 +119,23 @@ public class TaskBuilder extends Fragment implements View.OnClickListener, TextV
                 updateScreenUI();
                 break;
         }
+    }
 
+
+    @Override
+    public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+
+        try {
+
+            scene.setName(textView.getText().toString());
+
+            clearRequestLay.requestFocus();
+            InputMethodManager imm = (InputMethodManager)textView.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(textView.getApplicationWindowToken(), 0);
+
+        } catch (Exception e) { }
+
+        return true;
     }
 
     Handler handlerLogic = new Handler() {
@@ -160,7 +177,6 @@ public class TaskBuilder extends Fragment implements View.OnClickListener, TextV
         @Override
         public void shortPress(int xPointer, int yPointer) {
 
-            // look for delete icon press
             if(gcElement.deleteListGetSize() != 0){
 
                 if(gcElement.getIdPressedElement(xPointer, yPointer) != 0){
@@ -386,36 +402,25 @@ public class TaskBuilder extends Fragment implements View.OnClickListener, TextV
         }
     }
 
-    @Override
-    public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-
-        try {
-
-            scene.setName(textView.getText().toString());
-
-            clearReqwestLay.requestFocus();
-            InputMethodManager imm = (InputMethodManager)textView.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(textView.getApplicationWindowToken(), 0);
-
-        } catch (Exception e) { }
-
-        return true;
-    }
-
     public class DelElement {
 
         private ArrayList<PressedElement> delElementList = new ArrayList<PressedElement>();
         private int elementSize;
 
         public DelElement(int elementSize){
+
             this.elementSize = elementSize;
         }
 
         public void addPressedElement(long id, int x, int y){
+
             delElementList.add(new PressedElement(id, x + iconSizeElement - elementSize/2, y - elementSize/2));
         }
+
         public long getIdPressedElement(int xPointer, int yPointer){
+
             for(PressedElement element : delElementList) {
+
                 if ((xPointer > element.x) && (xPointer < element.x + elementSize)
                         && (yPointer > element.y) && (yPointer < element.y + elementSize)) {
                     return element.id;
@@ -423,14 +428,29 @@ public class TaskBuilder extends Fragment implements View.OnClickListener, TextV
             }
             return 0;
         }
-        public void clearList(){ delElementList.clear(); }
-        public int deleteListGetSize(){ return delElementList.size(); }
-        public ArrayList<PressedElement> getDelList(){ return delElementList; }
+
+        public void clearList(){
+
+            delElementList.clear();
+        }
+
+        public int deleteListGetSize(){
+
+            return delElementList.size();
+        }
+
+        public ArrayList<PressedElement> getDelList(){
+
+            return delElementList;
+        }
 
         public class PressedElement {
+
             long id;
             int x,y;
+
             public PressedElement(long id, int x, int y){
+
                 this.id = id;
                 this.x = x;
                 this.y=y;
