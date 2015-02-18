@@ -2,32 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
-    <LinearLayout
+    <com.taskerlite.AutoResizeEditText
+        android:id="@+id/txtName"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.1"
-        android:background="#ff00ff00"
-        android:orientation="horizontal">
-        <EditText
-            android:id="@+id/sceneName"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:inputType="text"
-            android:maxLines="1"
-            android:imeOptions="actionDone"
-            android:textColorHint="#aaa"
-            android:hint="Name Scene"
-            android:gravity="center"
-            android:textSize="30sp" />
-    </LinearLayout>
-
-    <com.taskerlite.TaskerBuilderView
-        android:id="@+id/drawBuilder"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.8" />
+        android:layout_weight="0.9"
+        android:inputType="text"
+        android:maxLines="1"
+        android:imeOptions="actionDone"
+        android:textColorHint="#aaa"
+        android:hint="Name Scene"
+        android:gravity="center_horizontal"
+        android:textSize="500sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -54,13 +42,5 @@
             android:text="Clear"
             android:id="@+id/clearBtn" />
     </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/clearReqwestLay"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:orientation="vertical"/>
 
 </LinearLayout>

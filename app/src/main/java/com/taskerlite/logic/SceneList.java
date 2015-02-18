@@ -4,6 +4,9 @@ import com.taskerlite.logic.actions.mAction;
 import com.taskerlite.logic.actions.mAction.*;
 import com.taskerlite.logic.tasks.mTask;
 import com.taskerlite.logic.tasks.mTask.*;
+import com.taskerlite.main.mActivity;
+import com.taskerlite.other.Flash;
+
 import java.util.ArrayList;
 
 public class SceneList {
@@ -17,8 +20,16 @@ public class SceneList {
 	
 	public void removeSceneFromList(int index){
 		sceneList.remove(index);
-		// need add save to flash
+        Flash.saveList(mActivity.sceneList);
 	}
+
+    public void removeAllFromScene(int index){
+
+        sceneList.get(index).getActionList().clear();
+        sceneList.get(index).getActionList().trimToSize();
+        sceneList.get(index).getTaskList().clear();
+        sceneList.get(index).getTaskList().trimToSize();
+    }
 	
 	public class Scene{
 		
@@ -56,6 +67,7 @@ public class SceneList {
 		public String getName() { return name; }
 		public ArrayList<TaskElement> getTaskList() { return taskList; }
 		public ArrayList<ActionElement> getActionList() { return actionList; }
-	}
+        public void setName(String name) { this.name = name; }
+    }
 }
 

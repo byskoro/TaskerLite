@@ -10,6 +10,7 @@ import com.taskerlite.R;
 import com.taskerlite.logic.tasks.mTask;
 import com.taskerlite.logic.tasks.mTask.*;
 import com.taskerlite.logic.tasks.tApp;
+import com.taskerlite.main.TaskBuilder;
 import com.taskerlite.main.mActivity;
 
 public class TaskElement {
@@ -82,26 +83,37 @@ public class TaskElement {
         return icon;
     }
 
-    public boolean isTouched(MotionEvent event, float size){
+    public boolean isTouched(int xPointer, int yPointer, float size){
 
-        if((event.getRawX() > x) && (event.getRawX() < x + size)
-            && (event.getRawY() > y) && (event.getRawY() < y + size)){
+        if((xPointer > x) && (xPointer < x + size)
+            && (yPointer > y) && (yPointer < y + size)){
             return true;
         }
         else
             return false;
     }
 
-    public void setNewCoordinate(MotionEvent event){
-        x = (int) event.getX() - mActivity.iconSizeElement /2;
-        y = (int) event.getY() - mActivity.iconSizeElement /2;
+    public void setNewCoordinate(int xPointer, int yPointer){
+
+        if(yPointer < mActivity.iconSizeElement /2)
+            yPointer = mActivity.iconSizeElement /2;
+        else if(yPointer > TaskBuilder.screenHeight  - mActivity.iconSizeElement /2)
+            yPointer = TaskBuilder.screenHeight - mActivity.iconSizeElement /2;
+
+        if(xPointer < mActivity.iconSizeElement /2)
+            xPointer = mActivity.iconSizeElement /2;
+        else if(xPointer > TaskBuilder.screenWidth - mActivity.iconSizeElement /2)
+            xPointer = TaskBuilder.screenWidth - mActivity.iconSizeElement /2;
+
+        x = xPointer - mActivity.iconSizeElement /2;
+        y = yPointer - mActivity.iconSizeElement /2;
     }
 
     public String getTaskName() { return taskName; }
     public long getTaskId() { return taskId; }
     public int getX() { return x; }
     public int getY() { return y; }
-    public boolean isElementSelect(){ return isSelect; }
-    public void selectElement(){ isSelect = true; }
-    public void unSelectElement(){ isSelect = false; }
+    public boolean isSelect(){ return isSelect; }
+    public void select(){ isSelect = true; }
+    public void unselect(){ isSelect = false; }
 }

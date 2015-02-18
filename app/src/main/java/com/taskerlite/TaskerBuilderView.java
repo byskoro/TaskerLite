@@ -15,14 +15,17 @@ public class TaskerBuilderView extends View{
 
     private float mDownX;
     private float mDownY;
+    private int xPointer;
+    private int yPointer;
     private float scrollThreshold = 15;
     private boolean isOnClick;
 
     public interface ViewCallBack{
         public void fingerUp();
-        public void shortPress(MotionEvent event);
-        public void longPress(MotionEvent event);
-        public void movement(MotionEvent event);
+        public void prepareScreen(int w, int h);
+        public void shortPress(int xPointer, int yPointer);
+        public void longPress(int xPointer, int yPointer);
+        public void movement(int xPointer, int yPointer);
         public void onDrawView(Canvas canvas, MotionEvent event);
     }
 
@@ -42,10 +45,13 @@ public class TaskerBuilderView extends View{
     	switch (event.getAction() & MotionEvent.ACTION_MASK) {
     		case MotionEvent.ACTION_DOWN:
 
+                isOnClick = true;
+
     			mDownX = event.getX();
     			mDownY = event.getY();
 
-    			isOnClick = true;
+                xPointer = (int) event.getX();
+                yPointer = (int) event.getY();
 
                 longPressDetect.sendEmptyMessageDelayed(0, 1000);
 
@@ -57,7 +63,11 @@ public class TaskerBuilderView extends View{
 
     				isOnClick = false;
                     longPressDetect.removeMessages(0);
-                    viewCallBack.movement(event);
+
+                    xPointer = (int) event.getX();
+                    yPointer = (int) event.getY();
+
+                    viewCallBack.movement(xPointer, yPointer);
     			}
 
     			break; 
@@ -65,8 +75,11 @@ public class TaskerBuilderView extends View{
 
                 longPressDetect.removeMessages(0);
 
+                xPointer = (int) event.getX();
+                yPointer = (int) event.getY();
+
     			if (isOnClick)
-                    viewCallBack.shortPress(event);
+                    viewCallBack.shortPress(xPointer, yPointer);
                 else
                     viewCallBack.fingerUp();
 
@@ -76,11 +89,17 @@ public class TaskerBuilderView extends View{
     	return true;
     }
 
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        viewCallBack.prepareScreen(w, h);
+    }
+
     Handler longPressDetect = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             isOnClick = false;
-            viewCallBack.longPress(event);
+            viewCallBack.longPress(xPointer, yPointer);
         };
     };
 

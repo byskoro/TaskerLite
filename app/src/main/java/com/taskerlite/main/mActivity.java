@@ -6,6 +6,10 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.taskerlite.R;
+import com.taskerlite.logic.actions.aTimer;
+import com.taskerlite.logic.actions.mAction;
+import com.taskerlite.logic.tasks.mTask;
+import com.taskerlite.logic.tasks.tApp;
 import com.taskerlite.other.Flash;
 import com.taskerlite.logic.SceneList;
 import com.taskerlite.other.Screen;
@@ -28,8 +32,8 @@ public class mActivity extends Activity {
 
         //sceneList = new SceneList();
         //sceneList.addNewScene("Test Scene");
-        //sceneList.getScene(0).addNewAction("Timer", new aTimer(18, 47), ACTION_TYPE.TIMER, 0, 0);
-        //sceneList.getScene(0).addNewTask("Skype", new tApp("com.skype.raider"), TASK_TYPE.APP);
+        //sceneList.getScene(0).addNewAction("Timer", new aTimer(18, 47), mAction.ACTION_TYPE.TIMER, 0, 0);
+        //sceneList.getScene(0).addNewTask("Skype", new tApp("com.skype.raider"), mTask.TASK_TYPE.APP);
         //Flash.saveList(sceneList);
 
         Handler handlerLogic = new Handler();
@@ -50,8 +54,6 @@ public class mActivity extends Activity {
             super.onBackPressed();
 
         }else {
-
-            Flash.saveList(sceneList);
 
             getFragmentManager().beginTransaction().
             replace(R.id.fragmentConteiner, new TaskList()).

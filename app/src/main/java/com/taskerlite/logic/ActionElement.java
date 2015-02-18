@@ -10,6 +10,7 @@ import com.taskerlite.R;
 import com.taskerlite.logic.actions.aTimer;
 import com.taskerlite.logic.actions.mAction;
 import com.taskerlite.logic.actions.mAction.*;
+import com.taskerlite.main.TaskBuilder;
 import com.taskerlite.main.mActivity;
 
 import java.util.ArrayList;
@@ -86,28 +87,47 @@ public class ActionElement {
         return icon;
     }
 
-    public boolean isTouched(MotionEvent event, float size){
-        if((event.getRawX() > x) && (event.getRawX() < x + size)
-                && (event.getRawY() > y) && (event.getRawY() < y + size)){
-            return true;
+    public boolean isTouched(int xPointer, int yPointer, float size){
+
+        boolean state = false;
+
+        if((xPointer > x) && (xPointer < x + size)
+                && (yPointer > y) && (yPointer < y + size)){
+            state =  true;
         }
         else
-            return false;
+            state =  false;
+
+        return state;
     }
 
-    public void setNewCoordinate(MotionEvent event){
-        x = (int) event.getX() - mActivity.iconSizeElement /2;
-        y = (int) event.getY() - mActivity.iconSizeElement /2;
+    public void setNewCoordinate(int xPointer, int yPointer){
+
+        if(yPointer < mActivity.iconSizeElement /2)
+            yPointer = mActivity.iconSizeElement /2;
+        else if(yPointer > TaskBuilder.screenHeight  - mActivity.iconSizeElement /2)
+            yPointer = TaskBuilder.screenHeight - mActivity.iconSizeElement /2;
+
+        if(xPointer < mActivity.iconSizeElement /2)
+            xPointer = mActivity.iconSizeElement /2;
+        else if(xPointer > TaskBuilder.screenWidth - mActivity.iconSizeElement /2)
+            xPointer = TaskBuilder.screenWidth - mActivity.iconSizeElement /2;
+
+        x = xPointer - mActivity.iconSizeElement /2;
+        y = yPointer - mActivity.iconSizeElement /2;
     }
 
     public void addNewTaskElementId(long id){
+
         taskElementID.add(id);
     }
     public void deleteTaskElementId(long id){
+
         taskElementID.remove((Long)id);
         taskElementID.trimToSize();
     }
     public boolean isTaskElementIdPresent(long id) {
+
         for(Long item : taskElementID){
             if (id == item) {
                 return true;
@@ -118,8 +138,8 @@ public class ActionElement {
     public int getX() { return x; }
     public int getY() { return y; }
     public String getActionName() { return actionName; }
-    public boolean isElementSelect(){ return isSelect; }
-    public void selectElement(){ isSelect = true; }
-    public void unSelectElement(){ isSelect = false; }
+    public boolean isSelect(){ return isSelect; }
+    public void select(){ isSelect = true; }
+    public void unselect(){ isSelect = false; }
     public Integer getActionId() { return actionId; }
 }
