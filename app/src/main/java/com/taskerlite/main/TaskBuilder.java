@@ -69,7 +69,7 @@ public class TaskBuilder extends Fragment {
 
         Bitmap selectBigIcon = BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_select);
         selectIcon = Bitmap.createScaledBitmap(selectBigIcon, iconSizeElement, iconSizeElement, true);
-        Bitmap deleteBigIcon = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_launcher);
+        Bitmap deleteBigIcon = BitmapFactory.decodeResource(context.getResources(), R.drawable.delete);
         deleteIcon = Bitmap.createScaledBitmap(deleteBigIcon, iconSizeDelete, iconSizeDelete, true);
 
         gcElement = new GC_Element(iconSizeDelete);
@@ -88,7 +88,6 @@ public class TaskBuilder extends Fragment {
                     task.unSelectElement();
 
                 gcElement.clearList();
-
                 taskerView.postInvalidate();
             }
 
@@ -109,6 +108,7 @@ public class TaskBuilder extends Fragment {
         @Override
         public void shortPress(MotionEvent event) {
 
+            // look for delete icon press
             if(gcElement.deleteListGetSize() != 0){
 
                 if(gcElement.idPressedElement(event) != 0){
@@ -165,6 +165,7 @@ public class TaskBuilder extends Fragment {
             } else if (findTaskElement != null) {
 
                 if (!findTaskElement.isElementSelect()) {
+                    gcElement.addElement(findTaskElement.getTaskId(), findTaskElement.getX(), findTaskElement.getY());
                     findTaskElement.selectElement();
                     checkConnection();
                 }else
