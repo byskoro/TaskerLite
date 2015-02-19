@@ -6,10 +6,6 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.taskerlite.R;
-import com.taskerlite.logic.actions.aTimer;
-import com.taskerlite.logic.actions.mAction;
-import com.taskerlite.logic.tasks.mTask;
-import com.taskerlite.logic.tasks.tApp;
 import com.taskerlite.other.Flash;
 import com.taskerlite.logic.SceneList;
 import com.taskerlite.other.Screen;
