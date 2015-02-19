@@ -30,12 +30,6 @@ public class mActivity extends Activity {
 
         sceneList = Flash.getList();
 
-        //sceneList = new SceneList();
-        //sceneList.addNewScene("Test Scene");
-        //sceneList.getScene(0).addNewAction("Timer", new aTimer(18, 47), mAction.ACTION_TYPE.TIMER, 0, 0);
-        //sceneList.getScene(0).addNewTask("Skype", new tApp("com.skype.raider"), mTask.TASK_TYPE.APP);
-        //Flash.saveList(sceneList);
-
         Handler handlerLogic = new Handler();
 
         getFragmentManager().beginTransaction().

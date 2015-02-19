@@ -171,6 +171,7 @@ public class TaskBuilder extends Fragment implements View.OnClickListener, TextV
 
         @Override
         public void prepareScreen(int w, int h) {
+
             screenWidth  = w;
             screenHeight = h;
         }
@@ -247,7 +248,7 @@ public class TaskBuilder extends Fragment implements View.OnClickListener, TextV
             }else{
 
                 unselectAll();
-                showMenuDialog();
+                showMenuDialog(xPointer, yPointer);
             }
 
             Vibro.playLong(context);
@@ -459,7 +460,7 @@ public class TaskBuilder extends Fragment implements View.OnClickListener, TextV
         }
     }
 
-    private void showMenuDialog( ){
+    private void showMenuDialog(final int xPointer, final int yPointer){
 
         dialogMenu = new Dialog(context);
         dialogMenu.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -469,7 +470,7 @@ public class TaskBuilder extends Fragment implements View.OnClickListener, TextV
             @Override
             public void onClick(View view) {
                 Toast.makeText(getActivity(),"Open Action List", Toast.LENGTH_SHORT).show();
-                scene.addNewAction("Timer 2", new aTimer(18, 47), ACTION_TYPE.TIMER, 0, 0);
+                scene.addNewAction("Timer 2", new aTimer(18, 47), ACTION_TYPE.TIMER, xPointer, yPointer);
                 updateScreenUI();
                 dialogMenu.dismiss();
             }
@@ -479,7 +480,7 @@ public class TaskBuilder extends Fragment implements View.OnClickListener, TextV
             @Override
             public void onClick(View view) {
                 Toast.makeText(getActivity(),"Open Task List", Toast.LENGTH_SHORT).show();
-                scene.addNewTask("Skype 2", new tApp("com.skype.raider"), TASK_TYPE.APP);
+                scene.addNewTask("Skype 2", new tApp("com.skype.raider"), TASK_TYPE.APP, xPointer, yPointer);
                 updateScreenUI();
                 dialogMenu.dismiss();
             }

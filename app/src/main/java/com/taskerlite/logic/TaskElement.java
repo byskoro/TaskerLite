@@ -28,11 +28,13 @@ public class TaskElement {
     private long taskId;
     private int x, y;
 
-    public TaskElement(String objName, mTask obj, TASK_TYPE objType){
+    public TaskElement(String objName, mTask obj, TASK_TYPE objType, int x, int y){
 
         this.taskName = objName;
         this.taskObject = obj;
         this.taskType = objType;
+        this.x = x;
+        this.y = y;
 
         taskId    = System.currentTimeMillis();
         taskINStr = new GsonBuilder().create().toJson(obj);

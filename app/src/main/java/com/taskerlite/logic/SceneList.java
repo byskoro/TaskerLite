@@ -52,9 +52,9 @@ public class SceneList {
             actionList.trimToSize();
         }
 		
-		public void addNewTask(String objName, mTask obj, TASK_TYPE objType){
+		public void addNewTask(String objName, mTask obj, TASK_TYPE objType, int x, int y){
 			
-			taskList.add(new TaskElement(objName, obj, objType));
+			taskList.add(new TaskElement(objName, obj, objType, x, y));
 		}
 
         public void deleteTask(TaskElement taskElement){
