@@ -26,6 +26,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class TaskList extends Fragment implements View.OnClickListener{
 
@@ -58,6 +59,7 @@ public class TaskList extends Fragment implements View.OnClickListener{
         mListView.setMenuCreator(creator);
         mListView.setOnMenuItemClickListener(itemClickListener);
         mListView.setOnItemClickListener(onSceneClickListener);
+        mListView.setOnItemLongClickListener(onLongClickListener);
 
         topLayout = (LinearLayout) view.findViewById(R.id.topLayout);
         buttonPlus = (ImageButton) view.findViewById(R.id.btnPlus);
@@ -129,6 +131,17 @@ public class TaskList extends Fragment implements View.OnClickListener{
                     mAdapter.notifyDataSetChanged();
                     break;
             }
+            return false;
+        }
+    };
+
+    AdapterView.OnItemLongClickListener onLongClickListener = new AdapterView.OnItemLongClickListener() {
+
+        @Override
+        public boolean onItemLongClick(AdapterView<?> adapterView, View view, int index, long l) {
+
+            Toast.makeText(context, index + " long click", Toast.LENGTH_LONG).show();
+
             return false;
         }
     };

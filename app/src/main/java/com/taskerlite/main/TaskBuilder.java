@@ -89,6 +89,7 @@ public class TaskBuilder extends Fragment implements View.OnClickListener, TextV
         nameScene.setOnEditorActionListener(this);
         nameScene.setText(scene.getName());
         clearRequestLay = (LinearLayout) view.findViewById(R.id.clearRequestLay);
+        clearRequest(nameScene);
 
         Bitmap selectBigIcon = BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_select);
         selectIcon = Bitmap.createScaledBitmap(selectBigIcon, iconSizeElement, iconSizeElement, true);
@@ -128,14 +129,18 @@ public class TaskBuilder extends Fragment implements View.OnClickListener, TextV
         try {
 
             scene.setName(textView.getText().toString());
-
-            clearRequestLay.requestFocus();
-            InputMethodManager imm = (InputMethodManager)textView.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(textView.getApplicationWindowToken(), 0);
+            clearRequest(textView);
 
         } catch (Exception e) { }
 
         return true;
+    }
+
+    private void clearRequest(TextView textView){
+
+        clearRequestLay.requestFocus();
+        InputMethodManager imm = (InputMethodManager)textView.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(textView.getApplicationWindowToken(), 0);
     }
 
     Handler handlerLogic = new Handler() {
