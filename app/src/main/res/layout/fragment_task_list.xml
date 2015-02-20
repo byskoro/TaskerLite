@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#1B1F29"
     android:orientation="vertical">
 
     <LinearLayout
@@ -9,7 +10,7 @@
         android:layout_height="0dp"
         android:layout_weight="0.1"
         android:orientation="horizontal"
-        android:background="#106DBA">
+        android:background="#dc6357">
 
         <ImageButton
             android:id="@+id/btnPlus"
@@ -29,7 +30,7 @@
             android:maxLines="1"
             android:gravity="center"
             android:padding="5dp"
-            android:textColor="#294375"
+            android:textColor="#ffffff"
             android:textSize="500sp" />
 
         <ImageButton
@@ -48,8 +49,11 @@
         android:layout_height="0dp"
         android:layout_weight="0.3"
         android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:id="@+id/topLayout"
-        android:background="#84C9EC">
+        android:background="@drawable/buttonshape">
 
         <LinearLayout
             android:id="@+id/Top"
@@ -67,7 +71,7 @@
                 android:maxLines="1"
                 android:gravity="center"
                 android:padding="5dp"
-                android:textColor="#294375"
+                android:textColor="#ffffff"
                 android:textSize="500sp" />
 
             <com.taskerlite.AutoResizeTextView
@@ -76,7 +80,7 @@
                 android:layout_height="match_parent"
                 android:text="Turn on Skype"
                 android:textSize="500sp"
-                android:textColor="#294375"
+                android:textColor="#ffffff"
                 android:maxLines="2"
                 android:layout_weight="0.5"
                 android:padding="5dp"
@@ -110,8 +114,11 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.7"
-        android:padding="10dip"
-        android:background="#C1AFA9"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:padding="5dp"
+        android:background="@drawable/buttonshape"
         android:divider="@android:color/transparent"
         android:dividerHeight="10.0sp" />
 </LinearLayout>
