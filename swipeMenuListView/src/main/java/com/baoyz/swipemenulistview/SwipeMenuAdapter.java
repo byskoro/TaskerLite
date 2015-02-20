@@ -72,7 +72,7 @@ public class SwipeMenuAdapter implements WrapperListAdapter,
 	}
 
 	public void createMenu(SwipeMenu menu) {
-		// Test Code
+
 		SwipeMenuItem item = new SwipeMenuItem(mContext);
 		item.setTitle("Item 1");
 		item.setBackground(new ColorDrawable(Color.GRAY));
