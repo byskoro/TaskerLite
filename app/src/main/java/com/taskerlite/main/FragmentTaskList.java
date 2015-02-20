@@ -16,7 +16,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,11 +24,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class TaskList extends Fragment implements View.OnClickListener{
+public class FragmentTaskList extends Fragment implements View.OnClickListener{
 
     SceneList sceneList;
 
@@ -101,7 +99,7 @@ public class TaskList extends Fragment implements View.OnClickListener{
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
             getFragmentManager().beginTransaction().
-            replace(R.id.fragmentConteiner, TaskBuilder.getInstance(position)).
+            replace(R.id.fragmentConteiner, FragmentTaskBuilder.getInstance(position)).
             commit();
         }
     };
@@ -144,7 +142,7 @@ public class TaskList extends Fragment implements View.OnClickListener{
         sceneList.addNewScene("");
 
         getFragmentManager().beginTransaction().
-        replace(R.id.fragmentConteiner, TaskBuilder.getInstance(sceneList.getSceneListSize() - 1)).
+        replace(R.id.fragmentConteiner, FragmentTaskBuilder.getInstance(sceneList.getSceneListSize() - 1)).
         commit();
     }
 

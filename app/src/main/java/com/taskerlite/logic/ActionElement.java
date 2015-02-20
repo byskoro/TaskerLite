@@ -3,14 +3,13 @@ package com.taskerlite.logic;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.view.MotionEvent;
 
 import com.google.gson.GsonBuilder;
 import com.taskerlite.R;
 import com.taskerlite.logic.actions.aTimer;
 import com.taskerlite.logic.actions.mAction;
 import com.taskerlite.logic.actions.mAction.*;
-import com.taskerlite.main.TaskBuilder;
+import com.taskerlite.main.FragmentTaskBuilder;
 import com.taskerlite.main.mActivity;
 
 import java.util.ArrayList;
@@ -102,13 +101,13 @@ public class ActionElement {
 
         if(yPointer < mActivity.iconSizeElement /2)
             yPointer = mActivity.iconSizeElement /2;
-        else if(yPointer > TaskBuilder.screenHeight  - mActivity.iconSizeElement /2)
-            yPointer = TaskBuilder.screenHeight - mActivity.iconSizeElement /2;
+        else if(yPointer > FragmentTaskBuilder.screenHeight  - mActivity.iconSizeElement /2)
+            yPointer = FragmentTaskBuilder.screenHeight - mActivity.iconSizeElement /2;
 
         if(xPointer < mActivity.iconSizeElement /2)
             xPointer = mActivity.iconSizeElement /2;
-        else if(xPointer > TaskBuilder.screenWidth - mActivity.iconSizeElement /2)
-            xPointer = TaskBuilder.screenWidth - mActivity.iconSizeElement /2;
+        else if(xPointer > FragmentTaskBuilder.screenWidth - mActivity.iconSizeElement /2)
+            xPointer = FragmentTaskBuilder.screenWidth - mActivity.iconSizeElement /2;
 
         x = xPointer - mActivity.iconSizeElement /2;
         y = yPointer - mActivity.iconSizeElement /2;

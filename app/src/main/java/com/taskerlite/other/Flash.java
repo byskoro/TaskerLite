@@ -10,7 +10,7 @@ import java.io.OutputStreamWriter;
 import android.os.Environment;
 
 import com.google.gson.GsonBuilder;
-import com.taskerlite.main.TaskerService;
+import com.taskerlite.main.TService;
 import com.taskerlite.logic.SceneList;
 
 public class Flash {
@@ -32,7 +32,7 @@ public class Flash {
 	        outWriter.close();
 	        fOut.close();
 	        
-	        TaskerService.newDataCome = true;
+	        TService.newDataCome = true;
 	        
 		} catch (Exception e) { }
 	}

@@ -25,7 +25,7 @@
             </intent-filter>
         </activity>
 
-        <service android:name="com.taskerlite.main.TaskerService" />
+        <service android:name=".main.TService" />
     </application>
 
 </manifest>

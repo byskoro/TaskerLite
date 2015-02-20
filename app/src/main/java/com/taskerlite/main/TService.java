@@ -17,7 +17,7 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 
-public class TaskerService extends Service {
+public class TService extends Service {
 
 	public static boolean newDataCome = false;
 	private SceneList sceneList;
@@ -81,7 +81,7 @@ public class TaskerService extends Service {
         
         for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
         	
-            if (TaskerService.class.getName().equals(service.service.getClassName()))
+            if (TService.class.getName().equals(service.service.getClassName()))
                 return true;
         }
         return false;

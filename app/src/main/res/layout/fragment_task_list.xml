@@ -9,7 +9,7 @@
         android:layout_height="0dp"
         android:layout_weight="0.1"
         android:orientation="horizontal"
-        android:background="#ff5252fe">
+        android:background="#106DBA">
 
         <ImageButton
             android:id="@+id/btnPlus"
@@ -29,7 +29,7 @@
             android:maxLines="1"
             android:gravity="center"
             android:padding="5dp"
-            android:textColor="#ffffffff"
+            android:textColor="#294375"
             android:textSize="500sp" />
 
         <ImageButton
@@ -49,7 +49,7 @@
         android:layout_weight="0.3"
         android:orientation="vertical"
         android:id="@+id/topLayout"
-        android:background="#ff569efe">
+        android:background="#84C9EC">
 
         <LinearLayout
             android:id="@+id/Top"
@@ -67,7 +67,7 @@
                 android:maxLines="1"
                 android:gravity="center"
                 android:padding="5dp"
-                android:textColor="#ffffffff"
+                android:textColor="#294375"
                 android:textSize="500sp" />
 
             <com.taskerlite.AutoResizeTextView
@@ -76,7 +76,7 @@
                 android:layout_height="match_parent"
                 android:text="Turn on Skype"
                 android:textSize="500sp"
-                android:textColor="#ffffffff"
+                android:textColor="#294375"
                 android:maxLines="2"
                 android:layout_weight="0.5"
                 android:padding="5dp"
@@ -111,7 +111,7 @@
         android:layout_height="0dp"
         android:layout_weight="0.7"
         android:padding="10dip"
-        android:background="#ffdedede"
+        android:background="#C1AFA9"
         android:divider="@android:color/transparent"
         android:dividerHeight="10.0sp" />
 </LinearLayout>

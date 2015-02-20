@@ -29,24 +29,24 @@ public class mActivity extends Activity {
         Handler handlerLogic = new Handler();
 
         getFragmentManager().beginTransaction().
-        add(R.id.fragmentConteiner, new TaskList()).
+        add(R.id.fragmentConteiner, new FragmentTaskList()).
         commit();
 
-        if(!TaskerService.isRunning(this))
-            startService(new Intent(this, TaskerService.class));
+        if(!TService.isRunning(this))
+            startService(new Intent(this, TService.class));
     }
 
     @Override
     public void onBackPressed() {
 
-        if (getFragmentManager().findFragmentById(R.id.fragmentConteiner) instanceof TaskList) {
+        if (getFragmentManager().findFragmentById(R.id.fragmentConteiner) instanceof FragmentTaskList) {
 
             super.onBackPressed();
 
         }else {
 
             getFragmentManager().beginTransaction().
-            replace(R.id.fragmentConteiner, new TaskList()).
+            replace(R.id.fragmentConteiner, new FragmentTaskList()).
             commit();
         }
     }

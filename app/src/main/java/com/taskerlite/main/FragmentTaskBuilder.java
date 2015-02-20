@@ -42,7 +42,7 @@ import com.taskerlite.logic.actions.mAction.*;
 
 import java.util.ArrayList;
 
-public class TaskBuilder extends Fragment implements View.OnClickListener, TextView.OnEditorActionListener {
+public class FragmentTaskBuilder extends Fragment implements View.OnClickListener, TextView.OnEditorActionListener {
 
     public static enum LIST{NULL, DIALOG_MENU, DIALOG_ACTIONS, DIALOG_TASK};
 
@@ -69,9 +69,9 @@ public class TaskBuilder extends Fragment implements View.OnClickListener, TextV
     EditText nameScene;
     LinearLayout clearRequestLay;
 
-    public static TaskBuilder getInstance(int sceneIndex){
-        TaskBuilder.sceneIndex = sceneIndex;
-        return new TaskBuilder();
+    public static FragmentTaskBuilder getInstance(int sceneIndex){
+        FragmentTaskBuilder.sceneIndex = sceneIndex;
+        return new FragmentTaskBuilder();
     }
 	
 	@Override
@@ -115,7 +115,7 @@ public class TaskBuilder extends Fragment implements View.OnClickListener, TextV
 
             case R.id.backBtn:
                 getFragmentManager().beginTransaction().
-                replace(R.id.fragmentConteiner, new TaskList()).
+                replace(R.id.fragmentConteiner, new FragmentTaskList()).
                 commit();
                 break;
             case R.id.saveBtn:
