@@ -77,14 +77,6 @@ public class FragmentTaskList extends Fragment implements View.OnClickListener{
             onItem.setTitleColor(Color.WHITE);
             menu.addMenuItem(onItem);
 
-            SwipeMenuItem offItem = new SwipeMenuItem(context);
-            offItem.setBackground(new ColorDrawable(Color.rgb(0xC9, 0xC9, 0xCE)));
-            offItem.setWidth(Screen.dp2px(context, 90));
-            offItem.setTitle("OFF");
-            offItem.setTitleSize(18);
-            offItem.setTitleColor(Color.WHITE);
-            menu.addMenuItem(offItem);
-
             SwipeMenuItem deleteItem = new SwipeMenuItem(context);
             deleteItem.setBackground(new ColorDrawable(Color.rgb(0xF9, 0x3F, 0x25)));
             deleteItem.setWidth(Screen.dp2px(context, 90));
@@ -112,9 +104,6 @@ public class FragmentTaskList extends Fragment implements View.OnClickListener{
 
                     break;
                 case 1:
-
-                    break;
-                case 2:
                     sceneList.removeSceneFromList(position);
                     mAdapter.notifyDataSetChanged();
                     break;
