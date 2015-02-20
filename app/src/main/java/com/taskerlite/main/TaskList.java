@@ -23,6 +23,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -61,19 +62,8 @@ public class TaskList extends Fragment implements View.OnClickListener{
         mListView.setOnItemClickListener(onSceneClickListener);
         mListView.setOnItemLongClickListener(onLongClickListener);
 
-        topLayout = (LinearLayout) view.findViewById(R.id.topLayout);
         buttonPlus = (ImageButton) view.findViewById(R.id.btnPlus);
         buttonPlus.setOnClickListener(this);
-
-        topLayout.post(new Runnable() {
-            public void run() {
-                int height = topLayout.getHeight();
-                int iconSize = getResources().getInteger(R.integer.icon_size);
-                RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(new ViewGroup.MarginLayoutParams(Screen.dp2px(context, iconSize), Screen.dp2px(context, iconSize)));
-                lp.setMargins(Screen.dp2px(context, 20), height - Screen.dp2px(context, iconSize / 2), 0, 0);
-                buttonPlus.setLayoutParams(lp);
-            }
-        });
 
         return view;
     }
@@ -160,6 +150,8 @@ public class TaskList extends Fragment implements View.OnClickListener{
 
     class AppAdapter extends BaseAdapter {
 
+        String[] colorlist = { "#f2a400", "#e00707", "#4ac925", "#00d5f2", "#f2a400" };
+
         public int getCount() {
             return sceneList.getSceneListSize();
         }
@@ -180,6 +172,8 @@ public class TaskList extends Fragment implements View.OnClickListener{
 
             TextView t = (TextView) convertView.findViewById(R.id.sceneNameID);
             t.setText(getItem(position).getName());
+            ImageView img = (ImageView) convertView.findViewById(R.id.imageView1);
+            img.setBackgroundColor(Color.parseColor(colorlist[position]));
 
             return convertView;
         }
