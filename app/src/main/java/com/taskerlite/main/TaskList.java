@@ -142,7 +142,7 @@ public class TaskList extends Fragment implements View.OnClickListener{
 
             Toast.makeText(context, index + " long click", Toast.LENGTH_LONG).show();
 
-            return false;
+            return true;
         }
     };
 

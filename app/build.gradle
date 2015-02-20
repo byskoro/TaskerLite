@@ -24,4 +24,5 @@ dependencies {
     compile files('libs/gson-2.3.jar')
     compile files('libs/swipemenulistview.jar')
     compile 'com.android.support:support-v4:21.0.3'
+    compile project(':switchButton')
 }

@@ -92,8 +92,8 @@
                 android:id="@+id/listView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:dividerHeight="1dp"
-                android:divider="@drawable/divider" />
+                android:dividerHeight="0dp"
+                android:divider="#FFCC00" />
         </LinearLayout>
 
     </LinearLayout>
