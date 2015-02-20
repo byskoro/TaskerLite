@@ -49,7 +49,7 @@ public class TaskList extends Fragment implements View.OnClickListener{
 
         this.inflater = inflater;
         activity = getActivity();
-        context = (Context) getActivity();
+        context  = getActivity();
 
         sceneList = mActivity.sceneList;
 
@@ -74,6 +74,7 @@ public class TaskList extends Fragment implements View.OnClickListener{
                 buttonPlus.setLayoutParams(lp);
             }
         });
+
         return view;
     }
 
@@ -128,6 +129,7 @@ public class TaskList extends Fragment implements View.OnClickListener{
                     break;
                 case 2:
                     sceneList.removeSceneFromList(position);
+                    //mAdapter.notifyAll();
                     mAdapter.notifyDataSetChanged();
                     break;
             }

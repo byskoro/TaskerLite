@@ -19,7 +19,9 @@ public class SceneList {
     public int getSceneListSize(){ return sceneList.size(); }
 	
 	public void removeSceneFromList(int index){
+
 		sceneList.remove(index);
+        sceneList.trimToSize();
         Flash.saveList(mActivity.sceneList);
 	}
 

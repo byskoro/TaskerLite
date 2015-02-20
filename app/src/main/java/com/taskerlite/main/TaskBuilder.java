@@ -8,7 +8,9 @@ import com.taskerlite.logic.TaskElement;
 import com.taskerlite.other.Flash;
 import com.taskerlite.other.Vibro;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -42,6 +44,8 @@ import java.util.ArrayList;
 
 public class TaskBuilder extends Fragment implements View.OnClickListener, TextView.OnEditorActionListener {
 
+    public static enum LIST{NULL, DIALOG_MENU, DIALOG_ACTIONS, DIALOG_TASK};
+
     private TaskerBuilderView taskerView;
     private Context context;
     private Scene scene;
@@ -56,6 +60,7 @@ public class TaskBuilder extends Fragment implements View.OnClickListener, TextV
     public static int screenWidth;
     public static int screenHeight;
 
+    CustomDialog dialog;
     Dialog dialogMenu;
     Dialog dialogActions;
     Dialog dialogTasks;
@@ -97,6 +102,8 @@ public class TaskBuilder extends Fragment implements View.OnClickListener, TextV
         deleteIcon = Bitmap.createScaledBitmap(deleteBigIcon, iconSizeDelete, iconSizeDelete, true);
 
         gcElement = new DelElement(iconSizeDelete);
+
+        dialog = new CustomDialog();
 
 		return view;
 	}
@@ -207,14 +214,12 @@ public class TaskBuilder extends Fragment implements View.OnClickListener, TextV
 
                 Toast.makeText(getActivity(),"Open Task", Toast.LENGTH_SHORT).show();
 
-                //findTouchedTask(event).getTaskObject().show();
+                findTouchedTask(xPointer, yPointer).getTaskObject().show(context);
 
                 Vibro.playShort(context);
             } else if (findTouchedAction(xPointer, yPointer) != null){
 
                 Toast.makeText(getActivity(),"Open Action", Toast.LENGTH_SHORT).show();
-
-                //findTouchedAction(event).getTaskObject().show();
 
                 Vibro.playShort(context);
             }
@@ -253,7 +258,7 @@ public class TaskBuilder extends Fragment implements View.OnClickListener, TextV
             }else{
 
                 unselectAll();
-                showMenuDialog(xPointer, yPointer);
+                dialog.setType(LIST.DIALOG_MENU).show(getFragmentManager(), "myD");
             }
 
             Vibro.playLong(context);
@@ -465,32 +470,53 @@ public class TaskBuilder extends Fragment implements View.OnClickListener, TextV
         }
     }
 
-    private void showMenuDialog(final int xPointer, final int yPointer){
+     @SuppressLint("ValidFragment")
+     class CustomDialog extends DialogFragment {
 
-        dialogMenu = new Dialog(context);
-        dialogMenu.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialogMenu.setContentView(R.layout.dialog_menu);
+        private LIST val;
+        private Dialog mDialog;
 
-        ((ImageButton) dialogMenu.findViewById(R.id.actionElement)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getActivity(),"Open Action List", Toast.LENGTH_SHORT).show();
-                scene.addNewAction("Timer 2", new aTimer(18, 47), ACTION_TYPE.TIMER, xPointer, yPointer);
-                updateScreenUI();
-                dialogMenu.dismiss();
+        public CustomDialog setType(LIST val){
+            this.val = val;
+            return this;
+        }
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+
+            mDialog = new Dialog(context);
+            mDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+            switch(val){
+
+                case DIALOG_MENU:
+
+                    mDialog.setContentView(R.layout.dialog_menu);
+
+                    ((ImageButton) mDialog.findViewById(R.id.actionElement)).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Toast.makeText(getActivity(),"Open Action List", Toast.LENGTH_SHORT).show();
+                            scene.addNewAction("Timer 2", new aTimer(18, 47), ACTION_TYPE.TIMER, 0, 0);
+                            updateScreenUI();
+                            mDialog.dismiss();
+                        }
+                    });
+
+                    ((ImageButton) mDialog.findViewById(R.id.taskElement)).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Toast.makeText(getActivity(),"Open Task List", Toast.LENGTH_SHORT).show();
+                            scene.addNewTask("Skype 2", new tApp("com.skype.raider"), TASK_TYPE.APP, 0, 0);
+                            updateScreenUI();
+                            mDialog.dismiss();
+                        }
+                    });
+
+                    break;
             }
-        });
 
-        ((ImageButton) dialogMenu.findViewById(R.id.taskElement)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getActivity(),"Open Task List", Toast.LENGTH_SHORT).show();
-                scene.addNewTask("Skype 2", new tApp("com.skype.raider"), TASK_TYPE.APP, xPointer, yPointer);
-                updateScreenUI();
-                dialogMenu.dismiss();
-            }
-        });
-
-        dialogMenu.show();
+            return mDialog;
+        }
     }
 }
