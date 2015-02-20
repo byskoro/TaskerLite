@@ -201,15 +201,12 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
 
             }else if(findTouchedTask(xPointer, yPointer) != null) {
 
-                Toast.makeText(getActivity(),"Open Task", Toast.LENGTH_SHORT).show();
-
                 findTouchedTask(xPointer, yPointer).getTaskObject().show(context);
-
                 Vibro.playShort(context);
+
             } else if (findTouchedAction(xPointer, yPointer) != null){
 
-                Toast.makeText(getActivity(),"Open Action", Toast.LENGTH_SHORT).show();
-
+                findTouchedAction(xPointer, yPointer).getActionObject().show(context);
                 Vibro.playShort(context);
             }
 

@@ -1,11 +1,14 @@
 package com.taskerlite.logic.tasks;
 
+import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -44,8 +47,18 @@ public class tApp extends mTask {
 	}
 
     @Override
-    public void show(Context context) {
+    public void show(final Context context) {
 
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Выбираем кота");
+
+        Intent resolveIntent = new Intent(Intent.ACTION_MAIN, null);
+        resolveIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+        resolveIntent.setPackage(item.packageName);
+        List<ResolveInfo> resolveInfoList = context.getPackageManager().queryIntentActivities(resolveIntent, 0);
+
+
+        class my{}
 
     }
 

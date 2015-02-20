@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 
-    <LinearLayout
+    <RelativeLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:background="@null"
@@ -17,7 +17,8 @@
             android:id="@+id/sb_enable"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
             android:layout_marginLeft="8dp"
             app:animationVelocity="8"
             app:offDrawable="@drawable/img_back_off"
@@ -30,11 +31,14 @@
 
         <com.taskerlite.AutoResizeTextView
             android:id="@+id/sceneNameID"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/sb_enable"
+            android:layout_toLeftOf="@+id/imageView1"
             android:gravity="left"
             android:text="name"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="10dp"
             android:layout_gravity="center_vertical"
             android:textColor="#ffffff"
             android:textSize="500sp" />
@@ -43,9 +47,9 @@
             android:id="@+id/imageView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:baselineAlignBottom="true"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
             android:scaleType="centerCrop"
             android:src="@drawable/open_menu"/>
-    </LinearLayout>
+    </RelativeLayout>
 </LinearLayout>
