@@ -3,6 +3,7 @@ package com.taskerlite.main;
 import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
+import com.baoyz.swipemenulistview.SwipeMenuLayout;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.baoyz.swipemenulistview.SwipeMenuListView.OnMenuItemClickListener;
 import com.taskerlite.R;
@@ -106,6 +107,7 @@ public class FragmentTaskList extends Fragment implements View.OnClickListener{
                 case 1:
                     sceneList.removeSceneFromList(position);
                     mAdapter.notifyDataSetChanged();
+
                     break;
             }
             return false;

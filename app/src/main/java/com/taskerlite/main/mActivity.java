@@ -26,8 +26,6 @@ public class mActivity extends Activity {
 
         sceneList = Flash.getList();
 
-        Handler handlerLogic = new Handler();
-
         getFragmentManager().beginTransaction().
         add(R.id.fragmentConteiner, new FragmentTaskList()).
         commit();
@@ -41,7 +39,7 @@ public class mActivity extends Activity {
 
         if (getFragmentManager().findFragmentById(R.id.fragmentConteiner) instanceof FragmentTaskList) {
 
-            super.onBackPressed();
+            finish();
 
         }else {
 

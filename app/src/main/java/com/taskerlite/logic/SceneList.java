@@ -38,9 +38,9 @@ public class SceneList {
 		private String name;
 		private ArrayList<ActionElement> actionList = new ArrayList<ActionElement>();
 		private ArrayList<TaskElement>   taskList = new ArrayList<TaskElement>();
-		
+
 		public Scene(String sceneName){
-			
+
 			this.name = sceneName;
 		}
 		

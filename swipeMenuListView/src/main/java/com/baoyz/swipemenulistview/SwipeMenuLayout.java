@@ -240,19 +240,18 @@ public class SwipeMenuLayout extends FrameLayout {
 
 	public void smoothOpenMenu() {
 		state = STATE_OPEN;
-		mOpenScroller.startScroll(-mContentView.getLeft(), 0,
-				mMenuView.getWidth(), 0, 350);
+		mOpenScroller.startScroll(-mContentView.getLeft(), 0, mMenuView.getWidth(), 0, 350);
 		postInvalidate();
 	}
 
 	public void closeMenu() {
+
 		if (mCloseScroller.computeScrollOffset()) {
 			mCloseScroller.abortAnimation();
 		}
-		if (state == STATE_OPEN) {
-			state = STATE_CLOSE;
-			swipe(0);
-		}
+
+        state = STATE_CLOSE;
+        swipe(0);
 	}
 
 	public void openMenu() {
