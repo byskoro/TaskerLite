@@ -126,12 +126,8 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
     @Override
     public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
 
-        try {
-
-            scene.setName(textView.getText().toString());
-            clearRequest(textView);
-
-        } catch (Exception e) { }
+        scene.setName(textView.getText().toString());
+        clearRequest(textView);
 
         return true;
     }
