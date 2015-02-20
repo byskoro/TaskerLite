@@ -45,6 +45,8 @@ public class mActivity extends Activity {
 
         }else {
 
+            Flash.saveList(mActivity.sceneList);
+
             getFragmentManager().beginTransaction().
             replace(R.id.fragmentConteiner, new FragmentTaskList()).
             commit();

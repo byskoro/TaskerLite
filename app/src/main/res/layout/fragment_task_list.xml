@@ -119,6 +119,6 @@
         android:layout_marginRight="10dp"
         android:padding="5dp"
         android:background="@drawable/buttonshape"
-        android:divider="@android:color/transparent"
-        android:dividerHeight="10.0sp" />
+        android:divider="#878787"
+        android:dividerHeight="1.0dp" />
 </LinearLayout>

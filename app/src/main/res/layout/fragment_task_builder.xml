@@ -2,18 +2,31 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:background="#1B1F29">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.1"
-        android:background="#ff00ff00"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="#dc6357">
+
+        <ImageButton
+            android:id="@+id/backBtn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
+            android:scaleType="centerInside"
+            android:padding="5dp"
+            android:src="@drawable/back"
+            android:background="@null"/>
+
         <EditText
             android:id="@+id/sceneName"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_weight="0.6"
             android:inputType="text"
             android:maxLines="1"
             android:imeOptions="actionDone"
@@ -21,38 +34,29 @@
             android:hint="Name Scene"
             android:gravity="center"
             android:textSize="30sp" />
-    </LinearLayout>
 
-    <com.taskerlite.TaskerBuilderView
-        android:id="@+id/drawBuilder"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.8" />
+        <ImageButton
+            android:id="@+id/clearBtn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
+            android:scaleType="centerInside"
+            android:padding="5dp"
+            android:src="@drawable/clean"
+            android:background="@null"/>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.1"
-        android:orientation="horizontal">
+        android:layout_weight="0.9"
+        android:layout_margin="10dp"
+        android:background="@drawable/buttonshape">
 
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.3"
-            android:text="Back"
-            android:id="@+id/backBtn" />
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.3"
-            android:text="Save"
-            android:id="@+id/saveBtn" />
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.3"
-            android:text="Clear"
-            android:id="@+id/clearBtn" />
+        <com.taskerlite.TaskerBuilderView
+            android:id="@+id/drawBuilder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
     </LinearLayout>
 
     <LinearLayout
@@ -61,6 +65,6 @@
         android:layout_height="0dp"
         android:focusable="true"
         android:focusableInTouchMode="true"
-        android:orientation="vertical"/>
+        android:orientation="vertical" />
 
 </LinearLayout>

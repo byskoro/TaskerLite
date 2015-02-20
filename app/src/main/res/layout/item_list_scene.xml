@@ -13,14 +13,6 @@
         android:background="@null"
         android:layout_height="60dp">
 
-        <ImageView
-            android:id="@+id/imageView1"
-            android:layout_width="20dip"
-            android:layout_height="match_parent"
-            android:adjustViewBounds="true"
-            android:baselineAlignBottom="true"
-            android:scaleType="centerCrop" />
-
         <com.kyleduo.switchbutton.SwitchButton
             android:id="@+id/sb_enable"
             android:layout_width="wrap_content"
@@ -38,7 +30,7 @@
 
         <com.taskerlite.AutoResizeTextView
             android:id="@+id/sceneNameID"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="left"
             android:text="name"
@@ -46,5 +38,14 @@
             android:layout_gravity="center_vertical"
             android:textColor="#ffffff"
             android:textSize="500sp" />
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:baselineAlignBottom="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/open_menu"/>
     </LinearLayout>
 </LinearLayout>

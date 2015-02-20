@@ -61,11 +61,8 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
     public static int screenHeight;
 
     CustomDialog dialog;
-    Dialog dialogMenu;
-    Dialog dialogActions;
-    Dialog dialogTasks;
 
-    Button backBtn, saveBtn, clearBtn;
+    ImageButton backBtn, clearBtn;
     EditText nameScene;
     LinearLayout clearRequestLay;
 
@@ -84,11 +81,9 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
 
 		taskerView = (TaskerBuilderView) view.findViewById(R.id.drawBuilder);
         taskerView.setViewCallBack(viewCallBack);
-        backBtn = (Button) view.findViewById(R.id.backBtn);
+        backBtn = (ImageButton) view.findViewById(R.id.backBtn);
         backBtn.setOnClickListener(this);
-        saveBtn = (Button) view.findViewById(R.id.saveBtn);
-        saveBtn.setOnClickListener(this);
-        clearBtn= (Button) view.findViewById(R.id.clearBtn);
+        clearBtn= (ImageButton) view.findViewById(R.id.clearBtn);
         clearBtn.setOnClickListener(this);
         nameScene = (EditText) view.findViewById(R.id.sceneName);
         nameScene.setOnEditorActionListener(this);
@@ -114,12 +109,10 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
         switch(view.getId()){
 
             case R.id.backBtn:
+                Flash.saveList(mActivity.sceneList);
                 getFragmentManager().beginTransaction().
                 replace(R.id.fragmentConteiner, new FragmentTaskList()).
                 commit();
-                break;
-            case R.id.saveBtn:
-                Flash.saveList(mActivity.sceneList);
                 break;
             case R.id.clearBtn:
                 mActivity.sceneList.removeAllFromScene(sceneIndex);

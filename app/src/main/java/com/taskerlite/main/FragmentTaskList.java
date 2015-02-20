@@ -147,8 +147,6 @@ public class FragmentTaskList extends Fragment implements View.OnClickListener{
 
     class AppAdapter extends BaseAdapter {
 
-        String[] colorList = { "#f2a400", "#e00707", "#4ac925", "#00d5f2", "#f2a400" };
-
         public int getCount() {
             return sceneList.getSceneListSize();
         }
@@ -169,8 +167,6 @@ public class FragmentTaskList extends Fragment implements View.OnClickListener{
 
             TextView t = (TextView) convertView.findViewById(R.id.sceneNameID);
             t.setText(getItem(position).getName());
-            ImageView img = (ImageView) convertView.findViewById(R.id.imageView1);
-            img.setBackgroundColor(Color.parseColor(colorList[position]));
 
             return convertView;
         }
