@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.RectF;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.text.Layout.Alignment;
 import android.text.StaticLayout;
@@ -54,20 +55,23 @@ public class AutoResizeTextView extends TextView {
 
     public AutoResizeTextView(Context context) {
         super(context);
-        initialize();
+        initialize(context);
     }
 
     public AutoResizeTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        initialize();
+        initialize(context);
     }
 
     public AutoResizeTextView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        initialize();
+        initialize(context);
     }
 
-    private void initialize() {
+    private void initialize(Context context) {
+
+        setTypeface(Typeface.createFromAsset(context.getAssets(), "Afton James.ttf"));
+
         mPaint = new TextPaint(getPaint());
         mMaxTextSize = getTextSize();
         mAvailableSpaceRect = new RectF();
