@@ -29,18 +29,36 @@
             app:thumb_marginRight="3dp"
             app:thumb_marginTop="4dp" />
 
-        <com.taskerlite.AutoResizeTextView
-            android:id="@+id/sceneNameID"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/sb_enable"
             android:layout_toLeftOf="@+id/imageView1"
-            android:gravity="left"
-            android:text="NAME"
             android:layout_marginLeft="10dp"
-            android:textColor="#ffffff"
-            android:textSize="500sp" />
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.5"
+                android:orientation="horizontal">
+
+                <com.taskerlite.AutoResizeTextView
+                    android:id="@+id/sceneNameID"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="NAME"
+                    android:textColor="#ffffff"
+                    android:textSize="500sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.5"
+                android:orientation="horizontal"/>
+
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/imageView1"
