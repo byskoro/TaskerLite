@@ -6,7 +6,7 @@
         android:propertyName="alpha"
         android:valueType="floatType"
         android:valueTo="0"
-        android:duration="750"/>
+        android:duration="760"/>
 
     <objectAnimator xmlns:android="http://schemas.android.com/apk/res/android"
         android:interpolator="@android:anim/accelerate_decelerate_interpolator"
