@@ -141,8 +141,8 @@ public class FragmentTaskList extends Fragment implements View.OnClickListener{
     private void goToBuilderFragment(int index){
 
         getFragmentManager().beginTransaction().
-        replace(R.id.fragmentConteiner, FragmentTaskBuilder.getInstance(index)).
         setCustomAnimations(R.animator.slide_in_left, R.animator.slide_in_right).
+        replace(R.id.fragmentConteiner, FragmentTaskBuilder.getInstance(index)).
         commit();
     }
 
