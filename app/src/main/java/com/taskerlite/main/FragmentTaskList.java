@@ -79,7 +79,7 @@ public class FragmentTaskList extends Fragment implements View.OnClickListener{
             Bitmap tmpIcon    = Bitmap.createScaledBitmap(tmpBigIcon, Screen.dp2px(context, iconSize), Screen.dp2px(context, iconSize), true);
 
             SwipeMenuItem onItem = new SwipeMenuItem(context);
-            onItem.setBackground(new ColorDrawable(Color.rgb(0xF9, 0x3F, 0x25)));
+            onItem.setBackground(new ColorDrawable(Color.rgb(0xC6, 0xB7, 0xA9)));
             onItem.setWidth(Screen.dp2px(context, bgSize));
             onItem.setIcon(new BitmapDrawable(getResources(), tmpIcon));
             menu.addMenuItem(onItem);
@@ -88,7 +88,7 @@ public class FragmentTaskList extends Fragment implements View.OnClickListener{
             tmpIcon    = Bitmap.createScaledBitmap(tmpBigIcon, Screen.dp2px(context, iconSize), Screen.dp2px(context, iconSize), true);
 
             SwipeMenuItem offItem = new SwipeMenuItem(context);
-            offItem.setBackground(new ColorDrawable(Color.rgb(0xF9, 0x3F, 0x25)));
+            offItem.setBackground(new ColorDrawable(Color.rgb(0xC6, 0xB7, 0xA9)));
             offItem.setWidth(Screen.dp2px(context, bgSize));
             offItem.setIcon(new BitmapDrawable(getResources(), tmpIcon));
             menu.addMenuItem(offItem);
@@ -97,7 +97,7 @@ public class FragmentTaskList extends Fragment implements View.OnClickListener{
             tmpIcon    = Bitmap.createScaledBitmap(tmpBigIcon, Screen.dp2px(context, iconSize), Screen.dp2px(context, iconSize), true);
 
             SwipeMenuItem deleteItem = new SwipeMenuItem(context);
-            deleteItem.setBackground(new ColorDrawable(Color.rgb(0xF9, 0x3F, 0x25)));
+            deleteItem.setBackground(new ColorDrawable(Color.rgb(0xC6, 0xB7, 0xA9)));
             deleteItem.setWidth(Screen.dp2px(context, bgSize));
             deleteItem.setIcon(new BitmapDrawable(getResources(), tmpIcon));
             menu.addMenuItem(deleteItem);
