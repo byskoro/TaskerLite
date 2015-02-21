@@ -46,7 +46,8 @@ public class mActivity extends Activity {
             Flash.saveList(mActivity.sceneList);
 
             getFragmentManager().beginTransaction().
-            replace(R.id.fragmentConteiner, new FragmentTaskList()).
+                    setCustomAnimations(R.animator.slide_in_left2, R.animator.slide_in_right2).
+                    replace(R.id.fragmentConteiner, new FragmentTaskList()).
             commit();
         }
     }

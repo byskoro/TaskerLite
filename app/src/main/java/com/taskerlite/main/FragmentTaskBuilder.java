@@ -110,7 +110,9 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
             case R.id.backBtn:
                 Flash.saveList(mActivity.sceneList);
                 getFragmentManager().beginTransaction().
+                setCustomAnimations(R.animator.slide_in_left2, R.animator.slide_in_right2).
                 replace(R.id.fragmentConteiner, new FragmentTaskList()).
+
                 commit();
                 break;
             case R.id.clearBtn:
