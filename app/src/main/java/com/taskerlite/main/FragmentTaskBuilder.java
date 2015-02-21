@@ -28,7 +28,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -295,7 +294,7 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
 
                 Paint p = new Paint();
                 p.setColor(Color.WHITE);
-                p.setTextSize(getResources().getInteger(R.integer.icon_text_size));
+                p.setTextSize(getResources().getInteger(R.integer.builder_text_size));
                 p.setTextAlign(Paint.Align.CENTER);
                 p.setStrokeWidth(5);
 
@@ -316,7 +315,7 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
                     Bitmap icon = action.getIcon(context, iconSizeElement);
                     canvas.drawBitmap(icon, action.getX(), action.getY(), null);
                     float textX = action.getX() + iconSizeElement /2;
-                    float textY = action.getY() + iconSizeElement + getResources().getInteger(R.integer.icon_text_margin);
+                    float textY = action.getY() + iconSizeElement + getResources().getInteger(R.integer.builder_icon_text_margin);
                     canvas.drawText(action.getActionName(), textX, textY, p);
                 }
 
@@ -326,7 +325,7 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
                     Bitmap icon = task.getIcon(context, iconSizeElement);
                     canvas.drawBitmap(icon, task.getX(), task.getY(), null);
                     float textX = task.getX() + iconSizeElement /2;
-                    float textY = task.getY() + iconSizeElement + getResources().getInteger(R.integer.icon_text_margin);
+                    float textY = task.getY() + iconSizeElement + getResources().getInteger(R.integer.builder_icon_text_margin);
                     canvas.drawText(task.getTaskName(), textX, textY, p);
                 }
 

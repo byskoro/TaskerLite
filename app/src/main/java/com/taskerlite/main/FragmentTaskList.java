@@ -27,7 +27,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class FragmentTaskList extends Fragment implements View.OnClickListener{
 
@@ -71,8 +70,8 @@ public class FragmentTaskList extends Fragment implements View.OnClickListener{
         @Override
         public void create(SwipeMenu menu) {
 
-            int iconSize = getResources().getInteger(R.integer.icon_size_swipe_menu);
-            int bgSize   = getResources().getInteger(R.integer.bg_size_swipe_menu);
+            int iconSize = getResources().getInteger(R.integer.swipe_menu_icon_size);
+            int bgSize   = getResources().getInteger(R.integer.swipe_menu_bg_size);
 
             Bitmap tmpBigIcon = BitmapFactory.decodeResource(context.getResources(), R.drawable.swipe_start);
             Bitmap tmpIcon    = Bitmap.createScaledBitmap(tmpBigIcon, Screen.dp2px(context, iconSize), Screen.dp2px(context, iconSize), true);
@@ -136,7 +135,6 @@ public class FragmentTaskList extends Fragment implements View.OnClickListener{
     public void onClick(View view) {
 
         sceneList.addNewScene("");
-
         goToBuilderFragment(sceneList.getSceneListSize() - 1);
     }
 
