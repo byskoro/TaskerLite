@@ -11,7 +11,7 @@
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:background="@null"
-        android:layout_height="60dp">
+        android:layout_height="@dimen/scene_item_height">
 
         <com.kyleduo.switchbutton.SwitchButton
             android:id="@+id/sb_enable"

@@ -19,7 +19,7 @@
             android:layout_weight="0.2"
             android:scaleType="centerInside"
             android:padding="5dp"
-            android:src="@drawable/back"
+            android:src="@drawable/arrow455"
             android:background="@null"/>
 
         <EditText
@@ -42,7 +42,7 @@
             android:layout_weight="0.2"
             android:scaleType="centerInside"
             android:padding="5dp"
-            android:src="@drawable/clean"
+            android:src="@drawable/spinner4"
             android:background="@null"/>
     </LinearLayout>
 

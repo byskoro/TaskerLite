@@ -39,7 +39,7 @@
             android:layout_weight="0.2"
             android:scaleType="centerInside"
             android:padding="5dp"
-            android:src="@drawable/settings"
+            android:src="@drawable/settings22"
             android:background="@null"/>
 
     </LinearLayout>

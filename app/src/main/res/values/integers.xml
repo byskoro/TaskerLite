@@ -2,6 +2,8 @@
 <resources>
     <integer name="icon_divider">5</integer>
     <integer name="icon_size">56</integer>
+    <integer name="icon_size_swipe_menu">50</integer>
+    <integer name="bg_size_swipe_menu">70</integer>
     <integer name="icon_text_size">35</integer>
     <integer name="icon_text_margin">35</integer>
 </resources>
