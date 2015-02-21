@@ -18,8 +18,8 @@
             android:layout_height="match_parent"
             android:layout_weight="0.2"
             android:scaleType="centerInside"
-            android:padding="5dp"
-            android:src="@drawable/button"
+            android:padding="10dp"
+            android:src="@drawable/add"
             android:background="@null"/>
 
         <com.taskerlite.AutoResizeTextView
@@ -38,7 +38,7 @@
             android:layout_height="match_parent"
             android:layout_weight="0.2"
             android:scaleType="centerInside"
-            android:padding="5dp"
+            android:padding="10dp"
             android:src="@drawable/settings22"
             android:background="@null"/>
 
