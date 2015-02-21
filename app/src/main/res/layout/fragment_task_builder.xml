@@ -18,7 +18,7 @@
             android:layout_height="match_parent"
             android:layout_weight="0.2"
             android:scaleType="centerInside"
-            android:padding="5dp"
+            android:padding="10dp"
             android:src="@drawable/arrow455"
             android:background="@null"/>
 
@@ -27,6 +27,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.6"
+            android:padding="10dp"
             android:inputType="text"
             android:maxLines="1"
             android:imeOptions="actionDone"
@@ -41,7 +42,7 @@
             android:layout_height="match_parent"
             android:layout_weight="0.2"
             android:scaleType="centerInside"
-            android:padding="5dp"
+            android:padding="10dp"
             android:src="@drawable/spinner4"
             android:background="@null"/>
     </LinearLayout>
