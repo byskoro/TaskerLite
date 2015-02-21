@@ -6,14 +6,14 @@
         android:propertyName="alpha"
         android:valueType="floatType"
         android:valueTo="0"
-        android:duration="300"/>
+        android:duration="650"/>
 
     <objectAnimator xmlns:android="http://schemas.android.com/apk/res/android"
         android:interpolator="@android:anim/accelerate_decelerate_interpolator"
         android:propertyName="x"
         android:valueType="floatType"
-        android:valueTo="1280"
+        android:valueTo="80"
         android:valueFrom="0"
-        android:duration="1500"/>
+        android:duration="900"/>
 
 </set>
