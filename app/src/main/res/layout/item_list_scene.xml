@@ -37,16 +37,15 @@
             android:layout_toRightOf="@+id/sb_enable"
             android:layout_toLeftOf="@+id/imageView1"
             android:gravity="left"
-            android:text="name"
+            android:text="NAME"
             android:layout_marginLeft="10dp"
-            android:layout_gravity="center_vertical"
             android:textColor="#ffffff"
             android:textSize="500sp" />
 
         <ImageView
             android:id="@+id/imageView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:scaleType="centerCrop"

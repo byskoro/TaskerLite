@@ -60,7 +60,6 @@ public class FragmentTaskList extends Fragment implements View.OnClickListener{
         mListView.setMenuCreator(creator);
         mListView.setOnMenuItemClickListener(itemClickListener);
         mListView.setOnItemClickListener(onSceneClickListener);
-        mListView.setOnItemLongClickListener(onLongClickListener);
 
         buttonPlus = (ImageButton) view.findViewById(R.id.btnPlus);
         buttonPlus.setOnClickListener(this);
@@ -108,9 +107,7 @@ public class FragmentTaskList extends Fragment implements View.OnClickListener{
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-            getFragmentManager().beginTransaction().
-            replace(R.id.fragmentConteiner, FragmentTaskBuilder.getInstance(position)).
-            commit();
+            goToBuilderFragment(position);
         }
     };
 
@@ -135,24 +132,18 @@ public class FragmentTaskList extends Fragment implements View.OnClickListener{
         }
     };
 
-    AdapterView.OnItemLongClickListener onLongClickListener = new AdapterView.OnItemLongClickListener() {
-
-        @Override
-        public boolean onItemLongClick(AdapterView<?> adapterView, View view, int index, long l) {
-
-            Toast.makeText(context, index + " long click", Toast.LENGTH_LONG).show();
-
-            return true;
-        }
-    };
-
     @Override
     public void onClick(View view) {
 
         sceneList.addNewScene("");
 
+        goToBuilderFragment(sceneList.getSceneListSize() - 1);
+    }
+
+    private void goToBuilderFragment(int index){
+
         getFragmentManager().beginTransaction().
-        replace(R.id.fragmentConteiner, FragmentTaskBuilder.getInstance(sceneList.getSceneListSize() - 1)).
+        replace(R.id.fragmentConteiner, FragmentTaskBuilder.getInstance(index)).
         commit();
     }
 
