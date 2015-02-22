@@ -25,6 +25,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class TaskListFragment extends Fragment implements View.OnClickListener{
@@ -66,35 +68,25 @@ public class TaskListFragment extends Fragment implements View.OnClickListener{
         @Override
         public void create(SwipeMenu menu) {
 
-            int iconSize = getResources().getInteger(R.integer.swipe_menu_icon_size);
-            int bgSize   = getResources().getInteger(R.integer.swipe_menu_bg_size);
+           int bgSize   = getResources().getInteger(R.integer.swipe_menu_bg_size);
 
-            Bitmap tmpBigIcon = BitmapFactory.decodeResource(context.getResources(), R.drawable.swipe_start);
-            Bitmap tmpIcon    = Bitmap.createScaledBitmap(tmpBigIcon, Screen.dp2px(context, iconSize), Screen.dp2px(context, iconSize), true);
+           SwipeMenuItem onItem = new SwipeMenuItem(context);
+           onItem.setBackground(new ColorDrawable(Color.rgb(0xC6, 0xB7, 0xA9)));
+           onItem.setWidth(Screen.dp2px(context, bgSize));
+           onItem.setIcon(TaskerIcons.getInstance().getSwMenuStart());
+           menu.addMenuItem(onItem);
 
-            SwipeMenuItem onItem = new SwipeMenuItem(context);
-            onItem.setBackground(new ColorDrawable(Color.rgb(0xC6, 0xB7, 0xA9)));
-            onItem.setWidth(Screen.dp2px(context, bgSize));
-            onItem.setIcon(new BitmapDrawable(getResources(), tmpIcon));
-            menu.addMenuItem(onItem);
+           SwipeMenuItem offItem = new SwipeMenuItem(context);
+           offItem.setBackground(new ColorDrawable(Color.rgb(0xC6, 0xB7, 0xA9)));
+           offItem.setWidth(Screen.dp2px(context, bgSize));
+           offItem.setIcon(TaskerIcons.getInstance().getSwMenuStop());
+           menu.addMenuItem(offItem);
 
-            tmpBigIcon = BitmapFactory.decodeResource(context.getResources(), R.drawable.swipe_pause);
-            tmpIcon    = Bitmap.createScaledBitmap(tmpBigIcon, Screen.dp2px(context, iconSize), Screen.dp2px(context, iconSize), true);
-
-            SwipeMenuItem offItem = new SwipeMenuItem(context);
-            offItem.setBackground(new ColorDrawable(Color.rgb(0xC6, 0xB7, 0xA9)));
-            offItem.setWidth(Screen.dp2px(context, bgSize));
-            offItem.setIcon(new BitmapDrawable(getResources(), tmpIcon));
-            menu.addMenuItem(offItem);
-
-            tmpBigIcon = BitmapFactory.decodeResource(context.getResources(), R.drawable.swipe_delete);
-            tmpIcon    = Bitmap.createScaledBitmap(tmpBigIcon, Screen.dp2px(context, iconSize), Screen.dp2px(context, iconSize), true);
-
-            SwipeMenuItem deleteItem = new SwipeMenuItem(context);
-            deleteItem.setBackground(new ColorDrawable(Color.rgb(0xC6, 0xB7, 0xA9)));
-            deleteItem.setWidth(Screen.dp2px(context, bgSize));
-            deleteItem.setIcon(new BitmapDrawable(getResources(), tmpIcon));
-            menu.addMenuItem(deleteItem);
+           SwipeMenuItem deleteItem = new SwipeMenuItem(context);
+           deleteItem.setBackground(new ColorDrawable(Color.rgb(0xC6, 0xB7, 0xA9)));
+           deleteItem.setWidth(Screen.dp2px(context, bgSize));
+           deleteItem.setIcon(TaskerIcons.getInstance().getSwMenuDelete());
+           menu.addMenuItem(deleteItem);
         }
     };
 
@@ -165,6 +157,11 @@ public class TaskListFragment extends Fragment implements View.OnClickListener{
 
             TextView t = (TextView) convertView.findViewById(R.id.sceneNameID);
             t.setText(getItem(position).getName());
+            LinearLayout iconsLay = (LinearLayout) convertView.findViewById(R.id.sceneIconsPlaceId);
+
+            ImageView img = new ImageView(context);
+            img.setBackgroundDrawable(TaskerIcons.getInstance().getPreviewIcon(TaskerTypes.TYPES.APP));
+            iconsLay.addView(img);
 
             return convertView;
         }

@@ -4,11 +4,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="1"
-    android:background="#B0987C">
+    android:background="#FFFFFF">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="0dp"
+        android:layout_weight="0.1"
         android:orientation="horizontal"
         android:background="#6E5B57">
 
@@ -52,7 +53,7 @@
         android:layout_height="0dp"
         android:layout_weight="0.9"
         android:layout_margin="10dp"
-        android:background="@drawable/buttonshape">
+        android:background="@drawable/black_board">
 
         <com.taskerlite.TaskerBuilderView
             android:id="@+id/drawBuilder"

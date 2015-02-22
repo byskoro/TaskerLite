@@ -1,16 +1,12 @@
 package com.taskerlite.logic;
 
-import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-
 import com.google.gson.GsonBuilder;
-import com.taskerlite.R;
 import com.taskerlite.logic.actions.aTimer;
 import com.taskerlite.logic.actions.mAction;
-import com.taskerlite.logic.actions.mAction.*;
+import com.taskerlite.main.TaskerIcons;
 import com.taskerlite.main.TaskBuilderFragment;
-import com.taskerlite.main.mActivity;
+import com.taskerlite.main.TaskerTypes.*;
 
 import java.util.ArrayList;
 
@@ -23,14 +19,14 @@ public class ActionElement {
     private transient boolean isMoving = false;
 
     // serializable
-    private ACTION_TYPE actionType;
+    private TYPES actionType;
     private String actionINStr;
     private String actionName;
     private Integer actionId;
     private int x, y;
     private ArrayList<Long> taskElementID = new ArrayList<Long>();
 
-    public ActionElement(String actionName, mAction actionObject, ACTION_TYPE actionType, int x, int y){
+    public ActionElement(String actionName, mAction actionObject, TYPES actionType, int x, int y){
 
         this.actionName = actionName;
         this.actionType = actionType;
@@ -46,14 +42,8 @@ public class ActionElement {
 
         if(actionObject == null){
             switch (actionType) {
-                case TIMER:
+                case TIME:
                     actionObject = new GsonBuilder().create().fromJson(actionINStr, aTimer.class);
-                    break;
-                case FINISHBOOT:
-                    break;
-                case SCREENOFF:
-                    break;
-                case SCREENON:
                     break;
                 default:
                     break;
@@ -63,28 +53,9 @@ public class ActionElement {
         return actionObject;
     }
 
-    public Bitmap getIcon(Context context, float size) {
+    public Bitmap getIcon() {
 
-        Bitmap bigIcon = null;
-
-        if(icon == null){
-            switch (actionType) {
-                case TIMER:
-                    bigIcon = BitmapFactory.decodeResource(context.getResources(), R.drawable.a_timer);
-                    break;
-                case FINISHBOOT:
-                    break;
-                case SCREENOFF:
-                    break;
-                case SCREENON:
-                    break;
-                default:
-                    break;
-            }
-            icon = Bitmap.createScaledBitmap(bigIcon, (int)size, (int)size, true);
-        }
-
-        return icon;
+        return TaskerIcons.getInstance().getBuilderIcon(actionType);
     }
 
     public boolean isTouched(int xPointer, int yPointer, float size){
@@ -99,18 +70,18 @@ public class ActionElement {
 
     public void setNewCoordinate(int xPointer, int yPointer){
 
-        if(yPointer < mActivity.iconSizeElement /2)
-            yPointer = mActivity.iconSizeElement /2;
-        else if(yPointer > TaskBuilderFragment.screenHeight  - mActivity.iconSizeElement /2)
-            yPointer = TaskBuilderFragment.screenHeight - mActivity.iconSizeElement /2;
+        if(yPointer < TaskerIcons.builderSize /2)
+            yPointer = TaskerIcons.builderSize /2;
+        else if(yPointer > TaskBuilderFragment.screenHeight  - TaskerIcons.builderSize /2)
+            yPointer = TaskBuilderFragment.screenHeight - TaskerIcons.builderSize /2;
 
-        if(xPointer < mActivity.iconSizeElement /2)
-            xPointer = mActivity.iconSizeElement /2;
-        else if(xPointer > TaskBuilderFragment.screenWidth - mActivity.iconSizeElement /2)
-            xPointer = TaskBuilderFragment.screenWidth - mActivity.iconSizeElement /2;
+        if(xPointer < TaskerIcons.builderSize /2)
+            xPointer = TaskerIcons.builderSize /2;
+        else if(xPointer > TaskBuilderFragment.screenWidth - TaskerIcons.builderSize /2)
+            xPointer = TaskBuilderFragment.screenWidth - TaskerIcons.builderSize /2;
 
-        x = xPointer - mActivity.iconSizeElement /2;
-        y = yPointer - mActivity.iconSizeElement /2;
+        x = xPointer - TaskerIcons.builderSize /2;
+        y = yPointer - TaskerIcons.builderSize /2;
     }
 
     public void addNewTaskElementId(long id){

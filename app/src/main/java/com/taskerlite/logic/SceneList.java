@@ -6,6 +6,7 @@ import com.taskerlite.logic.tasks.mTask;
 import com.taskerlite.logic.tasks.mTask.*;
 import com.taskerlite.main.mActivity;
 import com.taskerlite.other.Flash;
+import com.taskerlite.main.TaskerTypes.*;
 
 import java.util.ArrayList;
 
@@ -44,7 +45,7 @@ public class SceneList {
 			this.name = sceneName;
 		}
 		
-		public void addNewAction(String actionName, mAction actionObject, ACTION_TYPE actionType, int xCoordinate, int yCoordinate){
+		public void addNewAction(String actionName, mAction actionObject, TYPES actionType, int xCoordinate, int yCoordinate){
 			
 			actionList.add(new ActionElement(actionName, actionObject, actionType, xCoordinate, yCoordinate));
 		}
@@ -54,7 +55,7 @@ public class SceneList {
             actionList.trimToSize();
         }
 		
-		public void addNewTask(String objName, mTask obj, TASK_TYPE objType, int x, int y){
+		public void addNewTask(String objName, mTask obj, TYPES objType, int x, int y){
 			
 			taskList.add(new TaskElement(objName, obj, objType, x, y));
 		}

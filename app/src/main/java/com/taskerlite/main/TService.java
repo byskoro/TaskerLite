@@ -3,7 +3,6 @@ package com.taskerlite.main;
 import java.util.Calendar;
 
 import com.taskerlite.logic.actions.mAction;
-import com.taskerlite.logic.actions.mAction.*;
 import com.taskerlite.other.Flash;
 import com.taskerlite.logic.SceneList.*;
 import com.taskerlite.logic.*;
@@ -16,6 +15,7 @@ import android.content.Intent;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
+import com.taskerlite.main.TaskerTypes.*;
 
 public class TService extends Service {
 
@@ -53,15 +53,15 @@ public class TService extends Service {
             		
             		for(ActionElement action : scene.getActionList()){
             			
-            			mAction actionObj = (mAction) action.getActionObject();
+            			mAction actionObj = action.getActionObject();
             			
-            			if(actionObj.isMyAction(getApplicationContext(), ACTION_TYPE.TIMER)){
+            			if(actionObj.isMyAction(getApplicationContext(), TYPES.TIME)){
 
                             for(TaskElement task : scene.getTaskList()){
 
                                 if(action.isTaskElementIdPresent(task.getTaskId())){
 
-                                     mTask taskObj = (mTask) task.getTaskObject();
+                                     mTask taskObj = task.getTaskObject();
                                      taskObj.start(getApplicationContext());
                                 }
                             }

@@ -13,7 +13,6 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -36,9 +35,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.taskerlite.logic.tasks.tApp;
-import com.taskerlite.logic.tasks.mTask.*;
 import com.taskerlite.logic.actions.aTimer;
-import com.taskerlite.logic.actions.mAction.*;
+import com.taskerlite.main.TaskerTypes.*;
 
 import java.util.ArrayList;
 
@@ -52,10 +50,9 @@ public class TaskBuilderFragment extends Fragment implements View.OnClickListene
     private static int sceneIndex = 0;
     private SceneList sceneList = com.taskerlite.main.mActivity.sceneList;
 
-    private int iconSizeElement = com.taskerlite.main.mActivity.iconSizeElement;
-    private int iconSizeDelete  = com.taskerlite.main.mActivity.iconSizeDelete;
-    Bitmap selectIcon;
-    Bitmap deleteIcon;
+    private int iconSizeElement = TaskerIcons.builderSize;
+    Bitmap selectIcon = TaskerIcons.getInstance().getSelectIcons();
+    Bitmap deleteIcon = TaskerIcons.getInstance().getDeleteIcon();
     DelElement gcElement;
 
     public static int screenWidth;
@@ -92,12 +89,7 @@ public class TaskBuilderFragment extends Fragment implements View.OnClickListene
         clearRequestLay = (LinearLayout) view.findViewById(R.id.clearRequestLay);
         clearRequest(nameScene);
 
-        Bitmap selectBigIcon = BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_select);
-        selectIcon = Bitmap.createScaledBitmap(selectBigIcon, iconSizeElement, iconSizeElement, true);
-        Bitmap deleteBigIcon = BitmapFactory.decodeResource(context.getResources(), R.drawable.delete);
-        deleteIcon = Bitmap.createScaledBitmap(deleteBigIcon, iconSizeDelete, iconSizeDelete, true);
-
-        gcElement = new DelElement(iconSizeDelete);
+        gcElement = new DelElement(TaskerIcons.deleteSize);
 
         dialog = new CustomDialog();
 
@@ -317,8 +309,7 @@ public class TaskBuilderFragment extends Fragment implements View.OnClickListene
                 for(ActionElement action : scene.getActionList()){
                     if(action.isSelect())
                         canvas.drawBitmap(selectIcon, action.getX(), action.getY(), null);
-                    Bitmap icon = action.getIcon(context, iconSizeElement);
-                    canvas.drawBitmap(icon, action.getX(), action.getY(), null);
+                    canvas.drawBitmap(action.getIcon(), action.getX(), action.getY(), null);
                     float textX = action.getX() + iconSizeElement /2;
                     float textY = action.getY() + iconSizeElement + getResources().getInteger(R.integer.builder_icon_text_margin);
                     canvas.drawText(action.getActionName(), textX, textY, p);
@@ -327,8 +318,7 @@ public class TaskBuilderFragment extends Fragment implements View.OnClickListene
                 for(TaskElement task : scene.getTaskList()){
                     if(task.isSelect())
                         canvas.drawBitmap(selectIcon, task.getX(), task.getY(), null);
-                    Bitmap icon = task.getIcon(context, iconSizeElement);
-                    canvas.drawBitmap(icon, task.getX(), task.getY(), null);
+                    canvas.drawBitmap(task.getIcon(), task.getX(), task.getY(), null);
                     float textX = task.getX() + iconSizeElement /2;
                     float textY = task.getY() + iconSizeElement + getResources().getInteger(R.integer.builder_icon_text_margin);
                     canvas.drawText(task.getTaskName(), textX, textY, p);
@@ -491,7 +481,7 @@ public class TaskBuilderFragment extends Fragment implements View.OnClickListene
                         @Override
                         public void onClick(View view) {
                             Toast.makeText(getActivity(),"Open Action List", Toast.LENGTH_SHORT).show();
-                            scene.addNewAction("Timer 2", new aTimer(18, 47), ACTION_TYPE.TIMER, 0, 0);
+                            scene.addNewAction("Timer 2", new aTimer(18, 47), TYPES.TIME, 0, 0);
                             updateScreenUI();
                             mDialog.dismiss();
                         }
@@ -501,7 +491,7 @@ public class TaskBuilderFragment extends Fragment implements View.OnClickListene
                         @Override
                         public void onClick(View view) {
                             Toast.makeText(getActivity(),"Open Task List", Toast.LENGTH_SHORT).show();
-                            scene.addNewTask("Skype 2", new tApp("com.skype.raider"), TASK_TYPE.APP, 0, 0);
+                            scene.addNewTask("Skype 2", new tApp("com.skype.raider"), TYPES.APP, 0, 0);
                             updateScreenUI();
                             mDialog.dismiss();
                         }

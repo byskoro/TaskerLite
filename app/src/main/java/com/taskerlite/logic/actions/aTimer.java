@@ -2,14 +2,12 @@ package com.taskerlite.logic.actions;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-
 import com.taskerlite.R;
-import com.taskerlite.logic.SceneList.*;
-
 import android.app.Dialog;
 import android.content.Context;
 import android.view.Window;
 import android.widget.TimePicker;
+import com.taskerlite.main.TaskerTypes.*;
 
 public class aTimer extends mAction {
 
@@ -22,11 +20,11 @@ public class aTimer extends mAction {
 	}
 
 	@Override
-	public boolean isMyAction(Context context, ACTION_TYPE type) {
+	public boolean isMyAction(Context context, TYPES type) {
 		
 		boolean state = false;
 		
-		if(type == ACTION_TYPE.TIMER){
+		if(type == TYPES.TIME){
 			
 			Calendar cal = new GregorianCalendar();
 			

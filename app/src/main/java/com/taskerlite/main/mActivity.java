@@ -7,21 +7,17 @@ import android.support.v4.app.FragmentActivity;
 import com.taskerlite.R;
 import com.taskerlite.other.Flash;
 import com.taskerlite.logic.SceneList;
-import com.taskerlite.other.Screen;
 
 public class mActivity extends FragmentActivity {
 
     public static SceneList sceneList;
-    public static int iconSizeElement;
-    public static int iconSizeDelete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        iconSizeElement = Screen.getWidth(this)/getResources().getInteger(R.integer.icon_divider);
-        iconSizeDelete  = iconSizeElement/3;
+        TaskerIcons.getInstance(this);
 
         sceneList = Flash.getList();
 

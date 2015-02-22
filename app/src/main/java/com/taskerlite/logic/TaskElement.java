@@ -1,16 +1,12 @@
 package com.taskerlite.logic;
 
-import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-
 import com.google.gson.GsonBuilder;
-import com.taskerlite.R;
 import com.taskerlite.logic.tasks.mTask;
-import com.taskerlite.logic.tasks.mTask.*;
 import com.taskerlite.logic.tasks.tApp;
+import com.taskerlite.main.TaskerIcons;
 import com.taskerlite.main.TaskBuilderFragment;
-import com.taskerlite.main.mActivity;
+import com.taskerlite.main.TaskerTypes.*;
 
 public class TaskElement {
 
@@ -21,13 +17,13 @@ public class TaskElement {
     private transient boolean isMoving = false;
 
     // serializable
-    private TASK_TYPE taskType;
+    private TYPES taskType;
     private String taskINStr;
     private String taskName;
     private long taskId;
     private int x, y;
 
-    public TaskElement(String objName, mTask obj, TASK_TYPE objType, int x, int y){
+    public TaskElement(String objName, mTask obj, TYPES objType, int x, int y){
 
         this.taskName = objName;
         this.taskObject = obj;
@@ -46,13 +42,6 @@ public class TaskElement {
                 case APP:
                     taskObject = new GsonBuilder().create().fromJson(taskINStr, tApp.class);
                     break;
-                case WIFI:
-                    taskObject = new GsonBuilder().create().fromJson(taskINStr, tApp.class);
-                    break;
-                case ALARM:
-                    break;
-                case MOBILEDATA:
-                    break;
                 default:
                     break;
             }
@@ -61,28 +50,9 @@ public class TaskElement {
         return taskObject;
     }
 
-    public Bitmap getIcon(Context context, float size) {
+    public Bitmap getIcon() {
 
-        Bitmap bigIcon = null;
-
-        if(icon == null){
-            switch (taskType) {
-                case APP:
-                    bigIcon = BitmapFactory.decodeResource(context.getResources(), R.drawable.t_app);
-                    break;
-                case WIFI:
-                    break;
-                case ALARM:
-                    break;
-                case MOBILEDATA:
-                    break;
-                default:
-                    break;
-            }
-            icon = Bitmap.createScaledBitmap(bigIcon, (int)size, (int)size, true);
-        }
-
-        return icon;
+        return TaskerIcons.getInstance().getBuilderIcon(taskType);
     }
 
     public boolean isTouched(int xPointer, int yPointer, float size){
@@ -97,18 +67,18 @@ public class TaskElement {
 
     public void setNewCoordinate(int xPointer, int yPointer){
 
-        if(yPointer < mActivity.iconSizeElement /2)
-            yPointer = mActivity.iconSizeElement /2;
-        else if(yPointer > TaskBuilderFragment.screenHeight  - mActivity.iconSizeElement /2)
-            yPointer = TaskBuilderFragment.screenHeight - mActivity.iconSizeElement /2;
+        if(yPointer < TaskerIcons.builderSize /2)
+            yPointer = TaskerIcons.builderSize /2;
+        else if(yPointer > TaskBuilderFragment.screenHeight  - TaskerIcons.builderSize /2)
+            yPointer = TaskBuilderFragment.screenHeight - TaskerIcons.builderSize /2;
 
-        if(xPointer < mActivity.iconSizeElement /2)
-            xPointer = mActivity.iconSizeElement /2;
-        else if(xPointer > TaskBuilderFragment.screenWidth - mActivity.iconSizeElement /2)
-            xPointer = TaskBuilderFragment.screenWidth - mActivity.iconSizeElement /2;
+        if(xPointer < TaskerIcons.builderSize /2)
+            xPointer = TaskerIcons.builderSize /2;
+        else if(xPointer > TaskBuilderFragment.screenWidth - TaskerIcons.builderSize /2)
+            xPointer = TaskBuilderFragment.screenWidth - TaskerIcons.builderSize /2;
 
-        x = xPointer - mActivity.iconSizeElement /2;
-        y = yPointer - mActivity.iconSizeElement /2;
+        x = xPointer - TaskerIcons.builderSize /2;
+        y = yPointer - TaskerIcons.builderSize /2;
     }
 
     public String getTaskName() { return taskName; }

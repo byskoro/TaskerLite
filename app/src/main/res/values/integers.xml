@@ -5,6 +5,7 @@
 
     <integer name="swipe_menu_icon_size">30</integer>
     <integer name="swipe_menu_bg_size">50</integer>
+    <integer name="preview_icon_size">30</integer>
 
     <integer name="builder_text_size">35</integer>
     <integer name="builder_icon_text_margin">35</integer>
