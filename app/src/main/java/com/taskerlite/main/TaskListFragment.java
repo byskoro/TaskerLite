@@ -11,8 +11,6 @@ import com.taskerlite.logic.SceneList.*;
 import com.taskerlite.other.Screen;
 
 import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -20,18 +18,18 @@ import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class FragmentTaskList extends Fragment implements View.OnClickListener{
+public class TaskListFragment extends Fragment implements View.OnClickListener{
 
-    SceneList sceneList;
+    SceneList sceneList = com.taskerlite.main.mActivity.sceneList;
 
     LayoutInflater inflater;
     Activity activity;
@@ -41,7 +39,6 @@ public class FragmentTaskList extends Fragment implements View.OnClickListener{
     SwipeMenuListView mListView;
 
     ImageButton buttonPlus;
-    LinearLayout topLayout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -51,8 +48,6 @@ public class FragmentTaskList extends Fragment implements View.OnClickListener{
         this.inflater = inflater;
         activity = getActivity();
         context  = getActivity();
-
-        sceneList = mActivity.sceneList;
 
         mListView = (SwipeMenuListView) view.findViewById(R.id.listView);
         mAdapter = new AppAdapter();
@@ -142,8 +137,9 @@ public class FragmentTaskList extends Fragment implements View.OnClickListener{
     private void goToBuilderFragment(int index){
 
         getFragmentManager().beginTransaction().
-        setCustomAnimations(R.animator.slide_in_left, R.animator.slide_in_right).
-        replace(R.id.fragmentConteiner, FragmentTaskBuilder.getInstance(index)).
+        setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).
+        replace(R.id.fragmentConteiner, TaskBuilderFragment.getInstance(index)).
+        addToBackStack(null).
         commit();
     }
 

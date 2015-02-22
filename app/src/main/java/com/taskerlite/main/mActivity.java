@@ -1,16 +1,15 @@
 package com.taskerlite.main;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
+import android.support.v4.app.FragmentActivity;
 
 import com.taskerlite.R;
 import com.taskerlite.other.Flash;
 import com.taskerlite.logic.SceneList;
 import com.taskerlite.other.Screen;
 
-public class mActivity extends Activity {
+public class mActivity extends FragmentActivity {
 
     public static SceneList sceneList;
     public static int iconSizeElement;
@@ -26,8 +25,8 @@ public class mActivity extends Activity {
 
         sceneList = Flash.getList();
 
-        getFragmentManager().beginTransaction().
-        add(R.id.fragmentConteiner, new FragmentTaskList()).
+        getSupportFragmentManager().beginTransaction().
+        add(R.id.fragmentConteiner, new TaskListFragment()).
         commit();
 
         if(!TService.isRunning(this))
@@ -37,7 +36,7 @@ public class mActivity extends Activity {
     @Override
     public void onBackPressed() {
 
-        if (getFragmentManager().findFragmentById(R.id.fragmentConteiner) instanceof FragmentTaskList) {
+        if (getSupportFragmentManager().findFragmentById(R.id.fragmentConteiner) instanceof TaskListFragment) {
 
             finish();
 
@@ -45,9 +44,10 @@ public class mActivity extends Activity {
 
             Flash.saveList(mActivity.sceneList);
 
-            getFragmentManager().beginTransaction().
-                    setCustomAnimations(R.animator.slide_in_left2, R.animator.slide_in_right2).
-                    replace(R.id.fragmentConteiner, new FragmentTaskList()).
+            getSupportFragmentManager().beginTransaction().
+            setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right).
+            replace(R.id.fragmentConteiner, new TaskListFragment()).
+            addToBackStack(null).
             commit();
         }
     }

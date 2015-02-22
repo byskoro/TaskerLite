@@ -3,6 +3,7 @@ package com.taskerlite.main;
 import com.taskerlite.R;
 import com.taskerlite.TaskerBuilderView;
 import com.taskerlite.logic.ActionElement;
+import com.taskerlite.logic.SceneList;
 import com.taskerlite.logic.SceneList.*;
 import com.taskerlite.logic.TaskElement;
 import com.taskerlite.other.Flash;
@@ -10,8 +11,6 @@ import com.taskerlite.other.Vibro;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
-import android.app.DialogFragment;
-import android.app.Fragment;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -21,6 +20,8 @@ import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -41,17 +42,18 @@ import com.taskerlite.logic.actions.mAction.*;
 
 import java.util.ArrayList;
 
-public class FragmentTaskBuilder extends Fragment implements View.OnClickListener, TextView.OnEditorActionListener {
+public class TaskBuilderFragment extends Fragment implements View.OnClickListener, TextView.OnEditorActionListener {
 
     public static enum LIST{NULL, DIALOG_MENU, DIALOG_ACTIONS, DIALOG_TASK};
 
     private TaskerBuilderView taskerView;
     private Context context;
     private Scene scene;
-    private static int sceneIndex;
+    private static int sceneIndex = 0;
+    private SceneList sceneList = com.taskerlite.main.mActivity.sceneList;
 
-    private int iconSizeElement = mActivity.iconSizeElement;
-    private int iconSizeDelete  = mActivity.iconSizeDelete;
+    private int iconSizeElement = com.taskerlite.main.mActivity.iconSizeElement;
+    private int iconSizeDelete  = com.taskerlite.main.mActivity.iconSizeDelete;
     Bitmap selectIcon;
     Bitmap deleteIcon;
     DelElement gcElement;
@@ -65,9 +67,9 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
     EditText nameScene;
     LinearLayout clearRequestLay;
 
-    public static FragmentTaskBuilder getInstance(int sceneIndex){
-        FragmentTaskBuilder.sceneIndex = sceneIndex;
-        return new FragmentTaskBuilder();
+    public static TaskBuilderFragment getInstance(int sceneIndex){
+        TaskBuilderFragment.sceneIndex = sceneIndex;
+        return new TaskBuilderFragment();
     }
 	
 	@Override
@@ -76,7 +78,7 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
 		View view = inflater.inflate(R.layout.fragment_task_builder, container, false);
         context = getActivity();
 
-        scene = mActivity.sceneList.getScene(sceneIndex);
+        scene = com.taskerlite.main.mActivity.sceneList.getScene(sceneIndex);
 
 		taskerView = (TaskerBuilderView) view.findViewById(R.id.drawBuilder);
         taskerView.setViewCallBack(viewCallBack);
@@ -108,16 +110,16 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
         switch(view.getId()){
 
             case R.id.backBtn:
-                Flash.saveList(mActivity.sceneList);
+                Flash.saveList(sceneList);
                 getFragmentManager().beginTransaction().
-                setCustomAnimations(R.animator.slide_in_left2, R.animator.slide_in_right2).
-                replace(R.id.fragmentConteiner, new FragmentTaskList()).
-
+                setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right).
+                replace(R.id.fragmentConteiner, new TaskListFragment()).
+                addToBackStack(null).
                 commit();
                 break;
             case R.id.clearBtn:
-                mActivity.sceneList.removeAllFromScene(sceneIndex);
-                Flash.saveList(mActivity.sceneList);
+                sceneList.removeAllFromScene(sceneIndex);
+                Flash.saveList(sceneList);
                 updateScreenUI();
                 break;
         }
@@ -245,7 +247,8 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
             }else{
 
                 unselectAll();
-                dialog.setType(LIST.DIALOG_MENU).show(getFragmentManager(), "myD");
+                dialog.setType(LIST.DIALOG_MENU);
+                dialog.show(getFragmentManager().beginTransaction(), null);
             }
 
             Vibro.playLong(context);
@@ -413,7 +416,7 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
 
         public void addPressedElement(long id, int x, int y){
 
-            delElementList.add(new PressedElement(id, x + iconSizeElement - elementSize/2, y - elementSize/2));
+            delElementList.add(new PressedElement(id, x + iconSizeElement - elementSize, y));
         }
 
         public long getIdPressedElement(int xPointer, int yPointer){
@@ -457,21 +460,25 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
         }
     }
 
-     @SuppressLint("ValidFragment")
-     class CustomDialog extends DialogFragment {
+    @SuppressLint("ValidFragment")
+    public class CustomDialog extends DialogFragment {
 
         private LIST val;
         private Dialog mDialog;
 
-        public CustomDialog setType(LIST val){
+        public CustomDialog(){
+
+        }
+
+        public void setType(LIST val){
+
             this.val = val;
-            return this;
         }
 
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
 
-            mDialog = new Dialog(context);
+            mDialog = new Dialog(getActivity());
             mDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
             switch(val){

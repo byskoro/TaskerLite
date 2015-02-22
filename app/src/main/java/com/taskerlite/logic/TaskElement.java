@@ -9,7 +9,7 @@ import com.taskerlite.R;
 import com.taskerlite.logic.tasks.mTask;
 import com.taskerlite.logic.tasks.mTask.*;
 import com.taskerlite.logic.tasks.tApp;
-import com.taskerlite.main.FragmentTaskBuilder;
+import com.taskerlite.main.TaskBuilderFragment;
 import com.taskerlite.main.mActivity;
 
 public class TaskElement {
@@ -99,13 +99,13 @@ public class TaskElement {
 
         if(yPointer < mActivity.iconSizeElement /2)
             yPointer = mActivity.iconSizeElement /2;
-        else if(yPointer > FragmentTaskBuilder.screenHeight  - mActivity.iconSizeElement /2)
-            yPointer = FragmentTaskBuilder.screenHeight - mActivity.iconSizeElement /2;
+        else if(yPointer > TaskBuilderFragment.screenHeight  - mActivity.iconSizeElement /2)
+            yPointer = TaskBuilderFragment.screenHeight - mActivity.iconSizeElement /2;
 
         if(xPointer < mActivity.iconSizeElement /2)
             xPointer = mActivity.iconSizeElement /2;
-        else if(xPointer > FragmentTaskBuilder.screenWidth - mActivity.iconSizeElement /2)
-            xPointer = FragmentTaskBuilder.screenWidth - mActivity.iconSizeElement /2;
+        else if(xPointer > TaskBuilderFragment.screenWidth - mActivity.iconSizeElement /2)
+            xPointer = TaskBuilderFragment.screenWidth - mActivity.iconSizeElement /2;
 
         x = xPointer - mActivity.iconSizeElement /2;
         y = yPointer - mActivity.iconSizeElement /2;
