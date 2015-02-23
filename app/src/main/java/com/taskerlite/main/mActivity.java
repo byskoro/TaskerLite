@@ -22,7 +22,7 @@ public class mActivity extends FragmentActivity {
         sceneList = Flash.getList();
 
         getSupportFragmentManager().beginTransaction().
-        add(R.id.fragmentConteiner, new TaskListFragment()).
+        add(R.id.fragmentConteiner, new FragmentTaskList()).
         commit();
 
         if(!TService.isRunning(this))
@@ -32,7 +32,7 @@ public class mActivity extends FragmentActivity {
     @Override
     public void onBackPressed() {
 
-        if (getSupportFragmentManager().findFragmentById(R.id.fragmentConteiner) instanceof TaskListFragment) {
+        if (getSupportFragmentManager().findFragmentById(R.id.fragmentConteiner) instanceof FragmentTaskList) {
 
             finish();
 
@@ -42,7 +42,7 @@ public class mActivity extends FragmentActivity {
 
             getSupportFragmentManager().beginTransaction().
             setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right).
-            replace(R.id.fragmentConteiner, new TaskListFragment()).
+            replace(R.id.fragmentConteiner, new FragmentTaskList()).
             addToBackStack(null).
             commit();
         }

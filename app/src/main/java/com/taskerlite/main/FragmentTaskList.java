@@ -6,16 +6,15 @@ import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.baoyz.swipemenulistview.SwipeMenuListView.OnMenuItemClickListener;
 import com.taskerlite.R;
+import com.taskerlite.logic.ActionElement;
 import com.taskerlite.logic.SceneList;
 import com.taskerlite.logic.SceneList.*;
+import com.taskerlite.logic.TaskElement;
 import com.taskerlite.other.Screen;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -29,7 +28,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class TaskListFragment extends Fragment implements View.OnClickListener{
+public class FragmentTaskList extends Fragment implements View.OnClickListener{
 
     SceneList sceneList = com.taskerlite.main.mActivity.sceneList;
 
@@ -130,7 +129,7 @@ public class TaskListFragment extends Fragment implements View.OnClickListener{
 
         getFragmentManager().beginTransaction().
         setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).
-        replace(R.id.fragmentConteiner, TaskBuilderFragment.getInstance(index)).
+        replace(R.id.fragmentConteiner, FragmentTaskBuilder.getInstance(index)).
         addToBackStack(null).
         commit();
     }
@@ -159,9 +158,17 @@ public class TaskListFragment extends Fragment implements View.OnClickListener{
             t.setText(getItem(position).getName());
             LinearLayout iconsLay = (LinearLayout) convertView.findViewById(R.id.sceneIconsPlaceId);
 
-            ImageView img = new ImageView(context);
-            img.setBackgroundDrawable(TaskerIcons.getInstance().getPreviewIcon(TaskerTypes.TYPES.APP));
-            iconsLay.addView(img);
+            for(ActionElement action : getItem(position).getActionList()){
+                ImageView img = new ImageView(context);
+                img.setBackgroundDrawable(TaskerIcons.getInstance().getPreviewIcon(action.getActionType()));
+                iconsLay.addView(img);
+            }
+
+            for(TaskElement task : getItem(position).getTaskList()){
+                ImageView img = new ImageView(context);
+                img.setBackgroundDrawable(TaskerIcons.getInstance().getPreviewIcon(task.getTaskType()));
+                iconsLay.addView(img);
+            }
 
             return convertView;
         }

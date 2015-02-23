@@ -21,7 +21,7 @@
             android:scaleType="centerInside"
             android:padding="10dp"
             android:src="@drawable/arrow455"
-            android:background="@null"/>
+            android:background="@null" />
 
         <EditText
             android:id="@+id/sceneName"
@@ -45,22 +45,54 @@
             android:scaleType="centerInside"
             android:padding="10dp"
             android:src="@drawable/spinner4"
-            android:background="@null"/>
+            android:background="@null" />
     </LinearLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.9"
-        android:layout_margin="10dp"
-        android:padding="10dp"
+        android:paddingTop="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:background="@drawable/probka5">
 
         <com.taskerlite.TaskerBuilderView
             android:id="@+id/drawBuilder"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-    </LinearLayout>
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"/>
+
+        <LinearLayout
+            android:id="@+id/menuBtnID"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="8dp">
+
+                <ImageButton
+                    android:id="@+id/actionElementID"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_alignParentLeft="true"
+                    android:scaleType="centerInside"
+                    android:background="@drawable/action"/>
+
+                <ImageButton
+                    android:id="@+id/taskElementID"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_alignParentRight="true"
+                    android:scaleType="centerInside"
+                    android:background="@drawable/task"/>
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/clearRequestLay"
@@ -69,6 +101,6 @@
         android:focusable="true"
         android:focusableInTouchMode="true"
         android:orientation="vertical"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
 </LinearLayout>

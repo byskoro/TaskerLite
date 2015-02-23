@@ -4,8 +4,8 @@ import android.graphics.Bitmap;
 import com.google.gson.GsonBuilder;
 import com.taskerlite.logic.actions.aTimer;
 import com.taskerlite.logic.actions.mAction;
+import com.taskerlite.main.FragmentTaskBuilder;
 import com.taskerlite.main.TaskerIcons;
-import com.taskerlite.main.TaskBuilderFragment;
 import com.taskerlite.main.TaskerTypes.*;
 
 import java.util.ArrayList;
@@ -72,13 +72,13 @@ public class ActionElement {
 
         if(yPointer < TaskerIcons.builderSize /2)
             yPointer = TaskerIcons.builderSize /2;
-        else if(yPointer > TaskBuilderFragment.screenHeight  - TaskerIcons.builderSize /2)
-            yPointer = TaskBuilderFragment.screenHeight - TaskerIcons.builderSize /2;
+        else if(yPointer > FragmentTaskBuilder.screenHeight  - TaskerIcons.builderSize /2)
+            yPointer = FragmentTaskBuilder.screenHeight - TaskerIcons.builderSize /2;
 
         if(xPointer < TaskerIcons.builderSize /2)
             xPointer = TaskerIcons.builderSize /2;
-        else if(xPointer > TaskBuilderFragment.screenWidth - TaskerIcons.builderSize /2)
-            xPointer = TaskBuilderFragment.screenWidth - TaskerIcons.builderSize /2;
+        else if(xPointer > FragmentTaskBuilder.screenWidth - TaskerIcons.builderSize /2)
+            xPointer = FragmentTaskBuilder.screenWidth - TaskerIcons.builderSize /2;
 
         x = xPointer - TaskerIcons.builderSize /2;
         y = yPointer - TaskerIcons.builderSize /2;
@@ -102,6 +102,11 @@ public class ActionElement {
         }
         return false;
     }
+
+    public TYPES getActionType() {
+        return actionType;
+    }
+
     public int getX() { return x; }
     public int getY() { return y; }
     public String getActionName() { return actionName; }

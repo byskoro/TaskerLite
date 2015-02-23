@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.taskerlite.R;
@@ -19,77 +20,50 @@ import com.taskerlite.logic.tasks.tApp;
 
 public class TaskerBuilderDialogs extends DialogFragment {
 
-    public static enum LIST{NULL, DIALOG_MENU, DIALOG_ACTIONS, DIALOG_TASK};
-
-    private Dialog mDialog;
-    private static LIST val;
-
-    public static TaskerBuilderDialogs getInstance(LIST val){
-
-        TaskerBuilderDialogs.val = val;
-        return new TaskerBuilderDialogs();
-    }
-
-
-
-}
-
-/*
-class  TackBuilderDialogs extends DialogFragment {
-
-    public static enum LIST{NULL, DIALOG_MENU, DIALOG_ACTIONS, DIALOG_TASK};
-
-    private Dialog mDialog;
-    private LIST val;
-
-    @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
-
-        mDialog = new Dialog(getActivity());
-        mDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-
-        switch(val){
-
-            case DIALOG_MENU:
-
-                mDialog.setContentView(R.layout.dialog_menu);
-
-                ((ImageButton) mDialog.findViewById(R.id.actionElement)).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Toast.makeText(getActivity(), "Open Action List", Toast.LENGTH_SHORT).show();
-                        //scene.addNewAction("Timer 2", new aTimer(18, 47), mAction.ACTION_TYPE.TIMER, 0, 0);
-                        //updateScreenUI();
-                        mDialog.dismiss();
-                    }
-                });
-
-                ((ImageButton) mDialog.findViewById(R.id.taskElement)).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Toast.makeText(getActivity(),"Open Task List", Toast.LENGTH_SHORT).show();
-                        //scene.addNewTask("Skype 2", new tApp("com.skype.raider"), mTask.TASK_TYPE.APP, 0, 0);
-                        //updateScreenUI();
-                        mDialog.dismiss();
-                    }
-                });
-
-                break;
-        }
-
-        return mDialog;
-    }
-
-    public TackBuilderDialogs() {  }
-
+    LinearLayout actionListLay;
+    ImageButton  actionBtn, taskBtn;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.dialog_action_time, container);
-        //mEditText = (EditText) view.findViewById(R.id.txt_your_name);
-        getDialog().setTitle("Hello");
+
+        getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
+        View view = inflater.inflate(R.layout.dialog_menu, container);
+
+        actionListLay = (LinearLayout) view.findViewById(R.id.actionList);
+        actionBtn = (ImageButton) view.findViewById(R.id.actionElement);
+        actionBtn.setOnClickListener(actionBtnListener);
+        taskBtn   = (ImageButton) view.findViewById(R.id.taskElement);
+        taskBtn.setOnClickListener(taskBtnListener);
 
         return view;
     }
+
+    View.OnClickListener actionBtnListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+
+            //
+
+            Toast.makeText(getActivity(),"Open Action List", Toast.LENGTH_SHORT).show();
+            scene.addNewAction("Timer 2", new aTimer(18, 47), TaskerTypes.TYPES.TIME, 0, 0);
+            updateScreenUI();
+            //mDialog.dismiss();
+            actionListLay.setVisibility(View.GONE);
+
+        }
+    };
+
+    View.OnClickListener taskBtnListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+
+            Toast.makeText(getActivity(),"Open Task List", Toast.LENGTH_SHORT).show();
+            scene.addNewTask("Skype 2", new tApp("com.skype.raider"), TaskerTypes.TYPES.APP, 0, 0);
+            updateScreenUI();
+            //mDialog.dismiss();
+            actionListLay.setVisibility(View.VISIBLE);
+
+        }
+    };
+
 }
- */

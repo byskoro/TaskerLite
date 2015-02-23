@@ -9,8 +9,6 @@ import com.taskerlite.logic.TaskElement;
 import com.taskerlite.other.Flash;
 import com.taskerlite.other.Vibro;
 
-import android.annotation.SuppressLint;
-import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -19,20 +17,17 @@ import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.taskerlite.logic.tasks.tApp;
 import com.taskerlite.logic.actions.aTimer;
@@ -40,9 +35,7 @@ import com.taskerlite.main.TaskerTypes.*;
 
 import java.util.ArrayList;
 
-public class TaskBuilderFragment extends Fragment implements View.OnClickListener, TextView.OnEditorActionListener {
-
-    public static enum LIST{NULL, DIALOG_MENU, DIALOG_ACTIONS, DIALOG_TASK};
+public class FragmentTaskBuilder extends Fragment implements View.OnClickListener, TextView.OnEditorActionListener {
 
     private TaskerBuilderView taskerView;
     private Context context;
@@ -51,22 +44,18 @@ public class TaskBuilderFragment extends Fragment implements View.OnClickListene
     private SceneList sceneList = com.taskerlite.main.mActivity.sceneList;
 
     private int iconSizeElement = TaskerIcons.builderSize;
-    Bitmap selectIcon = TaskerIcons.getInstance().getSelectIcons();
-    Bitmap deleteIcon = TaskerIcons.getInstance().getDeleteIcon();
     DelElement gcElement;
 
     public static int screenWidth;
     public static int screenHeight;
 
-    CustomDialog dialog;
-
-    ImageButton backBtn, clearBtn;
+    ImageButton backBtn, clearBtn, actionElement, taskElement;
     EditText nameScene;
     LinearLayout clearRequestLay;
 
-    public static TaskBuilderFragment getInstance(int sceneIndex){
-        TaskBuilderFragment.sceneIndex = sceneIndex;
-        return new TaskBuilderFragment();
+    public static FragmentTaskBuilder getInstance(int sceneIndex){
+        FragmentTaskBuilder.sceneIndex = sceneIndex;
+        return new FragmentTaskBuilder();
     }
 	
 	@Override
@@ -83,6 +72,10 @@ public class TaskBuilderFragment extends Fragment implements View.OnClickListene
         backBtn.setOnClickListener(this);
         clearBtn= (ImageButton) view.findViewById(R.id.clearBtn);
         clearBtn.setOnClickListener(this);
+        actionElement = (ImageButton) view.findViewById(R.id.actionElementID);
+        actionElement.setOnClickListener(this);
+        taskElement = (ImageButton) view.findViewById(R.id.taskElementID);
+        taskElement.setOnClickListener(this);
         nameScene = (EditText) view.findViewById(R.id.sceneName);
         nameScene.setOnEditorActionListener(this);
         nameScene.setText(scene.getName());
@@ -91,10 +84,18 @@ public class TaskBuilderFragment extends Fragment implements View.OnClickListene
 
         gcElement = new DelElement(TaskerIcons.deleteSize);
 
-        dialog = new CustomDialog();
-
 		return view;
 	}
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        for(ActionElement action : scene.getActionList())
+            action.unselect();
+        for(TaskElement task : scene.getTaskList())
+            task.unselect();
+    }
 
     @Override
     public void onClick(View view) {
@@ -105,13 +106,21 @@ public class TaskBuilderFragment extends Fragment implements View.OnClickListene
                 Flash.saveList(sceneList);
                 getFragmentManager().beginTransaction().
                 setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right).
-                replace(R.id.fragmentConteiner, new TaskListFragment()).
+                replace(R.id.fragmentConteiner, new FragmentTaskList()).
                 addToBackStack(null).
                 commit();
                 break;
             case R.id.clearBtn:
                 sceneList.removeAllFromScene(sceneIndex);
                 Flash.saveList(sceneList);
+                updateScreenUI();
+                break;
+            case R.id.actionElementID:
+                scene.addNewAction("Timer 2", new aTimer(18, 47), TYPES.TIME, 0, 0);
+                updateScreenUI();
+                break;
+            case R.id.taskElementID:
+                scene.addNewTask("Skype 2", new tApp("com.skype.raider"), TYPES.APP, 0, 0);
                 updateScreenUI();
                 break;
         }
@@ -236,12 +245,8 @@ public class TaskBuilderFragment extends Fragment implements View.OnClickListene
                 }else
                     findTaskElement.unselect();
 
-            }else{
-
+            }else
                 unselectAll();
-                dialog.setType(LIST.DIALOG_MENU);
-                dialog.show(getFragmentManager().beginTransaction(), null);
-            }
 
             Vibro.playLong(context);
             updateScreenUI();
@@ -291,46 +296,56 @@ public class TaskBuilderFragment extends Fragment implements View.OnClickListene
 
                 Bitmap pimpaIcon = TaskerIcons.getInstance().getPimpaIcon();
 
-                Paint p = new Paint();
-                p.setColor(Color.WHITE);
-                p.setTextSize(getResources().getInteger(R.integer.builder_text_size));
-                p.setTextAlign(Paint.Align.CENTER);
-                p.setStrokeWidth(5);
+                Paint textPaint = new Paint();
+                textPaint.setColor(Color.WHITE);
+                textPaint.setTextSize(getResources().getInteger(R.integer.builder_text_size));
+                textPaint.setTextAlign(Paint.Align.CENTER);
 
-                // 1. If present relationship between action and task - draw a lines
-                for (ActionElement action : scene.getActionList()) {
-                    for (TaskElement task : scene.getTaskList()) {
-                        if (action.isTaskElementIdPresent(task.getTaskId())) {
-                            canvas.drawLine(action.getX() + iconSizeElement /2, action.getY() + iconSizeElement /2,
-                                            task.getX()   + iconSizeElement /2, task.getY()   + iconSizeElement /2, p);
-                        }
-                    }
-                }
+                Paint linePaint = new Paint();
+                linePaint.setTextAlign(Paint.Align.CENTER);
+                linePaint.setStrokeWidth(5);
 
-                // 2. Print action and task icons
+                // 1. Print action and task icons
                 for(ActionElement action : scene.getActionList()){
                     //if(action.isSelect())
                         //canvas.drawBitmap(selectIcon, action.getX(), action.getY(), null);
                     canvas.drawBitmap(action.getIcon(), action.getX(), action.getY(), null);
-                    canvas.drawBitmap(pimpaIcon, action.getX(), action.getY(), null);
                     float textX = action.getX() + iconSizeElement /2;
                     float textY = action.getY() + iconSizeElement + getResources().getInteger(R.integer.builder_icon_text_margin);
-                    canvas.drawText(action.getActionName(), textX, textY, p);
+                    canvas.drawText(action.getActionName(), textX, textY, textPaint);
                 }
 
                 for(TaskElement task : scene.getTaskList()){
                     //if(task.isSelect())
                         //canvas.drawBitmap(selectIcon, task.getX(), task.getY(), null);
                     canvas.drawBitmap(task.getIcon(), task.getX(), task.getY(), null);
-                    canvas.drawBitmap(pimpaIcon, task.getX(), task.getY(), null);
                     float textX = task.getX() + iconSizeElement /2;
                     float textY = task.getY() + iconSizeElement + getResources().getInteger(R.integer.builder_icon_text_margin);
-                    canvas.drawText(task.getTaskName(), textX, textY, p);
+                    canvas.drawText(task.getTaskName(), textX, textY, textPaint);
                 }
 
-                // 3. Print delete icons
+                // 2. If present relationship between action and task - draw a lines
+                int indexColor = 0;
+                for (ActionElement action : scene.getActionList()) {
+                    for (TaskElement task : scene.getTaskList()) {
+                        if (action.isTaskElementIdPresent(task.getTaskId())) {
+                            linePaint.setColor(TaskerTypes.getColor(indexColor));
+                            canvas.drawLine(action.getX() + iconSizeElement /2, action.getY() + iconSizeElement/10, task.getX()   + iconSizeElement /2, task.getY()   + iconSizeElement/10, linePaint);
+                            indexColor++;
+                        }
+                    }
+                }
+
+                // 3. Draw pimpa
+                for(ActionElement action : scene.getActionList())
+                    canvas.drawBitmap(pimpaIcon, action.getX(), action.getY(), null);
+
+                for(TaskElement task : scene.getTaskList())
+                    canvas.drawBitmap(pimpaIcon, task.getX(), task.getY(), null);
+
+                // 4. Draw delete icons
                 for(DelElement.PressedElement element : gcElement.getDelList())
-                    canvas.drawBitmap(deleteIcon, element.x, element.y, null);
+                    canvas.drawBitmap(TaskerIcons.getInstance().getDeleteIcon(), element.x, element.y, null);
 
             }catch (Exception e){ }
         }
@@ -410,7 +425,7 @@ public class TaskBuilderFragment extends Fragment implements View.OnClickListene
 
         public void addPressedElement(long id, int x, int y){
 
-            delElementList.add(new PressedElement(id, x + iconSizeElement - elementSize, y));
+            delElementList.add(new PressedElement(id, x + iconSizeElement - elementSize/2, y - elementSize/2));
         }
 
         public long getIdPressedElement(int xPointer, int yPointer){
@@ -451,60 +466,6 @@ public class TaskBuilderFragment extends Fragment implements View.OnClickListene
                 this.x = x;
                 this.y=y;
             }
-        }
-    }
-
-    @SuppressLint("ValidFragment")
-    public class CustomDialog extends DialogFragment {
-
-        private LIST val;
-        private Dialog mDialog;
-
-        public CustomDialog(){
-
-        }
-
-        public void setType(LIST val){
-
-            this.val = val;
-        }
-
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-
-            mDialog = new Dialog(getActivity());
-            mDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-
-            switch(val){
-
-                case DIALOG_MENU:
-
-                    mDialog.setContentView(R.layout.dialog_menu);
-
-                    ((ImageButton) mDialog.findViewById(R.id.actionElement)).setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            Toast.makeText(getActivity(),"Open Action List", Toast.LENGTH_SHORT).show();
-                            scene.addNewAction("Timer 2", new aTimer(18, 47), TYPES.TIME, 0, 0);
-                            updateScreenUI();
-                            mDialog.dismiss();
-                        }
-                    });
-
-                    ((ImageButton) mDialog.findViewById(R.id.taskElement)).setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            Toast.makeText(getActivity(),"Open Task List", Toast.LENGTH_SHORT).show();
-                            scene.addNewTask("Skype 2", new tApp("com.skype.raider"), TYPES.APP, 0, 0);
-                            updateScreenUI();
-                            mDialog.dismiss();
-                        }
-                    });
-
-                    break;
-            }
-
-            return mDialog;
         }
     }
 }

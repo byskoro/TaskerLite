@@ -4,8 +4,8 @@ import android.graphics.Bitmap;
 import com.google.gson.GsonBuilder;
 import com.taskerlite.logic.tasks.mTask;
 import com.taskerlite.logic.tasks.tApp;
+import com.taskerlite.main.FragmentTaskBuilder;
 import com.taskerlite.main.TaskerIcons;
-import com.taskerlite.main.TaskBuilderFragment;
 import com.taskerlite.main.TaskerTypes.*;
 
 public class TaskElement {
@@ -69,16 +69,20 @@ public class TaskElement {
 
         if(yPointer < TaskerIcons.builderSize /2)
             yPointer = TaskerIcons.builderSize /2;
-        else if(yPointer > TaskBuilderFragment.screenHeight  - TaskerIcons.builderSize /2)
-            yPointer = TaskBuilderFragment.screenHeight - TaskerIcons.builderSize /2;
+        else if(yPointer > FragmentTaskBuilder.screenHeight  - TaskerIcons.builderSize /2)
+            yPointer = FragmentTaskBuilder.screenHeight - TaskerIcons.builderSize /2;
 
         if(xPointer < TaskerIcons.builderSize /2)
             xPointer = TaskerIcons.builderSize /2;
-        else if(xPointer > TaskBuilderFragment.screenWidth - TaskerIcons.builderSize /2)
-            xPointer = TaskBuilderFragment.screenWidth - TaskerIcons.builderSize /2;
+        else if(xPointer > FragmentTaskBuilder.screenWidth - TaskerIcons.builderSize /2)
+            xPointer = FragmentTaskBuilder.screenWidth - TaskerIcons.builderSize /2;
 
         x = xPointer - TaskerIcons.builderSize /2;
         y = yPointer - TaskerIcons.builderSize /2;
+    }
+
+    public TYPES getTaskType() {
+        return taskType;
     }
 
     public String getTaskName() { return taskName; }
