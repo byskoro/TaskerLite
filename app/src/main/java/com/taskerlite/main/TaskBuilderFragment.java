@@ -289,6 +289,8 @@ public class TaskBuilderFragment extends Fragment implements View.OnClickListene
 
             try{
 
+                Bitmap pimpaIcon = TaskerIcons.getInstance().getPimpaIcon();
+
                 Paint p = new Paint();
                 p.setColor(Color.WHITE);
                 p.setTextSize(getResources().getInteger(R.integer.builder_text_size));
@@ -300,25 +302,27 @@ public class TaskBuilderFragment extends Fragment implements View.OnClickListene
                     for (TaskElement task : scene.getTaskList()) {
                         if (action.isTaskElementIdPresent(task.getTaskId())) {
                             canvas.drawLine(action.getX() + iconSizeElement /2, action.getY() + iconSizeElement /2,
-                                    task.getX() + iconSizeElement /2, task.getY() + iconSizeElement /2, p);
+                                            task.getX()   + iconSizeElement /2, task.getY()   + iconSizeElement /2, p);
                         }
                     }
                 }
 
                 // 2. Print action and task icons
                 for(ActionElement action : scene.getActionList()){
-                    if(action.isSelect())
-                        canvas.drawBitmap(selectIcon, action.getX(), action.getY(), null);
+                    //if(action.isSelect())
+                        //canvas.drawBitmap(selectIcon, action.getX(), action.getY(), null);
                     canvas.drawBitmap(action.getIcon(), action.getX(), action.getY(), null);
+                    canvas.drawBitmap(pimpaIcon, action.getX(), action.getY(), null);
                     float textX = action.getX() + iconSizeElement /2;
                     float textY = action.getY() + iconSizeElement + getResources().getInteger(R.integer.builder_icon_text_margin);
                     canvas.drawText(action.getActionName(), textX, textY, p);
                 }
 
                 for(TaskElement task : scene.getTaskList()){
-                    if(task.isSelect())
-                        canvas.drawBitmap(selectIcon, task.getX(), task.getY(), null);
+                    //if(task.isSelect())
+                        //canvas.drawBitmap(selectIcon, task.getX(), task.getY(), null);
                     canvas.drawBitmap(task.getIcon(), task.getX(), task.getY(), null);
+                    canvas.drawBitmap(pimpaIcon, task.getX(), task.getY(), null);
                     float textX = task.getX() + iconSizeElement /2;
                     float textY = task.getY() + iconSizeElement + getResources().getInteger(R.integer.builder_icon_text_margin);
                     canvas.drawText(task.getTaskName(), textX, textY, p);

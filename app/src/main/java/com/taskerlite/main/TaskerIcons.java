@@ -23,7 +23,7 @@ public class TaskerIcons {
     private HashMap<TYPES, Drawable> iconsViewList    = new HashMap<TYPES, Drawable>();
     private HashMap<TYPES, Bitmap>   iconsBuilderList = new HashMap<TYPES, Bitmap>();
     private Bitmap tmpBigIcon, previewIcon, builderIcon;
-    private Bitmap selectIcons, deleteIcon;
+    private Bitmap selectIcons, deleteIcon, pimpaIcon;
     private BitmapDrawable swMenuDelete, swMenuStart, swMenuStop;
 
     public static TaskerIcons getInstance(Context context){
@@ -50,6 +50,9 @@ public class TaskerIcons {
     }
 
     private void generateIconsDrawable(){
+
+        tmpBigIcon  = BitmapFactory.decodeResource(context.getResources(), R.drawable.pimpa);
+        pimpaIcon = Bitmap.createScaledBitmap(tmpBigIcon, builderSize, builderSize, true);
 
         generateSelectIcon();
         generateDeleteIcon();
@@ -107,6 +110,10 @@ public class TaskerIcons {
 
     public BitmapDrawable getSwMenuStop() {
         return swMenuStop;
+    }
+
+    public Bitmap getPimpaIcon() {
+        return pimpaIcon;
     }
 
     private void generate(TYPES typeIcon, int res){

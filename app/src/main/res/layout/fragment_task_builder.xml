@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="1"
-    android:background="#FFFFFF">
+    android:background="#B0987C">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -53,12 +53,13 @@
         android:layout_height="0dp"
         android:layout_weight="0.9"
         android:layout_margin="10dp"
-        android:background="@drawable/black_board">
+        android:padding="10dp"
+        android:background="@drawable/probka5">
 
         <com.taskerlite.TaskerBuilderView
             android:id="@+id/drawBuilder"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"/>
     </LinearLayout>
 
     <LinearLayout
