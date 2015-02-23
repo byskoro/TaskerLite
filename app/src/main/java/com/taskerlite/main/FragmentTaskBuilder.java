@@ -116,8 +116,9 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
                 updateScreenUI();
                 break;
             case R.id.actionElementID:
-                scene.addNewAction("Timer 2", new aTimer(18, 47), TYPES.TIME, 0, 0);
-                updateScreenUI();
+                ActionBuilderDialog dialogFrag = new ActionBuilderDialog();
+                dialogFrag.setTargetFragment(this, 0);
+                dialogFrag.show(getFragmentManager().beginTransaction(), "actionList");
                 break;
             case R.id.taskElementID:
                 scene.addNewTask("Skype 2", new tApp("com.skype.raider"), TYPES.APP, 0, 0);
@@ -143,7 +144,7 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
         imm.hideSoftInputFromWindow(textView.getApplicationWindowToken(), 0);
     }
 
-    Handler handlerLogic = new Handler() {
+    private Handler handlerLogic = new Handler() {
 
         public void handleMessage(Message msg) {
 
@@ -351,7 +352,7 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
         }
     };
 
-    private void updateScreenUI(){
+    public void updateScreenUI(){
 
         if(!handlerLogic.hasMessages(1))
             handlerLogic.sendEmptyMessageDelayed(1, 50);
@@ -467,5 +468,10 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
                 this.y=y;
             }
         }
+    }
+
+
+    public Scene getScene() {
+        return scene;
     }
 }

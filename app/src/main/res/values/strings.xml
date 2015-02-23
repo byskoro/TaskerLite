@@ -4,4 +4,12 @@
     <string name="app_name">TaskerLite</string>
     <string name="newTask">New task</string>
 
+    <string-array name="actionsDescribeList">
+        <item>This is timer</item>
+    </string-array>
+
+    <string-array name="actionsIcons">
+        <item>@drawable/a_timer</item>
+    </string-array>
+
 </resources>

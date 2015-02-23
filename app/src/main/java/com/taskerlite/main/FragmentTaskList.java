@@ -152,7 +152,7 @@ public class FragmentTaskList extends Fragment implements View.OnClickListener{
         public View getView(int position, View convertView, ViewGroup parent) {
 
             if (convertView == null)
-                convertView = View.inflate(context, R.layout.item_list_scene, null);
+                convertView = View.inflate(context, R.layout.list_item_scene, null);
 
             TextView t = (TextView) convertView.findViewById(R.id.sceneNameID);
             t.setText(getItem(position).getName());
