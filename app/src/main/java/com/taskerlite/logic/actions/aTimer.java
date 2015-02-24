@@ -24,7 +24,7 @@ public class aTimer extends mAction {
 		
 		boolean state = false;
 		
-		if(type == TYPES.TIME){
+		if(type == TYPES.A_TIME){
 			
 			Calendar cal = new GregorianCalendar();
 			

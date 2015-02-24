@@ -55,7 +55,7 @@ public class TService extends Service {
             			
             			mAction actionObj = action.getActionObject();
             			
-            			if(actionObj.isMyAction(getApplicationContext(), TYPES.TIME)){
+            			if(actionObj.isMyAction(getApplicationContext(), TYPES.A_TIME)){
 
                             for(TaskElement task : scene.getTaskList()){
 

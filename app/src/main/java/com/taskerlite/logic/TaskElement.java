@@ -39,7 +39,7 @@ public class TaskElement {
 
         if(taskObject == null){
             switch (taskType) {
-                case APP:
+                case T_APP:
                     taskObject = new GsonBuilder().create().fromJson(taskINStr, tApp.class);
                     break;
                 default:

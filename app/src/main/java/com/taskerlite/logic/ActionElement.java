@@ -42,7 +42,7 @@ public class ActionElement {
 
         if(actionObject == null){
             switch (actionType) {
-                case TIME:
+                case A_TIME:
                     actionObject = new GsonBuilder().create().fromJson(actionINStr, aTimer.class);
                     break;
                 default:

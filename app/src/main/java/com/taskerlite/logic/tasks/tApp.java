@@ -16,11 +16,6 @@ public class tApp extends mTask {
 		
 	String link;
     ApplicationInfo item;
-	
-	public tApp(String link) {
-
-		this.link = link;
-	}
 
 	@Override
 	public void start(Context context) {

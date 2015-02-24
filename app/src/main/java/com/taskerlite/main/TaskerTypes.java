@@ -5,7 +5,7 @@ import android.graphics.Color;
 
 public class TaskerTypes {
 
-    public static enum TYPES {TIME, APP}
+    public static enum TYPES {A_TIME, T_APP, T_THREE_G, T_WIFI, T_ACCESS_POINT}
 
     private static int[] mColors = new int[] {
             0xFFFFFFCC,

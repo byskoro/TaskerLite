@@ -1,4 +1,4 @@
-package com.taskerlite.main;
+package com.taskerlite.dialogs;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -15,11 +15,15 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.taskerlite.R;
-import com.taskerlite.logic.SceneList.*;
-import com.taskerlite.logic.actions.aTimer;
-import com.taskerlite.main.TaskerTypes.*;
+import com.taskerlite.logic.SceneList.Scene;
+import com.taskerlite.logic.tasks.t3G;
+import com.taskerlite.logic.tasks.tAccessPoint;
+import com.taskerlite.logic.tasks.tApp;
+import com.taskerlite.logic.tasks.tWIFI;
+import com.taskerlite.main.FragmentTaskBuilder;
+import com.taskerlite.main.TaskerTypes.TYPES;
 
-public class ActionBuilderDialog extends DialogFragment {
+public class TaskBuilderDialog extends DialogFragment {
 
     private Scene scene;
     private FragmentTaskBuilder parentFragment;
@@ -39,7 +43,7 @@ public class ActionBuilderDialog extends DialogFragment {
 
         lvMain = (ListView) view.findViewById(R.id.listview);
 
-        actionsDescription = getResources().getStringArray(R.array.actionsDescribeList);
+        actionsDescription = getResources().getStringArray(R.array.tasksDescribeList);
 
         adapter = new RoomArrayAdapter(getActivity(), actionsDescription);
         lvMain.setAdapter(adapter);
@@ -47,7 +51,20 @@ public class ActionBuilderDialog extends DialogFragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                scene.addNewAction("Timer 2", new aTimer(18, 47), TYPES.TIME, 0, 0);
+                switch (position){
+                    case 0:
+                        scene.addNewTask("", new tApp(), TYPES.T_APP, 0, 0);
+                    break;
+                    case 1:
+                        scene.addNewTask("", new tAccessPoint(), TYPES.T_ACCESS_POINT, 0, 0);
+                        break;
+                    case 2:
+                        scene.addNewTask("", new t3G(), TYPES.T_THREE_G, 0, 0);
+                        break;
+                    case 3:
+                        scene.addNewTask("", new tWIFI(), TYPES.T_WIFI, 0, 0);
+                        break;
+                }
                 parentFragment.updateScreenUI();
                 dismiss();
             }
@@ -74,7 +91,7 @@ public class ActionBuilderDialog extends DialogFragment {
             View rowView = inflater.inflate(R.layout.list_item_element, parent, false);
 
             ImageView imageView = (ImageView) rowView.findViewById(R.id.imageId);
-            TypedArray actionsId = getResources().obtainTypedArray(R.array.actionsIcons);
+            TypedArray actionsId = getResources().obtainTypedArray(R.array.tasksIcons);
             imageView.setImageResource(actionsId.getResourceId(position, -1));
 
             TextView textView = (TextView) rowView.findViewById(R.id.textDescriptionId);

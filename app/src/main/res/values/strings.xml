@@ -5,7 +5,7 @@
     <string name="newTask">New task</string>
 
     <string-array name="actionsDescribeList">
-        <item>This is timer</item>
+        <item>Trigger by time</item>
     </string-array>
 
     <string-array name="actionsIcons">
@@ -21,7 +21,7 @@
 
     <string-array name="tasksIcons">
         <item>@drawable/t_app</item>
-        <item>@drawable/t_ap</item>
+        <item>@drawable/t_access_point</item>
         <item>@drawable/t_three_g</item>
         <item>@drawable/t_wifi</item>
     </string-array>

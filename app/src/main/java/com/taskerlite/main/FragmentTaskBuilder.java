@@ -2,6 +2,8 @@ package com.taskerlite.main;
 
 import com.taskerlite.R;
 import com.taskerlite.TaskerBuilderView;
+import com.taskerlite.dialogs.ActionBuilderDialog;
+import com.taskerlite.dialogs.TaskBuilderDialog;
 import com.taskerlite.logic.ActionElement;
 import com.taskerlite.logic.SceneList;
 import com.taskerlite.logic.SceneList.*;
@@ -28,10 +30,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import com.taskerlite.logic.tasks.tApp;
-import com.taskerlite.logic.actions.aTimer;
-import com.taskerlite.main.TaskerTypes.*;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package com.taskerlite.main;
+package com.taskerlite.dialogs;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -15,12 +15,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.taskerlite.R;
-import com.taskerlite.logic.SceneList.Scene;
+import com.taskerlite.logic.SceneList.*;
 import com.taskerlite.logic.actions.aTimer;
-import com.taskerlite.logic.tasks.tApp;
-import com.taskerlite.main.TaskerTypes.TYPES;
+import com.taskerlite.main.FragmentTaskBuilder;
+import com.taskerlite.main.TaskerTypes.*;
 
-public class TaskBuilderDialog extends DialogFragment {
+public class ActionBuilderDialog extends DialogFragment {
 
     private Scene scene;
     private FragmentTaskBuilder parentFragment;
@@ -40,7 +40,7 @@ public class TaskBuilderDialog extends DialogFragment {
 
         lvMain = (ListView) view.findViewById(R.id.listview);
 
-        actionsDescription = getResources().getStringArray(R.array.tasksDescribeList);
+        actionsDescription = getResources().getStringArray(R.array.actionsDescribeList);
 
         adapter = new RoomArrayAdapter(getActivity(), actionsDescription);
         lvMain.setAdapter(adapter);
@@ -48,7 +48,7 @@ public class TaskBuilderDialog extends DialogFragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                scene.addNewTask("Skype 2", new tApp("com.skype.raider"), TYPES.APP, 0, 0);
+                scene.addNewAction("Timer 2", new aTimer(18, 47), TYPES.A_TIME, 0, 0);
                 parentFragment.updateScreenUI();
                 dismiss();
             }
@@ -75,7 +75,7 @@ public class TaskBuilderDialog extends DialogFragment {
             View rowView = inflater.inflate(R.layout.list_item_element, parent, false);
 
             ImageView imageView = (ImageView) rowView.findViewById(R.id.imageId);
-            TypedArray actionsId = getResources().obtainTypedArray(R.array.tasksIcons);
+            TypedArray actionsId = getResources().obtainTypedArray(R.array.actionsIcons);
             imageView.setImageResource(actionsId.getResourceId(position, -1));
 
             TextView textView = (TextView) rowView.findViewById(R.id.textDescriptionId);

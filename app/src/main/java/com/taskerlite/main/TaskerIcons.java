@@ -23,7 +23,7 @@ public class TaskerIcons {
     private HashMap<TYPES, Drawable> iconsViewList    = new HashMap<TYPES, Drawable>();
     private HashMap<TYPES, Bitmap>   iconsBuilderList = new HashMap<TYPES, Bitmap>();
     private Bitmap tmpBigIcon, previewIcon, builderIcon;
-    private Bitmap selectIcons, deleteIcon, pimpaIcon;
+    private Bitmap deleteIcon, pimpaIcon;
     private BitmapDrawable swMenuDelete, swMenuStart, swMenuStop;
 
     public static TaskerIcons getInstance(Context context){
@@ -51,26 +51,22 @@ public class TaskerIcons {
 
     private void generateIconsDrawable(){
 
-        tmpBigIcon  = BitmapFactory.decodeResource(context.getResources(), R.drawable.pimpa);
-        pimpaIcon = Bitmap.createScaledBitmap(tmpBigIcon, builderSize, builderSize, true);
-
-        generateSelectIcon();
-        generateDeleteIcon();
-
         generateSwipeMenu();
 
-        generate(TYPES.TIME, R.drawable.a_timer);
-        generate(TYPES.APP, R.drawable.t_app);
+        generateDeleteIcon();
+        generatePimpa();
+
+        generate(TYPES.A_TIME, R.drawable.a_timer);
+        generate(TYPES.T_APP, R.drawable.t_app);
+        generate(TYPES.T_THREE_G, R.drawable.t_three_g);
+        generate(TYPES.T_WIFI, R.drawable.t_wifi);
+        generate(TYPES.T_ACCESS_POINT, R.drawable.t_access_point);
     }
 
-    private void generateSelectIcon(){
+    private void generatePimpa(){
 
-        tmpBigIcon  = BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_select);
-        selectIcons = Bitmap.createScaledBitmap(tmpBigIcon, builderSize, builderSize, true);
-    }
-
-    public Bitmap getSelectIcons() {
-        return selectIcons;
+        tmpBigIcon  = BitmapFactory.decodeResource(context.getResources(), R.drawable.pimpa);
+        pimpaIcon = Bitmap.createScaledBitmap(tmpBigIcon, builderSize, builderSize, true);
     }
 
     private void generateDeleteIcon(){
