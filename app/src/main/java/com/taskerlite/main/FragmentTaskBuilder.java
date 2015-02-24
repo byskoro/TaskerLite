@@ -116,13 +116,14 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
                 updateScreenUI();
                 break;
             case R.id.actionElementID:
-                ActionBuilderDialog dialogFrag = new ActionBuilderDialog();
-                dialogFrag.setTargetFragment(this, 0);
-                dialogFrag.show(getFragmentManager().beginTransaction(), "actionList");
+                ActionBuilderDialog actionDialog = new ActionBuilderDialog();
+                actionDialog.setTargetFragment(this, 0);
+                actionDialog.show(getFragmentManager().beginTransaction(), "actionList");
                 break;
             case R.id.taskElementID:
-                scene.addNewTask("Skype 2", new tApp("com.skype.raider"), TYPES.APP, 0, 0);
-                updateScreenUI();
+                TaskBuilderDialog taskDialog = new TaskBuilderDialog();
+                taskDialog.setTargetFragment(this, 0);
+                taskDialog.show(getFragmentManager().beginTransaction(), "taskList");
                 break;
         }
     }

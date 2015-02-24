@@ -15,11 +15,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.taskerlite.R;
-import com.taskerlite.logic.SceneList.*;
+import com.taskerlite.logic.SceneList.Scene;
 import com.taskerlite.logic.actions.aTimer;
-import com.taskerlite.main.TaskerTypes.*;
+import com.taskerlite.logic.tasks.tApp;
+import com.taskerlite.main.TaskerTypes.TYPES;
 
-public class ActionBuilderDialog extends DialogFragment {
+public class TaskBuilderDialog extends DialogFragment {
 
     private Scene scene;
     private FragmentTaskBuilder parentFragment;
@@ -39,7 +40,7 @@ public class ActionBuilderDialog extends DialogFragment {
 
         lvMain = (ListView) view.findViewById(R.id.listview);
 
-        actionsDescription = getResources().getStringArray(R.array.actionsDescribeList);
+        actionsDescription = getResources().getStringArray(R.array.tasksDescribeList);
 
         adapter = new RoomArrayAdapter(getActivity(), actionsDescription);
         lvMain.setAdapter(adapter);
@@ -47,7 +48,7 @@ public class ActionBuilderDialog extends DialogFragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                scene.addNewAction("Timer 2", new aTimer(18, 47), TYPES.TIME, 0, 0);
+                scene.addNewTask("Skype 2", new tApp("com.skype.raider"), TYPES.APP, 0, 0);
                 parentFragment.updateScreenUI();
                 dismiss();
             }
@@ -74,7 +75,7 @@ public class ActionBuilderDialog extends DialogFragment {
             View rowView = inflater.inflate(R.layout.list_item_element, parent, false);
 
             ImageView imageView = (ImageView) rowView.findViewById(R.id.imageId);
-            TypedArray actionsId = getResources().obtainTypedArray(R.array.actionsIcons);
+            TypedArray actionsId = getResources().obtainTypedArray(R.array.tasksIcons);
             imageView.setImageResource(actionsId.getResourceId(position, -1));
 
             TextView textView = (TextView) rowView.findViewById(R.id.textDescriptionId);

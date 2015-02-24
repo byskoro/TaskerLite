@@ -12,4 +12,18 @@
         <item>@drawable/a_timer</item>
     </string-array>
 
+    <string-array name="tasksDescribeList">
+        <item>Run any application</item>
+        <item>Run access point</item>
+        <item>Run 3G mobile data</item>
+        <item>Run WIFI</item>
+    </string-array>
+
+    <string-array name="tasksIcons">
+        <item>@drawable/t_app</item>
+        <item>@drawable/t_ap</item>
+        <item>@drawable/t_three_g</item>
+        <item>@drawable/t_wifi</item>
+    </string-array>
+
 </resources>
