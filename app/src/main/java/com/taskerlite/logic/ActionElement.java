@@ -14,21 +14,18 @@ public class ActionElement {
 
     // non serializable
     private transient mAction actionObject;
-    private transient Bitmap icon;
     private transient boolean isSelect = false;
     private transient boolean isMoving = false;
 
     // serializable
     private TYPES actionType;
     private String actionINStr;
-    private String actionName;
     private Integer actionId;
     private int x, y;
     private ArrayList<Long> taskElementID = new ArrayList<Long>();
 
-    public ActionElement(String actionName, mAction actionObject, TYPES actionType, int x, int y){
+    public ActionElement(mAction actionObject, TYPES actionType, int x, int y){
 
-        this.actionName = actionName;
         this.actionType = actionType;
         this.actionObject = actionObject;
         this.x = x;
@@ -57,6 +54,11 @@ public class ActionElement {
 
         return TaskerIcons.getInstance().getBuilderIcon(actionType);
     }
+
+    public void invalidateData(){
+        actionINStr = new GsonBuilder().create().toJson(actionObject);
+    }
+
 
     public boolean isTouched(int xPointer, int yPointer, float size){
 
@@ -109,7 +111,6 @@ public class ActionElement {
 
     public int getX() { return x; }
     public int getY() { return y; }
-    public String getActionName() { return actionName; }
     public boolean isSelect(){ return isSelect; }
     public void select(){ isSelect = true; }
     public void unselect(){ isSelect = false; }

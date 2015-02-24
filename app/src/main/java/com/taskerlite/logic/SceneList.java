@@ -45,9 +45,9 @@ public class SceneList {
 			this.name = sceneName;
 		}
 		
-		public void addNewAction(String actionName, mAction actionObject, TYPES actionType, int xCoordinate, int yCoordinate){
+		public void addNewAction(mAction actionObject, TYPES actionType, int xCoordinate, int yCoordinate){
 			
-			actionList.add(new ActionElement(actionName, actionObject, actionType, xCoordinate, yCoordinate));
+			actionList.add(new ActionElement(actionObject, actionType, xCoordinate, yCoordinate));
 		}
 
         public void deleteAction(ActionElement actionElement){
@@ -55,9 +55,9 @@ public class SceneList {
             actionList.trimToSize();
         }
 		
-		public void addNewTask(String objName, mTask obj, TYPES objType, int x, int y){
+		public void addNewTask(mTask obj, TYPES objType, int x, int y){
 			
-			taskList.add(new TaskElement(objName, obj, objType, x, y));
+			taskList.add(new TaskElement(obj, objType, x, y));
 		}
 
         public void deleteTask(TaskElement taskElement){
@@ -65,6 +65,14 @@ public class SceneList {
                 actionElement.deleteTaskElementId(taskElement.getTaskId());
             taskList.remove(taskElement);
             taskList.trimToSize();
+        }
+
+        public void invalidateData(){
+
+            for(ActionElement action : getActionList())
+                action.invalidateData();
+            for(TaskElement task : getTaskList())
+                task.invalidateData();
         }
 		
 		public String getName() { return name; }

@@ -11,28 +11,24 @@ import com.taskerlite.main.TaskerTypes.*;
 public class TaskElement {
 
     // non serializable
-    private transient mTask taskObject;
-    private transient Bitmap icon;
+    private transient mTask   taskObject;
     private transient boolean isSelect = false;
     private transient boolean isMoving = false;
 
     // serializable
     private TYPES taskType;
     private String taskINStr;
-    private String taskName;
     private long taskId;
     private int x, y;
 
-    public TaskElement(String objName, mTask obj, TYPES objType, int x, int y){
+    public TaskElement(mTask obj, TYPES objType, int x, int y){
 
-        this.taskName = objName;
         this.taskObject = obj;
         this.taskType = objType;
         this.x = x;
         this.y = y;
 
-        taskId    = System.currentTimeMillis();
-        taskINStr = new GsonBuilder().create().toJson(obj);
+        taskId = System.currentTimeMillis();
     }
 
     public mTask getTaskObject() {
@@ -81,11 +77,13 @@ public class TaskElement {
         y = yPointer - TaskerIcons.builderSize /2;
     }
 
+    public void invalidateData(){
+        taskINStr = new GsonBuilder().create().toJson(taskObject);
+    }
+
     public TYPES getTaskType() {
         return taskType;
     }
-
-    public String getTaskName() { return taskName; }
     public long getTaskId() { return taskId; }
     public int getX() { return x; }
     public int getY() { return y; }

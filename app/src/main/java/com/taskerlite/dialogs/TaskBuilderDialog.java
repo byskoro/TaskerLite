@@ -28,7 +28,7 @@ public class TaskBuilderDialog extends DialogFragment {
     private Scene scene;
     private FragmentTaskBuilder parentFragment;
     private ListView lvMain;
-    private RoomArrayAdapter adapter;
+    private mAdapter adapter;
 
     private String[] actionsDescription;
 
@@ -45,7 +45,7 @@ public class TaskBuilderDialog extends DialogFragment {
 
         actionsDescription = getResources().getStringArray(R.array.tasksDescribeList);
 
-        adapter = new RoomArrayAdapter(getActivity(), actionsDescription);
+        adapter = new mAdapter(getActivity(), actionsDescription);
         lvMain.setAdapter(adapter);
         lvMain.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -53,19 +53,19 @@ public class TaskBuilderDialog extends DialogFragment {
 
                 switch (position){
                     case 0:
-                        scene.addNewTask("", new tApp(), TYPES.T_APP, 0, 0);
+                        scene.addNewTask(new tApp(), TYPES.T_APP, 0, 0);
                     break;
                     case 1:
-                        scene.addNewTask("", new tAccessPoint(), TYPES.T_ACCESS_POINT, 0, 0);
+                        scene.addNewTask(new tAccessPoint(), TYPES.T_ACCESS_POINT, 0, 0);
                         break;
                     case 2:
-                        scene.addNewTask("", new t3G(), TYPES.T_THREE_G, 0, 0);
+                        scene.addNewTask(new t3G(), TYPES.T_THREE_G, 0, 0);
                         break;
                     case 3:
-                        scene.addNewTask("", new tWIFI(), TYPES.T_WIFI, 0, 0);
+                        scene.addNewTask(new tWIFI(), TYPES.T_WIFI, 0, 0);
                         break;
                 }
-                parentFragment.updateScreenUI();
+
                 dismiss();
             }
         });
@@ -73,11 +73,11 @@ public class TaskBuilderDialog extends DialogFragment {
         return view;
     }
 
-    public class RoomArrayAdapter extends ArrayAdapter<String> {
+    public class mAdapter extends ArrayAdapter<String> {
 
         private Context context;
 
-        public RoomArrayAdapter(Context context, String[] roomNames) {
+        public mAdapter(Context context, String[] roomNames) {
             super(context, R.layout.dialog_action_list, roomNames);
 
             this.context = context;

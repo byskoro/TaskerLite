@@ -38,7 +38,7 @@ public class mActivity extends FragmentActivity {
 
         }else {
 
-            Flash.saveList(mActivity.sceneList);
+            //Flash.saveList(mActivity.sceneList);
 
             getSupportFragmentManager().beginTransaction().
             setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right).

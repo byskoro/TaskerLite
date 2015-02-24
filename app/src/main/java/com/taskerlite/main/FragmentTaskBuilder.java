@@ -16,6 +16,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -89,10 +90,14 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
     public void onPause() {
         super.onPause();
 
-        for(ActionElement action : scene.getActionList())
+        for(ActionElement action : scene.getActionList()) {
             action.unselect();
-        for(TaskElement task : scene.getTaskList())
+        }
+        for(TaskElement task : scene.getTaskList()) {
             task.unselect();
+        }
+
+        handlerLogic.removeMessages(1);
     }
 
     @Override
@@ -101,6 +106,9 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
         switch(view.getId()){
 
             case R.id.backBtn:
+
+                scene.invalidateData();
+
                 Flash.saveList(sceneList);
                 getFragmentManager().beginTransaction().
                 setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right).
@@ -111,7 +119,6 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
             case R.id.clearBtn:
                 sceneList.removeAllFromScene(sceneIndex);
                 Flash.saveList(sceneList);
-                updateScreenUI();
                 break;
             case R.id.actionElementID:
                 ActionBuilderDialog actionDialog = new ActionBuilderDialog();
@@ -153,12 +160,12 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
                     action.unselect();
                 for(TaskElement task : scene.getTaskList())
                     task.unselect();
-
-                taskerView.postInvalidate();
             }
 
-            if (msg.what == 1)
+            if (msg.what == 1){
                 taskerView.postInvalidate();
+                handlerLogic.sendEmptyMessageDelayed(1, 50);
+            }
         }
     };
 
@@ -179,6 +186,8 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
 
             screenWidth  = w;
             screenHeight = h;
+
+            handlerLogic.sendEmptyMessageDelayed(1, 50);
         }
 
         @Override
@@ -245,11 +254,10 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
                 }else
                     findTaskElement.unselect();
 
-            }else
+            } else
                 unselectAll();
 
             Vibro.playLong(context);
-            updateScreenUI();
         }
 
         @Override
@@ -285,7 +293,6 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
                 actionElement.setNewCoordinate(xPointer, yPointer);
             }
 
-            updateScreenUI();
             unselectAll();
         }
 
@@ -299,6 +306,7 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
                 Paint textPaint = new Paint();
                 textPaint.setColor(Color.WHITE);
                 textPaint.setTextSize(getResources().getInteger(R.integer.builder_text_size));
+                textPaint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
                 textPaint.setTextAlign(Paint.Align.CENTER);
 
                 Paint linePaint = new Paint();
@@ -307,21 +315,17 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
 
                 // 1. Print action and task icons
                 for(ActionElement action : scene.getActionList()){
-                    //if(action.isSelect())
-                        //canvas.drawBitmap(selectIcon, action.getX(), action.getY(), null);
                     canvas.drawBitmap(action.getIcon(), action.getX(), action.getY(), null);
                     float textX = action.getX() + iconSizeElement /2;
                     float textY = action.getY() + iconSizeElement + getResources().getInteger(R.integer.builder_icon_text_margin);
-                    canvas.drawText(action.getActionName(), textX, textY, textPaint);
+                    canvas.drawText(action.getActionObject().getName(), textX, textY, textPaint);
                 }
 
                 for(TaskElement task : scene.getTaskList()){
-                    //if(task.isSelect())
-                        //canvas.drawBitmap(selectIcon, task.getX(), task.getY(), null);
                     canvas.drawBitmap(task.getIcon(), task.getX(), task.getY(), null);
                     float textX = task.getX() + iconSizeElement /2;
                     float textY = task.getY() + iconSizeElement + getResources().getInteger(R.integer.builder_icon_text_margin);
-                    canvas.drawText(task.getTaskName(), textX, textY, textPaint);
+                    canvas.drawText(task.getTaskObject().getName(), textX, textY, textPaint);
                 }
 
                 // 2. If present relationship between action and task - draw a lines
@@ -350,12 +354,6 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
             }catch (Exception e){ }
         }
     };
-
-    public void updateScreenUI(){
-
-        if(!handlerLogic.hasMessages(1))
-            handlerLogic.sendEmptyMessageDelayed(1, 50);
-    }
 
     private void unselectAll(){
 

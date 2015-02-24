@@ -19,13 +19,11 @@ import com.taskerlite.main.TaskerTypes.*;
 
 public class TService extends Service {
 
-	public static boolean newDataCome = false;
 	private SceneList sceneList;
+    private String previousRawData = "";
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-
-    	newDataCome = true;
         
     	serviceHandler.sendEmptyMessageDelayed(0, generateOffsetTime());
     	
@@ -43,10 +41,10 @@ public class TService extends Service {
         	
         	try {
 				
-        		if(newDataCome == true){
+        		if(!previousRawData.equals(Flash.getRawData())){
         			
             		sceneList = Flash.getList();
-            		newDataCome = false;
+                    previousRawData = Flash.getRawData();
             	}
             	
             	for(Scene scene : sceneList.getSceneList()){
