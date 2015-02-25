@@ -66,7 +66,7 @@ public class TaskerIcons {
     private void generatePimpa(){
 
         tmpBigIcon  = BitmapFactory.decodeResource(context.getResources(), R.drawable.pimpa);
-        pimpaIcon = Bitmap.createScaledBitmap(tmpBigIcon, builderSize, builderSize, true);
+        pimpaIcon   = Bitmap.createScaledBitmap(tmpBigIcon, builderSize, builderSize, true);
     }
 
     private void generateDeleteIcon(){

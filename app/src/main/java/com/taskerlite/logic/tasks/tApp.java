@@ -1,9 +1,18 @@
 package com.taskerlite.logic.tasks;
 
+import android.app.Activity;
 import android.app.Dialog;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.ResolveInfo;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentManager;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -19,10 +28,6 @@ import java.util.List;
 
 public class tApp extends mTask {
 
-    private transient List<ApplicationInfo> mAppList;
-    private transient mAdapter adapter;
-    private transient Dialog mDialog;
-
     private String link = "";
 
 	@Override
@@ -37,62 +42,80 @@ public class tApp extends mTask {
 	}
 
     @Override
-    public void show(final Context context) {
+    public void show(FragmentManager fm) {
 
-        mDialog = new Dialog(context);
-        mDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        mDialog.setContentView(R.layout.dialog_task_app);
-
-        ListView lvMain = (ListView) mDialog.findViewById(R.id.listView);
-
-        mAppList = context.getPackageManager().getInstalledApplications(0);
-        adapter = new mAdapter(context);
-        lvMain.setAdapter(adapter);
-        lvMain.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                ApplicationInfo item = mAppList.get(position);
-                setName(String.valueOf(item.loadLabel(context.getPackageManager())));
-                link = item.packageName;
-                mDialog.dismiss();
-            }
-        });
-
-        mDialog.show();
+        UI ui = new UI();
+        ui.setParent(this);
+        ui.show(fm.beginTransaction(), "actionList");
     }
 
-    class mAdapter extends BaseAdapter {
+    public static class UI extends DialogFragment{
 
-        private Context context;
+        private List<ApplicationInfo> mAppList;
+        private mAdapter adapter;
+        private tApp task;
 
-        public mAdapter(Context context){
-            this.context = context;
-        }
-
-        public int getCount() {
-            return mAppList.size();
-        }
-
-        public ApplicationInfo getItem(int position) {
-            return mAppList.get(position);
-        }
-
-        public long getItemId(int position) {
-            return position;
+        public void setParent (tApp task){
+            this.task = task;
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-            View rowView = View.inflate(context, R.layout.list_item_element, null);
+            getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
+            View view = inflater.inflate(R.layout.dialog_task_app, container);
 
-            ApplicationInfo item = getItem(position);
-            ImageView imageView = (ImageView) rowView.findViewById(R.id.imageId);
-            imageView.setImageDrawable(item.loadIcon(context.getPackageManager()));
-            TextView textView = (TextView) rowView.findViewById(R.id.textDescriptionId);
-            textView.setText(item.loadLabel(context.getPackageManager()));
-            return rowView;
+            ListView lvMain = (ListView) view.findViewById(R.id.listView);
+
+            mAppList = getActivity().getPackageManager().getInstalledApplications(0);
+            adapter = new mAdapter(getActivity());
+            lvMain.setAdapter(adapter);
+            lvMain.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                    ApplicationInfo item = mAppList.get(position);
+                    task.setName(String.valueOf(item.loadLabel(getActivity().getPackageManager())));
+                    task.link = item.packageName;
+                    dismiss();
+                }
+            });
+
+            return view;
+        }
+
+        class mAdapter extends BaseAdapter {
+
+            private Context context;
+
+            public mAdapter(Context context){
+                this.context = context;
+            }
+
+            public int getCount() {
+                return mAppList.size();
+            }
+
+            public ApplicationInfo getItem(int position) {
+                return mAppList.get(position);
+            }
+
+            public long getItemId(int position) {
+                return position;
+            }
+
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+
+                View rowView = View.inflate(context, R.layout.list_item_element, null);
+
+                ApplicationInfo item = getItem(position);
+                ImageView imageView = (ImageView) rowView.findViewById(R.id.imageId);
+                imageView.setImageDrawable(item.loadIcon(context.getPackageManager()));
+                TextView textView = (TextView) rowView.findViewById(R.id.textDescriptionId);
+                textView.setText(item.loadLabel(context.getPackageManager()));
+                return rowView;
+            }
         }
     }
 }

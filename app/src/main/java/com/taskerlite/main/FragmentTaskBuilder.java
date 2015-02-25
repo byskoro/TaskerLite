@@ -39,10 +39,11 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
     private TaskerBuilderView taskerView;
     private Context context;
     private Scene scene;
-    private static int sceneIndex = 0;
+    private int sceneIndex = 0;
     private SceneList sceneList = com.taskerlite.main.mActivity.sceneList;
 
     private int iconSizeElement = TaskerIcons.builderSize;
+    private Bitmap pimpaIcon = TaskerIcons.getInstance().getPimpaIcon();
     DelElement gcElement;
 
     public static int screenWidth;
@@ -52,13 +53,24 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
     EditText nameScene;
     LinearLayout clearRequestLay;
 
+    private Paint textPaint, linePaint;
+
     public static FragmentTaskBuilder getInstance(int sceneIndex){
-        FragmentTaskBuilder.sceneIndex = sceneIndex;
-        return new FragmentTaskBuilder();
+
+        Bundle inSceneIndex = new Bundle();
+        inSceneIndex.putInt("index", sceneIndex);
+
+        FragmentTaskBuilder taskBuilder = new FragmentTaskBuilder();
+        taskBuilder.setArguments(inSceneIndex);
+
+        return taskBuilder;
     }
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        Bundle bundle = this.getArguments();
+        sceneIndex = bundle.getInt("index", 0);
 
 		View view = inflater.inflate(R.layout.fragment_task_builder, container, false);
         context = getActivity();
@@ -82,6 +94,16 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
         clearRequest(nameScene);
 
         gcElement = new DelElement(TaskerIcons.deleteSize);
+
+        textPaint = new Paint();
+        textPaint.setColor(Color.WHITE);
+        textPaint.setTextSize(getResources().getInteger(R.integer.builder_text_size));
+        textPaint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
+        textPaint.setTextAlign(Paint.Align.CENTER);
+
+        linePaint = new Paint();
+        linePaint.setTextAlign(Paint.Align.CENTER);
+        linePaint.setStrokeWidth(5);
 
 		return view;
 	}
@@ -214,7 +236,7 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
 
             }else if(findTouchedTask(xPointer, yPointer) != null) {
 
-                findTouchedTask(xPointer, yPointer).getTaskObject().show(context);
+                findTouchedTask(xPointer, yPointer).getTaskObject().show(getFragmentManager());
                 Vibro.playShort(context);
 
             } else if (findTouchedAction(xPointer, yPointer) != null){
@@ -300,18 +322,6 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
         public void onDrawView(Canvas canvas, MotionEvent event) {
 
             try{
-
-                Bitmap pimpaIcon = TaskerIcons.getInstance().getPimpaIcon();
-
-                Paint textPaint = new Paint();
-                textPaint.setColor(Color.WHITE);
-                textPaint.setTextSize(getResources().getInteger(R.integer.builder_text_size));
-                textPaint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
-                textPaint.setTextAlign(Paint.Align.CENTER);
-
-                Paint linePaint = new Paint();
-                linePaint.setTextAlign(Paint.Align.CENTER);
-                linePaint.setStrokeWidth(5);
 
                 // 1. Print action and task icons
                 for(ActionElement action : scene.getActionList()){

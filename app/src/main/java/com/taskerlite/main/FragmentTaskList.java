@@ -157,6 +157,7 @@ public class FragmentTaskList extends Fragment implements View.OnClickListener{
             TextView t = (TextView) convertView.findViewById(R.id.sceneNameID);
             t.setText(getItem(position).getName());
             LinearLayout iconsLay = (LinearLayout) convertView.findViewById(R.id.sceneIconsPlaceId);
+            iconsLay.removeAllViews();
 
             for(ActionElement action : getItem(position).getActionList()){
                 ImageView img = new ImageView(context);
