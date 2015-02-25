@@ -10,8 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.kyleduo.switchbutton.SwitchButton;
@@ -73,6 +75,9 @@ public class tMobileData extends mTask{
         private EditText nameInput;
         private Button saveBtn;
         private SwitchButton switchButton;
+        private LinearLayout clearRequestLay;
+
+        private String tmpTaskName;
 
         public void setParent (tMobileData task){
             this.task = task;
@@ -91,23 +96,27 @@ public class tMobileData extends mTask{
             switchButton.setChecked(task.state);
             nameInput = (EditText) view.findViewById(R.id.nameId);
             nameInput.setText(task.getName());
+            nameInput.setOnEditorActionListener(textWatcher);
+
+            clearRequestLay = (LinearLayout) view.findViewById(R.id.clearRequestLay);
+            clearRequest(nameInput);
 
             return view;
         }
 
-        TextView.OnEditorActionListener textWatcher_Entrance = new TextView.OnEditorActionListener() {
+        TextView.OnEditorActionListener textWatcher = new TextView.OnEditorActionListener() {
 
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
 
-                 try {
+                try {
 
-                    int data = Integer.parseInt(v.toString());
-                    clientMachine.setRegOnServer(29, data);
+                    tmpTaskName = String.valueOf(nameInput.getText());
 
-                } catch (Exception e) { }
+                }catch(Exception e){ }
 
-                clearFocus(v);
+                clearRequest(v);
+
                 return false;
             }
         };
@@ -118,8 +127,7 @@ public class tMobileData extends mTask{
 
                 try {
 
-                    String name = String.valueOf(nameInput.getText());
-                    task.setName(name);
+                    task.setName(tmpTaskName);
                     task.state = switchButton.isChecked();
 
                 }catch(Exception e){ }
@@ -127,5 +135,12 @@ public class tMobileData extends mTask{
                 dismiss();
             }
         };
+
+        private void clearRequest(TextView textView){
+
+            clearRequestLay.requestFocus();
+            InputMethodManager imm = (InputMethodManager)textView.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(textView.getApplicationWindowToken(), 0);
+        }
     }
 }
