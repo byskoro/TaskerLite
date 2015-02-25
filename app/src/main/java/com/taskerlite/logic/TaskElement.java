@@ -3,6 +3,7 @@ package com.taskerlite.logic;
 import android.graphics.Bitmap;
 import com.google.gson.GsonBuilder;
 import com.taskerlite.logic.tasks.mTask;
+import com.taskerlite.logic.tasks.tAccessPoint;
 import com.taskerlite.logic.tasks.tApp;
 import com.taskerlite.logic.tasks.tMobileData;
 import com.taskerlite.main.FragmentTaskBuilder;
@@ -41,6 +42,9 @@ public class TaskElement {
                     break;
                 case T_THREE_G:
                     taskObject = new GsonBuilder().create().fromJson(taskINStr, tMobileData.class);
+                    break;
+                case T_ACCESS_POINT:
+                    taskObject = new GsonBuilder().create().fromJson(taskINStr, tAccessPoint.class);
                     break;
                 default:
                     break;
