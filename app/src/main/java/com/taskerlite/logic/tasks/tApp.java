@@ -29,17 +29,33 @@ public class tApp extends mTask {
 	public void start(Context context) {
 
         try {
-
             Intent intent = context.getPackageManager().getLaunchIntentForPackage(packageName);
             context.startActivity(intent);
 
-            NotificationUtils.getInstance(context).createInfoNotification(getName());
+            String header = context.getResources().getString(R.string.t_app_short);
+            NotificationUtils.getInstance(context).createInfoNotification(header, getName());
 
         }catch (Exception e){ }
 	}
 
     @Override
     public void stop(Context context) {
+
+        /*
+        List<ApplicationInfo> packages;
+    PackageManager pm;
+    pm = getPackageManager();
+    //get a list of installed apps.
+    packages = pm.getInstalledApplications(0);
+
+    ActivityManager mActivityManager = (ActivityManager)context.getSystemService(Context.ACTIVITY_SERVICE);
+
+   for (ApplicationInfo packageInfo : packages) {
+        if((packageInfo.flags & ApplicationInfo.FLAG_SYSTEM)==1)continue;
+        if(packageInfo.packageName.equals("mypackage")) continue;
+        mActivityManager.killBackgroundProcesses(packageInfo.packageName);
+   }
+         */
 
     }
 

@@ -13,9 +13,11 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import com.kyleduo.switchbutton.SwitchButton;
 import com.taskerlite.R;
@@ -32,10 +34,9 @@ public class tAccessPoint extends mTask{
     public void start(Context context) {
 
         if(state){
-
             setAccessPointState(true, context);
-            NotificationUtils.getInstance(context).createInfoNotification(getName());
-
+            String header = context.getResources().getString(R.string.t_access_point_short);
+            NotificationUtils.getInstance(context).createInfoNotification(header, getName());
         }
         else
             stop(context);
@@ -104,6 +105,7 @@ public class tAccessPoint extends mTask{
             saveBtn.setOnClickListener(btnListener);
             switchButton = (SwitchButton) view.findViewById(R.id.switchBtnId);
             switchButton.setChecked(task.state);
+            switchButton.setOnCheckedChangeListener(swBtnListener);
             nameInput = (EditText) view.findViewById(R.id.nameId);
             nameInput.setText(task.getName());
             nameInput.setOnEditorActionListener(textWatcher);
@@ -125,6 +127,21 @@ public class tAccessPoint extends mTask{
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 clearRequest(v);
                 return false;
+            }
+        };
+
+        OnCheckedChangeListener swBtnListener = new OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                if(isChecked){
+                    ssidNameInput.setVisibility(View.VISIBLE);
+                    ssidPasswordInput.setVisibility(View.VISIBLE);
+                }else{
+                    ssidNameInput.setVisibility(View.GONE);
+                    ssidPasswordInput.setVisibility(View.GONE);
+                }
             }
         };
 

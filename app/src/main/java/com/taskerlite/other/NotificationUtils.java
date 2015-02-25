@@ -38,7 +38,7 @@ public class NotificationUtils {
         notifications = new HashMap<Integer, Notification>();
     }
 
-    public int createInfoNotification(String message) {
+    public int createInfoNotification(String header, String message) {
         //Intent notificationIntent = new Intent(context, HomeActivity.class); // по клику на уведомлении откроется HomeActivity
         NotificationCompat.Builder nb = new NotificationCompat.Builder(context)
         //NotificationCompat.Builder nb = new NotificationBuilder(context) //для версии Android > 3.0
@@ -48,7 +48,7 @@ public class NotificationUtils {
                 .setContentText(message) // Основной текст уведомления
                 //.setContentIntent(PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_CANCEL_CURRENT))
                 .setWhen(System.currentTimeMillis()) //отображаемое время уведомления
-                .setContentTitle(context.getResources().getString(R.string.app_name)) //заголовок уведомления
+                .setContentTitle(header) //заголовок уведомления
                 .setDefaults(Notification.DEFAULT_VIBRATE);
 
         Notification notification = nb.getNotification(); //генерируем уведомление

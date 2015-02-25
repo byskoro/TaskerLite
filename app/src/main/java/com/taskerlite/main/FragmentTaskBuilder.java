@@ -45,9 +45,6 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
     private Bitmap pimpaIcon = TaskerIcons.getInstance().getPimpaIcon();
     DelElement gcElement;
 
-    public static int screenWidth;
-    public static int screenHeight;
-
     ImageButton backBtn, clearBtn, actionElement, taskElement;
     EditText nameScene;
     LinearLayout clearRequestLay;
@@ -106,6 +103,13 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
 
 		return view;
 	}
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        handlerLogic.sendEmptyMessageDelayed(1, 50);
+    }
 
     @Override
     public void onPause() {
@@ -192,6 +196,8 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
 
     TaskerBuilderView.ViewCallBack viewCallBack = new TaskerBuilderView.ViewCallBack(){
 
+        private int screenWidth, screenHeight;
+
         @Override
         public void fingerUp() {
 
@@ -207,8 +213,6 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
 
             screenWidth  = w;
             screenHeight = h;
-
-            handlerLogic.sendEmptyMessageDelayed(1, 50);
         }
 
         @Override
@@ -306,12 +310,12 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
             if( taskElement != null &&  actionMoving == false){
 
                 taskElement.setMoving();
-                taskElement.setNewCoordinate(xPointer, yPointer);
+                taskElement.setNewCoordinate(xPointer, yPointer, screenWidth, screenHeight);
 
             } else if( actionElement != null &&  taskMoving == false) {
 
                 actionElement.setMoving();
-                actionElement.setNewCoordinate(xPointer, yPointer);
+                actionElement.setNewCoordinate(xPointer, yPointer, screenWidth, screenHeight);
             }
 
             unselectAll();

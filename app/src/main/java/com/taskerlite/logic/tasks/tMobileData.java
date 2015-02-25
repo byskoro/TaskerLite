@@ -30,10 +30,9 @@ public class tMobileData extends mTask{
     public void start(Context context) {
 
         if(state){
-
             set3GEnable(true, context);
-            NotificationUtils.getInstance(context).createInfoNotification(getName());
-
+            String header = context.getResources().getString(R.string.t_mobile_internet_short);
+            NotificationUtils.getInstance(context).createInfoNotification(header, getName());
         }
         else
             stop(context);

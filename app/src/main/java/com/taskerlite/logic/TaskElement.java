@@ -69,17 +69,17 @@ public class TaskElement {
             return false;
     }
 
-    public void setNewCoordinate(int xPointer, int yPointer){
+    public void setNewCoordinate(int xPointer, int yPointer, int width, int height){
 
         if(yPointer < TaskerIcons.builderSize /2)
             yPointer = TaskerIcons.builderSize /2;
-        else if(yPointer > FragmentTaskBuilder.screenHeight  - TaskerIcons.builderSize /2)
-            yPointer = FragmentTaskBuilder.screenHeight - TaskerIcons.builderSize /2;
+        else if(yPointer > height  - TaskerIcons.builderSize /2)
+            yPointer = height - TaskerIcons.builderSize /2;
 
         if(xPointer < TaskerIcons.builderSize /2)
             xPointer = TaskerIcons.builderSize /2;
-        else if(xPointer > FragmentTaskBuilder.screenWidth - TaskerIcons.builderSize /2)
-            xPointer = FragmentTaskBuilder.screenWidth - TaskerIcons.builderSize /2;
+        else if(xPointer > width - TaskerIcons.builderSize /2)
+            xPointer = width - TaskerIcons.builderSize /2;
 
         x = xPointer - TaskerIcons.builderSize /2;
         y = yPointer - TaskerIcons.builderSize /2;
