@@ -6,6 +6,8 @@ import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.support.v4.app.FragmentManager;
 
+import com.taskerlite.other.NotificationUtils;
+
 import java.lang.reflect.Method;
 
 public class tAccessPoint extends mTask{
@@ -13,14 +15,21 @@ public class tAccessPoint extends mTask{
     private String ssidName = "test";
     private String password = "test";
 
+    public tAccessPoint(){
+        setName("Access point");
+    }
+
     @Override
     public void start(Context context) {
 
+        setAPenabled(true, context);
+        NotificationUtils.getInstance(context).createInfoNotification(getName());
     }
 
     @Override
     public void stop(Context context) {
 
+        setAPenabled(false, context);
     }
 
     @Override
