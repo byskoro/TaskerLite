@@ -77,8 +77,6 @@ public class tMobileData extends mTask{
         private SwitchButton switchButton;
         private LinearLayout clearRequestLay;
 
-        private String tmpTaskName;
-
         public void setParent (tMobileData task){
             this.task = task;
         }
@@ -107,15 +105,7 @@ public class tMobileData extends mTask{
         TextView.OnEditorActionListener textWatcher = new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-
-                try {
-
-                    tmpTaskName = String.valueOf(nameInput.getText());
-
-                }catch(Exception e){ }
-
                 clearRequest(v);
-
                 return false;
             }
         };
@@ -123,20 +113,15 @@ public class tMobileData extends mTask{
         View.OnClickListener btnListener =  new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 try {
-
-                    task.setName(tmpTaskName);
+                    task.setName(String.valueOf(nameInput.getText()));
                     task.state = switchButton.isChecked();
-
                 }catch(Exception e){ }
-
                 dismiss();
             }
         };
 
         private void clearRequest(TextView textView){
-
             clearRequestLay.requestFocus();
             InputMethodManager imm = (InputMethodManager)textView.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(textView.getApplicationWindowToken(), 0);

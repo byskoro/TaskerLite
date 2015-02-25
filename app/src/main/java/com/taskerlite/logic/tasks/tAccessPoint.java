@@ -6,12 +6,16 @@ import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.kyleduo.switchbutton.SwitchButton;
 import com.taskerlite.R;
@@ -83,6 +87,7 @@ public class tAccessPoint extends mTask{
         private EditText nameInput, ssidNameInput, ssidPasswordInput;
         private Button saveBtn;
         private SwitchButton switchButton;
+        private LinearLayout clearRequestLay;
 
         public void setParent (tAccessPoint task){
             this.task = task;
@@ -101,29 +106,45 @@ public class tAccessPoint extends mTask{
             switchButton.setChecked(task.state);
             nameInput = (EditText) view.findViewById(R.id.nameId);
             nameInput.setText(task.getName());
+            nameInput.setOnEditorActionListener(textWatcher);
             ssidNameInput = (EditText) view.findViewById(R.id.ssidNameId);
             ssidNameInput.setText(task.ssidName);
+            ssidNameInput.setOnEditorActionListener(textWatcher);
             ssidPasswordInput = (EditText) view.findViewById(R.id.ssidPasswordId);
             ssidPasswordInput.setText(task.ssidPassword);
+            ssidPasswordInput.setOnEditorActionListener(textWatcher);
+
+            clearRequestLay = (LinearLayout) view.findViewById(R.id.clearRequestLay);
+            clearRequest(nameInput);
 
             return view;
         }
 
+        TextView.OnEditorActionListener textWatcher = new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                clearRequest(v);
+                return false;
+            }
+        };
+
         View.OnClickListener btnListener =  new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 try {
-
                     task.setName(String.valueOf(nameInput.getText()));
-                    task.state = switchButton.isChecked();
                     task.ssidName = String.valueOf(ssidNameInput.getText());
                     task.ssidPassword = String.valueOf(ssidPasswordInput.getText());
-
+                    task.state = switchButton.isChecked();
                 }catch(Exception e){ }
-
                 dismiss();
             }
         };
+
+        private void clearRequest(TextView textView){
+            clearRequestLay.requestFocus();
+            InputMethodManager imm = (InputMethodManager)textView.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(textView.getApplicationWindowToken(), 0);
+        }
     }
 }
