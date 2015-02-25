@@ -20,8 +20,8 @@ import java.lang.reflect.Method;
 
 public class tAccessPoint extends mTask{
 
-    private String ssidName = "test";
-    private String password = "1234567890";
+    private String ssidName = "";
+    private String ssidPassword = "";
     private boolean state = true;
 
     @Override
@@ -57,7 +57,7 @@ public class tAccessPoint extends mTask{
 
             WifiConfiguration localWifiConfiguration = new WifiConfiguration();
             localWifiConfiguration.SSID = ssidName;
-            localWifiConfiguration.preSharedKey = password;
+            localWifiConfiguration.preSharedKey = ssidPassword;
             localWifiConfiguration.allowedAuthAlgorithms.set(0);
             localWifiConfiguration.status = 2;
             localWifiConfiguration.allowedKeyManagement.set(1);
@@ -80,7 +80,7 @@ public class tAccessPoint extends mTask{
     public static class UI extends DialogFragment {
 
         private tAccessPoint task;
-        private EditText nameInput;
+        private EditText nameInput, ssidNameInput, ssidPasswordInput;
         private Button saveBtn;
         private SwitchButton switchButton;
 
@@ -101,6 +101,10 @@ public class tAccessPoint extends mTask{
             switchButton.setChecked(task.state);
             nameInput = (EditText) view.findViewById(R.id.nameId);
             nameInput.setText(task.getName());
+            ssidNameInput = (EditText) view.findViewById(R.id.ssidNameId);
+            ssidNameInput.setText(task.ssidName);
+            ssidPasswordInput = (EditText) view.findViewById(R.id.ssidPasswordId);
+            ssidPasswordInput.setText(task.ssidPassword);
 
             return view;
         }
@@ -111,9 +115,10 @@ public class tAccessPoint extends mTask{
 
                 try {
 
-                    String name = String.valueOf(nameInput.getText());
-                    task.setName(name);
+                    task.setName(String.valueOf(nameInput.getText()));
                     task.state = switchButton.isChecked();
+                    task.ssidName = String.valueOf(ssidNameInput.getText());
+                    task.ssidPassword = String.valueOf(ssidPasswordInput.getText());
 
                 }catch(Exception e){ }
 

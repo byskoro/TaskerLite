@@ -2,11 +2,17 @@
 <resources>
 
     <string name="app_name">Tasker Lite</string>
+
+    <string name="task_name">Task name</string>
+    <string name="action_name">Action name</string>
+
     <string name="boolean_state">State</string>
+    <string name="ap_ssid_name">Network name</string>
+    <string name="ap_ssid_password">Network password</string>
 
     <string name="t_app_short">Application</string>
     <string name="t_access_point_short">Access point</string>
-    <string name="t_mobile_internet_short">Mobile 3G/GPRS Internet</string>
+    <string name="t_mobile_internet_short">Mobile internet 3G/GPRS</string>
 
     <string name="a_time_short">Time action</string>
 

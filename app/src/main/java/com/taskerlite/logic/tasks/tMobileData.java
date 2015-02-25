@@ -5,12 +5,14 @@ import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.kyleduo.switchbutton.SwitchButton;
 import com.taskerlite.R;
@@ -92,6 +94,23 @@ public class tMobileData extends mTask{
 
             return view;
         }
+
+        TextView.OnEditorActionListener textWatcher_Entrance = new TextView.OnEditorActionListener() {
+
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+
+                 try {
+
+                    int data = Integer.parseInt(v.toString());
+                    clientMachine.setRegOnServer(29, data);
+
+                } catch (Exception e) { }
+
+                clearFocus(v);
+                return false;
+            }
+        };
 
         View.OnClickListener btnListener =  new View.OnClickListener() {
             @Override
