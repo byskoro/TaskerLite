@@ -1,14 +1,8 @@
 package com.taskerlite.logic.tasks;
 
-import android.app.Activity;
-import android.app.Dialog;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
-import android.content.pm.ResolveInfo;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
@@ -28,25 +22,30 @@ import java.util.List;
 
 public class tApp extends mTask {
 
-    private String link = "";
+    private String packageName = "";
 
 	@Override
 	public void start(Context context) {
 
         try {
 
-            Intent intent = context.getPackageManager().getLaunchIntentForPackage(link);
+            Intent intent = context.getPackageManager().getLaunchIntentForPackage(packageName);
             context.startActivity(intent);
 
         }catch (Exception e){ }
 	}
 
     @Override
+    public void stop(Context context) {
+
+    }
+
+    @Override
     public void show(FragmentManager fm) {
 
         UI ui = new UI();
         ui.setParent(this);
-        ui.show(fm.beginTransaction(), "actionList");
+        ui.show(fm.beginTransaction(), "T_APP");
     }
 
     public static class UI extends DialogFragment{
@@ -81,7 +80,7 @@ public class tApp extends mTask {
 
                 ApplicationInfo item = mAppList.get(position);
                 task.setName(String.valueOf(item.loadLabel(getActivity().getPackageManager())));
-                task.link = item.packageName;
+                task.packageName = item.packageName;
                 dismiss();
             }
         };
