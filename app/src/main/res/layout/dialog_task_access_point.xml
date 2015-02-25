@@ -124,5 +124,4 @@
         android:focusable="true"
         android:focusableInTouchMode="true"
         android:orientation="vertical" />
-
 </LinearLayout>
