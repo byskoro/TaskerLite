@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import com.google.gson.GsonBuilder;
 import com.taskerlite.logic.tasks.mTask;
 import com.taskerlite.logic.tasks.tApp;
+import com.taskerlite.logic.tasks.tMobileData;
 import com.taskerlite.main.FragmentTaskBuilder;
 import com.taskerlite.main.TaskerIcons;
 import com.taskerlite.main.TaskerTypes.*;
@@ -37,6 +38,9 @@ public class TaskElement {
             switch (taskType) {
                 case T_APP:
                     taskObject = new GsonBuilder().create().fromJson(taskINStr, tApp.class);
+                    break;
+                case T_THREE_G:
+                    taskObject = new GsonBuilder().create().fromJson(taskINStr, tMobileData.class);
                     break;
                 default:
                     break;

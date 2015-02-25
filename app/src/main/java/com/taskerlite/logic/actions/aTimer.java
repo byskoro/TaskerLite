@@ -61,7 +61,6 @@ public class aTimer extends mAction {
         ui.show(fm.beginTransaction(), "A_TIME");
     }
 
-
     public static class UI extends DialogFragment {
 
         private aTimer action;

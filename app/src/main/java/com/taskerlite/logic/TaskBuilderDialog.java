@@ -1,4 +1,4 @@
-package com.taskerlite.dialogs;
+package com.taskerlite.logic;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.taskerlite.R;
 import com.taskerlite.logic.SceneList.Scene;
 import com.taskerlite.logic.tasks.tApp;
+import com.taskerlite.logic.tasks.tMobileData;
 import com.taskerlite.main.FragmentTaskBuilder;
 import com.taskerlite.main.TaskerTypes.TYPES;
 
@@ -56,7 +57,7 @@ public class TaskBuilderDialog extends DialogFragment {
                         //scene.addNewTask(new tAccessPoint(), TYPES.T_ACCESS_POINT, 0, 0);
                         break;
                     case 2:
-                        //scene.addNewTask(new t3G(), TYPES.T_THREE_G, 0, 0);
+                        scene.addNewTask(new tMobileData(), TYPES.T_THREE_G, 0, 0);
                         break;
                     case 3:
                         //scene.addNewTask(new tWIFI(), TYPES.T_WIFI, 0, 0);

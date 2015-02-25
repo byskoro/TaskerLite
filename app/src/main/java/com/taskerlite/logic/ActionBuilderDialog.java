@@ -1,4 +1,4 @@
-package com.taskerlite.dialogs;
+package com.taskerlite.logic;
 
 import android.content.Context;
 import android.content.res.TypedArray;
