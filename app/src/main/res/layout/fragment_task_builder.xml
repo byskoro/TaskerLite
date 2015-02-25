@@ -57,7 +57,7 @@
         android:paddingRight="10dp"
         android:background="@drawable/probka5">
 
-        <com.taskerlite.TaskerBuilderView
+        <com.taskerlite.main.TaskerBuilderView
             android:id="@+id/drawBuilder"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

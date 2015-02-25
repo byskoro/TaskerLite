@@ -1,7 +1,6 @@
 package com.taskerlite.main;
 
 import com.taskerlite.R;
-import com.taskerlite.TaskerBuilderView;
 import com.taskerlite.dialogs.ActionBuilderDialog;
 import com.taskerlite.dialogs.TaskBuilderDialog;
 import com.taskerlite.logic.ActionElement;

@@ -1,4 +1,4 @@
-package com.taskerlite;
+package com.taskerlite.main;
 
 import android.content.Context;
 import android.graphics.Canvas;

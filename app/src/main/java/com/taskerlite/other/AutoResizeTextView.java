@@ -1,4 +1,4 @@
-package com.taskerlite;
+package com.taskerlite.other;
 
 import android.annotation.TargetApi;
 import android.content.Context;

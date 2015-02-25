@@ -17,6 +17,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.taskerlite.R;
+import com.taskerlite.main.TaskerIcons;
+import com.taskerlite.main.TaskerTypes;
+import com.taskerlite.other.NotificationUtils;
+import com.taskerlite.main.TaskerTypes.*;
 
 import java.util.List;
 
@@ -31,6 +35,8 @@ public class tApp extends mTask {
 
             Intent intent = context.getPackageManager().getLaunchIntentForPackage(packageName);
             context.startActivity(intent);
+
+            NotificationUtils.getInstance(context).createInfoNotification(getName());
 
         }catch (Exception e){ }
 	}

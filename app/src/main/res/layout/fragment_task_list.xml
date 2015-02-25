@@ -23,7 +23,7 @@
             android:src="@drawable/spinner4"
             android:background="@null"/>
 
-        <com.taskerlite.AutoResizeTextView
+        <com.taskerlite.other.AutoResizeTextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.6"
@@ -65,7 +65,7 @@
             android:gravity="center"
             android:orientation="horizontal">
 
-            <com.taskerlite.AutoResizeTextView
+            <com.taskerlite.other.AutoResizeTextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.5"
@@ -76,7 +76,7 @@
                 android:textColor="#ffffff"
                 android:textSize="500sp" />
 
-            <com.taskerlite.AutoResizeTextView
+            <com.taskerlite.other.AutoResizeTextView
                 android:id="@+id/taskName"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
