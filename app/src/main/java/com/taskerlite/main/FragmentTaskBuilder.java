@@ -2,10 +2,10 @@ package com.taskerlite.main;
 
 import com.taskerlite.R;
 import com.taskerlite.logic.ActionBuilderDialog;
+import com.taskerlite.logic.SceneListController;
 import com.taskerlite.logic.TaskBuilderDialog;
 import com.taskerlite.logic.ActionElement;
-import com.taskerlite.logic.SceneList;
-import com.taskerlite.logic.SceneList.*;
+import com.taskerlite.logic.SceneListController.*;
 import com.taskerlite.logic.TaskElement;
 import com.taskerlite.other.Flash;
 import com.taskerlite.other.Vibro;
@@ -39,7 +39,7 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
     private Context context;
     private Scene scene;
     private int sceneIndex = 0;
-    private SceneList sceneList = com.taskerlite.main.mActivity.sceneList;
+    private SceneListController sceneList = com.taskerlite.main.mActivity.sceneList;
 
     private int iconSizeElement = TaskerIcons.builderSize;
     private Bitmap pimpaIcon = TaskerIcons.getInstance().getPimpaIcon();

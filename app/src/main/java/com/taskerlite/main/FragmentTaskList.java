@@ -7,8 +7,8 @@ import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.baoyz.swipemenulistview.SwipeMenuListView.OnMenuItemClickListener;
 import com.taskerlite.R;
 import com.taskerlite.logic.ActionElement;
-import com.taskerlite.logic.SceneList;
-import com.taskerlite.logic.SceneList.*;
+import com.taskerlite.logic.SceneListController;
+import com.taskerlite.logic.SceneListController.*;
 import com.taskerlite.logic.TaskElement;
 import com.taskerlite.other.Screen;
 
@@ -30,7 +30,7 @@ import android.widget.TextView;
 
 public class FragmentTaskList extends Fragment implements View.OnClickListener{
 
-    SceneList sceneList = com.taskerlite.main.mActivity.sceneList;
+    SceneListController sceneList = com.taskerlite.main.mActivity.sceneList;
 
     LayoutInflater inflater;
     Activity activity;

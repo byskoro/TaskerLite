@@ -5,12 +5,12 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
 import com.taskerlite.R;
+import com.taskerlite.logic.SceneListController;
 import com.taskerlite.other.Flash;
-import com.taskerlite.logic.SceneList;
 
 public class mActivity extends FragmentActivity {
 
-    public static SceneList sceneList;
+    public static SceneListController sceneList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

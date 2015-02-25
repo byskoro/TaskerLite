@@ -2,9 +2,16 @@
 <resources>
 
     <string name="app_name">Tasker Lite</string>
-    <string name="newTask">New task</string>
+    <string name="boolean_state">State</string>
 
-    <string-array name="actionsDescribeList">
+    <string name="t_app_short">Application</string>
+    <string name="t_access_point_short">Access point</string>
+    <string name="t_mobile_internet_short">Mobile 3G/GPRS Internet</string>
+
+    <string name="a_time_short">Time action</string>
+
+    <!-- Description of action list  -->
+    <string-array name="actionsList">
         <item>Trigger by time</item>
     </string-array>
 
@@ -12,11 +19,12 @@
         <item>@drawable/a_timer</item>
     </string-array>
 
-    <string-array name="tasksDescribeList">
-        <item>Run any application</item>
-        <item>Run access point</item>
-        <item>Run 3G mobile data</item>
-        <item>Run WIFI</item>
+    <!-- Description of task list  -->
+    <string-array name="tasksList">
+        <item>Turn on/off any application</item>
+        <item>Turn on/off wifi access point</item>
+        <item>Turn on/off mobile internet</item>
+        <item>Turn on/off WIFI</item>
     </string-array>
 
     <string-array name="tasksIcons">

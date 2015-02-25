@@ -10,7 +10,7 @@ import com.taskerlite.main.TaskerTypes.*;
 
 import java.util.ArrayList;
 
-public class SceneList {
+public class SceneListController {
 	
 	private ArrayList<Scene> sceneList = new ArrayList<Scene>();
 	

@@ -11,11 +11,6 @@
 
     <TextView
         style="@style/logo_text"
-        android:text="@string/t_app_short"/>
-
-    <ListView
-        android:id="@+id/listView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:text="@string/t_access_point_short"/>
 
 </LinearLayout>

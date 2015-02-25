@@ -13,7 +13,7 @@
         android:layout_height="@dimen/scene_item_height">
 
         <com.kyleduo.switchbutton.SwitchButton
-            android:id="@+id/sb_enable"
+            android:id="@+id/switchBtnId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -31,7 +31,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_toRightOf="@+id/sb_enable"
+            android:layout_toRightOf="@+id/switchBtnId"
             android:layout_toLeftOf="@+id/imageView1"
             android:layout_marginLeft="10dp"
             android:orientation="vertical">

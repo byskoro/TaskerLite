@@ -15,7 +15,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.taskerlite.R;
-import com.taskerlite.logic.SceneList.*;
+import com.taskerlite.logic.SceneListController.*;
 import com.taskerlite.logic.actions.aTimer;
 import com.taskerlite.main.FragmentTaskBuilder;
 import com.taskerlite.main.TaskerTypes.*;
@@ -40,7 +40,7 @@ public class ActionBuilderDialog extends DialogFragment {
 
         lvMain = (ListView) view.findViewById(R.id.listview);
 
-        actionsDescription = getResources().getStringArray(R.array.actionsDescribeList);
+        actionsDescription = getResources().getStringArray(R.array.actionsList);
 
         adapter = new RoomArrayAdapter(getActivity(), actionsDescription);
         lvMain.setAdapter(adapter);
