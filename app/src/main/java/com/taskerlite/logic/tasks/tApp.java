@@ -63,26 +63,28 @@ public class tApp extends mTask {
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
             getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
-            View view = inflater.inflate(R.layout.dialog_task_app, container);
 
+            View view = inflater.inflate(R.layout.dialog_task_app, container);
             ListView lvMain = (ListView) view.findViewById(R.id.listView);
 
             mAppList = getActivity().getPackageManager().getInstalledApplications(0);
             adapter = new mAdapter(getActivity());
             lvMain.setAdapter(adapter);
-            lvMain.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                    ApplicationInfo item = mAppList.get(position);
-                    task.setName(String.valueOf(item.loadLabel(getActivity().getPackageManager())));
-                    task.link = item.packageName;
-                    dismiss();
-                }
-            });
+            lvMain.setOnItemClickListener(listListener);
 
             return view;
         }
+
+        AdapterView.OnItemClickListener listListener = new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                ApplicationInfo item = mAppList.get(position);
+                task.setName(String.valueOf(item.loadLabel(getActivity().getPackageManager())));
+                task.link = item.packageName;
+                dismiss();
+            }
+        };
 
         class mAdapter extends BaseAdapter {
 
