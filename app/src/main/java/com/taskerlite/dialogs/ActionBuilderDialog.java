@@ -48,7 +48,7 @@ public class ActionBuilderDialog extends DialogFragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                scene.addNewAction(new aTimer(18, 47), TYPES.A_TIME, 0, 0);
+                scene.addNewAction(new aTimer(), TYPES.A_TIME, 0, 0);
                 dismiss();
             }
         });

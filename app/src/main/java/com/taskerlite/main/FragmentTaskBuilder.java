@@ -240,7 +240,7 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
 
             } else if (findTouchedAction(xPointer, yPointer) != null){
 
-                findTouchedAction(xPointer, yPointer).getActionObject().show(context);
+                findTouchedAction(xPointer, yPointer).getActionObject().show(getFragmentManager());
                 Vibro.playShort(context);
             }
 
