@@ -6,6 +6,7 @@ import com.taskerlite.logic.tasks.mTask;
 import com.taskerlite.logic.tasks.tAccessPoint;
 import com.taskerlite.logic.tasks.tApp;
 import com.taskerlite.logic.tasks.tMobileData;
+import com.taskerlite.logic.tasks.tUnlockScreen;
 import com.taskerlite.main.FragmentTaskBuilder;
 import com.taskerlite.main.TaskerIcons;
 import com.taskerlite.main.TaskerTypes.*;
@@ -45,6 +46,9 @@ public class TaskElement {
                     break;
                 case T_ACCESS_POINT:
                     taskObject = new GsonBuilder().create().fromJson(taskINStr, tAccessPoint.class);
+                    break;
+                case T_UNLOCK_SCREEN:
+                    taskObject = new GsonBuilder().create().fromJson(taskINStr, tUnlockScreen.class);
                     break;
                 default:
                     break;

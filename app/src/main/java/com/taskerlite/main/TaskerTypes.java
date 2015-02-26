@@ -1,11 +1,8 @@
 package com.taskerlite.main;
 
-
-import android.graphics.Color;
-
 public class TaskerTypes {
 
-    public static enum TYPES {A_TIME, T_APP, T_THREE_G, T_WIFI, T_ACCESS_POINT}
+    public static enum TYPES {A_TIME, T_APP, T_THREE_G, T_WIFI, T_ACCESS_POINT, T_UNLOCK_SCREEN}
 
     private static int[] mColors = new int[] {
             0xFFFFFFCC,

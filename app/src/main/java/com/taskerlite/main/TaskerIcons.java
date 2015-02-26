@@ -61,6 +61,7 @@ public class TaskerIcons {
         generate(TYPES.T_THREE_G, R.drawable.t_three_g);
         generate(TYPES.T_WIFI, R.drawable.t_wifi);
         generate(TYPES.T_ACCESS_POINT, R.drawable.t_access_point);
+        generate(TYPES.T_UNLOCK_SCREEN, R.drawable.t_unlock_screen);
     }
 
     private void generatePimpa(){

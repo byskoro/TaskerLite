@@ -19,6 +19,7 @@ import com.taskerlite.logic.SceneListController.Scene;
 import com.taskerlite.logic.tasks.tAccessPoint;
 import com.taskerlite.logic.tasks.tApp;
 import com.taskerlite.logic.tasks.tMobileData;
+import com.taskerlite.logic.tasks.tUnlockScreen;
 import com.taskerlite.main.FragmentTaskBuilder;
 import com.taskerlite.main.TaskerTypes.TYPES;
 
@@ -62,6 +63,9 @@ public class TaskBuilderDialog extends DialogFragment {
                         break;
                     case 3:
                         //scene.addNewTask(new tWIFI(), TYPES.T_WIFI, 0, 0);
+                        break;
+                    case 4:
+                        scene.addNewTask(new tUnlockScreen(getActivity()), TYPES.T_UNLOCK_SCREEN, 0, 0);
                         break;
                 }
 

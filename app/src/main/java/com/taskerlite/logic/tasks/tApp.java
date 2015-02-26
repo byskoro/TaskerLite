@@ -1,15 +1,19 @@
 package com.taskerlite.logic.tasks;
 
+import android.app.Activity;
+import android.app.KeyguardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.os.Bundle;
+import android.os.PowerManager;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
@@ -29,6 +33,7 @@ public class tApp extends mTask {
 	public void start(Context context) {
 
         try {
+
             Intent intent = context.getPackageManager().getLaunchIntentForPackage(packageName);
             context.startActivity(intent);
 

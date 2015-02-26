@@ -13,6 +13,7 @@
     <string name="t_app_short">Application</string>
     <string name="t_access_point_short">Access point</string>
     <string name="t_mobile_internet_short">Mobile internet 3G/GPRS</string>
+    <string name="t_unlock_screen_short">Unlock screen</string>
 
     <string name="a_time_short">Time action</string>
 
@@ -31,6 +32,7 @@
         <item>Turn on/off wifi access point</item>
         <item>Turn on/off mobile internet</item>
         <item>Turn on/off WIFI</item>
+        <item>Unlock screen</item>
     </string-array>
 
     <string-array name="tasksIcons">
@@ -38,6 +40,7 @@
         <item>@drawable/t_access_point</item>
         <item>@drawable/t_three_g</item>
         <item>@drawable/t_wifi</item>
+        <item>@drawable/t_unlock_screen</item>
     </string-array>
 
 </resources>
