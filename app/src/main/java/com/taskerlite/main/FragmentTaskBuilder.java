@@ -10,6 +10,7 @@ import com.taskerlite.logic.TaskElement;
 import com.taskerlite.other.Flash;
 import com.taskerlite.other.Vibro;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -35,11 +36,17 @@ import java.util.ArrayList;
 
 public class FragmentTaskBuilder extends Fragment implements View.OnClickListener, TextView.OnEditorActionListener {
 
+    private DataActivity dataActivity;
+
+    public interface DataActivity {
+        public ProfilesController taskBuilderAskProfileController();
+    }
+
     private TaskerBuilderView taskerView;
     private Context context;
     private Profile profile;
     private int sceneIndex = 0;
-    private ProfilesController profileList = com.taskerlite.main.mActivity.profileList;
+    private ProfilesController profilesController;
 
     private int iconSizeElement = TaskerIcons.builderSize;
     private Bitmap pimpaIcon = TaskerIcons.getInstance().getPimpaIcon();
@@ -61,17 +68,25 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
 
         return taskBuilder;
     }
-	
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        dataActivity = (DataActivity) activity;
+        profilesController = dataActivity.taskBuilderAskProfileController();
 
         Bundle bundle = this.getArguments();
         sceneIndex = bundle.getInt("index", 0);
 
+        profile = profilesController.getProfile(sceneIndex);
+    }
+
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
 		View view = inflater.inflate(R.layout.fragment_task_builder, container, false);
         context = getActivity();
-
-        profile = com.taskerlite.main.mActivity.profileList.getProfile(sceneIndex);
 
 		taskerView = (TaskerBuilderView) view.findViewById(R.id.drawBuilder);
         taskerView.setViewCallBack(viewCallBack);
@@ -134,7 +149,7 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
 
                 profile.invalidateData();
 
-                Flash.saveList(profileList);
+                Flash.saveList(profilesController);
                 getFragmentManager().beginTransaction().
                 setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right).
                 replace(R.id.fragmentConteiner, new FragmentTaskList()).
@@ -142,8 +157,8 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
                 commit();
                 break;
             case R.id.clearBtn:
-                profileList.removeAllElementFromProfile(sceneIndex);
-                Flash.saveList(profileList);
+                profilesController.removeAllElementFromProfile(sceneIndex);
+                Flash.saveList(profilesController);
                 break;
             case R.id.actionElementID:
                 ActionBuilderDialog actionDialog = new ActionBuilderDialog();

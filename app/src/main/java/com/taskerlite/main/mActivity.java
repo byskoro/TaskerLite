@@ -8,9 +8,9 @@ import com.taskerlite.R;
 import com.taskerlite.logic.ProfilesController;
 import com.taskerlite.other.Flash;
 
-public class mActivity extends FragmentActivity {
+public class mActivity extends FragmentActivity implements FragmentTaskBuilder.DataActivity, FragmentTaskList.DataActivity{
 
-    public static ProfilesController profileList;
+    private ProfilesController profilesController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +19,7 @@ public class mActivity extends FragmentActivity {
 
         TaskerIcons.getInstance(this);
 
-        profileList = Flash.getProfileList();
+        profilesController = Flash.getProfileList();
 
         getSupportFragmentManager().beginTransaction().
         add(R.id.fragmentConteiner, new FragmentTaskList()).
@@ -44,5 +44,15 @@ public class mActivity extends FragmentActivity {
             addToBackStack(null).
             commit();
         }
+    }
+
+    @Override
+    public ProfilesController taskBuilderAskProfileController() {
+        return profilesController;
+    }
+
+    @Override
+    public ProfilesController taskListAskProfileList() {
+        return profilesController;
     }
 }

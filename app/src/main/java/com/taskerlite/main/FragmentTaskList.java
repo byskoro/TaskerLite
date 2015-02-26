@@ -30,7 +30,13 @@ import android.widget.TextView;
 
 public class FragmentTaskList extends Fragment implements View.OnClickListener{
 
-    ProfilesController sceneList = com.taskerlite.main.mActivity.profileList;
+    private DataActivity dataActivity;
+
+    public interface DataActivity {
+        public ProfilesController taskListAskProfileList();
+    }
+
+    ProfilesController profilesController;
 
     LayoutInflater inflater;
     Activity activity;
@@ -40,6 +46,14 @@ public class FragmentTaskList extends Fragment implements View.OnClickListener{
     SwipeMenuListView mListView;
 
     ImageButton buttonPlus;
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        dataActivity = (DataActivity) activity;
+        profilesController = dataActivity.taskListAskProfileList();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -103,17 +117,17 @@ public class FragmentTaskList extends Fragment implements View.OnClickListener{
 
             switch (index) {
                 case 0:
-                    for(TaskElement task :sceneList.getProfile(position).getTaskList()){
+                    for(TaskElement task : profilesController.getProfile(position).getTaskList()){
                         task.getTaskObject().start(context);
                     }
                     break;
                 case 1:
-                    for(TaskElement task :sceneList.getProfile(position).getTaskList()){
+                    for(TaskElement task : profilesController.getProfile(position).getTaskList()){
                         task.getTaskObject().stop(context);
                     }
                     break;
                 case 2:
-                    sceneList.removeProfileFromList(position);
+                    profilesController.removeProfileFromList(position);
                     mAdapter.notifyDataSetChanged();
 
                     break;
@@ -125,8 +139,8 @@ public class FragmentTaskList extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View view) {
 
-        sceneList.addNewProfile("");
-        goToBuilderFragment(sceneList.getProfileListSize() - 1);
+        profilesController.addNewProfile("");
+        goToBuilderFragment(profilesController.getProfileListSize() - 1);
     }
 
     private void goToBuilderFragment(int index){
@@ -141,11 +155,11 @@ public class FragmentTaskList extends Fragment implements View.OnClickListener{
     class AppAdapter extends BaseAdapter {
 
         public int getCount() {
-            return sceneList.getProfileListSize();
+            return profilesController.getProfileListSize();
         }
 
         public Profile getItem(int position) {
-            return sceneList.getProfile(position);
+            return profilesController.getProfile(position);
         }
 
         public long getItemId(int position) {

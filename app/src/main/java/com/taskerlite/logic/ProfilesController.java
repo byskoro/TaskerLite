@@ -21,7 +21,7 @@ public class ProfilesController {
 
 		profileList.remove(index);
         profileList.trimToSize();
-        Flash.saveList(mActivity.profileList);
+        Flash.saveList(this);
 	}
 
     public void removeAllElementFromProfile(int index){
