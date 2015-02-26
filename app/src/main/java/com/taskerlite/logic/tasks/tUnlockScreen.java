@@ -32,10 +32,10 @@ public class tUnlockScreen extends mTask{
             km.newKeyguardLock("myTag").disableKeyguard();
             km.exitKeyguardSecurely(null);
             //km.newKeyguardLock("myTag").reenableKeyguard();
-        }
 
-        String header = context.getResources().getString(R.string.t_unlock_screen_short);
-        NotificationUtils.getInstance(context).createInfoNotification(header, "");
+            String header = context.getResources().getString(R.string.t_unlock_screen_short);
+            NotificationUtils.getInstance(context).createInfoNotification(header, "");
+        }
     }
 
     @Override
