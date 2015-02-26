@@ -15,7 +15,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.taskerlite.R;
-import com.taskerlite.logic.SceneListController.Scene;
 import com.taskerlite.logic.tasks.tAccessPoint;
 import com.taskerlite.logic.tasks.tApp;
 import com.taskerlite.logic.tasks.tMobileData;
@@ -25,7 +24,7 @@ import com.taskerlite.main.TaskerTypes.TYPES;
 
 public class TaskBuilderDialog extends DialogFragment {
 
-    private Scene scene;
+    private ProfilesController.Profile profile;
     private FragmentTaskBuilder parentFragment;
     private ListView lvMain;
     private mAdapter adapter;
@@ -36,7 +35,7 @@ public class TaskBuilderDialog extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         parentFragment = (FragmentTaskBuilder) this.getTargetFragment();
-        scene = parentFragment.getScene();
+        profile = parentFragment.getProfile();
 
         getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
         View view = inflater.inflate(R.layout.dialog_action_list, container);
@@ -53,19 +52,19 @@ public class TaskBuilderDialog extends DialogFragment {
 
                 switch (position){
                     case 0:
-                        scene.addNewTask(new tApp(), TYPES.T_APP, 0, 0);
+                        profile.addNewTask(new tApp(), TYPES.T_APP, 0, 0);
                     break;
                     case 1:
-                        scene.addNewTask(new tAccessPoint(), TYPES.T_ACCESS_POINT, 0, 0);
+                        profile.addNewTask(new tAccessPoint(), TYPES.T_ACCESS_POINT, 0, 0);
                         break;
                     case 2:
-                        scene.addNewTask(new tMobileData(), TYPES.T_THREE_G, 0, 0);
+                        profile.addNewTask(new tMobileData(), TYPES.T_THREE_G, 0, 0);
                         break;
                     case 3:
                         //scene.addNewTask(new tWIFI(), TYPES.T_WIFI, 0, 0);
                         break;
                     case 4:
-                        scene.addNewTask(new tUnlockScreen(getActivity()), TYPES.T_UNLOCK_SCREEN, 0, 0);
+                        profile.addNewTask(new tUnlockScreen(getActivity()), TYPES.T_UNLOCK_SCREEN, 0, 0);
                         break;
                 }
 

@@ -5,12 +5,12 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
 import com.taskerlite.R;
-import com.taskerlite.logic.SceneListController;
+import com.taskerlite.logic.ProfilesController;
 import com.taskerlite.other.Flash;
 
 public class mActivity extends FragmentActivity {
 
-    public static SceneListController sceneList;
+    public static ProfilesController profileList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +19,7 @@ public class mActivity extends FragmentActivity {
 
         TaskerIcons.getInstance(this);
 
-        sceneList = Flash.getList();
+        profileList = Flash.getProfileList();
 
         getSupportFragmentManager().beginTransaction().
         add(R.id.fragmentConteiner, new FragmentTaskList()).
@@ -37,8 +37,6 @@ public class mActivity extends FragmentActivity {
             finish();
 
         }else {
-
-            //Flash.saveList(mActivity.sceneList);
 
             getSupportFragmentManager().beginTransaction().
             setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right).

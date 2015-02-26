@@ -10,11 +10,11 @@ import java.io.OutputStreamWriter;
 import android.os.Environment;
 
 import com.google.gson.GsonBuilder;
-import com.taskerlite.logic.SceneListController;
+import com.taskerlite.logic.ProfilesController;
 
 public class Flash {
 
-	public static void saveList(SceneListController obj){
+	public static void saveList(ProfilesController obj){
 		
 		try {
 
@@ -34,9 +34,9 @@ public class Flash {
 		} catch (Exception e) { }
 	}
 	
-	public static SceneListController getList(){
+	public static ProfilesController getProfileList(){
 		
-		SceneListController sl = null;
+		ProfilesController sl = null;
 		String rBuffer = "";
 		
 		try {
@@ -49,16 +49,16 @@ public class Flash {
 	            rBuffer += aDataRow ;
 	        myReader.close();
 	        
-	        sl = new GsonBuilder().create().fromJson(rBuffer, SceneListController.class);
+	        sl = new GsonBuilder().create().fromJson(rBuffer, ProfilesController.class);
 			
 		} catch (Exception e) { }		
 
-		return sl == null ? new SceneListController() : sl;
+		return sl == null ? new ProfilesController() : sl;
 	}
 
     public static String getRawData(){
 
-        SceneListController sl = null;
+        ProfilesController sl = null;
         String rBuffer = "";
 
         try {

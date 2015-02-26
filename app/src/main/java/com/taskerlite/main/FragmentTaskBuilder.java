@@ -2,10 +2,10 @@ package com.taskerlite.main;
 
 import com.taskerlite.R;
 import com.taskerlite.logic.ActionBuilderDialog;
-import com.taskerlite.logic.SceneListController;
+import com.taskerlite.logic.ProfilesController;
 import com.taskerlite.logic.TaskBuilderDialog;
 import com.taskerlite.logic.ActionElement;
-import com.taskerlite.logic.SceneListController.*;
+import com.taskerlite.logic.ProfilesController.*;
 import com.taskerlite.logic.TaskElement;
 import com.taskerlite.other.Flash;
 import com.taskerlite.other.Vibro;
@@ -37,9 +37,9 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
 
     private TaskerBuilderView taskerView;
     private Context context;
-    private Scene scene;
+    private Profile profile;
     private int sceneIndex = 0;
-    private SceneListController sceneList = com.taskerlite.main.mActivity.sceneList;
+    private ProfilesController profileList = com.taskerlite.main.mActivity.profileList;
 
     private int iconSizeElement = TaskerIcons.builderSize;
     private Bitmap pimpaIcon = TaskerIcons.getInstance().getPimpaIcon();
@@ -71,7 +71,7 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
 		View view = inflater.inflate(R.layout.fragment_task_builder, container, false);
         context = getActivity();
 
-        scene = com.taskerlite.main.mActivity.sceneList.getScene(sceneIndex);
+        profile = com.taskerlite.main.mActivity.profileList.getProfile(sceneIndex);
 
 		taskerView = (TaskerBuilderView) view.findViewById(R.id.drawBuilder);
         taskerView.setViewCallBack(viewCallBack);
@@ -85,7 +85,7 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
         taskElement.setOnClickListener(this);
         nameScene = (EditText) view.findViewById(R.id.sceneName);
         nameScene.setOnEditorActionListener(this);
-        nameScene.setText(scene.getName());
+        nameScene.setText(profile.getName());
         clearRequestLay = (LinearLayout) view.findViewById(R.id.clearRequestLay);
         clearRequest(nameScene);
 
@@ -115,10 +115,10 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
     public void onPause() {
         super.onPause();
 
-        for(ActionElement action : scene.getActionList()) {
+        for(ActionElement action : profile.getActionList()) {
             action.unselect();
         }
-        for(TaskElement task : scene.getTaskList()) {
+        for(TaskElement task : profile.getTaskList()) {
             task.unselect();
         }
 
@@ -132,9 +132,9 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
 
             case R.id.backBtn:
 
-                scene.invalidateData();
+                profile.invalidateData();
 
-                Flash.saveList(sceneList);
+                Flash.saveList(profileList);
                 getFragmentManager().beginTransaction().
                 setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right).
                 replace(R.id.fragmentConteiner, new FragmentTaskList()).
@@ -142,8 +142,8 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
                 commit();
                 break;
             case R.id.clearBtn:
-                sceneList.removeAllFromScene(sceneIndex);
-                Flash.saveList(sceneList);
+                profileList.removeAllElementFromProfile(sceneIndex);
+                Flash.saveList(profileList);
                 break;
             case R.id.actionElementID:
                 ActionBuilderDialog actionDialog = new ActionBuilderDialog();
@@ -162,7 +162,7 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
     @Override
     public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
 
-        scene.setName(textView.getText().toString());
+        profile.setName(textView.getText().toString());
         clearRequest(textView);
 
         return true;
@@ -181,9 +181,9 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
 
             if (msg.what == 0) {
 
-                for(ActionElement action : scene.getActionList())
+                for(ActionElement action : profile.getActionList())
                     action.unselect();
-                for(TaskElement task : scene.getTaskList())
+                for(TaskElement task : profile.getTaskList())
                     task.unselect();
             }
 
@@ -201,10 +201,10 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
         @Override
         public void fingerUp() {
 
-            for(TaskElement task : scene.getTaskList())
+            for(TaskElement task : profile.getTaskList())
                 task.clearMoving();
 
-            for(ActionElement action : scene.getActionList())
+            for(ActionElement action : profile.getActionList())
                 action.clearMoving();
         }
 
@@ -222,16 +222,16 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
 
                 if(gcElement.getIdPressedElement(xPointer, yPointer) != 0){
 
-                    for(TaskElement task : scene.getTaskList()){
+                    for(TaskElement task : profile.getTaskList()){
                         if(task.getTaskId() == gcElement.getIdPressedElement(xPointer, yPointer)){
-                            scene.deleteTask(task);
+                            profile.deleteTask(task);
                             break;
                         }
                     }
 
-                    for(ActionElement action : scene.getActionList()){
+                    for(ActionElement action : profile.getActionList()){
                         if(action.getActionId() == gcElement.getIdPressedElement(xPointer, yPointer)){
-                            scene.deleteAction(action);
+                            profile.deleteAction(action);
                             break;
                         }
                     }
@@ -293,14 +293,14 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
             TaskElement   taskElement   = findTouchedTask(xPointer, yPointer);
             ActionElement actionElement = findTouchedAction(xPointer, yPointer);
 
-            for(TaskElement task : scene.getTaskList()) {
+            for(TaskElement task : profile.getTaskList()) {
                 if (task.isMoving()) {
                     taskMoving = true;
                     break;
                 }
             }
 
-            for(ActionElement action : scene.getActionList()) {
+            for(ActionElement action : profile.getActionList()) {
                 if (action.isMoving()) {
                     actionMoving = true;
                     break;
@@ -327,14 +327,14 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
             try{
 
                 // 1. Print action and task icons
-                for(ActionElement action : scene.getActionList()){
+                for(ActionElement action : profile.getActionList()){
                     canvas.drawBitmap(action.getIcon(), action.getX(), action.getY(), null);
                     float textX = action.getX() + iconSizeElement /2;
                     float textY = action.getY() + iconSizeElement + getResources().getInteger(R.integer.builder_icon_text_margin);
                     canvas.drawText(action.getActionObject().getName(), textX, textY, textPaint);
                 }
 
-                for(TaskElement task : scene.getTaskList()){
+                for(TaskElement task : profile.getTaskList()){
                     canvas.drawBitmap(task.getIcon(), task.getX(), task.getY(), null);
                     float textX = task.getX() + iconSizeElement /2;
                     float textY = task.getY() + iconSizeElement + getResources().getInteger(R.integer.builder_icon_text_margin);
@@ -343,8 +343,8 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
 
                 // 2. If present relationship between action and task - draw a lines
                 int indexColor = 0;
-                for (ActionElement action : scene.getActionList()) {
-                    for (TaskElement task : scene.getTaskList()) {
+                for (ActionElement action : profile.getActionList()) {
+                    for (TaskElement task : profile.getTaskList()) {
                         if (action.isTaskElementIdPresent(task.getTaskId())) {
                             linePaint.setColor(TaskerTypes.getColor(indexColor));
                             canvas.drawLine(action.getX() + iconSizeElement /2, action.getY() + iconSizeElement/10, task.getX()   + iconSizeElement /2, task.getY()   + iconSizeElement/10, linePaint);
@@ -354,10 +354,10 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
                 }
 
                 // 3. Draw pimpa
-                for(ActionElement action : scene.getActionList())
+                for(ActionElement action : profile.getActionList())
                     canvas.drawBitmap(pimpaIcon, action.getX(), action.getY(), null);
 
-                for(TaskElement task : scene.getTaskList())
+                for(TaskElement task : profile.getTaskList())
                     canvas.drawBitmap(pimpaIcon, task.getX(), task.getY(), null);
 
                 // 4. Draw delete icons
@@ -378,13 +378,13 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
 
     private TaskElement findTouchedTask(int xPointer, int yPointer){
 
-        for(TaskElement task : scene.getTaskList()){
+        for(TaskElement task : profile.getTaskList()){
             if(task.isTouched(xPointer, yPointer, iconSizeElement))
                 if(task.isMoving())
                     return task;
         }
 
-        for(TaskElement task : scene.getTaskList()){
+        for(TaskElement task : profile.getTaskList()){
             if(task.isTouched(xPointer, yPointer, iconSizeElement))
                 return task;
         }
@@ -393,13 +393,13 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
 
     private ActionElement findTouchedAction(int xPointer, int yPointer){
 
-        for(ActionElement action : scene.getActionList()){
+        for(ActionElement action : profile.getActionList()){
             if(action.isTouched(xPointer, yPointer, iconSizeElement))
                 if(action.isMoving())
                     return action;
         }
 
-        for(ActionElement action : scene.getActionList()){
+        for(ActionElement action : profile.getActionList()){
             if(action.isTouched(xPointer, yPointer, iconSizeElement))
                 return action;
         }
@@ -408,9 +408,9 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
 
     private void checkConnection( ){
 
-        for(ActionElement action : scene.getActionList()) {
+        for(ActionElement action : profile.getActionList()) {
             if( action.isSelect() ){
-                for(TaskElement task : scene.getTaskList()) {
+                for(TaskElement task : profile.getTaskList()) {
                     if (task.isSelect()) {
                         if(!action.isTaskElementIdPresent(task.getTaskId()))
                             action.addNewTaskElementId(task.getTaskId());
@@ -481,7 +481,7 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
     }
 
 
-    public Scene getScene() {
-        return scene;
+    public Profile getProfile() {
+        return profile;
     }
 }

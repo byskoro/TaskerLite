@@ -15,14 +15,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.taskerlite.R;
-import com.taskerlite.logic.SceneListController.*;
+import com.taskerlite.logic.ProfilesController.*;
 import com.taskerlite.logic.actions.aTimer;
 import com.taskerlite.main.FragmentTaskBuilder;
 import com.taskerlite.main.TaskerTypes.*;
 
 public class ActionBuilderDialog extends DialogFragment {
 
-    private Scene scene;
+    private Profile profile;
     private FragmentTaskBuilder parentFragment;
     private ListView lvMain;
     private RoomArrayAdapter adapter;
@@ -33,7 +33,7 @@ public class ActionBuilderDialog extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         parentFragment = (FragmentTaskBuilder) this.getTargetFragment();
-        scene = parentFragment.getScene();
+        profile = parentFragment.getProfile();
 
         getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
         View view = inflater.inflate(R.layout.dialog_action_list, container);
@@ -48,7 +48,7 @@ public class ActionBuilderDialog extends DialogFragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                scene.addNewAction(new aTimer(), TYPES.A_TIME, 0, 0);
+                profile.addNewAction(new aTimer(), TYPES.A_TIME, 0, 0);
                 dismiss();
             }
         });
