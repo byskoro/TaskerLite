@@ -137,6 +137,9 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
             task.unselect();
         }
 
+        profile.invalidateData();
+        profileController.saveCurrentProfile();
+
         handlerLogic.removeMessages(1);
     }
 
@@ -146,10 +149,6 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
         switch(view.getId()){
 
             case R.id.backBtn:
-
-                profile.invalidateData();
-
-                Flash.saveList(profileController);
                 getFragmentManager().beginTransaction().
                 setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right).
                 replace(R.id.fragmentConteiner, new FragmentTaskList()).
@@ -158,7 +157,6 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
                 break;
             case R.id.clearBtn:
                 profileController.removeAllElementFromProfile(sceneIndex);
-                Flash.saveList(profileController);
                 break;
             case R.id.actionElementID:
                 ActionBuilderDialog actionDialog = new ActionBuilderDialog();

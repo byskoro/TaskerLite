@@ -10,6 +10,7 @@ import com.taskerlite.logic.ActionElement;
 import com.taskerlite.logic.ProfileController;
 import com.taskerlite.logic.ProfileController.*;
 import com.taskerlite.logic.TaskElement;
+import com.taskerlite.other.Flash;
 import com.taskerlite.other.Screen;
 
 import android.app.Activity;
@@ -139,7 +140,7 @@ public class FragmentTaskList extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View view) {
 
-        profileController.addNewProfile("");
+        profileController.newProfile("");
         goToBuilderFragment(profileController.getProfileListSize() - 1);
     }
 
@@ -170,11 +171,11 @@ public class FragmentTaskList extends Fragment implements View.OnClickListener{
         public View getView(int position, View convertView, ViewGroup parent) {
 
             if (convertView == null)
-                convertView = View.inflate(context, R.layout.list_item_scene, null);
+                convertView = View.inflate(context, R.layout.list_item_profile, null);
 
-            TextView t = (TextView) convertView.findViewById(R.id.sceneNameID);
+            TextView t = (TextView) convertView.findViewById(R.id.profileNameID);
             t.setText(getItem(position).getName());
-            LinearLayout iconsLay = (LinearLayout) convertView.findViewById(R.id.sceneIconsPlaceId);
+            LinearLayout iconsLay = (LinearLayout) convertView.findViewById(R.id.profileIconsPlaceId);
             iconsLay.removeAllViews();
 
             for(ActionElement action : getItem(position).getActionList()){

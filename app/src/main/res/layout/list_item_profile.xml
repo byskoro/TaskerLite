@@ -43,7 +43,7 @@
                 android:orientation="horizontal">
 
                 <com.taskerlite.other.AutoResizeTextView
-                    android:id="@+id/sceneNameID"
+                    android:id="@+id/profileNameID"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="NAME"
@@ -52,7 +52,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/sceneIconsPlaceId"
+                android:id="@+id/profileIconsPlaceId"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="0.5"

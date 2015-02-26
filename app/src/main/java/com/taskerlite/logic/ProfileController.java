@@ -12,7 +12,7 @@ public class ProfileController {
 	
 	private ArrayList<Profile> profileList = new ArrayList<Profile>();
 	
-	public void addNewProfile(String profileName){ profileList.add(new Profile(profileName)); }
+	public void newProfile(String profileName){ profileList.add(new Profile(profileName)); }
 	public Profile getProfile(int index){ return profileList.get(index); }
 	public ArrayList<Profile> getProfileList() { return profileList; }
     public int getProfileListSize(){ return profileList.size(); }
@@ -21,8 +21,12 @@ public class ProfileController {
 
 		profileList.remove(index);
         profileList.trimToSize();
-        Flash.saveList(this);
+        saveCurrentProfile();
 	}
+
+    public void saveCurrentProfile(){
+        Flash.saveList(this);
+    }
 
     public void removeAllElementFromProfile(int index){
 
