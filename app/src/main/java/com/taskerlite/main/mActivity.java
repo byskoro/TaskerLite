@@ -1,12 +1,15 @@
 package com.taskerlite.main;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-
 import com.taskerlite.R;
 import com.taskerlite.logic.ProfileController;
 import com.taskerlite.other.Flash;
+import java.util.Calendar;
 
 public class mActivity extends FragmentActivity implements FragmentTaskBuilder.DataActivity, FragmentTaskList.DataActivity{
 
@@ -25,8 +28,20 @@ public class mActivity extends FragmentActivity implements FragmentTaskBuilder.D
         add(R.id.fragmentConteiner, new FragmentTaskList()).
         commit();
 
-        if(!TService.isRunning(this))
-            startService(new Intent(this, TService.class));
+        startNotify();
+    }
+
+    private void startNotify() {
+
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.MINUTE, 1);
+        cal.set(Calendar.SECOND, 0);
+
+        AlarmManager am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(this, TimeNotification.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT );
+        am.cancel(pendingIntent);
+        am.set(AlarmManager.RTC, cal.getTimeInMillis(), pendingIntent);
     }
 
     @Override

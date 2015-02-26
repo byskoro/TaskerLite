@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.kyleduo.switchbutton.SwitchButton;
 import com.taskerlite.R;
 import com.taskerlite.other.NotificationUtils;
+import com.taskerlite.other.Vibro;
 
 import java.lang.reflect.Method;
 
@@ -28,6 +29,8 @@ public class tMobileData extends mTask{
 
     @Override
     public void start(Context context) {
+
+        Vibro.playLong(context);
 
         if(state){
             set3GEnable(true, context);

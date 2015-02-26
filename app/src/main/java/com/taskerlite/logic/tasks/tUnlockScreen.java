@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentManager;
 
 import com.taskerlite.R;
 import com.taskerlite.other.NotificationUtils;
+import com.taskerlite.other.Vibro;
 
 
 public class tUnlockScreen extends mTask{
@@ -18,6 +19,8 @@ public class tUnlockScreen extends mTask{
 
     @Override
     public void start(Context context) {
+
+        Vibro.playLong(context);
 
         PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
 
