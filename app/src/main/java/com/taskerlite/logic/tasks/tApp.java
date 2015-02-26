@@ -1,21 +1,17 @@
 package com.taskerlite.logic.tasks;
 
-import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningAppProcessInfo;
-import android.app.KeyguardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.os.Bundle;
-import android.os.PowerManager;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
@@ -23,7 +19,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.taskerlite.R;
-import com.taskerlite.other.NotificationUtils;
+import com.taskerlite.other.Notification;
 
 import java.util.List;
 
@@ -40,7 +36,7 @@ public class tApp extends mTask {
             context.startActivity(intent);
 
             String header = context.getResources().getString(R.string.t_app_short);
-            NotificationUtils.getInstance(context).createInfoNotification(header, getName());
+            Notification.getInstance(context).createInfoNotification(header, getName());
 
         }catch (Exception e){ }
 	}

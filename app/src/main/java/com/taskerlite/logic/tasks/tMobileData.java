@@ -18,7 +18,7 @@ import android.widget.TextView;
 
 import com.kyleduo.switchbutton.SwitchButton;
 import com.taskerlite.R;
-import com.taskerlite.other.NotificationUtils;
+import com.taskerlite.other.Notification;
 import com.taskerlite.other.Vibro;
 
 import java.lang.reflect.Method;
@@ -35,7 +35,7 @@ public class tMobileData extends mTask{
         if(state){
             set3GEnable(true, context);
             String header = context.getResources().getString(R.string.t_mobile_internet_short);
-            NotificationUtils.getInstance(context).createInfoNotification(header, getName());
+            Notification.getInstance(context).createInfoNotification(header, getName());
         }
         else
             stop(context);

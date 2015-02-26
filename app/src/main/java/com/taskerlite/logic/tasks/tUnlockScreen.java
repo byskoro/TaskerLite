@@ -6,7 +6,7 @@ import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.support.v4.app.FragmentManager;
 import com.taskerlite.R;
-import com.taskerlite.other.NotificationUtils;
+import com.taskerlite.other.Notification;
 import com.taskerlite.other.Vibro;
 
 
@@ -39,7 +39,7 @@ public class tUnlockScreen extends mTask{
 
             //put notification
             String header = context.getResources().getString(R.string.t_unlock_screen_short);
-            NotificationUtils.getInstance(context).createInfoNotification(header, "");
+            Notification.getInstance(context).createInfoNotification(header, "");
         }
     }
 
