@@ -88,22 +88,9 @@ public class TService extends Service {
     private long generateOffsetTime(){
     	
     	Calendar cal = Calendar.getInstance();
-    	int minutes = cal.get(Calendar.MINUTE);
-    	int hour = cal.get(Calendar.HOUR_OF_DAY);
-    	
-    	if((minutes++) == 60){
-    		
-    		minutes = 0;
-    		hour++;
-    		
-    		if(hour==24)
-        		hour = 0;
-            // need add ++day
-    	}
-    	cal.set(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH), hour, minutes, 0);
-    	
-    	long timeOffset = cal.getTimeInMillis() - System.currentTimeMillis();
-    	
-    	return timeOffset;
+        cal.add(Calendar.MINUTE, 1);
+        cal.set(Calendar.SECOND, 0);
+
+    	return cal.getTimeInMillis() - System.currentTimeMillis();
     }
 }
