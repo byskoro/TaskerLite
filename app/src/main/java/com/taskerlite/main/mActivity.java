@@ -5,12 +5,12 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
 import com.taskerlite.R;
-import com.taskerlite.logic.ProfilesController;
+import com.taskerlite.logic.ProfileController;
 import com.taskerlite.other.Flash;
 
 public class mActivity extends FragmentActivity implements FragmentTaskBuilder.DataActivity, FragmentTaskList.DataActivity{
 
-    private ProfilesController profilesController;
+    private ProfileController profileController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +19,7 @@ public class mActivity extends FragmentActivity implements FragmentTaskBuilder.D
 
         TaskerIcons.getInstance(this);
 
-        profilesController = Flash.getProfileList();
+        profileController = Flash.getProfileList();
 
         getSupportFragmentManager().beginTransaction().
         add(R.id.fragmentConteiner, new FragmentTaskList()).
@@ -47,12 +47,12 @@ public class mActivity extends FragmentActivity implements FragmentTaskBuilder.D
     }
 
     @Override
-    public ProfilesController taskBuilderAskProfileController() {
-        return profilesController;
+    public ProfileController taskBuilderAskProfileController() {
+        return profileController;
     }
 
     @Override
-    public ProfilesController taskListAskProfileList() {
-        return profilesController;
+    public ProfileController taskListAskProfileList() {
+        return profileController;
     }
 }

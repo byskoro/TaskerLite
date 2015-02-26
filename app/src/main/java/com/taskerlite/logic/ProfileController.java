@@ -8,7 +8,7 @@ import com.taskerlite.main.TaskerTypes.*;
 
 import java.util.ArrayList;
 
-public class ProfilesController {
+public class ProfileController {
 	
 	private ArrayList<Profile> profileList = new ArrayList<Profile>();
 	

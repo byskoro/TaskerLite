@@ -24,7 +24,7 @@ import com.taskerlite.main.TaskerTypes.TYPES;
 
 public class TaskBuilderDialog extends DialogFragment {
 
-    private ProfilesController.Profile profile;
+    private ProfileController.Profile profile;
     private FragmentTaskBuilder parentFragment;
     private ListView lvMain;
     private mAdapter adapter;

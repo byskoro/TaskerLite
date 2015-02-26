@@ -15,7 +15,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.taskerlite.R;
-import com.taskerlite.logic.ProfilesController.*;
+import com.taskerlite.logic.ProfileController.*;
 import com.taskerlite.logic.actions.aTimer;
 import com.taskerlite.main.FragmentTaskBuilder;
 import com.taskerlite.main.TaskerTypes.*;

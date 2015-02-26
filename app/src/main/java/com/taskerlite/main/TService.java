@@ -4,7 +4,7 @@ import java.util.Calendar;
 
 import com.taskerlite.logic.actions.mAction;
 import com.taskerlite.other.Flash;
-import com.taskerlite.logic.ProfilesController.*;
+import com.taskerlite.logic.ProfileController.*;
 import com.taskerlite.logic.*;
 import com.taskerlite.logic.tasks.mTask;
 
@@ -19,7 +19,7 @@ import com.taskerlite.main.TaskerTypes.*;
 
 public class TService extends Service {
 
-	private ProfilesController sceneList;
+	private ProfileController sceneList;
     private String previousRawData = "";
 
     @Override

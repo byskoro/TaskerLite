@@ -2,10 +2,10 @@ package com.taskerlite.main;
 
 import com.taskerlite.R;
 import com.taskerlite.logic.ActionBuilderDialog;
-import com.taskerlite.logic.ProfilesController;
+import com.taskerlite.logic.ProfileController;
 import com.taskerlite.logic.TaskBuilderDialog;
 import com.taskerlite.logic.ActionElement;
-import com.taskerlite.logic.ProfilesController.*;
+import com.taskerlite.logic.ProfileController.*;
 import com.taskerlite.logic.TaskElement;
 import com.taskerlite.other.Flash;
 import com.taskerlite.other.Vibro;
@@ -39,14 +39,14 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
     private DataActivity dataActivity;
 
     public interface DataActivity {
-        public ProfilesController taskBuilderAskProfileController();
+        public ProfileController taskBuilderAskProfileController();
     }
 
     private TaskerBuilderView taskerView;
     private Context context;
     private Profile profile;
     private int sceneIndex = 0;
-    private ProfilesController profilesController;
+    private ProfileController profileController;
 
     private int iconSizeElement = TaskerIcons.builderSize;
     private Bitmap pimpaIcon = TaskerIcons.getInstance().getPimpaIcon();
@@ -74,12 +74,12 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
         super.onAttach(activity);
 
         dataActivity = (DataActivity) activity;
-        profilesController = dataActivity.taskBuilderAskProfileController();
+        profileController = dataActivity.taskBuilderAskProfileController();
 
         Bundle bundle = this.getArguments();
         sceneIndex = bundle.getInt("index", 0);
 
-        profile = profilesController.getProfile(sceneIndex);
+        profile = profileController.getProfile(sceneIndex);
     }
 
 	@Override
@@ -149,7 +149,7 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
 
                 profile.invalidateData();
 
-                Flash.saveList(profilesController);
+                Flash.saveList(profileController);
                 getFragmentManager().beginTransaction().
                 setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right).
                 replace(R.id.fragmentConteiner, new FragmentTaskList()).
@@ -157,8 +157,8 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
                 commit();
                 break;
             case R.id.clearBtn:
-                profilesController.removeAllElementFromProfile(sceneIndex);
-                Flash.saveList(profilesController);
+                profileController.removeAllElementFromProfile(sceneIndex);
+                Flash.saveList(profileController);
                 break;
             case R.id.actionElementID:
                 ActionBuilderDialog actionDialog = new ActionBuilderDialog();
