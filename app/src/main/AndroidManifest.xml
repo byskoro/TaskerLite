@@ -46,7 +46,7 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED"></action>
             </intent-filter>
         </receiver>
-        <receiver android:name=".main.TimeNotification" />
+        <receiver android:name=".main.TimeSchedule" />
     </application>
 
 </manifest>

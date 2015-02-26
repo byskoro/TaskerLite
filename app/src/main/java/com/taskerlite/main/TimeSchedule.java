@@ -14,7 +14,7 @@ import com.taskerlite.logic.*;
 import com.taskerlite.logic.tasks.mTask;
 import com.taskerlite.main.TaskerTypes.*;
 
-public class TimeNotification extends BroadcastReceiver {
+public class TimeSchedule extends BroadcastReceiver {
 
     private static ProfileController profileController;
     private static String previousRawData = "";
@@ -58,7 +58,7 @@ public class TimeNotification extends BroadcastReceiver {
         cal.set(Calendar.SECOND, 0);
 
         AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(context, TimeNotification.class);
+        Intent intent = new Intent(context, TimeSchedule.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT );
         am.cancel(pendingIntent);
         am.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pendingIntent);

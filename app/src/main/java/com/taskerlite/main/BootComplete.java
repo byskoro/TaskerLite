@@ -10,8 +10,8 @@ public class BootComplete extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
 
         if (intent.getAction().equals("android.intent.action.BOOT_COMPLETED")){
-            TimeNotification timeNotification = new TimeNotification();
-            timeNotification.startNotify(context);
+            TimeSchedule timeSchedule = new TimeSchedule();
+            timeSchedule.startNotify(context);
         }
     }
 }
