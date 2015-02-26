@@ -40,7 +40,7 @@ public class ProfileController {
 		
 		private String name;
 		private ArrayList<ActionElement> actionList = new ArrayList<ActionElement>();
-		private ArrayList<TaskElement>   taskList = new ArrayList<TaskElement>();
+		private ArrayList<TaskElement> taskList = new ArrayList<TaskElement>();
 
 		public Profile(String sceneName){
 

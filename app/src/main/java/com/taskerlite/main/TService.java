@@ -41,11 +41,11 @@ public class TService extends Service {
         	
         	try {
 				
-        		if(!previousRawData.equals(Flash.getRawData())){
+        		//if(!previousRawData.equals(Flash.getRawData())){
         			
             		profileController = Flash.getProfileList();
                     previousRawData   = Flash.getRawData();
-            	}
+            	//}
             	
             	for(Profile profile : profileController.getProfileList()){
             		
@@ -59,8 +59,10 @@ public class TService extends Service {
 
                                 if(action.isTaskElementIdPresent(task.getTaskId())){
 
-                                     mTask taskObj = task.getTaskObject();
-                                     taskObj.start(getApplicationContext());
+                                    try {
+                                        mTask taskObj = task.getTaskObject();
+                                        taskObj.start(getApplicationContext());
+                                    }catch (Exception e) { }
                                 }
                             }
             			}
