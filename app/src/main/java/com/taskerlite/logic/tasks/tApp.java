@@ -1,6 +1,8 @@
 package com.taskerlite.logic.tasks;
 
 import android.app.Activity;
+import android.app.ActivityManager;
+import android.app.ActivityManager.RunningAppProcessInfo;
 import android.app.KeyguardManager;
 import android.content.Context;
 import android.content.Intent;
@@ -46,22 +48,15 @@ public class tApp extends mTask {
     @Override
     public void stop(Context context) {
 
-        /*
-        List<ApplicationInfo> packages;
-    PackageManager pm;
-    pm = getPackageManager();
-    //get a list of installed apps.
-    packages = pm.getInstalledApplications(0);
+        try {
 
-    ActivityManager mActivityManager = (ActivityManager)context.getSystemService(Context.ACTIVITY_SERVICE);
+            if(isPackageRunning(context)) {
 
-   for (ApplicationInfo packageInfo : packages) {
-        if((packageInfo.flags & ApplicationInfo.FLAG_SYSTEM)==1)continue;
-        if(packageInfo.packageName.equals("mypackage")) continue;
-        mActivityManager.killBackgroundProcesses(packageInfo.packageName);
-   }
-         */
+                ActivityManager mActivityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+                mActivityManager.killBackgroundProcesses(packageName);
+            }
 
+        }catch (Exception e){ }
     }
 
     @Override
@@ -70,6 +65,30 @@ public class tApp extends mTask {
         UI ui = new UI();
         ui.setParent(this);
         ui.show(fm.beginTransaction(), "T_APP");
+    }
+
+    public boolean isPackageRunning(Context context) {
+
+        return findPIDbyPackageName(context) != -1;
+    }
+
+    public int findPIDbyPackageName(Context context) {
+
+        int result = -1;
+
+        ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+
+        if (am != null) {
+            for (RunningAppProcessInfo pi : am.getRunningAppProcesses()){
+                if (pi.processName.equalsIgnoreCase(packageName))
+                    result = pi.pid;
+                if (result != -1)
+                    break;
+            }
+        } else {
+            result = -1;
+        }
+        return result;
     }
 
     public static class UI extends DialogFragment{
