@@ -103,10 +103,14 @@ public class FragmentTaskList extends Fragment implements View.OnClickListener{
 
             switch (index) {
                 case 0:
-
+                    for(TaskElement task :sceneList.getScene(position).getTaskList()){
+                        task.getTaskObject().start(context);
+                    }
                     break;
                 case 1:
-
+                    for(TaskElement task :sceneList.getScene(position).getTaskList()){
+                        task.getTaskObject().stop(context);
+                    }
                     break;
                 case 2:
                     sceneList.removeSceneFromList(position);
