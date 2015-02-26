@@ -47,7 +47,7 @@ public class tApp extends mTask {
 
     @Override
     public void stop(Context context) {
-
+/*
         try {
 
             if(isPackageRunning(context)) {
@@ -57,6 +57,7 @@ public class tApp extends mTask {
             }
 
         }catch (Exception e){ }
+*/
     }
 
     @Override

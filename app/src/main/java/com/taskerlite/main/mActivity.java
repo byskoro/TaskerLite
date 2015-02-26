@@ -28,20 +28,8 @@ public class mActivity extends FragmentActivity implements FragmentTaskBuilder.D
         add(R.id.fragmentConteiner, new FragmentTaskList()).
         commit();
 
-        startNotify();
-    }
-
-    private void startNotify() {
-
-        Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.MINUTE, 1);
-        cal.set(Calendar.SECOND, 0);
-
-        AlarmManager am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(this, TimeNotification.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT );
-        am.cancel(pendingIntent);
-        am.set(AlarmManager.RTC, cal.getTimeInMillis(), pendingIntent);
+        TimeNotification timeNotification = new TimeNotification();
+        timeNotification.startNotify(this);
     }
 
     @Override

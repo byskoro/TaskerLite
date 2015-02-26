@@ -5,7 +5,6 @@ import android.content.Context;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.support.v4.app.FragmentManager;
-
 import com.taskerlite.R;
 import com.taskerlite.other.NotificationUtils;
 import com.taskerlite.other.Vibro;
@@ -28,26 +27,24 @@ public class tUnlockScreen extends mTask{
 
             // wake up screen
             WakeLock wakeLock = pm.newWakeLock((PowerManager.FULL_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP), "TAG");
-            wakeLock.acquire(5000);
+            wakeLock.acquire();
+            wakeLock.release();
 
             // delete lock screen
             KeyguardManager km = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
             km.newKeyguardLock("myTag").disableKeyguard();
             km.exitKeyguardSecurely(null);
-            //km.newKeyguardLock("myTag").reenableKeyguard();
+            km.newKeyguardLock("myTag").reenableKeyguard();
+            km.exitKeyguardSecurely(null);
 
+            //put notification
             String header = context.getResources().getString(R.string.t_unlock_screen_short);
             NotificationUtils.getInstance(context).createInfoNotification(header, "");
         }
     }
 
     @Override
-    public void stop(Context context) {
-
-    }
-
+    public void stop(Context context) { }
     @Override
-    public void show(FragmentManager fm) {
-
-    }
+    public void show(FragmentManager fm) { }
 }

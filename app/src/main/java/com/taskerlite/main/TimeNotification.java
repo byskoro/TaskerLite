@@ -16,13 +16,19 @@ import com.taskerlite.main.TaskerTypes.*;
 
 public class TimeNotification extends BroadcastReceiver {
 
+    private static ProfileController profileController;
+    private static String previousRawData = "";
+
     @Override
     public void onReceive(Context context, Intent intent) {
 
+        if(!previousRawData.equals(Flash.getRawData())){
 
-        ProfileController sceneList = Flash.getProfileList();
+            profileController = Flash.getProfileList();
+            previousRawData = Flash.getRawData();
+        }
 
-        for(Profile profile : sceneList.getProfileList()){
+        for(Profile profile : profileController.getProfileList()){
 
             for(ActionElement action : profile.getActionList()){
 
@@ -42,10 +48,10 @@ public class TimeNotification extends BroadcastReceiver {
             }
         }
 
-        restartNotify(context);
+        startNotify(context);
     }
 
-    private void restartNotify(Context context) {
+    public void startNotify(Context context) {
 
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.MINUTE, 1);
@@ -55,6 +61,6 @@ public class TimeNotification extends BroadcastReceiver {
         Intent intent = new Intent(context, TimeNotification.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT );
         am.cancel(pendingIntent);
-        am.set(AlarmManager.RTC, cal.getTimeInMillis(), pendingIntent);
+        am.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pendingIntent);
     }
 }
