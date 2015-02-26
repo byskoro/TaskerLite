@@ -52,7 +52,7 @@ public class mActivity extends FragmentActivity implements FragmentTaskBuilder.D
     }
 
     @Override
-    public ProfileController taskListAskProfileList() {
+    public ProfileController taskListAskProfileController() {
         return profileController;
     }
 }

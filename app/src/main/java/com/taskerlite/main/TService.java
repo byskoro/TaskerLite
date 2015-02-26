@@ -19,7 +19,7 @@ import com.taskerlite.main.TaskerTypes.*;
 
 public class TService extends Service {
 
-	private ProfileController sceneList;
+	private ProfileController profileController;
     private String previousRawData = "";
 
     @Override
@@ -35,7 +35,7 @@ public class TService extends Service {
         return null;
     }
 
-   Handler serviceHandler = new Handler() {
+    Handler serviceHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
         	
@@ -43,11 +43,11 @@ public class TService extends Service {
 				
         		if(!previousRawData.equals(Flash.getRawData())){
         			
-            		sceneList = Flash.getProfileList();
-                    previousRawData = Flash.getRawData();
+            		profileController = Flash.getProfileList();
+                    previousRawData   = Flash.getRawData();
             	}
             	
-            	for(Profile profile : sceneList.getProfileList()){
+            	for(Profile profile : profileController.getProfileList()){
             		
             		for(ActionElement action : profile.getActionList()){
             			
@@ -71,7 +71,7 @@ public class TService extends Service {
         	
         	serviceHandler.sendEmptyMessageDelayed(0, generateOffsetTime());
         };
-    };
+     };
     
     public static boolean isRunning(Context ctx) {
     	
@@ -84,13 +84,13 @@ public class TService extends Service {
         }
         return false;
     }
-    
+
     private long generateOffsetTime(){
-    	
-    	Calendar cal = Calendar.getInstance();
+
+        Calendar cal = Calendar.getInstance();
         cal.add(Calendar.MINUTE, 1);
         cal.set(Calendar.SECOND, 0);
 
-    	return cal.getTimeInMillis() - System.currentTimeMillis();
+        return cal.getTimeInMillis() - System.currentTimeMillis();
     }
 }

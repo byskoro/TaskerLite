@@ -10,7 +10,6 @@ import com.taskerlite.logic.ActionElement;
 import com.taskerlite.logic.ProfileController;
 import com.taskerlite.logic.ProfileController.*;
 import com.taskerlite.logic.TaskElement;
-import com.taskerlite.other.Flash;
 import com.taskerlite.other.Screen;
 
 import android.app.Activity;
@@ -34,7 +33,7 @@ public class FragmentTaskList extends Fragment implements View.OnClickListener{
     private DataActivity dataActivity;
 
     public interface DataActivity {
-        public ProfileController taskListAskProfileList();
+        public ProfileController taskListAskProfileController();
     }
 
     ProfileController profileController;
@@ -53,7 +52,7 @@ public class FragmentTaskList extends Fragment implements View.OnClickListener{
         super.onAttach(activity);
 
         dataActivity = (DataActivity) activity;
-        profileController = dataActivity.taskListAskProfileList();
+        profileController = dataActivity.taskListAskProfileController();
     }
 
     @Override
