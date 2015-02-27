@@ -1,7 +1,6 @@
 package com.taskerlite.main;
 
 import java.util.Calendar;
-
 import com.taskerlite.R;
 import com.taskerlite.logic.actions.mAction;
 import com.taskerlite.other.Flash;
@@ -14,60 +13,31 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.hardware.Camera;
+import android.media.AudioManager;
+import android.media.ToneGenerator;
 import android.os.Handler;
-import android.os.HandlerThread;
 import android.os.IBinder;
-import android.os.Looper;
 import android.os.Message;
-import android.os.PowerManager;
-import android.support.v4.app.NotificationCompat;
-import android.view.View;
 
 import com.taskerlite.main.Types.*;
-import com.taskerlite.other.Vibro;
 
 public class TService extends Service {
 
     private ProfileController sceneList;
     private String previousRawData = "";
 
-    PowerManager pm;
-    PowerManager.WakeLock wakeLock;
-
-    private static boolean error = false;
+    ToneGenerator toneGenerator;
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-
-            try {
-
-                flashLightOn();
-
-                Thread.sleep(500);
-
-                flashLightOff();
-
-            }catch (Exception e) { }
-
-            }
-        }).start();
-
-        pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
-        wakeLock = pm.newWakeLock((PowerManager.PARTIAL_WAKE_LOCK ), "TAG");
+        toneGenerator = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 0);
 
         runAsForeground();
 
-        Vibro.playMovement(getApplicationContext());
-
         serviceHandler.sendEmptyMessageDelayed(0, generateOffsetTime());
 
-        return Service.START_STICKY; // START_STICKY
+        return Service.START_STICKY;
     }
 
     @Override
@@ -75,30 +45,8 @@ public class TService extends Service {
         return null;
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-
-        flashLightOn();
-    }
-
-    @Override
-    public void onLowMemory() {
-        super.onLowMemory();
-
-        flashLightOn();
-    }
-
-    @Override
-    public void onTaskRemoved(Intent rootIntent) {
-        super.onTaskRemoved(rootIntent);
-
-        flashLightOn();
-    }
-
     private void runAsForeground(){
 
-        // Build a Notification required for running service in foreground.
         Intent main = new Intent(this, mActivity.class);
         main.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, main,  PendingIntent.FLAG_UPDATE_CURRENT);
@@ -124,12 +72,8 @@ public class TService extends Service {
         @Override
         public void handleMessage(Message msg) {
 
-            wakeLock.acquire();
+            pleaseDontKillMe();
 
-            Vibro.playShort(getApplicationContext());
-
-            wakeLock.release();
-/*
             try {
 
                 if(!previousRawData.equals(Flash.getRawData())){
@@ -159,34 +103,14 @@ public class TService extends Service {
                 }
 
             } catch (Exception e) { }
-*/
+
             serviceHandler.sendEmptyMessageDelayed(0, generateOffsetTime());
         };
     };
 
-    Camera cam;
+    private void pleaseDontKillMe(){
 
-    public void flashLightOn() {
-
-        try {
-            if (getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH)) {
-                cam = Camera.open();
-                Camera.Parameters p = cam.getParameters();
-                p.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
-                cam.setParameters(p);
-                cam.startPreview();
-            }
-        } catch (Exception e) { }
-    }
-
-    public void flashLightOff() {
-        try {
-            if (getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH)) {
-                cam.stopPreview();
-                cam.release();
-                cam = null;
-            }
-        } catch (Exception e) { }
+        toneGenerator.startTone(ToneGenerator.TONE_PROP_BEEP, 0);
     }
 
     public static boolean isRunning(Context ctx) {
@@ -207,6 +131,6 @@ public class TService extends Service {
         cal.add(Calendar.MINUTE, 1);
         cal.set(Calendar.SECOND, 0);
 
-        return 2500;//cal.getTimeInMillis() - System.currentTimeMillis();
+        return cal.getTimeInMillis() - System.currentTimeMillis();
     }
 }
