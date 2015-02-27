@@ -30,8 +30,6 @@ public class tMobileData extends mTask{
     @Override
     public void start(Context context) {
 
-        Vibro.playLong(context);
-
         if(state){
             set3GEnable(true, context);
             String header = context.getResources().getString(R.string.t_mobile_internet_short);
