@@ -51,7 +51,8 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
     private Bitmap pimpaIcon = Icons.getInstance().getPimpaIcon();
     DelElement gcElement;
 
-    ImageButton backBtn, clearBtn, actionElement, taskElement;
+    ImageButton backBtn, clearBtn;
+    LinearLayout actionElement, taskElement;
     EditText nameScene;
     LinearLayout clearRequestLay;
 
@@ -93,9 +94,9 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
         backBtn.setOnClickListener(this);
         clearBtn= (ImageButton) view.findViewById(R.id.clearBtn);
         clearBtn.setOnClickListener(this);
-        actionElement = (ImageButton) view.findViewById(R.id.actionElementID);
+        actionElement = (LinearLayout) view.findViewById(R.id.actionElementID);
         actionElement.setOnClickListener(this);
-        taskElement = (ImageButton) view.findViewById(R.id.taskElementID);
+        taskElement = (LinearLayout) view.findViewById(R.id.taskElementID);
         taskElement.setOnClickListener(this);
         nameScene = (EditText) view.findViewById(R.id.sceneName);
         nameScene.setOnEditorActionListener(this);
