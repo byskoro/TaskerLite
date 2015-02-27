@@ -14,26 +14,60 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.hardware.Camera;
 import android.os.Handler;
+import android.os.HandlerThread;
 import android.os.IBinder;
+import android.os.Looper;
 import android.os.Message;
+import android.os.PowerManager;
 import android.support.v4.app.NotificationCompat;
+import android.view.View;
 
 import com.taskerlite.main.Types.*;
+import com.taskerlite.other.Vibro;
 
 public class TService extends Service {
 
     private ProfileController sceneList;
     private String previousRawData = "";
 
+    PowerManager pm;
+    PowerManager.WakeLock wakeLock;
+
+    private static boolean error = false;
+
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+            try {
+
+                flashLightOn();
+
+                Thread.sleep(500);
+
+                flashLightOff();
+
+            }catch (Exception e) { }
+
+            }
+        }).start();
+
+        pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+        wakeLock = pm.newWakeLock((PowerManager.PARTIAL_WAKE_LOCK ), "TAG");
+
         runAsForeground();
+
+        Vibro.playMovement(getApplicationContext());
 
         serviceHandler.sendEmptyMessageDelayed(0, generateOffsetTime());
 
-        return Service.START_NOT_STICKY;
+        return Service.START_STICKY; // START_STICKY
     }
 
     @Override
@@ -41,28 +75,61 @@ public class TService extends Service {
         return null;
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        flashLightOn();
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+
+        flashLightOn();
+    }
+
+    @Override
+    public void onTaskRemoved(Intent rootIntent) {
+        super.onTaskRemoved(rootIntent);
+
+        flashLightOn();
+    }
+
     private void runAsForeground(){
 
-        Intent notificationIntent = new Intent(this, mActivity.class);
-        notificationIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
+        // Build a Notification required for running service in foreground.
+        Intent main = new Intent(this, mActivity.class);
+        main.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, main,  PendingIntent.FLAG_UPDATE_CURRENT);
 
-        Notification notification=new NotificationCompat.Builder(this)
-                .setSmallIcon(R.drawable.ic_launcher)
-                .setTicker(getString(R.string.app_name))
-                .setContentTitle(getString(R.string.app_name))
-                .setContentText(getString(R.string.app_open))
-                .setContentIntent(pendingIntent).build();
+        Notification.Builder builder = new Notification.Builder(this);
+        builder.setContentTitle(getString(R.string.app_name));
+        builder.setContentText(getString(R.string.app_open));
+        builder.setSmallIcon(android.R.drawable.ic_menu_mylocation);
+        builder.setContentIntent(pendingIntent);
+        Notification notification;
+        if (android.os.Build.VERSION.SDK_INT >= 16) {
+            notification = builder.build();
+        } else {
+            notification = builder.getNotification();
+        }
+        notification.flags |= Notification.FLAG_ONGOING_EVENT | Notification.FLAG_FOREGROUND_SERVICE | Notification.FLAG_NO_CLEAR;
 
-        startForeground(1, notification);
+        int uniqueId = (int)System.currentTimeMillis();
+        startForeground(uniqueId, notification);
     }
 
     Handler serviceHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
 
+            wakeLock.acquire();
 
+            Vibro.playShort(getApplicationContext());
 
+            wakeLock.release();
+/*
             try {
 
                 if(!previousRawData.equals(Flash.getRawData())){
@@ -92,10 +159,35 @@ public class TService extends Service {
                 }
 
             } catch (Exception e) { }
-
+*/
             serviceHandler.sendEmptyMessageDelayed(0, generateOffsetTime());
         };
     };
+
+    Camera cam;
+
+    public void flashLightOn() {
+
+        try {
+            if (getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH)) {
+                cam = Camera.open();
+                Camera.Parameters p = cam.getParameters();
+                p.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+                cam.setParameters(p);
+                cam.startPreview();
+            }
+        } catch (Exception e) { }
+    }
+
+    public void flashLightOff() {
+        try {
+            if (getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH)) {
+                cam.stopPreview();
+                cam.release();
+                cam = null;
+            }
+        } catch (Exception e) { }
+    }
 
     public static boolean isRunning(Context ctx) {
 
@@ -115,6 +207,6 @@ public class TService extends Service {
         cal.add(Calendar.MINUTE, 1);
         cal.set(Calendar.SECOND, 0);
 
-        return 3000; //cal.getTimeInMillis() - System.currentTimeMillis();
+        return 2500;//cal.getTimeInMillis() - System.currentTimeMillis();
     }
 }

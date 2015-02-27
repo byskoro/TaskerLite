@@ -34,9 +34,7 @@ public class Notification {
     }
 
     public int createInfoNotification(String header, String message) {
-        //Intent notificationIntent = new Intent(context, HomeActivity.class); // по клику на уведомлении откроется HomeActivity
         NotificationCompat.Builder nb = new NotificationCompat.Builder(context)
-        //NotificationCompat.Builder nb = new NotificationBuilder(context) //для версии Android > 3.0
                 .setSmallIcon(R.drawable.ic_launcher) //иконка уведомления
                 .setAutoCancel(true) //уведомление закроется по клику на него
                 .setTicker(message) //текст, который отобразится вверху статус-бара при создании уведомления
