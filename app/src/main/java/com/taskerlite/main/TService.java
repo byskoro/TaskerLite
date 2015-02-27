@@ -18,7 +18,6 @@ import android.media.ToneGenerator;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
-
 import com.taskerlite.main.Types.*;
 
 public class TService extends Service {
