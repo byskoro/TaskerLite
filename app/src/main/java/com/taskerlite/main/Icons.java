@@ -9,13 +9,13 @@ import android.graphics.drawable.Drawable;
 
 import com.taskerlite.R;
 import com.taskerlite.other.Screen;
-import com.taskerlite.main.TaskerTypes.*;
+import com.taskerlite.main.Types.*;
 
 import java.util.HashMap;
 
-public class TaskerIcons {
+public class Icons {
 
-    private static TaskerIcons instance = null;
+    private static Icons instance = null;
 
     public static int previewSize, builderSize, deleteSize;
     private Context context;
@@ -26,20 +26,20 @@ public class TaskerIcons {
     private Bitmap deleteIcon, pimpaIcon;
     private BitmapDrawable swMenuDelete, swMenuStart, swMenuStop;
 
-    public static TaskerIcons getInstance(Context context){
+    public static Icons getInstance(Context context){
 
         if(instance == null)
-            instance = new TaskerIcons(context);
+            instance = new Icons(context);
 
         return instance;
     }
 
-    public static TaskerIcons getInstance(){
+    public static Icons getInstance(){
 
         return instance;
     }
 
-    public TaskerIcons(Context context){
+    public Icons(Context context){
 
         this.context = context;
         this.previewSize = context.getResources().getInteger(R.integer.preview_icon_size);

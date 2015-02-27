@@ -3,7 +3,7 @@ package com.taskerlite.logic.actions;
 import android.content.Context;
 import android.support.v4.app.FragmentManager;
 
-import com.taskerlite.main.TaskerTypes.*;
+import com.taskerlite.main.Types.*;
 
 public abstract class mAction {
 

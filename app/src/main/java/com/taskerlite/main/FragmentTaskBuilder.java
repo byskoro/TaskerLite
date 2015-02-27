@@ -7,7 +7,6 @@ import com.taskerlite.logic.TaskBuilderDialog;
 import com.taskerlite.logic.ActionElement;
 import com.taskerlite.logic.ProfileController.*;
 import com.taskerlite.logic.TaskElement;
-import com.taskerlite.other.Flash;
 import com.taskerlite.other.Vibro;
 
 import android.app.Activity;
@@ -42,14 +41,14 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
         public ProfileController taskBuilderAskProfileController();
     }
 
-    private TaskerBuilderView taskerView;
+    private BuilderView taskerView;
     private Context context;
     private Profile profile;
     private int sceneIndex = 0;
     private ProfileController profileController;
 
-    private int iconSizeElement = TaskerIcons.builderSize;
-    private Bitmap pimpaIcon = TaskerIcons.getInstance().getPimpaIcon();
+    private int iconSizeElement = Icons.builderSize;
+    private Bitmap pimpaIcon = Icons.getInstance().getPimpaIcon();
     DelElement gcElement;
 
     ImageButton backBtn, clearBtn, actionElement, taskElement;
@@ -88,7 +87,7 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
 		View view = inflater.inflate(R.layout.fragment_task_builder, container, false);
         context = getActivity();
 
-		taskerView = (TaskerBuilderView) view.findViewById(R.id.drawBuilder);
+		taskerView = (BuilderView) view.findViewById(R.id.drawBuilder);
         taskerView.setViewCallBack(viewCallBack);
         backBtn = (ImageButton) view.findViewById(R.id.backBtn);
         backBtn.setOnClickListener(this);
@@ -104,7 +103,7 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
         clearRequestLay = (LinearLayout) view.findViewById(R.id.clearRequestLay);
         clearRequest(nameScene);
 
-        gcElement = new DelElement(TaskerIcons.deleteSize);
+        gcElement = new DelElement(Icons.deleteSize);
 
         textPaint = new Paint();
         textPaint.setColor(Color.WHITE);
@@ -207,7 +206,7 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
         }
     };
 
-    TaskerBuilderView.ViewCallBack viewCallBack = new TaskerBuilderView.ViewCallBack(){
+    BuilderView.ViewCallBack viewCallBack = new BuilderView.ViewCallBack(){
 
         private int screenWidth, screenHeight;
 
@@ -359,7 +358,7 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
                 for (ActionElement action : profile.getActionList()) {
                     for (TaskElement task : profile.getTaskList()) {
                         if (action.isTaskElementIdPresent(task.getTaskId())) {
-                            linePaint.setColor(TaskerTypes.getColor(indexColor));
+                            linePaint.setColor(Types.getColor(indexColor));
                             canvas.drawLine(action.getX() + iconSizeElement /2, action.getY() + iconSizeElement/10, task.getX()   + iconSizeElement /2, task.getY()   + iconSizeElement/10, linePaint);
                             indexColor++;
                         }
@@ -375,7 +374,7 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
 
                 // 4. Draw delete icons
                 for(DelElement.PressedElement element : gcElement.getDelList())
-                    canvas.drawBitmap(TaskerIcons.getInstance().getDeleteIcon(), element.x, element.y, null);
+                    canvas.drawBitmap(Icons.getInstance().getDeleteIcon(), element.x, element.y, null);
 
             }catch (Exception e){ }
         }

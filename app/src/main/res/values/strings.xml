@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">Tasker Lite</string>
+    <string name="app_open">Press to open application</string>
 
     <string name="task_name">Task name</string>
     <string name="action_name">Action name</string>

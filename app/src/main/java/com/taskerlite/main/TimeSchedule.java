@@ -12,7 +12,7 @@ import com.taskerlite.logic.actions.mAction;
 import com.taskerlite.logic.ProfileController.*;
 import com.taskerlite.logic.*;
 import com.taskerlite.logic.tasks.mTask;
-import com.taskerlite.main.TaskerTypes.*;
+import com.taskerlite.main.Types.*;
 
 public class TimeSchedule extends BroadcastReceiver {
 

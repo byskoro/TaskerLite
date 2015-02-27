@@ -7,9 +7,8 @@ import com.taskerlite.logic.tasks.tAccessPoint;
 import com.taskerlite.logic.tasks.tApp;
 import com.taskerlite.logic.tasks.tMobileData;
 import com.taskerlite.logic.tasks.tUnlockScreen;
-import com.taskerlite.main.FragmentTaskBuilder;
-import com.taskerlite.main.TaskerIcons;
-import com.taskerlite.main.TaskerTypes.*;
+import com.taskerlite.main.Icons;
+import com.taskerlite.main.Types.*;
 
 public class TaskElement {
 
@@ -60,7 +59,7 @@ public class TaskElement {
 
     public Bitmap getIcon() {
 
-        return TaskerIcons.getInstance().getBuilderIcon(taskType);
+        return Icons.getInstance().getBuilderIcon(taskType);
     }
 
     public boolean isTouched(int xPointer, int yPointer, float size){
@@ -75,18 +74,18 @@ public class TaskElement {
 
     public void setNewCoordinate(int xPointer, int yPointer, int width, int height){
 
-        if(yPointer < TaskerIcons.builderSize /2)
-            yPointer = TaskerIcons.builderSize /2;
-        else if(yPointer > height  - TaskerIcons.builderSize /2)
-            yPointer = height - TaskerIcons.builderSize /2;
+        if(yPointer < Icons.builderSize /2)
+            yPointer = Icons.builderSize /2;
+        else if(yPointer > height  - Icons.builderSize /2)
+            yPointer = height - Icons.builderSize /2;
 
-        if(xPointer < TaskerIcons.builderSize /2)
-            xPointer = TaskerIcons.builderSize /2;
-        else if(xPointer > width - TaskerIcons.builderSize /2)
-            xPointer = width - TaskerIcons.builderSize /2;
+        if(xPointer < Icons.builderSize /2)
+            xPointer = Icons.builderSize /2;
+        else if(xPointer > width - Icons.builderSize /2)
+            xPointer = width - Icons.builderSize /2;
 
-        x = xPointer - TaskerIcons.builderSize /2;
-        y = yPointer - TaskerIcons.builderSize /2;
+        x = xPointer - Icons.builderSize /2;
+        y = yPointer - Icons.builderSize /2;
     }
 
     public void invalidateData(){

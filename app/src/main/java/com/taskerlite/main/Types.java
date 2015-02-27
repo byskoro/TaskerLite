@@ -1,6 +1,6 @@
 package com.taskerlite.main;
 
-public class TaskerTypes {
+public class Types {
 
     public static enum TYPES {A_TIME, T_APP, T_THREE_G, T_WIFI, T_ACCESS_POINT, T_UNLOCK_SCREEN}
 

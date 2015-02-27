@@ -1,5 +1,6 @@
 package com.taskerlite.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import com.taskerlite.R;
@@ -15,7 +16,7 @@ public class mActivity extends FragmentActivity implements FragmentTaskBuilder.D
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        TaskerIcons.getInstance(this);
+        Icons.getInstance(this);
 
         profileController = Flash.getProfileList();
 
@@ -23,8 +24,11 @@ public class mActivity extends FragmentActivity implements FragmentTaskBuilder.D
         add(R.id.fragmentConteiner, new FragmentTaskList()).
         commit();
 
-        TimeSchedule timeSchedule = new TimeSchedule();
-        timeSchedule.startNotify(this);
+        //TimeSchedule timeSchedule = new TimeSchedule();
+        //timeSchedule.startNotify(this);
+
+        if(!TService.isRunning(this))
+            startService(new Intent(this, TService.class));
     }
 
     @Override

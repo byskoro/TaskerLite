@@ -4,9 +4,8 @@ import android.graphics.Bitmap;
 import com.google.gson.GsonBuilder;
 import com.taskerlite.logic.actions.aTimer;
 import com.taskerlite.logic.actions.mAction;
-import com.taskerlite.main.FragmentTaskBuilder;
-import com.taskerlite.main.TaskerIcons;
-import com.taskerlite.main.TaskerTypes.*;
+import com.taskerlite.main.Icons;
+import com.taskerlite.main.Types.*;
 
 import java.util.ArrayList;
 
@@ -52,7 +51,7 @@ public class ActionElement {
 
     public Bitmap getIcon() {
 
-        return TaskerIcons.getInstance().getBuilderIcon(actionType);
+        return Icons.getInstance().getBuilderIcon(actionType);
     }
 
     public void invalidateData(){
@@ -72,18 +71,18 @@ public class ActionElement {
 
     public void setNewCoordinate(int xPointer, int yPointer, int width, int height){
 
-        if(yPointer < TaskerIcons.builderSize /2)
-            yPointer = TaskerIcons.builderSize /2;
-        else if(yPointer > height  - TaskerIcons.builderSize /2)
-            yPointer = height - TaskerIcons.builderSize /2;
+        if(yPointer < Icons.builderSize /2)
+            yPointer = Icons.builderSize /2;
+        else if(yPointer > height  - Icons.builderSize /2)
+            yPointer = height - Icons.builderSize /2;
 
-        if(xPointer < TaskerIcons.builderSize /2)
-            xPointer = TaskerIcons.builderSize /2;
-        else if(xPointer > width - TaskerIcons.builderSize /2)
-            xPointer = width - TaskerIcons.builderSize /2;
+        if(xPointer < Icons.builderSize /2)
+            xPointer = Icons.builderSize /2;
+        else if(xPointer > width - Icons.builderSize /2)
+            xPointer = width - Icons.builderSize /2;
 
-        x = xPointer - TaskerIcons.builderSize /2;
-        y = yPointer - TaskerIcons.builderSize /2;
+        x = xPointer - Icons.builderSize /2;
+        y = yPointer - Icons.builderSize /2;
     }
 
     public void addNewTaskElementId(long id){

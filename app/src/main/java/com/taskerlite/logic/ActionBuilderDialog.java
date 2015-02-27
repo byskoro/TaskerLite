@@ -18,7 +18,7 @@ import com.taskerlite.R;
 import com.taskerlite.logic.ProfileController.*;
 import com.taskerlite.logic.actions.aTimer;
 import com.taskerlite.main.FragmentTaskBuilder;
-import com.taskerlite.main.TaskerTypes.*;
+import com.taskerlite.main.Types.*;
 
 public class ActionBuilderDialog extends DialogFragment {
 

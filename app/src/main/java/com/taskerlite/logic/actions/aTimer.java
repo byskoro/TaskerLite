@@ -2,12 +2,10 @@ package com.taskerlite.logic.actions;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.List;
 
 import com.taskerlite.R;
-import android.app.Dialog;
+
 import android.content.Context;
-import android.content.pm.ApplicationInfo;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
@@ -17,16 +15,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import com.taskerlite.main.TaskerTypes.*;
+import com.taskerlite.main.Types.*;
 
 public class aTimer extends mAction {
 

@@ -8,7 +8,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-public class TaskerBuilderView extends View{
+public class BuilderView extends View{
 
     private ViewCallBack viewCallBack;
     private MotionEvent event;
@@ -29,7 +29,7 @@ public class TaskerBuilderView extends View{
         public void onDrawView(Canvas canvas, MotionEvent event);
     }
 
-    public TaskerBuilderView(Context context, AttributeSet attrs) {
+    public BuilderView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 

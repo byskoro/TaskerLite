@@ -86,19 +86,19 @@ public class FragmentTaskList extends Fragment implements View.OnClickListener{
            SwipeMenuItem onItem = new SwipeMenuItem(context);
            onItem.setBackground(new ColorDrawable(Color.rgb(0xC6, 0xB7, 0xA9)));
            onItem.setWidth(Screen.dp2px(context, bgSize));
-           onItem.setIcon(TaskerIcons.getInstance().getSwMenuStart());
+           onItem.setIcon(Icons.getInstance().getSwMenuStart());
            menu.addMenuItem(onItem);
 
            SwipeMenuItem offItem = new SwipeMenuItem(context);
            offItem.setBackground(new ColorDrawable(Color.rgb(0xC6, 0xB7, 0xA9)));
            offItem.setWidth(Screen.dp2px(context, bgSize));
-           offItem.setIcon(TaskerIcons.getInstance().getSwMenuStop());
+           offItem.setIcon(Icons.getInstance().getSwMenuStop());
            menu.addMenuItem(offItem);
 
            SwipeMenuItem deleteItem = new SwipeMenuItem(context);
            deleteItem.setBackground(new ColorDrawable(Color.rgb(0xC6, 0xB7, 0xA9)));
            deleteItem.setWidth(Screen.dp2px(context, bgSize));
-           deleteItem.setIcon(TaskerIcons.getInstance().getSwMenuDelete());
+           deleteItem.setIcon(Icons.getInstance().getSwMenuDelete());
            menu.addMenuItem(deleteItem);
         }
     };
@@ -179,13 +179,13 @@ public class FragmentTaskList extends Fragment implements View.OnClickListener{
 
             for(ActionElement action : getItem(position).getActionList()){
                 ImageView img = new ImageView(context);
-                img.setBackgroundDrawable(TaskerIcons.getInstance().getPreviewIcon(action.getActionType()));
+                img.setBackgroundDrawable(Icons.getInstance().getPreviewIcon(action.getActionType()));
                 iconsLay.addView(img);
             }
 
             for(TaskElement task : getItem(position).getTaskList()){
                 ImageView img = new ImageView(context);
-                img.setBackgroundDrawable(TaskerIcons.getInstance().getPreviewIcon(task.getTaskType()));
+                img.setBackgroundDrawable(Icons.getInstance().getPreviewIcon(task.getTaskType()));
                 iconsLay.addView(img);
             }
 

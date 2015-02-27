@@ -2,9 +2,8 @@ package com.taskerlite.logic;
 
 import com.taskerlite.logic.actions.mAction;
 import com.taskerlite.logic.tasks.mTask;
-import com.taskerlite.main.mActivity;
 import com.taskerlite.other.Flash;
-import com.taskerlite.main.TaskerTypes.*;
+import com.taskerlite.main.Types.*;
 
 import java.util.ArrayList;
 
