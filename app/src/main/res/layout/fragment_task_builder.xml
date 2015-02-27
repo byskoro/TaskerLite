@@ -56,7 +56,7 @@
         android:paddingRight="10dp"
         android:background="@drawable/probka5">
 
-        <View
+        <com.taskerlite.main.BuilderView
             android:id="@+id/drawBuilder"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
@@ -68,6 +68,7 @@
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:padding="10dp"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -78,16 +79,18 @@
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
-            <ImageView
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="0.7"
+                android:scaleType="centerInside"
                 android:background="@drawable/ic_launcher"/>
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="0.3"
                 android:text="test"/>
-
         </LinearLayout>
 
         <LinearLayout
@@ -100,14 +103,16 @@
 
             <ImageView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="0.7"
+                android:scaleType="fitCenter"
                 android:background="@drawable/ic_launcher"/>
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="0.3"
                 android:text="test"/>
-
         </LinearLayout>
 
         <LinearLayout
@@ -119,14 +124,16 @@
 
             <ImageView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="0.7"
+                android:scaleType="fitCenter"
                 android:background="@drawable/ic_launcher"/>
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="0.3"
                 android:text="test"/>
-
         </LinearLayout>
 
         <LinearLayout
@@ -138,14 +145,16 @@
 
             <ImageView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="0.7"
+                android:scaleType="fitCenter"
                 android:background="@drawable/ic_launcher"/>
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="0.3"
                 android:text="test"/>
-
         </LinearLayout>
     </LinearLayout>
 
