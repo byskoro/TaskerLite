@@ -27,16 +27,22 @@ public class TService extends Service {
 
     private String previousRawData = "";
     private ProfileController profileController;
+    private ServiceThread serviceThread;
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
         runAsForeground();
 
-        TimeSchedule ts = new TimeSchedule();
-        ts.startNotify(getApplicationContext());
+        serviceThread = new ServiceThread();
 
         return Service.START_STICKY;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        serviceThread.threadStop();
     }
 
     @Override
@@ -44,54 +50,70 @@ public class TService extends Service {
         return null;
     }
 
+    class ServiceThread extends Thread{
 
-    public class TimeSchedule extends BroadcastReceiver {
+        private  boolean threadState = false;
+
+        public ServiceThread(){
+
+            setName("serviceThread");
+            threadState = true;
+            start();
+        }
 
         @Override
-        public void onReceive(Context context, Intent intent) {
+        public void run() {
 
-            Vibro.playShort(getApplicationContext());
+            while (threadState) {
 
-            if(!previousRawData.equals(Flash.getRawData())){
+                try {
 
-                profileController = Flash.getProfileList();
-                previousRawData = Flash.getRawData();
-            }
+                    Thread.sleep(generateOffsetTime());
 
-            for(Profile profile : profileController.getProfileList()){
+                    Vibro.playShort(getApplicationContext());
 
-                for(ActionElement action : profile.getActionList()){
+                    if(!previousRawData.equals(Flash.getRawData())){
 
-                    mAction actionObj = action.getActionObject();
+                        profileController = Flash.getProfileList();
+                        previousRawData = Flash.getRawData();
+                    }
 
-                    if(actionObj.isMyAction(context, TYPES.A_TIME)){
+                    for(Profile profile : profileController.getProfileList()){
 
-                        for(TaskElement task : profile.getTaskList()){
+                        for(ActionElement action : profile.getActionList()){
 
-                            if(action.isTaskElementIdPresent(task.getTaskId())){
+                            mAction actionObj = action.getActionObject();
 
-                                mTask taskObj = task.getTaskObject();
-                                taskObj.start(context);
+                            if(actionObj.isMyAction(getApplicationContext(), TYPES.A_TIME)){
+
+                                for(TaskElement task : profile.getTaskList()){
+
+                                    if(action.isTaskElementIdPresent(task.getTaskId())){
+
+                                        mTask taskObj = task.getTaskObject();
+                                        taskObj.start(getApplicationContext());
+                                    }
+                                }
                             }
                         }
                     }
-                }
-            }
 
-            startNotify(context);
+                }catch (Exception e) { }
+
+            }
         }
 
-        public void startNotify(Context context) {
+        private long generateOffsetTime(){
 
             Calendar cal = Calendar.getInstance();
             cal.add(Calendar.MINUTE, 1);
             cal.set(Calendar.SECOND, 0);
 
-            //AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-            //Intent intent = new Intent(context, TimeSchedule.class);
-            //PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT );
-            //am.cancel(pendingIntent);
-            //am.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pendingIntent);
+            return 2500;//cal.getTimeInMillis() - System.currentTimeMillis();
+        }
+
+        public void threadStop(){
+            threadState = false;
         }
     }
 
