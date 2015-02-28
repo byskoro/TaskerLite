@@ -73,8 +73,6 @@ public class TService extends Service {
 
                     Thread.sleep(generateOffsetTime());
 
-                    Vibro.playShort(getApplicationContext()); // for debug
-
                     if(!previousRawData.equals(Flash.getRawData())){
 
                         profileController = Flash.getProfileController();
