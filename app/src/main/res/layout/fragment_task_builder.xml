@@ -43,7 +43,6 @@
                 android:textSize="30sp" />
 
             <ImageButton
-                android:id="@+id/clearBtn"
                 android:layout_width="0dp"
                 android:padding="10dp"
                 android:layout_height="match_parent"
@@ -120,6 +119,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/clearBtn"
                 android:layout_width="0dp"
                 android:layout_weight="0.25"
                 android:layout_height="match_parent"

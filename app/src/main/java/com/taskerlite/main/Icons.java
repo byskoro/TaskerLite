@@ -73,7 +73,7 @@ public class Icons {
 
     private void generateDeleteIcon(){
 
-        tmpBigIcon  = BitmapFactory.decodeResource(context.getResources(), R.drawable.delete);
+        tmpBigIcon  = BitmapFactory.decodeResource(context.getResources(), R.drawable.delete_element);
         deleteIcon = Bitmap.createScaledBitmap(tmpBigIcon, deleteSize, deleteSize, true);
     }
 
