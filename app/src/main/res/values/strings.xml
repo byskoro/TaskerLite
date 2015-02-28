@@ -2,8 +2,11 @@
 <resources>
 
     <string name="app_name">Tasker Lite</string>
+
+    <!-- notification  -->
     <string name="app_open">Press to open application</string>
 
+    <!-- text of input  -->
     <string name="task_name">Task name</string>
     <string name="action_name">Action name</string>
 
@@ -16,15 +19,18 @@
     <string name="t_mobile_internet_short">Mobile internet 3G/GPRS</string>
     <string name="t_unlock_screen_short">Unlock screen</string>
 
-    <string name="a_time_short">Time action</string>
+    <string name="a_time_short">Time trigger</string>
+    <string name="a_boot_complete_short">Boot trigger</string>
 
     <!-- Description of action list  -->
     <string-array name="actionsList">
         <item>Trigger by time</item>
+        <item>Boot complete</item>
     </string-array>
 
     <string-array name="actionsIcons">
         <item>@drawable/a_timer</item>
+        <item>@drawable/a_boot_complete</item>
     </string-array>
 
     <!-- Description of task list  -->

@@ -24,9 +24,6 @@ public class mActivity extends FragmentActivity implements FragmentTaskBuilder.D
         add(R.id.fragmentConteiner, new FragmentTaskList()).
         commit();
 
-        //TimeSchedule timeSchedule = new TimeSchedule();
-        //timeSchedule.startNotify(this);
-
         if(!TService.isRunning(this))
             startService(new Intent(this, TService.class));
     }

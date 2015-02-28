@@ -8,18 +8,15 @@ import com.taskerlite.logic.ProfileController.*;
 import com.taskerlite.logic.*;
 import com.taskerlite.logic.tasks.mTask;
 import android.app.ActivityManager;
-import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.media.AudioManager;
-import android.media.ToneGenerator;
-import android.os.Handler;
 import android.os.IBinder;
-import android.os.Message;
+import android.os.PowerManager;
+import android.os.PowerManager.WakeLock;
+
 import com.taskerlite.main.Types.*;
 import com.taskerlite.other.Vibro;
 
@@ -28,11 +25,16 @@ public class TService extends Service {
     private String previousRawData = "";
     private ProfileController profileController;
     private ServiceThread serviceThread;
+    private WakeLock wakeLock;
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
-        runAsForeground();
+        PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+        wakeLock = pm.newWakeLock((PowerManager.PARTIAL_WAKE_LOCK), "TAG");
+        wakeLock.acquire();
+
+        //runAsForeground();
 
         serviceThread = new ServiceThread();
 
@@ -43,6 +45,7 @@ public class TService extends Service {
     public void onDestroy() {
         super.onDestroy();
         serviceThread.threadStop();
+        wakeLock.release();
     }
 
     @Override
@@ -56,7 +59,7 @@ public class TService extends Service {
 
         public ServiceThread(){
 
-            setName("serviceThread");
+            setName("ServiceThread");
             threadState = true;
             start();
         }
