@@ -11,8 +11,8 @@ public class BootComplete extends BroadcastReceiver {
 
         if (intent.getAction().equals("android.intent.action.BOOT_COMPLETED")){
 
-            TimeSchedule timeSchedule = new TimeSchedule();
-            timeSchedule.startNotify(context);
+            if(!TService.isRunning(context))
+                context.startService(new Intent(context, TService.class));
         }
     }
 }
