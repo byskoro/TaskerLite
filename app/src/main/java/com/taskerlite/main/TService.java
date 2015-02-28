@@ -16,9 +16,8 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
-
 import com.taskerlite.main.Types.*;
-import com.taskerlite.other.Vibro;
+
 
 public class TService extends Service {
 
@@ -76,7 +75,7 @@ public class TService extends Service {
                     if(!previousRawData.equals(Flash.getRawData())){
 
                         profileController = Flash.getProfileController();
-                        previousRawData = Flash.getRawData();
+                        previousRawData   = Flash.getRawData();
                     }
 
                     for(Profile profile : profileController.getProfileList()){
