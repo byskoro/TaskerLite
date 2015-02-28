@@ -16,7 +16,12 @@ import android.widget.TextView;
 
 import com.taskerlite.R;
 import com.taskerlite.logic.ProfileController.*;
+import com.taskerlite.logic.actions.aBootComplete;
 import com.taskerlite.logic.actions.aTimer;
+import com.taskerlite.logic.tasks.tAccessPoint;
+import com.taskerlite.logic.tasks.tApp;
+import com.taskerlite.logic.tasks.tMobileData;
+import com.taskerlite.logic.tasks.tUnlockScreen;
 import com.taskerlite.main.FragmentTaskBuilder;
 import com.taskerlite.main.Types.*;
 
@@ -48,7 +53,15 @@ public class ActionBuilderDialog extends DialogFragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                profile.addNewAction(new aTimer(), TYPES.A_TIME, 0, 0);
+                switch (position){
+                    case 0:
+                        profile.addNewAction(new aTimer(), TYPES.A_TIME, 0, 0);
+                        break;
+                    case 1:
+                        profile.addNewAction(new aBootComplete(getActivity()), TYPES.A_BOOT_COMPLETE, 0, 0);
+                        break;
+                }
+
                 dismiss();
             }
         });

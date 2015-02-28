@@ -42,7 +42,7 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name=".main.BootComplete">
+        <receiver android:name=".Receivers.BootComplete">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"></action>
             </intent-filter>

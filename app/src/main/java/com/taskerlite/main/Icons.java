@@ -57,6 +57,7 @@ public class Icons {
         generatePimpa();
 
         generate(TYPES.A_TIME, R.drawable.a_timer);
+        generate(TYPES.A_BOOT_COMPLETE, R.drawable.a_boot_complete);
         generate(TYPES.T_APP, R.drawable.t_app);
         generate(TYPES.T_THREE_G, R.drawable.t_three_g);
         generate(TYPES.T_WIFI, R.drawable.t_wifi);

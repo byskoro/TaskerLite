@@ -15,8 +15,8 @@
     <string name="ap_ssid_password">Network password</string>
 
     <string name="t_app_short">Application</string>
-    <string name="t_access_point_short">Access point</string>
-    <string name="t_mobile_internet_short">Mobile internet 3G/GPRS</string>
+    <string name="t_access_point_short">WIFI access point</string>
+    <string name="t_mobile_internet_short">Mobile internet</string>
     <string name="t_unlock_screen_short">Unlock screen</string>
 
     <string name="a_time_short">Time trigger</string>

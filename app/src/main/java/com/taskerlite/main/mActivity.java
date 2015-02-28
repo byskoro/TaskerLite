@@ -18,7 +18,7 @@ public class mActivity extends FragmentActivity implements FragmentTaskBuilder.D
 
         Icons.getInstance(this);
 
-        profileController = Flash.getProfileList();
+        profileController = Flash.getProfileController();
 
         getSupportFragmentManager().beginTransaction().
         add(R.id.fragmentConteiner, new FragmentTaskList()).

@@ -15,13 +15,14 @@ public class Notification {
     private static Context context;
     private NotificationManager manager;
     private ArrayList<String> notificationMessages;
+    private static int index = 0;
 
     public static Notification getInstance(Context context) {
-        if (instance == null) {
+        if (instance == null)
             instance = new Notification(context);
-        } else {
+        else
             instance.context = context;
-        }
+
         return instance;
     }
 
@@ -44,6 +45,7 @@ public class Notification {
 
         android.app.Notification notification = nb.getNotification(); //генерируем уведомление
         notification.flags |= notification.FLAG_AUTO_CANCEL; // FLAG_ONLY_ALERT_ONCE
-        manager.notify(666, notification); // отображаем его пользователю.
+        manager.notify(index, notification); // отображаем его пользователю.
+        index++;
     }
 }

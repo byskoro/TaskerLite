@@ -34,7 +34,7 @@ public class TService extends Service {
         wakeLock = pm.newWakeLock((PowerManager.PARTIAL_WAKE_LOCK), "TAG");
         wakeLock.acquire();
 
-        //runAsForeground();
+        runAsForeground();
 
         serviceThread = new ServiceThread();
 
@@ -73,11 +73,11 @@ public class TService extends Service {
 
                     Thread.sleep(generateOffsetTime());
 
-                    Vibro.playShort(getApplicationContext());
+                    Vibro.playShort(getApplicationContext()); // for debug
 
                     if(!previousRawData.equals(Flash.getRawData())){
 
-                        profileController = Flash.getProfileList();
+                        profileController = Flash.getProfileController();
                         previousRawData = Flash.getRawData();
                     }
 
@@ -112,7 +112,7 @@ public class TService extends Service {
             cal.add(Calendar.MINUTE, 1);
             cal.set(Calendar.SECOND, 0);
 
-            return 2500;//cal.getTimeInMillis() - System.currentTimeMillis();
+            return cal.getTimeInMillis() - System.currentTimeMillis();
         }
 
         public void threadStop(){

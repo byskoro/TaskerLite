@@ -34,7 +34,7 @@ public class Flash {
 		} catch (Exception e) { }
 	}
 	
-	public static ProfileController getProfileList(){
+	public static ProfileController getProfileController(){
 		
 		ProfileController sl = null;
 		String rBuffer = "";
