@@ -1,12 +1,11 @@
 package com.taskerlite.other;
 
-
 import android.app.NotificationManager;
 import android.content.Context;
 import android.support.v4.app.NotificationCompat;
-
 import com.taskerlite.R;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Notification {
@@ -15,8 +14,7 @@ public class Notification {
 
     private static Context context;
     private NotificationManager manager;
-    private int lastId = 0;
-    private HashMap<Integer, android.app.Notification> notifications;
+    private ArrayList<String> notificationMessages;
 
     public static Notification getInstance(Context context) {
         if (instance == null) {
@@ -30,23 +28,22 @@ public class Notification {
     private Notification(Context context) {
         this.context = context;
         manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        notifications = new HashMap<Integer, android.app.Notification>();
+        notificationMessages = new ArrayList<String>();
     }
 
-    public int createInfoNotification(String header, String message) {
+    public void createInfoNotification(String header, String message) {
+
         NotificationCompat.Builder nb = new NotificationCompat.Builder(context)
-                .setSmallIcon(R.drawable.ic_launcher) //иконка уведомления
+                .setSmallIcon(R.drawable.ic_launcher)
                 .setAutoCancel(true) //уведомление закроется по клику на него
+                .setContentTitle(header) //заголовок уведомления
                 .setTicker(message) //текст, который отобразится вверху статус-бара при создании уведомления
                 .setContentText(message) // Основной текст уведомления
-                //.setContentIntent(PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_CANCEL_CURRENT))
-                .setWhen(System.currentTimeMillis()) //отображаемое время уведомления
-                .setContentTitle(header) //заголовок уведомления
+                .setWhen(System.currentTimeMillis())
                 .setDefaults(android.app.Notification.DEFAULT_VIBRATE);
 
         android.app.Notification notification = nb.getNotification(); //генерируем уведомление
-        manager.notify(lastId, notification); // отображаем его пользователю.
-        notifications.put(lastId, notification); //теперь мы можем обращаться к нему по id
-        return lastId++;
+        notification.flags |= notification.FLAG_AUTO_CANCEL; // FLAG_ONLY_ALERT_ONCE
+        manager.notify(666, notification); // отображаем его пользователю.
     }
 }

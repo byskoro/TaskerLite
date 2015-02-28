@@ -1,162 +1,185 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:weightSum="1"
-    android:background="#B0987C">
+    android:background="@null">
 
     <LinearLayout
+        android:id="@+id/deskTopId"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:orientation="horizontal"
-        android:background="#6E5B57">
-
-        <ImageButton
-            android:id="@+id/backBtn"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.2"
-            android:scaleType="centerInside"
-            android:padding="10dp"
-            android:src="@drawable/arrow455"
-            android:background="@null" />
-
-        <EditText
-            android:id="@+id/sceneName"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.6"
-            android:padding="10dp"
-            android:inputType="text"
-            android:maxLines="1"
-            android:imeOptions="actionDone"
-            android:textColorHint="#aaa"
-            android:hint="Name Scene"
-            android:gravity="center"
-            android:textSize="30sp" />
-
-        <ImageButton
-            android:id="@+id/clearBtn"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.2"
-            android:scaleType="centerInside"
-            android:padding="10dp"
-            android:src="@drawable/spinner4"
-            android:background="@null" />
-    </LinearLayout>
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/desk_top"
+        android:orientation="vertical"/>
 
     <LinearLayout
+        android:layout_below="@+id/deskTopId"
+        android:layout_above="@+id/deskBottomId"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:paddingTop="10dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:background="@drawable/desk">
-
-        <com.taskerlite.main.BuilderView
-            android:id="@+id/drawBuilder"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/menuBtnID"
-        android:layout_alignParentBottom="true"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:padding="10dp"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/desk_center">
 
         <LinearLayout
-            android:id="@+id/actionElementID"
-            android:layout_width="0dp"
-            android:layout_weight="0.25"
-            android:layout_height="match_parent"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/backBtn"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.2"
+                android:padding="10dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/arrow455"
+                android:background="@null" />
+
+            <EditText
+                android:id="@+id/sceneName"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.6"
+                android:padding="10dp"
+                android:inputType="text"
+                android:maxLines="1"
+                android:imeOptions="actionDone"
+                android:textColorHint="#aaa"
+                android:hint="Name"
+                android:gravity="center"
+                android:textSize="30sp" />
+
+            <ImageButton
+                android:id="@+id/clearBtn"
+                android:layout_width="0dp"
+                android:padding="10dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.2"
+                android:scaleType="centerInside"
+                android:src="@drawable/spinner4"
+                android:background="@null" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <com.taskerlite.main.BuilderView
+                android:id="@+id/drawBuilder"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/menuBtnID"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight="0.7"
-                android:scaleType="centerInside"
-                android:background="@drawable/ic_launcher"/>
+                android:id="@+id/actionElementID"
+                android:layout_width="0dp"
+                android:layout_weight="0.25"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight="0.3"
-                android:text="test"/>
-        </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.7"
+                    android:scaleType="centerInside"
+                    android:background="@drawable/ic_launcher"/>
 
-        <LinearLayout
-            android:id="@+id/taskElementID"
-            android:layout_width="0dp"
-            android:layout_weight="0.25"
-            android:layout_height="match_parent"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
+                <com.taskerlite.other.AutoResizeTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.3"
+                    android:textColor="@color/white"
+                    android:text="Triger"/>
+            </LinearLayout>
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight="0.7"
-                android:scaleType="fitCenter"
-                android:background="@drawable/ic_launcher"/>
+            <LinearLayout
+                android:id="@+id/taskElementID"
+                android:layout_width="0dp"
+                android:layout_weight="0.25"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight="0.3"
-                android:text="test"/>
-        </LinearLayout>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.7"
+                    android:scaleType="fitCenter"
+                    android:background="@drawable/ic_launcher"/>
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="0.25"
-            android:layout_height="match_parent"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
+                <com.taskerlite.other.AutoResizeTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.3"
+                    android:textColor="@color/white"
+                    android:text="Tasks"/>
+            </LinearLayout>
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight="0.7"
-                android:scaleType="fitCenter"
-                android:background="@drawable/ic_launcher"/>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.25"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight="0.3"
-                android:text="test"/>
-        </LinearLayout>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.7"
+                    android:scaleType="fitCenter"
+                    android:background="@drawable/ic_launcher"/>
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="0.25"
-            android:layout_height="match_parent"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
+                <com.taskerlite.other.AutoResizeTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.3"
+                    android:textColor="@color/white"
+                    android:text="Clean"/>
+            </LinearLayout>
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight="0.7"
-                android:scaleType="fitCenter"
-                android:background="@drawable/ic_launcher"/>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="0.25"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight="0.3"
-                android:text="test"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.7"
+                    android:scaleType="fitCenter"
+                    android:background="@drawable/ic_launcher"/>
+
+                <com.taskerlite.other.AutoResizeTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.3"
+                    android:textColor="@color/white"
+                    android:text="Delete"/>
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/deskBottomId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/desk_bottom"
+        android:orientation="vertical"/>
 
     <LinearLayout
         android:id="@+id/clearRequestLay"
@@ -164,7 +187,6 @@
         android:layout_height="0dp"
         android:focusable="true"
         android:focusableInTouchMode="true"
-        android:orientation="vertical"
-        android:visibility="gone" />
+        android:orientation="vertical"/>
 
-</LinearLayout>
+</RelativeLayout>

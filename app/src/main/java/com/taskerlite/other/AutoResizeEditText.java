@@ -28,6 +28,7 @@ public class AutoResizeEditText extends EditText {
     private boolean _enableSizeCache = true;
     private boolean _initiallized = false;
     private TextPaint paint;
+    private Context context;
 
     private interface SizeTester {
         /**
@@ -52,12 +53,13 @@ public class AutoResizeEditText extends EditText {
         this(context, attrs, 0);
     }
 
-    public AutoResizeEditText(final Context context, final AttributeSet attrs,
-                              final int defStyle) {
+    public AutoResizeEditText(final Context context, final AttributeSet attrs, final int defStyle) {
         super(context, attrs, defStyle);
+
+        //setTypeface(Typeface.createFromAsset(context.getAssets(), "KGBlankSpaceSketch.ttf"));
+
         // using the minimal recommended font size
-        _minTextSize = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP,
-                12, getResources().getDisplayMetrics());
+        _minTextSize = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 12, getResources().getDisplayMetrics());
         _maxTextSize = getTextSize();
         if (_maxLines == 0)
             // no value was assigned during construction

@@ -101,6 +101,7 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
         nameScene = (EditText) view.findViewById(R.id.sceneName);
         nameScene.setOnEditorActionListener(this);
         nameScene.setText(profile.getName());
+        nameScene.setTypeface(Typeface.createFromAsset(context.getAssets(), "KGBlankSpaceSketch.ttf"));
         clearRequestLay = (LinearLayout) view.findViewById(R.id.clearRequestLay);
         clearRequest(nameScene);
 
@@ -109,7 +110,7 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
         textPaint = new Paint();
         textPaint.setColor(Color.WHITE);
         textPaint.setTextSize(getResources().getInteger(R.integer.builder_text_size));
-        textPaint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
+        textPaint.setTypeface(Typeface.createFromAsset(context.getAssets(), "KGBlankSpaceSketch.ttf"));
         textPaint.setTextAlign(Paint.Align.CENTER);
 
         linePaint = new Paint();
@@ -359,9 +360,8 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
                 for (ActionElement action : profile.getActionList()) {
                     for (TaskElement task : profile.getTaskList()) {
                         if (action.isTaskElementIdPresent(task.getTaskId())) {
-                            linePaint.setColor(Types.getColor(indexColor));
+                            linePaint.setColor(Color.WHITE);
                             canvas.drawLine(action.getX() + iconSizeElement /2, action.getY() + iconSizeElement/10, task.getX()   + iconSizeElement /2, task.getY()   + iconSizeElement/10, linePaint);
-                            indexColor++;
                         }
                     }
                 }

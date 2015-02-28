@@ -70,7 +70,7 @@ public class AutoResizeTextView extends TextView {
 
     private void initialize(Context context) {
 
-        setTypeface(Typeface.createFromAsset(context.getAssets(), "Roboto-Regular.ttf"));
+        setTypeface(Typeface.createFromAsset(context.getAssets(), "KGBlankSpaceSketch.ttf"));
 
         mPaint = new TextPaint(getPaint());
         mMaxTextSize = getTextSize();
