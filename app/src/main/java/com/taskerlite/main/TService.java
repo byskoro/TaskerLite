@@ -18,7 +18,6 @@ import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import com.taskerlite.main.Types.*;
 
-
 public class TService extends Service {
 
     private String previousRawData = "";
@@ -70,8 +69,6 @@ public class TService extends Service {
 
                 try {
 
-                    Thread.sleep(generateOffsetTime());
-
                     if(!previousRawData.equals(Flash.getRawData())){
 
                         profileController = Flash.getProfileController();
@@ -98,8 +95,9 @@ public class TService extends Service {
                         }
                     }
 
-                }catch (Exception e) { }
+                    Thread.sleep(generateOffsetTime());
 
+                }catch (Exception e) { }
             }
         }
 
