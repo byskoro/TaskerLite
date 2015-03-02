@@ -10,29 +10,21 @@ import java.util.ArrayList;
 public class ProfileController {
 	
 	private ArrayList<Profile> profileList = new ArrayList<Profile>();
-	
-	public void newProfile(String profileName){ profileList.add(new Profile(profileName)); }
+
+	public void newProfile(){ profileList.add(new Profile("")); }
 	public Profile getProfile(int index){ return profileList.get(index); }
 	public ArrayList<Profile> getProfileList() { return profileList; }
     public int getProfileListSize(){ return profileList.size(); }
-	
-	public void removeProfileFromList(int index){
+
+    public void removeProfileFromList(int index){
 
 		profileList.remove(index);
         profileList.trimToSize();
-        saveCurrentProfile();
+        saveAllProfile();
 	}
 
-    public void saveCurrentProfile(){
+    public void saveAllProfile(){
         Flash.saveList(this);
-    }
-
-    public void removeAllElementFromProfile(int index){
-
-        profileList.get(index).getActionList().clear();
-        profileList.get(index).getActionList().trimToSize();
-        profileList.get(index).getTaskList().clear();
-        profileList.get(index).getTaskList().trimToSize();
     }
 	
 	public class Profile {
@@ -41,10 +33,9 @@ public class ProfileController {
 		private ArrayList<ActionElement> actionList = new ArrayList<ActionElement>();
 		private ArrayList<TaskElement> taskList = new ArrayList<TaskElement>();
 
-		public Profile(String sceneName){
-
-			this.name = sceneName;
-		}
+        public Profile(String name){
+            this.name = name;
+        }
 		
 		public void addNewAction(mAction actionObject, TYPES actionType, int xCoordinate, int yCoordinate){
 			

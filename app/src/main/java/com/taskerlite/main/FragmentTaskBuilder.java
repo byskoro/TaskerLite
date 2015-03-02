@@ -48,7 +48,7 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
     DelElement gcElement;
 
     ImageButton backBtn;
-    LinearLayout actionElement, taskElement, clearBtn, deleteBtn;
+    LinearLayout actionElement, taskElement, deleteBtn;
     EditText nameScene;
     LinearLayout clearRequestLay;
 
@@ -61,6 +61,7 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
         dataActivity = (FragmentCallBack) activity;
         profileController = dataActivity.getProfileController();
         sceneIndex = dataActivity.getCurrentProfileIndex();
+
         profile = profileController.getProfile(sceneIndex);
 
         context = getActivity();
@@ -75,8 +76,6 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
         taskerView.setViewCallBack(viewCallBack);
         backBtn = (ImageButton) view.findViewById(R.id.backBtn);
         backBtn.setOnClickListener(this);
-        clearBtn= (LinearLayout) view.findViewById(R.id.clearBtn);
-        clearBtn.setOnClickListener(this);
         deleteBtn= (LinearLayout) view.findViewById(R.id.deleteBtn);
         deleteBtn.setOnClickListener(this);
         actionElement = (LinearLayout) view.findViewById(R.id.actionElementID);
@@ -116,6 +115,8 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
     public void onPause() {
         super.onPause();
 
+        handlerLogic.removeMessages(1);
+
         for(ActionElement action : profile.getActionList()) {
             action.unselect();
         }
@@ -124,9 +125,7 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
         }
 
         profile.invalidateData();
-        profileController.saveCurrentProfile();
-
-        handlerLogic.removeMessages(1);
+        profileController.saveAllProfile();
     }
 
     @Override
@@ -135,24 +134,29 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
         switch(view.getId()){
 
             case R.id.backBtn:
+
                 dataActivity.gotoFragmentList();
-                break;
-            case R.id.clearBtn:
-                profileController.removeAllElementFromProfile(sceneIndex);
+
                 break;
             case R.id.deleteBtn:
+
                 profileController.removeProfileFromList(sceneIndex);
                 dataActivity.gotoFragmentList();
+
                 break;
             case R.id.actionElementID:
+
                 ActionBuilderDialog actionDialog = new ActionBuilderDialog();
                 actionDialog.setTargetFragment(this, 0);
                 actionDialog.show(getFragmentManager().beginTransaction(), "actionList");
+
                 break;
             case R.id.taskElementID:
+
                 TaskBuilderDialog taskDialog = new TaskBuilderDialog();
                 taskDialog.setTargetFragment(this, 0);
                 taskDialog.show(getFragmentManager().beginTransaction(), "taskList");
+
                 break;
         }
     }

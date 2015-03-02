@@ -122,7 +122,7 @@ public class FragmentTaskList extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View view) {
 
-        profileController.newProfile("");
+        profileController.newProfile();
         goToBuilderFragment(profileController.getProfileListSize() - 1);
     }
 
