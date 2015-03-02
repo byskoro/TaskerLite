@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_weight="0"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal">
 
         <ImageButton
@@ -18,7 +19,7 @@
             android:layout_weight="0.2"
             android:scaleType="centerInside"
             android:padding="10dp"
-            android:src="@drawable/spinner4"
+            android:src="@android:drawable/ic_menu_compass"
             android:background="@null"/>
 
         <com.taskerlite.other.AutoResizeTextView
@@ -39,7 +40,7 @@
             android:layout_weight="0.2"
             android:scaleType="centerInside"
             android:padding="10dp"
-            android:src="@drawable/settings22"
+            android:src="@drawable/settings"
             android:background="@null"/>
 
     </LinearLayout>
@@ -52,60 +53,9 @@
         android:layout_marginTop="15dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
+        android:background="@color/white"
         android:id="@+id/topLayout">
 
-        <LinearLayout
-            android:id="@+id/Top"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.5"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <com.taskerlite.other.AutoResizeTextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.5"
-                android:text="19:00"
-                android:maxLines="1"
-                android:gravity="center"
-                android:padding="5dp"
-                android:textColor="#ffffff"
-                android:textSize="500sp" />
-
-            <com.taskerlite.other.AutoResizeTextView
-                android:id="@+id/taskName"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:text="Turn on Skype"
-                android:textSize="500sp"
-                android:textColor="#ffffff"
-                android:maxLines="2"
-                android:layout_weight="0.5"
-                android:padding="5dp"
-                android:gravity="center" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.5"
-            android:baselineAligned="false"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.5"
-                android:orientation="vertical"
-                android:layout_marginBottom="28dp" />
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.5"
-                android:orientation="vertical" />
-        </LinearLayout>
     </LinearLayout>
 
     <com.baoyz.swipemenulistview.SwipeMenuListView
@@ -118,7 +68,7 @@
         android:layout_marginRight="15dp"
         android:layout_marginBottom="15dp"
         android:padding="5dp"
-        android:divider="#878787"
+        android:divider="#FFFFFF"
         android:dividerHeight="1.0dp" />
 
 </LinearLayout>
