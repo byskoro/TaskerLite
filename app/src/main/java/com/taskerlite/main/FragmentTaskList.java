@@ -80,13 +80,13 @@ public class FragmentTaskList extends Fragment implements View.OnClickListener{
            int bgSize   = getResources().getInteger(R.integer.swipe_menu_bg_size);
 
            SwipeMenuItem onItem = new SwipeMenuItem(context);
-           onItem.setBackground(new ColorDrawable(Color.rgb(0xC6, 0xB7, 0xA9)));
+           onItem.setBackground(null);
            onItem.setWidth(Screen.dp2px(context, bgSize));
            onItem.setIcon(Icons.getInstance().getSwMenuStart());
            menu.addMenuItem(onItem);
 
            SwipeMenuItem offItem = new SwipeMenuItem(context);
-           offItem.setBackground(new ColorDrawable(Color.rgb(0xC6, 0xB7, 0xA9)));
+           offItem.setBackground(null);
            offItem.setWidth(Screen.dp2px(context, bgSize));
            offItem.setIcon(Icons.getInstance().getSwMenuStop());
            menu.addMenuItem(offItem);
