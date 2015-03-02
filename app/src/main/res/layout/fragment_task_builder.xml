@@ -8,48 +8,28 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
             android:orientation="horizontal">
-
-            <ImageButton
-                android:id="@+id/backBtn"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.2"
-                android:padding="10dp"
-                android:scaleType="centerInside"
-                android:src="@drawable/back"
-                android:background="@null" />
 
             <EditText
                 android:id="@+id/sceneName"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="0.6"
                 android:padding="10dp"
                 android:inputType="text"
                 android:maxLines="1"
+                android:maxLength="20"
                 android:imeOptions="actionDone"
                 android:textColorHint="#aaa"
                 android:hint="Name"
                 android:gravity="center"
                 android:textSize="30sp" />
-
-            <ImageButton
-                android:layout_width="0dp"
-                android:padding="10dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.2"
-                android:scaleType="centerInside"
-                android:src="@drawable/settings"
-                android:background="@null" />
         </LinearLayout>
 
         <LinearLayout
@@ -73,9 +53,32 @@
             android:orientation="horizontal">
 
             <LinearLayout
+                android:id="@+id/backBtn"
+                android:layout_width="0dp"
+                android:layout_weight="0.25"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.7"
+                    android:scaleType="fitCenter"
+                    android:background="@drawable/ic_launcher"/>
+
+                <com.taskerlite.other.AutoResizeTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.3"
+                    android:textColor="@color/white"
+                    android:text="Back"/>
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/actionElementID"
                 android:layout_width="0dp"
-                android:layout_weight="0.33"
+                android:layout_weight="0.25"
                 android:layout_height="match_parent"
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
@@ -98,7 +101,7 @@
             <LinearLayout
                 android:id="@+id/taskElementID"
                 android:layout_width="0dp"
-                android:layout_weight="0.33"
+                android:layout_weight="0.25"
                 android:layout_height="match_parent"
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
@@ -121,7 +124,7 @@
             <LinearLayout
                 android:id="@+id/deleteBtn"
                 android:layout_width="0dp"
-                android:layout_weight="0.33"
+                android:layout_weight="0.25"
                 android:layout_height="match_parent"
                 android:gravity="center_horizontal"
                 android:orientation="vertical">

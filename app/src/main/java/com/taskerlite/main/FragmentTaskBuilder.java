@@ -47,8 +47,7 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
     private Bitmap pimpaIcon = Icons.getInstance().getPimpaIcon();
     DelElement gcElement;
 
-    ImageButton backBtn;
-    LinearLayout actionElement, taskElement, deleteBtn;
+    LinearLayout backBtn, actionElement, taskElement, deleteBtn;
     EditText nameScene;
     LinearLayout clearRequestLay;
 
@@ -74,7 +73,7 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
 
 		taskerView = (BuilderView) view.findViewById(R.id.drawBuilder);
         taskerView.setViewCallBack(viewCallBack);
-        backBtn = (ImageButton) view.findViewById(R.id.backBtn);
+        backBtn = (LinearLayout) view.findViewById(R.id.backBtn);
         backBtn.setOnClickListener(this);
         deleteBtn= (LinearLayout) view.findViewById(R.id.deleteBtn);
         deleteBtn.setOnClickListener(this);
@@ -243,12 +242,10 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
             }else if(findTouchedTask(xPointer, yPointer) != null) {
 
                 findTouchedTask(xPointer, yPointer).getTaskObject().show(getFragmentManager());
-                Vibro.playShort(context);
 
             } else if (findTouchedAction(xPointer, yPointer) != null){
 
                 findTouchedAction(xPointer, yPointer).getActionObject().show(getFragmentManager());
-                Vibro.playShort(context);
             }
 
             unselectAll();
@@ -271,6 +268,8 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
                 }else
                     findActionElement.unselect();
 
+                Vibro.playShort(context);
+
             } else if (findTaskElement != null) {
 
                 if (!findTaskElement.isSelect()) {
@@ -282,10 +281,10 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
                 }else
                     findTaskElement.unselect();
 
+                Vibro.playShort(context);
+
             } else
                 unselectAll();
-
-            Vibro.playLong(context);
         }
 
         @Override
