@@ -113,7 +113,7 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
             ProfileNameDialog nameDialog = new ProfileNameDialog();
             nameDialog.setCancelable(false);
             nameDialog.setTargetFragment(this, 0);
-            nameDialog.show(getFragmentManager().beginTransaction(), "actionList");
+            nameDialog.show(getFragmentManager().beginTransaction(), "profileNameDialog");
         }
 
 		return view;
@@ -155,21 +155,19 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
                 break;
             case R.id.deleteBtn:
 
-                profileController.removeProfileFromList(sceneIndex);
-                dataActivity.gotoFragmentList();
+                ProfileDeleteDialog deleteDialog = new ProfileDeleteDialog();
+                deleteDialog.show(getFragmentManager().beginTransaction(), "deleteDialog");
 
                 break;
             case R.id.actionElementID:
 
                 ActionBuilderDialog actionDialog = new ActionBuilderDialog();
-                actionDialog.setTargetFragment(this, 0);
                 actionDialog.show(getFragmentManager().beginTransaction(), "actionList");
 
                 break;
             case R.id.taskElementID:
 
                 TaskBuilderDialog taskDialog = new TaskBuilderDialog();
-                taskDialog.setTargetFragment(this, 0);
                 taskDialog.show(getFragmentManager().beginTransaction(), "taskList");
 
                 break;
@@ -537,10 +535,44 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
 
             return view;
         }
-
     }
 
-    public Profile getProfile() {
+    public static class ProfileDeleteDialog extends DialogFragment{
+
+        private FragmentCallBack dataActivity;
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+            dataActivity = (FragmentCallBack) getActivity();
+
+            getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
+            View view = inflater.inflate(R.layout.dialog_profile_delete, container);
+            Button yesBtn = (Button) view.findViewById(R.id.yesBtnId);
+            Button noBtn = (Button) view.findViewById(R.id.noBtnId);
+
+            yesBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    dataActivity.getProfileController().removeProfileFromList(dataActivity.getCurrentProfileIndex());
+                    dataActivity.gotoFragmentList();
+                    dismiss();
+                }
+            });
+
+            noBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dismiss();
+                }
+            });
+
+            return view;
+        }
+    }
+
+    private Profile getProfile() {
         return profile;
     }
 }

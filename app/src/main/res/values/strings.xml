@@ -4,6 +4,7 @@
     <string name="app_name">Tasker Lite</string>
     <string name="profile_name">Profile Name</string>
     <string name="profile_name_short">Name</string>
+    <string name="profile_delete">Delete profile?</string>
 
     <!-- notification  -->
     <string name="app_open">Press to open application</string>

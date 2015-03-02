@@ -19,23 +19,24 @@ import com.taskerlite.logic.tasks.tAccessPoint;
 import com.taskerlite.logic.tasks.tApp;
 import com.taskerlite.logic.tasks.tMobileData;
 import com.taskerlite.logic.tasks.tUnlockScreen;
+import com.taskerlite.main.FragmentCallBack;
 import com.taskerlite.main.FragmentTaskBuilder;
 import com.taskerlite.main.Types.TYPES;
 
 public class TaskBuilderDialog extends DialogFragment {
 
     private ProfileController.Profile profile;
-    private FragmentTaskBuilder parentFragment;
     private ListView lvMain;
     private mAdapter adapter;
+    private FragmentCallBack dataActivity;
 
     private String[] actionsDescription;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        parentFragment = (FragmentTaskBuilder) this.getTargetFragment();
-        profile = parentFragment.getProfile();
+        dataActivity = (FragmentCallBack) getActivity();
+        profile = dataActivity.getCurrentProfile();
 
         getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
         View view = inflater.inflate(R.layout.dialog_action_list, container);
