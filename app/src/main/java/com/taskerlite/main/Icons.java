@@ -24,7 +24,7 @@ public class Icons {
     private HashMap<TYPES, Bitmap>   iconsBuilderList = new HashMap<TYPES, Bitmap>();
     private Bitmap tmpBigIcon, previewIcon, builderIcon;
     private Bitmap deleteIcon, pimpaIcon;
-    private BitmapDrawable swMenuDelete, swMenuStart, swMenuStop;
+    private BitmapDrawable swMenuStart, swMenuStop;
 
     public static Icons prepareResource(Context context){
 
@@ -85,10 +85,6 @@ public class Icons {
 
         int iconSize = context.getResources().getInteger(R.integer.swipe_menu_icon_size);
 
-        tmpBigIcon = BitmapFactory.decodeResource(context.getResources(), R.drawable.swipe_delete);
-        tmpBigIcon = Bitmap.createScaledBitmap(tmpBigIcon, Screen.dp2px(context, iconSize), Screen.dp2px(context, iconSize), true);
-        swMenuDelete = new BitmapDrawable(context.getResources(), tmpBigIcon);
-
         tmpBigIcon = BitmapFactory.decodeResource(context.getResources(), R.drawable.swipe_start);
         tmpBigIcon = Bitmap.createScaledBitmap(tmpBigIcon, Screen.dp2px(context, iconSize), Screen.dp2px(context, iconSize), true);
         swMenuStart = new BitmapDrawable(context.getResources(), tmpBigIcon);
@@ -96,10 +92,6 @@ public class Icons {
         tmpBigIcon = BitmapFactory.decodeResource(context.getResources(), R.drawable.swipe_pause);
         tmpBigIcon = Bitmap.createScaledBitmap(tmpBigIcon, Screen.dp2px(context, iconSize), Screen.dp2px(context, iconSize), true);
         swMenuStop = new BitmapDrawable(context.getResources(), tmpBigIcon);
-    }
-
-    public BitmapDrawable getSwMenuDelete() {
-        return swMenuDelete;
     }
 
     public BitmapDrawable getSwMenuStart() {

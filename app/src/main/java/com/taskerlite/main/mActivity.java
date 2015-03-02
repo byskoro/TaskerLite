@@ -36,7 +36,7 @@ public class mActivity extends FragmentActivity implements FragmentCallBack{
     @Override
     public void onBackPressed() {
 
-        if (getSupportFragmentManager().findFragmentById(R.id.fragmentConteiner) instanceof FragmentTaskList)
+        if (getSupportFragmentManager().findFragmentById(R.id.fragmentContainer) instanceof FragmentTaskList)
             finish();
         else
             gotoFragmentList();
@@ -67,7 +67,7 @@ public class mActivity extends FragmentActivity implements FragmentCallBack{
 
         getSupportFragmentManager().beginTransaction().
         setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right).
-        replace(R.id.fragmentConteiner, new FragmentTaskList()).
+        replace(R.id.fragmentContainer, new FragmentTaskList()).
         commit();
     }
 
@@ -76,7 +76,7 @@ public class mActivity extends FragmentActivity implements FragmentCallBack{
 
         getSupportFragmentManager().beginTransaction().
         setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).
-        replace(R.id.fragmentConteiner, fragmentTaskBuilder).
+        replace(R.id.fragmentContainer, fragmentTaskBuilder).
         commit();
     }
 }
