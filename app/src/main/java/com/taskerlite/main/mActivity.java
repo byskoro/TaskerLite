@@ -9,11 +9,11 @@ import com.taskerlite.other.Flash;
 
 public class mActivity extends FragmentActivity implements FragmentCallBack{
 
-    private ProfileController profileController;
-    private int currentProfile=0;
+    private FragmentTaskList fragmentTaskList;
+    private FragmentTaskBuilder fragmentTaskBuilder;
 
-    FragmentTaskList fragmentTaskList;
-    FragmentTaskBuilder fragmentTaskBuilder;
+    private ProfileController profileController;
+    private int currentProfileIndex = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +22,9 @@ public class mActivity extends FragmentActivity implements FragmentCallBack{
 
         Icons.prepareResource(this);
         profileController = Flash.getProfileController();
+
+        fragmentTaskBuilder = new FragmentTaskBuilder();
+        fragmentTaskList = new FragmentTaskList();
 
         gotoFragmentList();
 
@@ -39,41 +42,35 @@ public class mActivity extends FragmentActivity implements FragmentCallBack{
     }
 
     @Override
+    public int getCurrentProfileIndex() {
+        return currentProfileIndex;
+    }
+
+    @Override
+    public void setCurrentProfileIndex(int index) {
+        currentProfileIndex = index;
+    }
+
+    @Override
     public ProfileController getProfileController() {
         return profileController;
     }
 
     @Override
-    public int getCurrentProfileIndex() {
-        return currentProfile;
-    }
-
-    @Override
-    public void setCurrentProfileIndex(int index) {
-        currentProfile = index;
-    }
-
-    @Override
     public void gotoFragmentList() {
-
-        fragmentTaskList = new FragmentTaskList();
 
         getSupportFragmentManager().beginTransaction().
         setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right).
         replace(R.id.fragmentConteiner, new FragmentTaskList()).
-        //addToBackStack(null).
         commit();
     }
 
     @Override
     public void gotoFragmentBuilder() {
 
-        fragmentTaskBuilder = new FragmentTaskBuilder();
-
         getSupportFragmentManager().beginTransaction().
         setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).
         replace(R.id.fragmentConteiner, fragmentTaskBuilder).
-        //addToBackStack(null).
         commit();
     }
 }

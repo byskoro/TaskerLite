@@ -54,17 +54,6 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
 
     private Paint textPaint, linePaint;
 
-    public static FragmentTaskBuilder getInstance(int sceneIndex){
-
-        Bundle inSceneIndex = new Bundle();
-        inSceneIndex.putInt("index", sceneIndex);
-
-        FragmentTaskBuilder taskBuilder = new FragmentTaskBuilder();
-        taskBuilder.setArguments(inSceneIndex);
-
-        return taskBuilder;
-    }
-
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -73,13 +62,14 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
         profileController = dataActivity.getProfileController();
         sceneIndex = dataActivity.getCurrentProfileIndex();
         profile = profileController.getProfile(sceneIndex);
+
+        context = getActivity();
     }
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
 		View view = inflater.inflate(R.layout.fragment_task_builder, container, false);
-        context = getActivity();
 
 		taskerView = (BuilderView) view.findViewById(R.id.drawBuilder);
         taskerView.setViewCallBack(viewCallBack);
@@ -98,9 +88,6 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
         nameScene.setText(profile.getName());
         nameScene.setTypeface(Typeface.createFromAsset(context.getAssets(), "font.ttf"));
         clearRequestLay = (LinearLayout) view.findViewById(R.id.clearRequestLay);
-        clearRequest(nameScene);
-
-        gcElement = new DelElement(Icons.deleteSize);
 
         textPaint = new Paint();
         textPaint.setColor(Color.WHITE);
@@ -111,6 +98,9 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
         linePaint = new Paint();
         linePaint.setTextAlign(Paint.Align.CENTER);
         linePaint.setStrokeWidth(5);
+
+        gcElement = new DelElement(Icons.deleteSize);
+        clearRequest(nameScene);
 
 		return view;
 	}
@@ -196,13 +186,14 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
             }
 
             if (msg.what == 1){
+
                 taskerView.postInvalidate();
                 handlerLogic.sendEmptyMessageDelayed(1, 50);
             }
         }
     };
 
-    BuilderView.ViewCallBack viewCallBack = new BuilderView.ViewCallBack(){
+    BuilderView.ViewCallBack viewCallBack = new BuilderView.ViewCallBack() {
 
         private int screenWidth, screenHeight;
 
@@ -377,7 +368,7 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
         }
     };
 
-    private void unselectAll(){
+    private void unselectAll() {
 
         gcElement.clearList();
 
@@ -385,7 +376,7 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
             handlerLogic.sendEmptyMessageDelayed(0, 300);
     }
 
-    private TaskElement findTouchedTask(int xPointer, int yPointer){
+    private TaskElement findTouchedTask(int xPointer, int yPointer) {
 
         for(TaskElement task : profile.getTaskList()){
             if(task.isTouched(xPointer, yPointer, iconSizeElement))
@@ -400,7 +391,7 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
         return null;
     }
 
-    private ActionElement findTouchedAction(int xPointer, int yPointer){
+    private ActionElement findTouchedAction(int xPointer, int yPointer) {
 
         for(ActionElement action : profile.getActionList()){
             if(action.isTouched(xPointer, yPointer, iconSizeElement))
@@ -415,7 +406,7 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
         return null;
     }
 
-    private void checkConnection( ){
+    private void checkConnection() {
 
         for(ActionElement action : profile.getActionList()) {
             if( action.isSelect() ){
@@ -488,7 +479,6 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
             }
         }
     }
-
 
     public Profile getProfile() {
         return profile;
