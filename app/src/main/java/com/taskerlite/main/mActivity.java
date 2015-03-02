@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentActivity;
 import com.taskerlite.R;
 import com.taskerlite.logic.ProfileController;
 import com.taskerlite.other.Flash;
+import com.taskerlite.logic.ProfileController.Profile;
 
 public class mActivity extends FragmentActivity implements FragmentCallBack{
 
@@ -42,8 +43,8 @@ public class mActivity extends FragmentActivity implements FragmentCallBack{
     }
 
     @Override
-    public int getCurrentProfileIndex() {
-        return currentProfileIndex;
+    public Profile getCurrentProfile() {
+        return profileController.getProfile(currentProfileIndex);
     }
 
     @Override
@@ -54,6 +55,11 @@ public class mActivity extends FragmentActivity implements FragmentCallBack{
     @Override
     public ProfileController getProfileController() {
         return profileController;
+    }
+
+    @Override
+    public int getCurrentProfileIndex() {
+        return currentProfileIndex;
     }
 
     @Override

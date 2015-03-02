@@ -7,6 +7,8 @@ import com.taskerlite.logic.TaskBuilderDialog;
 import com.taskerlite.logic.ActionElement;
 import com.taskerlite.logic.ProfileController.*;
 import com.taskerlite.logic.TaskElement;
+import com.taskerlite.logic.actions.aBootComplete;
+import com.taskerlite.logic.actions.aTimer;
 import com.taskerlite.other.Vibro;
 
 import android.app.Activity;
@@ -19,17 +21,23 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -59,9 +67,8 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
 
         dataActivity = (FragmentCallBack) activity;
         profileController = dataActivity.getProfileController();
+        profile = dataActivity.getCurrentProfile();
         sceneIndex = dataActivity.getCurrentProfileIndex();
-
-        profile = profileController.getProfile(sceneIndex);
 
         context = getActivity();
     }
@@ -83,7 +90,6 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
         taskElement.setOnClickListener(this);
         nameScene = (EditText) view.findViewById(R.id.sceneName);
         nameScene.setOnEditorActionListener(this);
-        nameScene.setText(profile.getName());
         nameScene.setTypeface(Typeface.createFromAsset(context.getAssets(), "font.ttf"));
         clearRequestLay = (LinearLayout) view.findViewById(R.id.clearRequestLay);
 
@@ -99,6 +105,16 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
 
         gcElement = new DelElement(Icons.deleteSize);
         clearRequest(nameScene);
+
+        if(!profile.getName().equals(""))
+            nameScene.setText(profile.getName());
+        else{
+
+            ProfileNameDialog nameDialog = new ProfileNameDialog();
+            nameDialog.setCancelable(false);
+            nameDialog.setTargetFragment(this, 0);
+            nameDialog.show(getFragmentManager().beginTransaction(), "actionList");
+        }
 
 		return view;
 	}
@@ -481,6 +497,47 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
                 this.y=y;
             }
         }
+    }
+
+    public static class ProfileNameDialog extends DialogFragment{
+
+        private FragmentCallBack dataActivity;
+        EditText nameInput;
+        Button saveBtn;
+
+        private FragmentTaskBuilder parentFragment;
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+            dataActivity = (FragmentCallBack) getActivity();
+            parentFragment = (FragmentTaskBuilder) this.getTargetFragment();
+
+            getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
+            View view = inflater.inflate(R.layout.dialog_profile_name, container);
+            nameInput = (EditText) view.findViewById(R.id.nameId);
+            saveBtn = (Button) view.findViewById(R.id.saveBtnId);
+
+            saveBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    String name = String.valueOf(nameInput.getText());
+
+                    if(name.length()!=0){
+
+                        dataActivity.getCurrentProfile().setName(name);
+                        parentFragment.nameScene.setText(name);
+                        dismiss();
+
+                    }else
+                        Toast.makeText(getActivity(), "Not correct name", Toast.LENGTH_LONG).show();
+                }
+            });
+
+            return view;
+        }
+
     }
 
     public Profile getProfile() {

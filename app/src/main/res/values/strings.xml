@@ -2,6 +2,8 @@
 <resources>
 
     <string name="app_name">Tasker Lite</string>
+    <string name="profile_name">Profile Name</string>
+    <string name="profile_name_short">Name</string>
 
     <!-- notification  -->
     <string name="app_open">Press to open application</string>
