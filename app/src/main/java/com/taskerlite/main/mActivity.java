@@ -1,14 +1,15 @@
 package com.taskerlite.main;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+
 import com.taskerlite.R;
 import com.taskerlite.logic.ProfileController;
 import com.taskerlite.other.Flash;
 import com.taskerlite.logic.ProfileController.Profile;
 
-public class mActivity extends FragmentActivity implements FragmentCallBack{
+public class mActivity extends Activity implements FragmentCallBack{
 
     private FragmentTaskList fragmentTaskList;
     private FragmentTaskBuilder fragmentTaskBuilder;
@@ -27,21 +28,21 @@ public class mActivity extends FragmentActivity implements FragmentCallBack{
         fragmentTaskBuilder = new FragmentTaskBuilder();
         fragmentTaskList = new FragmentTaskList();
 
-        gotoFragmentList();
+        addFragmentLis();
 
         if(!TService.isRunning(this))
             startService(new Intent(this, TService.class));
     }
-
+/*
     @Override
     public void onBackPressed() {
 
-        if (getSupportFragmentManager().findFragmentById(R.id.fragmentContainer) instanceof FragmentTaskList)
+        if (getFragmentManager().findFragmentById(R.id.fragmentContainer) instanceof FragmentTaskList)
             finish();
         else
-            gotoFragmentList();
+            returnToFragmentList();
     }
-
+*/
     @Override
     public Profile getCurrentProfile() {
         return profileController.getProfile(currentProfileIndex);
@@ -62,21 +63,30 @@ public class mActivity extends FragmentActivity implements FragmentCallBack{
         return currentProfileIndex;
     }
 
-    @Override
-    public void gotoFragmentList() {
+    public void addFragmentLis(){
 
-        getSupportFragmentManager().beginTransaction().
-        setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right).
-        replace(R.id.fragmentContainer, new FragmentTaskList()).
+        getFragmentManager().beginTransaction().
+        add(R.id.fragmentContainer, fragmentTaskList).
         commit();
+    }
+
+    @Override
+    public void returnToFragmentList() {
+
+        getFragmentManager().popBackStack();
     }
 
     @Override
     public void gotoFragmentBuilder() {
 
-        getSupportFragmentManager().beginTransaction().
-        setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).
+        getFragmentManager().beginTransaction().
+        setCustomAnimations(
+                        R.anim.anim_visible,
+                        R.anim.anim_gone,
+                        R.anim.anim_visible,
+                        R.anim.anim_gone).
         replace(R.id.fragmentContainer, fragmentTaskBuilder).
+        addToBackStack(null).
         commit();
     }
 }

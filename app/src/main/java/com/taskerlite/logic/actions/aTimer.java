@@ -4,11 +4,10 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import com.taskerlite.R;
-
+import android.app.DialogFragment;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentManager;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,7 +54,7 @@ public class aTimer extends mAction {
 
         UI ui = new UI();
         ui.setParent(this);
-        ui.show(fm.beginTransaction(), "A_TIME");
+        ui.show(fm.beginTransaction(), "");
     }
 
     public static class UI extends DialogFragment {

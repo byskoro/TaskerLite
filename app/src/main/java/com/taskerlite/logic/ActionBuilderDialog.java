@@ -1,9 +1,9 @@
 package com.taskerlite.logic;
 
+import android.app.DialogFragment;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,12 +18,7 @@ import com.taskerlite.R;
 import com.taskerlite.logic.ProfileController.*;
 import com.taskerlite.logic.actions.aBootComplete;
 import com.taskerlite.logic.actions.aTimer;
-import com.taskerlite.logic.tasks.tAccessPoint;
-import com.taskerlite.logic.tasks.tApp;
-import com.taskerlite.logic.tasks.tMobileData;
-import com.taskerlite.logic.tasks.tUnlockScreen;
 import com.taskerlite.main.FragmentCallBack;
-import com.taskerlite.main.FragmentTaskBuilder;
 import com.taskerlite.main.Types.*;
 
 public class ActionBuilderDialog extends DialogFragment {

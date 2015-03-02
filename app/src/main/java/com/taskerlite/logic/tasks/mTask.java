@@ -1,7 +1,7 @@
 package com.taskerlite.logic.tasks;
 
+import android.app.FragmentManager;
 import android.content.Context;
-import android.support.v4.app.FragmentManager;
 
 public abstract class mTask {
 

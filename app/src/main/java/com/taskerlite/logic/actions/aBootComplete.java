@@ -1,8 +1,7 @@
 package com.taskerlite.logic.actions;
 
+import android.app.FragmentManager;
 import android.content.Context;
-import android.support.v4.app.FragmentManager;
-
 import com.taskerlite.R;
 import com.taskerlite.main.Types.*;
 

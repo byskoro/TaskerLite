@@ -7,11 +7,10 @@ import com.taskerlite.logic.TaskBuilderDialog;
 import com.taskerlite.logic.ActionElement;
 import com.taskerlite.logic.ProfileController.*;
 import com.taskerlite.logic.TaskElement;
-import com.taskerlite.logic.actions.aBootComplete;
-import com.taskerlite.logic.actions.aTimer;
 import com.taskerlite.other.Vibro;
-
 import android.app.Activity;
+import android.app.DialogFragment;
+import android.app.Fragment;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -21,8 +20,6 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -30,12 +27,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -150,7 +144,7 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
 
             case R.id.backBtn:
 
-                dataActivity.gotoFragmentList();
+                dataActivity.returnToFragmentList();
 
                 break;
             case R.id.deleteBtn:
@@ -497,7 +491,7 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
         }
     }
 
-    public static class ProfileNameDialog extends DialogFragment{
+    public static class ProfileNameDialog extends DialogFragment {
 
         private FragmentCallBack dataActivity;
         EditText nameInput;
@@ -556,7 +550,7 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
                 public void onClick(View view) {
 
                     dataActivity.getProfileController().removeProfileFromList(dataActivity.getCurrentProfileIndex());
-                    dataActivity.gotoFragmentList();
+                    dataActivity.returnToFragmentList();
                     dismiss();
                 }
             });

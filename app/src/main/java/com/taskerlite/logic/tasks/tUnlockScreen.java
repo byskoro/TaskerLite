@@ -1,14 +1,13 @@
 package com.taskerlite.logic.tasks;
 
+import android.app.FragmentManager;
 import android.app.KeyguardManager;
 import android.content.Context;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
-import android.support.v4.app.FragmentManager;
 import com.taskerlite.R;
 import com.taskerlite.other.Notification;
 import com.taskerlite.other.Vibro;
-
 
 public class tUnlockScreen extends mTask{
 
