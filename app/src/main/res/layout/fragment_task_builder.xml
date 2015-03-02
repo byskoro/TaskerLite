@@ -25,7 +25,7 @@
                 android:layout_weight="0.2"
                 android:padding="10dp"
                 android:scaleType="centerInside"
-                android:src="@drawable/arrow455"
+                android:src="@drawable/back"
                 android:background="@null" />
 
             <EditText

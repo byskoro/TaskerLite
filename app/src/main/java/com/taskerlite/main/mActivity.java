@@ -7,22 +7,23 @@ import com.taskerlite.R;
 import com.taskerlite.logic.ProfileController;
 import com.taskerlite.other.Flash;
 
-public class mActivity extends FragmentActivity implements FragmentTaskBuilder.DataActivity, FragmentTaskList.DataActivity{
+public class mActivity extends FragmentActivity implements FragmentCallBack{
 
     private ProfileController profileController;
+    private int currentProfile=0;
+
+    FragmentTaskList fragmentTaskList;
+    FragmentTaskBuilder fragmentTaskBuilder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Icons.getInstance(this);
-
+        Icons.prepareResource(this);
         profileController = Flash.getProfileController();
 
-        getSupportFragmentManager().beginTransaction().
-        add(R.id.fragmentConteiner, new FragmentTaskList()).
-        commit();
+        gotoFragmentList();
 
         if(!TService.isRunning(this))
             startService(new Intent(this, TService.class));
@@ -31,27 +32,48 @@ public class mActivity extends FragmentActivity implements FragmentTaskBuilder.D
     @Override
     public void onBackPressed() {
 
-        if (getSupportFragmentManager().findFragmentById(R.id.fragmentConteiner) instanceof FragmentTaskList) {
-
+        if (getSupportFragmentManager().findFragmentById(R.id.fragmentConteiner) instanceof FragmentTaskList)
             finish();
-
-        }else {
-
-            getSupportFragmentManager().beginTransaction().
-            setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right).
-            replace(R.id.fragmentConteiner, new FragmentTaskList()).
-            addToBackStack(null).
-            commit();
-        }
+        else
+            gotoFragmentList();
     }
 
     @Override
-    public ProfileController taskBuilderAskProfileController() {
+    public ProfileController getProfileController() {
         return profileController;
     }
 
     @Override
-    public ProfileController taskListAskProfileController() {
-        return profileController;
+    public int getCurrentProfileIndex() {
+        return currentProfile;
+    }
+
+    @Override
+    public void setCurrentProfileIndex(int index) {
+        currentProfile = index;
+    }
+
+    @Override
+    public void gotoFragmentList() {
+
+        fragmentTaskList = new FragmentTaskList();
+
+        getSupportFragmentManager().beginTransaction().
+        setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right).
+        replace(R.id.fragmentConteiner, new FragmentTaskList()).
+        //addToBackStack(null).
+        commit();
+    }
+
+    @Override
+    public void gotoFragmentBuilder() {
+
+        fragmentTaskBuilder = new FragmentTaskBuilder();
+
+        getSupportFragmentManager().beginTransaction().
+        setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).
+        replace(R.id.fragmentConteiner, fragmentTaskBuilder).
+        //addToBackStack(null).
+        commit();
     }
 }

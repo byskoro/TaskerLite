@@ -26,7 +26,7 @@ public class Icons {
     private Bitmap deleteIcon, pimpaIcon;
     private BitmapDrawable swMenuDelete, swMenuStart, swMenuStop;
 
-    public static Icons getInstance(Context context){
+    public static Icons prepareResource(Context context){
 
         if(instance == null)
             instance = new Icons(context);

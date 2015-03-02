@@ -30,11 +30,7 @@ import android.widget.TextView;
 
 public class FragmentTaskList extends Fragment implements View.OnClickListener{
 
-    private DataActivity dataActivity;
-
-    public interface DataActivity {
-        public ProfileController taskListAskProfileController();
-    }
+    private FragmentCallBack dataActivity;
 
     ProfileController profileController;
 
@@ -51,8 +47,8 @@ public class FragmentTaskList extends Fragment implements View.OnClickListener{
     public void onAttach(Activity activity) {
         super.onAttach(activity);
 
-        dataActivity = (DataActivity) activity;
-        profileController = dataActivity.taskListAskProfileController();
+        dataActivity = (FragmentCallBack) activity;
+        profileController = dataActivity.getProfileController();
     }
 
     @Override
@@ -94,12 +90,6 @@ public class FragmentTaskList extends Fragment implements View.OnClickListener{
            offItem.setWidth(Screen.dp2px(context, bgSize));
            offItem.setIcon(Icons.getInstance().getSwMenuStop());
            menu.addMenuItem(offItem);
-
-           SwipeMenuItem deleteItem = new SwipeMenuItem(context);
-           deleteItem.setBackground(new ColorDrawable(Color.rgb(0xC6, 0xB7, 0xA9)));
-           deleteItem.setWidth(Screen.dp2px(context, bgSize));
-           deleteItem.setIcon(Icons.getInstance().getSwMenuDelete());
-           menu.addMenuItem(deleteItem);
         }
     };
 
@@ -117,19 +107,12 @@ public class FragmentTaskList extends Fragment implements View.OnClickListener{
 
             switch (index) {
                 case 0:
-                    for(TaskElement task : profileController.getProfile(position).getTaskList()){
+                    for(TaskElement task : profileController.getProfile(position).getTaskList())
                         task.getTaskObject().start(context);
-                    }
                     break;
                 case 1:
-                    for(TaskElement task : profileController.getProfile(position).getTaskList()){
+                    for(TaskElement task : profileController.getProfile(position).getTaskList())
                         task.getTaskObject().stop(context);
-                    }
-                    break;
-                case 2:
-                    profileController.removeProfileFromList(position);
-                    mAdapter.notifyDataSetChanged();
-
                     break;
             }
             return false;
@@ -145,11 +128,8 @@ public class FragmentTaskList extends Fragment implements View.OnClickListener{
 
     private void goToBuilderFragment(int index){
 
-        getFragmentManager().beginTransaction().
-        setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left).
-        replace(R.id.fragmentConteiner, FragmentTaskBuilder.getInstance(index)).
-        addToBackStack(null).
-        commit();
+        dataActivity.setCurrentProfileIndex(index);
+        dataActivity.gotoFragmentBuilder();
     }
 
     class AppAdapter extends BaseAdapter {

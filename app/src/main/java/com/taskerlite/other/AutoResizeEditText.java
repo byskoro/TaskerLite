@@ -56,7 +56,7 @@ public class AutoResizeEditText extends EditText {
     public AutoResizeEditText(final Context context, final AttributeSet attrs, final int defStyle) {
         super(context, attrs, defStyle);
 
-        //setTypeface(Typeface.createFromAsset(context.getAssets(), "KGBlankSpaceSketch.ttf"));
+        //setTypeface(Typeface.createFromAsset(context.getAssets(), "font.ttf"));
 
         // using the minimal recommended font size
         _minTextSize = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 12, getResources().getDisplayMetrics());

@@ -35,11 +35,7 @@ import java.util.ArrayList;
 
 public class FragmentTaskBuilder extends Fragment implements View.OnClickListener, TextView.OnEditorActionListener {
 
-    private DataActivity dataActivity;
-
-    public interface DataActivity {
-        public ProfileController taskBuilderAskProfileController();
-    }
+    private FragmentCallBack dataActivity;
 
     private BuilderView taskerView;
     private Context context;
@@ -73,12 +69,9 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
     public void onAttach(Activity activity) {
         super.onAttach(activity);
 
-        dataActivity = (DataActivity) activity;
-        profileController = dataActivity.taskBuilderAskProfileController();
-
-        Bundle bundle = this.getArguments();
-        sceneIndex = bundle.getInt("index", 0);
-
+        dataActivity = (FragmentCallBack) activity;
+        profileController = dataActivity.getProfileController();
+        sceneIndex = dataActivity.getCurrentProfileIndex();
         profile = profileController.getProfile(sceneIndex);
     }
 
@@ -103,7 +96,7 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
         nameScene = (EditText) view.findViewById(R.id.sceneName);
         nameScene.setOnEditorActionListener(this);
         nameScene.setText(profile.getName());
-        nameScene.setTypeface(Typeface.createFromAsset(context.getAssets(), "KGBlankSpaceSketch.ttf"));
+        nameScene.setTypeface(Typeface.createFromAsset(context.getAssets(), "font.ttf"));
         clearRequestLay = (LinearLayout) view.findViewById(R.id.clearRequestLay);
         clearRequest(nameScene);
 
@@ -112,7 +105,7 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
         textPaint = new Paint();
         textPaint.setColor(Color.WHITE);
         textPaint.setTextSize(getResources().getInteger(R.integer.builder_text_size));
-        textPaint.setTypeface(Typeface.createFromAsset(context.getAssets(), "KGBlankSpaceSketch.ttf"));
+        textPaint.setTypeface(Typeface.createFromAsset(context.getAssets(), "font.ttf"));
         textPaint.setTextAlign(Paint.Align.CENTER);
 
         linePaint = new Paint();
@@ -152,22 +145,14 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
         switch(view.getId()){
 
             case R.id.backBtn:
-                getFragmentManager().beginTransaction().
-                setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right).
-                replace(R.id.fragmentConteiner, new FragmentTaskList()).
-                addToBackStack(null).
-                commit();
+                dataActivity.gotoFragmentList();
                 break;
             case R.id.clearBtn:
                 profileController.removeAllElementFromProfile(sceneIndex);
                 break;
             case R.id.deleteBtn:
                 profileController.removeProfileFromList(sceneIndex);
-                getFragmentManager().beginTransaction().
-                setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right).
-                replace(R.id.fragmentConteiner, new FragmentTaskList()).
-                addToBackStack(null).
-                commit();
+                dataActivity.gotoFragmentList();
                 break;
             case R.id.actionElementID:
                 ActionBuilderDialog actionDialog = new ActionBuilderDialog();
@@ -349,6 +334,18 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
 
             try{
 
+                // 2. If present relationship between action and task - draw a lines
+                int indexColor = 0;
+                for (ActionElement action : profile.getActionList()) {
+                    for (TaskElement task : profile.getTaskList()) {
+                        if (action.isTaskElementIdPresent(task.getTaskId())) {
+                            linePaint.setColor(Types.getColor(indexColor));
+                            canvas.drawLine(action.getX() + iconSizeElement /2, action.getY() + iconSizeElement /2, task.getX()   + iconSizeElement /2, task.getY()   + iconSizeElement /2, linePaint);
+                            indexColor++;
+                        }
+                    }
+                }
+
                 // 1. Print action and task icons
                 for(ActionElement action : profile.getActionList()){
                     canvas.drawBitmap(action.getIcon(), action.getX(), action.getY(), null);
@@ -364,24 +361,14 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
                     canvas.drawText(task.getTaskObject().getName(), textX, textY, textPaint);
                 }
 
-                // 2. If present relationship between action and task - draw a lines
-                int indexColor = 0;
-                for (ActionElement action : profile.getActionList()) {
-                    for (TaskElement task : profile.getTaskList()) {
-                        if (action.isTaskElementIdPresent(task.getTaskId())) {
-                            linePaint.setColor(Color.WHITE);
-                            canvas.drawLine(action.getX() + iconSizeElement /2, action.getY() + iconSizeElement/10, task.getX()   + iconSizeElement /2, task.getY()   + iconSizeElement/10, linePaint);
-                        }
-                    }
-                }
-
+/*
                 // 3. Draw pimpa
                 for(ActionElement action : profile.getActionList())
                     canvas.drawBitmap(pimpaIcon, action.getX(), action.getY(), null);
 
                 for(TaskElement task : profile.getTaskList())
                     canvas.drawBitmap(pimpaIcon, task.getX(), task.getY(), null);
-
+*/
                 // 4. Draw delete icons
                 for(DelElement.PressedElement element : gcElement.getDelList())
                     canvas.drawBitmap(Icons.getInstance().getDeleteIcon(), element.x, element.y, null);
