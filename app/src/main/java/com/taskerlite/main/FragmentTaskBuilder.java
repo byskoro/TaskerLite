@@ -52,7 +52,7 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
     DelElement gcElement;
 
     ImageButton backBtn;
-    LinearLayout actionElement, taskElement, clearBtn;
+    LinearLayout actionElement, taskElement, clearBtn, deleteBtn;
     EditText nameScene;
     LinearLayout clearRequestLay;
 
@@ -94,6 +94,8 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
         backBtn.setOnClickListener(this);
         clearBtn= (LinearLayout) view.findViewById(R.id.clearBtn);
         clearBtn.setOnClickListener(this);
+        deleteBtn= (LinearLayout) view.findViewById(R.id.deleteBtn);
+        deleteBtn.setOnClickListener(this);
         actionElement = (LinearLayout) view.findViewById(R.id.actionElementID);
         actionElement.setOnClickListener(this);
         taskElement = (LinearLayout) view.findViewById(R.id.taskElementID);
@@ -159,6 +161,14 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
             case R.id.clearBtn:
                 profileController.removeAllElementFromProfile(sceneIndex);
                 break;
+            case R.id.deleteBtn:
+                profileController.removeProfileFromList(sceneIndex);
+                getFragmentManager().beginTransaction().
+                setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right).
+                replace(R.id.fragmentConteiner, new FragmentTaskList()).
+                addToBackStack(null).
+                commit();
+                break;
             case R.id.actionElementID:
                 ActionBuilderDialog actionDialog = new ActionBuilderDialog();
                 actionDialog.setTargetFragment(this, 0);
@@ -171,7 +181,6 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
                 break;
         }
     }
-
 
     @Override
     public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
