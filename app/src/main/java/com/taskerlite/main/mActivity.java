@@ -11,7 +11,7 @@ import com.taskerlite.source.Flash;
 import com.taskerlite.logic.ProfileController.Profile;
 import com.taskerlite.source.Icons;
 
-public class mActivity extends Activity implements FragmentCallBack{
+public class mActivity extends Activity implements FragmentCallBack {
 
     private FragmentTaskList fragmentTaskList;
     private FragmentTaskBuilder fragmentTaskBuilder;
