@@ -10,7 +10,7 @@ import com.taskerlite.source.Types;
 public class aScreenOn extends mAction{
 
     public aScreenOn(Context context){
-        setName(context.getResources().getString(R.string.a_screen_off));
+        setName(context.getResources().getString(R.string.a_screen_on));
     }
 
     @Override
