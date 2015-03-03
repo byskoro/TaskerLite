@@ -48,7 +48,7 @@ public class tMobileLight extends mTask {
 
         UI ui = new UI();
         ui.setParent(this);
-        ui.show(fm.beginTransaction(), "A_TREE_G");
+        ui.show(fm.beginTransaction(), "");
     }
 
     public void flashLightOn(Context context) {
