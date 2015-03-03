@@ -24,16 +24,22 @@
 
     <string name="a_time_short">Time trigger</string>
     <string name="a_boot_complete_short">Boot trigger</string>
+    <string name="a_screen_on">Screen On trigger</string>
+    <string name="a_screen_off">Screen Off trigger</string>
 
     <!-- Description of action list  -->
     <string-array name="actionsList">
         <item>Trigger by time</item>
         <item>Boot complete</item>
+        <item>Screen On</item>
+        <item>Screen OFF</item>
     </string-array>
 
     <string-array name="actionsIcons">
         <item>@drawable/a_timer</item>
         <item>@drawable/a_boot_complete</item>
+        <item>@drawable/a_screen_on</item>
+        <item>@drawable/a_screen_off</item>
     </string-array>
 
     <!-- Description of task list  -->

@@ -3,6 +3,8 @@ package com.taskerlite.logic;
 import android.graphics.Bitmap;
 import com.google.gson.GsonBuilder;
 import com.taskerlite.logic.actions.aBootComplete;
+import com.taskerlite.logic.actions.aScreenOff;
+import com.taskerlite.logic.actions.aScreenOn;
 import com.taskerlite.logic.actions.aTimer;
 import com.taskerlite.logic.actions.mAction;
 import com.taskerlite.main.Icons;
@@ -44,6 +46,12 @@ public class ActionElement {
                     break;
                 case A_BOOT_COMPLETE:
                     actionObject = new GsonBuilder().create().fromJson(actionINStr, aBootComplete.class);
+                    break;
+                case A_SCREEN_ON:
+                    actionObject = new GsonBuilder().create().fromJson(actionINStr, aScreenOn.class);
+                    break;
+                case A_SCREEN_OFF:
+                    actionObject = new GsonBuilder().create().fromJson(actionINStr, aScreenOff.class);
                     break;
                 default:
                     break;

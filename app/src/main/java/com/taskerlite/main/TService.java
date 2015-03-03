@@ -11,8 +11,10 @@ import android.app.ActivityManager;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.IBinder;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
@@ -34,6 +36,8 @@ public class TService extends Service {
 
         runAsForeground();
 
+        registerBroadcastReceivers();
+
         serviceThread = new ServiceThread();
 
         return Service.START_STICKY;
@@ -42,9 +46,35 @@ public class TService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
+
         serviceThread.threadStop();
         wakeLock.release();
+
+        getApplicationContext().unregisterReceiver(screenStateReceiver);
     }
+
+    private void registerBroadcastReceivers(){
+
+        IntentFilter theFilter = new IntentFilter();
+
+        // Screen on/off
+        theFilter.addAction(Intent.ACTION_SCREEN_ON);
+        theFilter.addAction(Intent.ACTION_SCREEN_OFF);
+        getApplicationContext().registerReceiver(screenStateReceiver, theFilter);
+    }
+
+    BroadcastReceiver screenStateReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            String strAction = intent.getAction();
+
+            if (strAction.equals(Intent.ACTION_SCREEN_OFF))
+                checkForAction(TYPES.A_SCREEN_OFF);
+            else if(strAction.equals(Intent.ACTION_SCREEN_ON))
+                checkForAction(TYPES.A_SCREEN_ON);
+        }
+    };
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -69,31 +99,7 @@ public class TService extends Service {
 
                 try {
 
-                    if(!previousRawData.equals(Flash.getRawData())){
-
-                        profileController = Flash.getProfileController();
-                        previousRawData   = Flash.getRawData();
-                    }
-
-                    for(Profile profile : profileController.getProfileList()){
-
-                        for(ActionElement action : profile.getActionList()){
-
-                            mAction actionObj = action.getActionObject();
-
-                            if(actionObj.isMyAction(getApplicationContext(), TYPES.A_TIME)){
-
-                                for(TaskElement task : profile.getTaskList()){
-
-                                    if(action.isTaskElementIdPresent(task.getTaskId())){
-
-                                        mTask taskObj = task.getTaskObject();
-                                        taskObj.start(getApplicationContext());
-                                    }
-                                }
-                            }
-                        }
-                    }
+                    checkForAction(TYPES.A_TIME);
 
                     Thread.sleep(generateOffsetTime());
 
@@ -112,6 +118,36 @@ public class TService extends Service {
 
         public void threadStop(){
             threadState = false;
+        }
+    }
+
+    private void checkForAction(TYPES type){
+
+
+        if(!previousRawData.equals(Flash.getRawData())){
+
+            profileController = Flash.getProfileController();
+            previousRawData   = Flash.getRawData();
+        }
+
+        for(Profile profile : profileController.getProfileList()){
+
+            for(ActionElement action : profile.getActionList()){
+
+                mAction actionObj = action.getActionObject();
+
+                if(actionObj.isMyAction(getApplicationContext(), type)){
+
+                    for(TaskElement task : profile.getTaskList()){
+
+                        if(action.isTaskElementIdPresent(task.getTaskId())){
+
+                            mTask taskObj = task.getTaskObject();
+                            taskObj.start(getApplicationContext());
+                        }
+                    }
+                }
+            }
         }
     }
 

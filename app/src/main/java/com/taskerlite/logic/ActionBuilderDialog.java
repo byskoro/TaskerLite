@@ -17,6 +17,8 @@ import android.widget.TextView;
 import com.taskerlite.R;
 import com.taskerlite.logic.ProfileController.*;
 import com.taskerlite.logic.actions.aBootComplete;
+import com.taskerlite.logic.actions.aScreenOff;
+import com.taskerlite.logic.actions.aScreenOn;
 import com.taskerlite.logic.actions.aTimer;
 import com.taskerlite.main.FragmentCallBack;
 import com.taskerlite.main.Types.*;
@@ -55,6 +57,12 @@ public class ActionBuilderDialog extends DialogFragment {
                         break;
                     case 1:
                         profile.addNewAction(new aBootComplete(getActivity()), TYPES.A_BOOT_COMPLETE, 0, 0);
+                        break;
+                    case 2:
+                        profile.addNewAction(new aScreenOn(getActivity()), TYPES.A_SCREEN_ON, 0, 0);
+                        break;
+                    case 3:
+                        profile.addNewAction(new aScreenOff(getActivity()), TYPES.A_SCREEN_OFF, 0, 0);
                         break;
                 }
 
