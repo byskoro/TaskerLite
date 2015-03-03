@@ -19,7 +19,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.taskerlite.R;
-import com.taskerlite.other.Notification;
+import com.taskerlite.source.Notification;
 
 import java.util.List;
 

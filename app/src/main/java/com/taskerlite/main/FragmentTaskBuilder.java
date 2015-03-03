@@ -7,7 +7,10 @@ import com.taskerlite.logic.TaskBuilderDialog;
 import com.taskerlite.logic.ActionElement;
 import com.taskerlite.logic.ProfileController.*;
 import com.taskerlite.logic.TaskElement;
-import com.taskerlite.other.Vibro;
+import com.taskerlite.source.BuilderView;
+import com.taskerlite.source.Icons;
+import com.taskerlite.source.Types;
+import com.taskerlite.source.Vibro;
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.app.Fragment;
@@ -342,7 +345,7 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
                     for (TaskElement task : profile.getTaskList()) {
                         if (action.isTaskElementIdPresent(task.getTaskId())) {
                             linePaint.setColor(Types.getColor(indexColor));
-                            canvas.drawLine(action.getX() + iconSizeElement /2, action.getY() + iconSizeElement /2, task.getX()   + iconSizeElement /2, task.getY()   + iconSizeElement /2, linePaint);
+                            canvas.drawLine(action.getX() + iconSizeElement /2, action.getY() + iconSizeElement /2, task.getX() + iconSizeElement /2, task.getY()   + iconSizeElement /2, linePaint);
                             indexColor++;
                         }
                     }
@@ -564,9 +567,5 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
 
             return view;
         }
-    }
-
-    private Profile getProfile() {
-        return profile;
     }
 }

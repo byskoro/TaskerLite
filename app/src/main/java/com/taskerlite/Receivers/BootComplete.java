@@ -10,8 +10,8 @@ import com.taskerlite.logic.TaskElement;
 import com.taskerlite.logic.actions.mAction;
 import com.taskerlite.logic.tasks.mTask;
 import com.taskerlite.main.TService;
-import com.taskerlite.main.Types;
-import com.taskerlite.other.Flash;
+import com.taskerlite.source.Types;
+import com.taskerlite.source.Flash;
 
 public class BootComplete extends BroadcastReceiver {
 

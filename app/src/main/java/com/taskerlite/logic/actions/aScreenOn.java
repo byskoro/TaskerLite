@@ -5,7 +5,7 @@ import android.app.FragmentManager;
 import android.content.Context;
 
 import com.taskerlite.R;
-import com.taskerlite.main.Types;
+import com.taskerlite.source.Types;
 
 public class aScreenOn extends mAction{
 

@@ -1,4 +1,4 @@
-package com.taskerlite.main;
+package com.taskerlite.source;
 
 public class Types {
 

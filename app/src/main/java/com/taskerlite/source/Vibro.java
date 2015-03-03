@@ -1,4 +1,4 @@
-package com.taskerlite.other;
+package com.taskerlite.source;
 
 import android.content.Context;
 import android.os.Vibrator;

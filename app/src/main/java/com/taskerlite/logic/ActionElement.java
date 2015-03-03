@@ -7,8 +7,8 @@ import com.taskerlite.logic.actions.aScreenOff;
 import com.taskerlite.logic.actions.aScreenOn;
 import com.taskerlite.logic.actions.aTimer;
 import com.taskerlite.logic.actions.mAction;
-import com.taskerlite.main.Icons;
-import com.taskerlite.main.Types.*;
+import com.taskerlite.source.Icons;
+import com.taskerlite.source.Types.*;
 
 import java.util.ArrayList;
 

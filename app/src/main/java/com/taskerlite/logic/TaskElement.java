@@ -7,8 +7,8 @@ import com.taskerlite.logic.tasks.tAccessPoint;
 import com.taskerlite.logic.tasks.tApp;
 import com.taskerlite.logic.tasks.tMobileData;
 import com.taskerlite.logic.tasks.tUnlockScreen;
-import com.taskerlite.main.Icons;
-import com.taskerlite.main.Types.*;
+import com.taskerlite.source.Icons;
+import com.taskerlite.source.Types.*;
 
 public class TaskElement {
 

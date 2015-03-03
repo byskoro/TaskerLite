@@ -7,8 +7,9 @@ import android.view.Menu;
 
 import com.taskerlite.R;
 import com.taskerlite.logic.ProfileController;
-import com.taskerlite.other.Flash;
+import com.taskerlite.source.Flash;
 import com.taskerlite.logic.ProfileController.Profile;
+import com.taskerlite.source.Icons;
 
 public class mActivity extends Activity implements FragmentCallBack{
 

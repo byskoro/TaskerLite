@@ -21,7 +21,7 @@ import com.taskerlite.logic.actions.aScreenOff;
 import com.taskerlite.logic.actions.aScreenOn;
 import com.taskerlite.logic.actions.aTimer;
 import com.taskerlite.main.FragmentCallBack;
-import com.taskerlite.main.Types.*;
+import com.taskerlite.source.Types.*;
 
 public class ActionBuilderDialog extends DialogFragment {
 

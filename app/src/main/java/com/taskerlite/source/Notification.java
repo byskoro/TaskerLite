@@ -1,4 +1,4 @@
-package com.taskerlite.other;
+package com.taskerlite.source;
 
 import android.app.NotificationManager;
 import android.content.Context;
@@ -6,7 +6,6 @@ import android.support.v4.app.NotificationCompat;
 import com.taskerlite.R;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Notification {
 

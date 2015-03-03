@@ -1,3 +1,8 @@
 <resources>
+
+    <dimen name="add_btn_size">60dp</dimen>
+    <dimen name="add_btn_half_size">30dp</dimen>
+
     <dimen name="scene_item_height">60dp</dimen>
+
 </resources>

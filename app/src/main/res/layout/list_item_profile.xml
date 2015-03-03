@@ -42,7 +42,7 @@
                 android:layout_weight="0.5"
                 android:orientation="horizontal">
 
-                <com.taskerlite.other.AutoResizeTextView
+                <com.taskerlite.source.AutoResizeTextView
                     android:id="@+id/profileNameID"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

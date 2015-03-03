@@ -6,8 +6,8 @@ import android.content.Context;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import com.taskerlite.R;
-import com.taskerlite.other.Notification;
-import com.taskerlite.other.Vibro;
+import com.taskerlite.source.Notification;
+import com.taskerlite.source.Vibro;
 
 public class tUnlockScreen extends mTask{
 

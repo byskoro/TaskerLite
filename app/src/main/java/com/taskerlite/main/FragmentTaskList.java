@@ -10,7 +10,8 @@ import com.taskerlite.logic.ActionElement;
 import com.taskerlite.logic.ProfileController;
 import com.taskerlite.logic.ProfileController.*;
 import com.taskerlite.logic.TaskElement;
-import com.taskerlite.other.Screen;
+import com.taskerlite.source.Icons;
+import com.taskerlite.source.Screen;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -24,6 +25,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class FragmentTaskList extends Fragment implements View.OnClickListener{
@@ -40,6 +42,7 @@ public class FragmentTaskList extends Fragment implements View.OnClickListener{
     SwipeMenuListView mListView;
 
     ImageButton buttonPlus;
+    ImageView logoPicture;
 
     @Override
     public void onAttach(Activity activity) {
@@ -65,8 +68,19 @@ public class FragmentTaskList extends Fragment implements View.OnClickListener{
         mListView.setOnMenuItemClickListener(itemClickListener);
         mListView.setOnItemClickListener(onSceneClickListener);
 
+        logoPicture = (ImageView) view.findViewById(R.id.logoId);
         buttonPlus = (ImageButton) view.findViewById(R.id.btnPlus);
         buttonPlus.setOnClickListener(this);
+
+        logoPicture.post(new Runnable() {
+            public void run() {
+                int height = logoPicture.getHeight();
+                int iconSize = (int) getResources().getDimension(R.dimen.add_btn_size);//getInteger(R.integer.icon_size);
+                RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(new ViewGroup.MarginLayoutParams(iconSize, iconSize));
+                lp.setMargins(Screen.dp2px(context, 20), height - iconSize / 2, 0, 0);
+                buttonPlus.setLayoutParams(lp);
+            }
+        });
 
         return view;
     }
@@ -75,17 +89,18 @@ public class FragmentTaskList extends Fragment implements View.OnClickListener{
         @Override
         public void create(SwipeMenu menu) {
 
-           int bgSize   = getResources().getInteger(R.integer.swipe_menu_bg_size);
+           int bgSize = getResources().getInteger(R.integer.swipe_menu_bg_size);
+           bgSize = Screen.dp2px(context, bgSize);
 
            SwipeMenuItem onItem = new SwipeMenuItem(context);
            onItem.setBackground(null);
-           onItem.setWidth(Screen.dp2px(context, bgSize));
+           onItem.setWidth(bgSize);
            onItem.setIcon(Icons.getInstance().getSwMenuStart());
            menu.addMenuItem(onItem);
 
            SwipeMenuItem offItem = new SwipeMenuItem(context);
            offItem.setBackground(null);
-           offItem.setWidth(Screen.dp2px(context, bgSize));
+           offItem.setWidth(bgSize);
            offItem.setIcon(Icons.getInstance().getSwMenuStop());
            menu.addMenuItem(offItem);
         }

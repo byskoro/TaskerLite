@@ -1,4 +1,4 @@
-package com.taskerlite.main;
+package com.taskerlite.source;
 
 
 import android.content.Context;
@@ -8,8 +8,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 
 import com.taskerlite.R;
-import com.taskerlite.other.Screen;
-import com.taskerlite.main.Types.*;
+import com.taskerlite.source.Types.*;
 
 import java.util.HashMap;
 
@@ -69,8 +68,8 @@ public class Icons {
 
     private void generatePimpa(){
 
-        tmpBigIcon  = BitmapFactory.decodeResource(context.getResources(), R.drawable.pimpa);
-        pimpaIcon   = Bitmap.createScaledBitmap(tmpBigIcon, builderSize, builderSize, true);
+        tmpBigIcon = BitmapFactory.decodeResource(context.getResources(), R.drawable.pimpa);
+        pimpaIcon  = Bitmap.createScaledBitmap(tmpBigIcon, builderSize, builderSize, true);
     }
 
     private void generateDeleteIcon(){

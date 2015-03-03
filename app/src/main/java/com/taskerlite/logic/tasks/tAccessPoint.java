@@ -21,7 +21,7 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import com.kyleduo.switchbutton.SwitchButton;
 import com.taskerlite.R;
-import com.taskerlite.other.Notification;
+import com.taskerlite.source.Notification;
 
 import java.lang.reflect.Method;
 

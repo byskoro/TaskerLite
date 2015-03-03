@@ -3,7 +3,7 @@ package com.taskerlite.main;
 import java.util.Calendar;
 import com.taskerlite.R;
 import com.taskerlite.logic.actions.mAction;
-import com.taskerlite.other.Flash;
+import com.taskerlite.source.Flash;
 import com.taskerlite.logic.ProfileController.*;
 import com.taskerlite.logic.*;
 import com.taskerlite.logic.tasks.mTask;
@@ -18,7 +18,7 @@ import android.content.IntentFilter;
 import android.os.IBinder;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
-import com.taskerlite.main.Types.*;
+import com.taskerlite.source.Types.*;
 
 public class TService extends Service {
 

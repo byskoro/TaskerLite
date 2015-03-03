@@ -1,68 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:weightSum="1"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_weight="0"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:weightSum="1"
+        android:orientation="vertical">
 
-        <ImageButton
-            android:id="@+id/btnPlus"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.2"
-            android:scaleType="centerInside"
-            android:padding="10dp"
-            android:src="@android:drawable/ic_menu_compass"
-            android:background="@null"/>
+        <ImageView
+            android:id="@+id/logoId"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@color/white"/>
 
-        <com.taskerlite.other.AutoResizeTextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.6"
+        <com.taskerlite.source.AutoResizeTextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/add_btn_half_size"
+            android:layout_marginTop="5dp"
             android:text="PROFILE LIST"
             android:maxLines="1"
             android:gravity="center"
-            android:paddingTop="15dp"
-            android:paddingBottom="15dp"
             android:textColor="#ffffff"
-            android:textSize="500sp"/>
+            android:textSize="500sp" />
 
-        <ImageButton
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.2"
-            android:scaleType="centerInside"
-            android:padding="10dp"
-            android:src="@drawable/settings"
-            android:background="@null"/>
-
+        <com.baoyz.swipemenulistview.SwipeMenuListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginTop="5dp"
+            android:padding="5dp"
+            android:divider="#FFFFFF"
+            android:dividerHeight="1.0dp" />
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.3"
-        android:orientation="vertical"
-        android:layout_marginTop="15dp"
-        android:background="@color/white"
-        android:id="@+id/topLayout">
+    <ImageButton
+        android:id="@+id/btnPlus"
+        android:layout_width="@dimen/add_btn_size"
+        android:layout_height="@dimen/add_btn_size"
+        android:background="@android:drawable/ic_menu_compass"/>
 
-    </LinearLayout>
-
-    <com.baoyz.swipemenulistview.SwipeMenuListView
-        android:id="@+id/listView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.7"
-        android:layout_marginTop="15dp"
-        android:padding="5dp"
-        android:divider="#FFFFFF"
-        android:dividerHeight="1.0dp" />
-
-</LinearLayout>
+</RelativeLayout>

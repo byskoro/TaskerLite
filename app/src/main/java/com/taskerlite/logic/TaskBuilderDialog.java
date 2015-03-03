@@ -20,7 +20,7 @@ import com.taskerlite.logic.tasks.tApp;
 import com.taskerlite.logic.tasks.tMobileData;
 import com.taskerlite.logic.tasks.tUnlockScreen;
 import com.taskerlite.main.FragmentCallBack;
-import com.taskerlite.main.Types.TYPES;
+import com.taskerlite.source.Types.TYPES;
 
 public class TaskBuilderDialog extends DialogFragment {
 

@@ -19,7 +19,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import com.taskerlite.main.Types.*;
+import com.taskerlite.source.Types.*;
 
 public class aTimer extends mAction {
 
