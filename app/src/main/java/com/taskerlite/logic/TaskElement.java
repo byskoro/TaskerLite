@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.taskerlite.logic.tasks.mTask;
 import com.taskerlite.logic.tasks.tAccessPoint;
 import com.taskerlite.logic.tasks.tApp;
+import com.taskerlite.logic.tasks.tGPS;
 import com.taskerlite.logic.tasks.tMobileData;
 import com.taskerlite.logic.tasks.tMobileLight;
 import com.taskerlite.logic.tasks.tUnlockScreen;
@@ -56,6 +57,9 @@ public class TaskElement {
                     break;
                 case T_WIFI:
                     taskObject = new GsonBuilder().create().fromJson(taskINStr, tWiFi.class);
+                    break;
+                case T_GPS:
+                    taskObject = new GsonBuilder().create().fromJson(taskINStr, tGPS.class);
                     break;
                 default:
                     break;

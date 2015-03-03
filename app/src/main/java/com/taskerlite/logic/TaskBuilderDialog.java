@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.taskerlite.R;
 import com.taskerlite.logic.tasks.tAccessPoint;
 import com.taskerlite.logic.tasks.tApp;
+import com.taskerlite.logic.tasks.tGPS;
 import com.taskerlite.logic.tasks.tMobileLight;
 import com.taskerlite.logic.tasks.tMobileData;
 import com.taskerlite.logic.tasks.tUnlockScreen;
@@ -24,6 +25,7 @@ import com.taskerlite.logic.tasks.tWiFi;
 import com.taskerlite.main.FragmentCallBack;
 import com.taskerlite.source.Types.TYPES;
 
+import static com.taskerlite.source.Types.TYPES.T_GPS;
 import static com.taskerlite.source.Types.TYPES.T_MOBILE_LIGHT;
 
 public class TaskBuilderDialog extends DialogFragment {
@@ -72,6 +74,9 @@ public class TaskBuilderDialog extends DialogFragment {
                         break;
                     case 5:
                         profile.addNewTask(new tMobileLight(), T_MOBILE_LIGHT, 0, 0);
+                        break;
+                    case 6:
+                        profile.addNewTask(new tGPS(), T_GPS, 0, 0);
                         break;
                 }
 

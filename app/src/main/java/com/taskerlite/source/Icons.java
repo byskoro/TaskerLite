@@ -65,6 +65,7 @@ public class Icons {
         generate(TYPES.T_ACCESS_POINT, R.drawable.t_access_point);
         generate(TYPES.T_UNLOCK_SCREEN, R.drawable.t_unlock_screen);
         generate(TYPES.T_MOBILE_LIGHT, R.drawable.t_mobile_light);
+        generate(TYPES.T_GPS, R.drawable.t_gps);
     }
 
     private void generatePimpa(){

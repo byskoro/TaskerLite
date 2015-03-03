@@ -32,6 +32,7 @@
     <string name="t_unlock_screen_short">Unlock screen</string>
     <string name="t_mobile_light_short">Mobile light</string>
     <string name="t_wifi_short">WIFI</string>
+    <string name="t_gps_short">GPS</string>
 
     <string name="a_time_short">Time trigger</string>
     <string name="a_boot_complete_short">Boot trigger</string>
@@ -61,6 +62,7 @@
         <item>Turn on/off WIFI</item>
         <item>Unlock screen</item>
         <item>Turn on/off mobile light</item>
+        <item>Turn on/off GPS</item>
     </string-array>
 
     <string-array name="tasksIcons">
@@ -70,6 +72,7 @@
         <item>@drawable/t_wifi</item>
         <item>@drawable/t_unlock_screen</item>
         <item>@drawable/t_mobile_light</item>
+        <item>@drawable/t_gps</item>
     </string-array>
 
 </resources>
