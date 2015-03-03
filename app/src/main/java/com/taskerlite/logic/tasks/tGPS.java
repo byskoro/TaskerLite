@@ -84,6 +84,7 @@ public class tGPS extends mTask {
         private Button saveBtn;
         private SwitchButton switchButton;
         private LinearLayout clearRequestLay;
+        private TextView taskName;
 
         public void setParent (tGPS task){
             this.task = task;
@@ -94,8 +95,9 @@ public class tGPS extends mTask {
 
             getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-            View view = inflater.inflate(R.layout.dialog_task_gps, container);
-
+            View view = inflater.inflate(R.layout.dialog_task_custom, container);
+            taskName = (TextView) view.findViewById(R.id.taskNameId);
+            taskName.setText(getString(R.string.t_gps_short));
             saveBtn = (Button) view.findViewById(R.id.saveBtnId);
             saveBtn.setOnClickListener(btnListener);
             switchButton = (SwitchButton) view.findViewById(R.id.switchBtnId);

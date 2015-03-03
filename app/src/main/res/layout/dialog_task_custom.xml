@@ -13,8 +13,9 @@
     android:orientation="vertical">
 
     <TextView
+        android:id="@+id/taskNameId"
         style="@style/logo_text"
-        android:text="@string/t_wifi_short"/>
+        android:text="Custom"/>
 
     <EditText
         android:id="@+id/nameId"

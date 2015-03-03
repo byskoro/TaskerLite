@@ -85,7 +85,9 @@ public class tMobileData extends mTask{
 
             getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-            View view = inflater.inflate(R.layout.dialog_task_mobile_data, container);
+            View view = inflater.inflate(R.layout.dialog_task_custom, container);
+            TextView taskName = (TextView) view.findViewById(R.id.taskNameId);
+            taskName.setText(getString(R.string.t_mobile_internet_short));
 
             saveBtn = (Button) view.findViewById(R.id.saveBtnId);
             saveBtn.setOnClickListener(btnListener);
