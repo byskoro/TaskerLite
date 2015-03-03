@@ -80,11 +80,7 @@ public class mActivity extends Activity implements FragmentCallBack{
     public void gotoFragmentBuilder() {
 
         getFragmentManager().beginTransaction().
-        setCustomAnimations(
-            R.anim.anim_visible,
-            R.anim.anim_gone,
-            R.anim.anim_visible,
-            R.anim.anim_gone).
+        setCustomAnimations( R.anim.anim_visible, R.anim.anim_gone, R.anim.anim_visible, R.anim.anim_gone).
         replace(R.id.fragmentContainer, fragmentTaskBuilder).
         addToBackStack(null).
         commit();
