@@ -8,6 +8,7 @@ import com.taskerlite.logic.tasks.tApp;
 import com.taskerlite.logic.tasks.tMobileData;
 import com.taskerlite.logic.tasks.tMobileLight;
 import com.taskerlite.logic.tasks.tUnlockScreen;
+import com.taskerlite.logic.tasks.tWiFi;
 import com.taskerlite.source.Icons;
 import com.taskerlite.source.Types.*;
 
@@ -52,6 +53,9 @@ public class TaskElement {
                     break;
                 case T_MOBILE_LIGHT:
                     taskObject = new GsonBuilder().create().fromJson(taskINStr, tMobileLight.class);
+                    break;
+                case T_WIFI:
+                    taskObject = new GsonBuilder().create().fromJson(taskINStr, tWiFi.class);
                     break;
                 default:
                     break;

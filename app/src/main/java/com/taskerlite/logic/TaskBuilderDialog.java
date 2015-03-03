@@ -20,6 +20,7 @@ import com.taskerlite.logic.tasks.tApp;
 import com.taskerlite.logic.tasks.tMobileLight;
 import com.taskerlite.logic.tasks.tMobileData;
 import com.taskerlite.logic.tasks.tUnlockScreen;
+import com.taskerlite.logic.tasks.tWiFi;
 import com.taskerlite.main.FragmentCallBack;
 import com.taskerlite.source.Types.TYPES;
 
@@ -64,7 +65,7 @@ public class TaskBuilderDialog extends DialogFragment {
                         profile.addNewTask(new tMobileData(), TYPES.T_THREE_G, 0, 0);
                         break;
                     case 3:
-                        //scene.addNewTask(new tWIFI(), TYPES.T_WIFI, 0, 0);
+                        profile.addNewTask(new tWiFi(), TYPES.T_WIFI, 0, 0);
                         break;
                     case 4:
                         profile.addNewTask(new tUnlockScreen(getActivity()), TYPES.T_UNLOCK_SCREEN, 0, 0);

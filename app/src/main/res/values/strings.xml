@@ -31,6 +31,7 @@
     <string name="t_mobile_internet_short">Mobile internet</string>
     <string name="t_unlock_screen_short">Unlock screen</string>
     <string name="t_mobile_light_short">Mobile light</string>
+    <string name="t_wifi_short">WIFI</string>
 
     <string name="a_time_short">Time trigger</string>
     <string name="a_boot_complete_short">Boot trigger</string>
