@@ -10,5 +10,5 @@ public interface FragmentCallBack {
     abstract public Profile getCurrentProfile ();
     abstract public void setCurrentProfileIndex (int index);
     abstract public void returnToFragmentList();
-    abstract public void gotoFragmentBuilder();
+    abstract public void openFragmentBuilder();
 }

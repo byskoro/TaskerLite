@@ -9,7 +9,6 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_weight="0"
-        android:layout_marginTop="10dp"
         android:orientation="horizontal">
 
         <ImageButton
@@ -51,8 +50,6 @@
         android:layout_weight="0.3"
         android:orientation="vertical"
         android:layout_marginTop="15dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
         android:background="@color/white"
         android:id="@+id/topLayout">
 
@@ -64,9 +61,6 @@
         android:layout_height="0dp"
         android:layout_weight="0.7"
         android:layout_marginTop="15dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginBottom="15dp"
         android:padding="5dp"
         android:divider="#FFFFFF"
         android:dividerHeight="1.0dp" />

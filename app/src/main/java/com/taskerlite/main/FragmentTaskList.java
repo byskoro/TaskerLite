@@ -127,7 +127,7 @@ public class FragmentTaskList extends Fragment implements View.OnClickListener{
     private void goToBuilderFragment(int index){
 
         dataActivity.setCurrentProfileIndex(index);
-        dataActivity.gotoFragmentBuilder();
+        dataActivity.openFragmentBuilder();
     }
 
     class AppAdapter extends BaseAdapter {
