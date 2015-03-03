@@ -6,6 +6,17 @@
     <string name="profile_name_short">Name</string>
     <string name="profile_delete">Delete profile?</string>
 
+    <!-- preference  -->
+    <string name="notification_title">Notification preference</string>
+    <string name="notification_state">Notification state</string>
+    <string name="notification_state_enable">Enable</string>
+    <string name="notification_state_disable">Disable</string>
+    <string name="notification_vibro">Vibro</string>
+    <string name="notification_light">Light</string>
+    <string name="notification_sound">Sound</string>
+
+
+
     <!-- notification  -->
     <string name="app_open">Press to open application</string>
 

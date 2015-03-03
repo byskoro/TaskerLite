@@ -2,11 +2,37 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory
-        android:title="Notification">
+        android:title="@string/notification_title">
         <CheckBoxPreference
-            android:key="chb2"
-            android:summary="summury"
-            android:title="title">
+            android:key="notificationState"
+            android:defaultValue="true"
+            android:title="@string/notification_state"
+            android:summaryOff="@string/notification_state_disable"
+            android:summaryOn="@string/notification_state_enable">
+        </CheckBoxPreference>
+        <CheckBoxPreference
+            android:dependency="notificationState"
+            android:key="notificationLight"
+            android:defaultValue="true"
+            android:title="@string/notification_light"
+            android:summaryOff="@string/notification_state_disable"
+            android:summaryOn="@string/notification_state_enable">>
+        </CheckBoxPreference>
+        <CheckBoxPreference
+            android:dependency="notificationState"
+            android:key="notificationVibro"
+            android:defaultValue="true"
+            android:title="@string/notification_vibro"
+            android:summaryOff="@string/notification_state_disable"
+            android:summaryOn="@string/notification_state_enable">>
+        </CheckBoxPreference>
+        <CheckBoxPreference
+            android:dependency="notificationState"
+            android:key="notificationSound"
+            android:defaultValue="true"
+            android:title="@string/notification_sound"
+            android:summaryOff="@string/notification_state_disable"
+            android:summaryOn="@string/notification_state_enable">>
         </CheckBoxPreference>
     </PreferenceCategory>
 </PreferenceScreen>
