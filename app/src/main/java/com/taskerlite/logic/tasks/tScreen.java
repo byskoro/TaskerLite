@@ -3,9 +3,9 @@ package com.taskerlite.logic.tasks;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.content.Context;
-import android.content.pm.PackageManager;
-import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.os.PowerManager;
+import android.os.PowerManager.WakeLock;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,28 +21,33 @@ import com.kyleduo.switchbutton.SwitchButton;
 import com.taskerlite.R;
 import com.taskerlite.source.Notification;
 
-public class tWiFi extends mTask {
+public class tScreen extends mTask{
 
     private boolean state = true;
 
     @Override
     public void start(Context context) {
 
-        if(state){
-            wifiOn(context);
-            String header = context.getResources().getString(R.string.t_wifi_short);
-            Notification.getInstance(context).createInfoNotification(header, getName());
-        }
-        else
+        PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+
+        if(state) {
+            WakeLock wakeLock = pm.newWakeLock((PowerManager.FULL_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP), "TAG");
+            wakeLock.acquire();
+            wakeLock.release();
+
+            String header = context.getResources().getString(R.string.t_screen_short);
+            Notification.getInstance(context).createInfoNotification(header, "");
+
+        } else
             stop(context);
     }
 
     @Override
     public void stop(Context context) {
 
-        wifiOff(context);
-    }
 
+
+    }
     @Override
     public void show(FragmentManager fm) {
 
@@ -51,30 +56,15 @@ public class tWiFi extends mTask {
         ui.show(fm.beginTransaction(), "");
     }
 
-    public void wifiOn(Context context) {
-
-        try {
-            WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-            wifiManager.setWifiEnabled(true);
-        } catch (Exception e) { }
-    }
-
-    public void wifiOff(Context context) {
-        try {
-            WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-            wifiManager.setWifiEnabled(false);
-        } catch (Exception e) { }
-    }
-
     public static class UI extends DialogFragment {
 
-        private tWiFi task;
+        private tScreen task;
         private EditText nameInput;
         private Button saveBtn;
         private SwitchButton switchButton;
         private LinearLayout clearRequestLay;
 
-        public void setParent (tWiFi task){
+        public void setParent (tScreen task){
             this.task = task;
         }
 
@@ -85,7 +75,7 @@ public class tWiFi extends mTask {
 
             View view = inflater.inflate(R.layout.dialog_task_custom, container);
             TextView taskName = (TextView) view.findViewById(R.id.taskNameId);
-            taskName.setText(getString(R.string.t_wifi_short));
+            taskName.setText(getString(R.string.t_screen_short));
 
             saveBtn = (Button) view.findViewById(R.id.saveBtnId);
             saveBtn.setOnClickListener(btnListener);
@@ -127,4 +117,3 @@ public class tWiFi extends mTask {
         }
     }
 }
-

@@ -26,20 +26,12 @@
     <string name="ap_ssid_name">Network name</string>
     <string name="ap_ssid_password">Network password</string>
 
-    <string name="t_app_short">Application</string>
-    <string name="t_access_point_short">WIFI access point</string>
-    <string name="t_mobile_internet_short">Mobile internet</string>
-    <string name="t_unlock_screen_short">Unlock screen</string>
-    <string name="t_mobile_light_short">Mobile light</string>
-    <string name="t_wifi_short">WIFI</string>
-    <string name="t_gps_short">GPS</string>
-
+    <!-- Description of action list  -->
     <string name="a_time_short">Time trigger</string>
     <string name="a_boot_complete_short">Boot trigger</string>
     <string name="a_screen_on">Screen On trigger</string>
     <string name="a_screen_off">Screen Off trigger</string>
 
-    <!-- Description of action list  -->
     <string-array name="actionsList">
         <item>Trigger by time</item>
         <item>Boot complete</item>
@@ -55,14 +47,20 @@
     </string-array>
 
     <!-- Description of task list  -->
+    <string name="t_app_short">Application</string>
+    <string name="t_access_point_short">WIFI access point</string>
+    <string name="t_mobile_internet_short">Mobile internet</string>
+    <string name="t_screen_short">Screen</string>
+    <string name="t_mobile_light_short">Mobile light</string>
+    <string name="t_wifi_short">WIFI</string>
+    <string name="t_gps_short">GPS</string>
+
     <string-array name="tasksList">
         <item>Turn on/off any application</item>
         <item>Turn on/off wifi access point</item>
         <item>Turn on/off mobile internet</item>
         <item>Turn on/off WIFI</item>
-        <item>Unlock screen</item>
-        <item>Turn on/off mobile light</item>
-        <item>Turn on/off GPS</item>
+        <item>Turn on/off screen</item>
     </string-array>
 
     <string-array name="tasksIcons">
@@ -70,9 +68,7 @@
         <item>@drawable/t_access_point</item>
         <item>@drawable/t_three_g</item>
         <item>@drawable/t_wifi</item>
-        <item>@drawable/t_unlock_screen</item>
-        <item>@drawable/t_mobile_light</item>
-        <item>@drawable/t_gps</item>
+        <item>@drawable/t_screen</item>
     </string-array>
 
 </resources>

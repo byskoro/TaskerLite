@@ -3,7 +3,7 @@ package com.taskerlite.source;
 public class Types {
 
     public static enum TYPES {A_TIME, A_BOOT_COMPLETE, A_SCREEN_ON, A_SCREEN_OFF,
-        T_APP, T_THREE_G, T_WIFI, T_ACCESS_POINT, T_UNLOCK_SCREEN, T_MOBILE_LIGHT, T_GPS}
+        T_APP, T_THREE_G, T_WIFI, T_ACCESS_POINT, T_SCREEN, T_MOBILE_LIGHT, T_GPS}
 
     private static int[] mColors = new int[] {
             0xFFFFFFCC,

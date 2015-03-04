@@ -8,7 +8,7 @@ import com.taskerlite.logic.tasks.tApp;
 import com.taskerlite.logic.tasks.tGPS;
 import com.taskerlite.logic.tasks.tMobileData;
 import com.taskerlite.logic.tasks.tMobileLight;
-import com.taskerlite.logic.tasks.tUnlockScreen;
+import com.taskerlite.logic.tasks.tScreen;
 import com.taskerlite.logic.tasks.tWiFi;
 import com.taskerlite.source.Icons;
 import com.taskerlite.source.Types.*;
@@ -49,8 +49,8 @@ public class TaskElement {
                 case T_ACCESS_POINT:
                     taskObject = new GsonBuilder().create().fromJson(taskINStr, tAccessPoint.class);
                     break;
-                case T_UNLOCK_SCREEN:
-                    taskObject = new GsonBuilder().create().fromJson(taskINStr, tUnlockScreen.class);
+                case T_SCREEN:
+                    taskObject = new GsonBuilder().create().fromJson(taskINStr, tScreen.class);
                     break;
                 case T_MOBILE_LIGHT:
                     taskObject = new GsonBuilder().create().fromJson(taskINStr, tMobileLight.class);
