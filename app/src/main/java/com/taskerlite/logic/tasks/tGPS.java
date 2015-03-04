@@ -5,7 +5,6 @@ import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.KeyEvent;
@@ -21,7 +20,7 @@ import android.widget.TextView;
 
 import com.kyleduo.switchbutton.SwitchButton;
 import com.taskerlite.R;
-import com.taskerlite.source.Notification;
+import com.taskerlite.source.mNotification;
 
 public class tGPS extends mTask {
 
@@ -33,7 +32,7 @@ public class tGPS extends mTask {
         if(state){
             turnGPSOn(context);
             String header = context.getResources().getString(R.string.t_gps_short);
-            Notification.getInstance(context).createInfoNotification(header, getName());
+            mNotification.getInstance(context).createInfoNotification(header, getName());
         }
         else
             stop(context);

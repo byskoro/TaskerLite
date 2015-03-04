@@ -19,7 +19,7 @@ import android.widget.TextView;
 
 import com.kyleduo.switchbutton.SwitchButton;
 import com.taskerlite.R;
-import com.taskerlite.source.Notification;
+import com.taskerlite.source.mNotification;
 
 public class tMobileLight extends mTask {
 
@@ -31,7 +31,7 @@ public class tMobileLight extends mTask {
         if(state){
             flashLightOn(context);
             String header = context.getResources().getString(R.string.t_mobile_internet_short);
-            Notification.getInstance(context).createInfoNotification(header, getName());
+            mNotification.getInstance(context).createInfoNotification(header, getName());
         }
         else
             stop(context);

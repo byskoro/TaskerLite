@@ -21,7 +21,7 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import com.kyleduo.switchbutton.SwitchButton;
 import com.taskerlite.R;
-import com.taskerlite.source.Notification;
+import com.taskerlite.source.mNotification;
 
 import java.lang.reflect.Method;
 
@@ -37,7 +37,7 @@ public class tAccessPoint extends mTask{
         if(state){
             setAccessPointState(true, context);
             String header = context.getResources().getString(R.string.t_access_point_short);
-            Notification.getInstance(context).createInfoNotification(header, getName());
+            mNotification.getInstance(context).createInfoNotification(header, getName());
         }
         else
             stop(context);

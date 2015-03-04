@@ -3,7 +3,6 @@ package com.taskerlite.logic.tasks;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -19,7 +18,7 @@ import android.widget.TextView;
 
 import com.kyleduo.switchbutton.SwitchButton;
 import com.taskerlite.R;
-import com.taskerlite.source.Notification;
+import com.taskerlite.source.mNotification;
 
 public class tWiFi extends mTask {
 
@@ -31,7 +30,7 @@ public class tWiFi extends mTask {
         if(state){
             wifiOn(context);
             String header = context.getResources().getString(R.string.t_wifi_short);
-            Notification.getInstance(context).createInfoNotification(header, getName());
+            mNotification.getInstance(context).createInfoNotification(header, getName());
         }
         else
             stop(context);

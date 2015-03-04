@@ -5,7 +5,7 @@ import android.content.Context;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import com.taskerlite.R;
-import com.taskerlite.source.Notification;
+import com.taskerlite.source.mNotification;
 
 public class tScreen extends mTask{
 
@@ -23,7 +23,7 @@ public class tScreen extends mTask{
         wakeLock.release();
 
         String header = context.getResources().getString(R.string.t_screen_short);
-        Notification.getInstance(context).createInfoNotification(header, "");
+        mNotification.getInstance(context).createInfoNotification(header, "");
     }
 
     @Override
