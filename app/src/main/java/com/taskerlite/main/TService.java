@@ -101,6 +101,10 @@ public class TService extends Service {
 
                     checkForAction(TYPES.A_TIME);
 
+                }catch (Exception e) { }
+
+                try {
+
                     Thread.sleep(generateOffsetTime());
 
                 }catch (Exception e) { }

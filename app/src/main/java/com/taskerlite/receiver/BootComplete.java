@@ -1,4 +1,4 @@
-package com.taskerlite.Receivers;
+package com.taskerlite.receiver;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

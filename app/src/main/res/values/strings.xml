@@ -50,7 +50,7 @@
     <string name="t_app_short">Application</string>
     <string name="t_access_point_short">WIFI access point</string>
     <string name="t_mobile_internet_short">Mobile internet</string>
-    <string name="t_screen_short">Screen</string>
+    <string name="t_screen_short">Screen on</string>
     <string name="t_mobile_light_short">Mobile light</string>
     <string name="t_wifi_short">WIFI</string>
     <string name="t_gps_short">GPS</string>
@@ -60,7 +60,7 @@
         <item>Turn on/off wifi access point</item>
         <item>Turn on/off mobile internet</item>
         <item>Turn on/off WIFI</item>
-        <item>Turn on/off screen</item>
+        <item>Turn on screen</item>
     </string-array>
 
     <string-array name="tasksIcons">
@@ -70,5 +70,9 @@
         <item>@drawable/t_wifi</item>
         <item>@drawable/t_screen</item>
     </string-array>
+    <string name="title_activity_main2">Main2Activity</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
 
 </resources>
