@@ -50,10 +50,11 @@ public class tGPS extends mTask {
 
         UI ui = new UI();
         ui.setParent(this);
-        ui.show(fm.beginTransaction(), "A_TREE_G");
+        ui.show(fm.beginTransaction(), "");
     }
 
-    private void turnGPSOn(Context context){
+    public void turnGPSOn(Context context)
+    {
         String provider = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
 
         if(!provider.contains("gps")){ //if gps is disabled
@@ -65,9 +66,9 @@ public class tGPS extends mTask {
         }
     }
 
-    private void turnGPSOff(Context context){
+    public void turnGPSOff(Context context)
+    {
         String provider = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
-
         if(provider.contains("gps")){ //if gps is enabled
             final Intent poke = new Intent();
             poke.setClassName("com.android.settings", "com.android.settings.widget.SettingsAppWidgetProvider");
