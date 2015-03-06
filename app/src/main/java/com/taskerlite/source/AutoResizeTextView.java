@@ -14,6 +14,8 @@ import android.util.SparseIntArray;
 import android.util.TypedValue;
 import android.widget.TextView;
 
+import com.taskerlite.R;
+
 public class AutoResizeTextView extends TextView {
     private interface SizeTester {
         /**
@@ -70,7 +72,7 @@ public class AutoResizeTextView extends TextView {
 
     private void initialize(Context context) {
 
-        setTypeface(Typeface.createFromAsset(context.getAssets(), "font.ttf"));
+        setTypeface(Typeface.createFromAsset(context.getAssets(), context.getString(R.string.font_name)));
 
         mPaint = new TextPaint(getPaint());
         mMaxTextSize = getTextSize();
