@@ -87,13 +87,13 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
         taskElement.setOnClickListener(this);
         nameScene = (EditText) view.findViewById(R.id.sceneName);
         nameScene.setOnEditorActionListener(this);
-        nameScene.setTypeface(Typeface.createFromAsset(context.getAssets(), "font.ttf"));
+        nameScene.setTypeface(Typeface.createFromAsset(context.getAssets(), context.getString(R.string.font_name)));
         clearRequestLay = (LinearLayout) view.findViewById(R.id.clearRequestLay);
 
         textPaint = new Paint();
         textPaint.setColor(Color.WHITE);
         textPaint.setTextSize(getResources().getInteger(R.integer.builder_text_size));
-        textPaint.setTypeface(Typeface.createFromAsset(context.getAssets(), "font.ttf"));
+        textPaint.setTypeface(Typeface.createFromAsset(context.getAssets(), context.getString(R.string.font_name)));
         textPaint.setTextAlign(Paint.Align.CENTER);
 
         linePaint = new Paint();
