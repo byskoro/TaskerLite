@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
-
 import com.taskerlite.R;
 import com.taskerlite.logic.ProfileController;
 import com.taskerlite.source.Flash;

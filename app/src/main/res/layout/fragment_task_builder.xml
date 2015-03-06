@@ -59,8 +59,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_weight="0.7"
-                    android:scaleType="fitCenter"
-                    android:background="@drawable/ic_launcher"/>
+                    android:scaleType="centerInside"
+                    android:src="@drawable/home"
+                    android:background="@null"/>
 
                 <com.taskerlite.source.AutoResizeTextView
                     android:layout_width="wrap_content"
@@ -78,12 +79,13 @@
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
 
-                <LinearLayout
+                <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_weight="0.7"
                     android:scaleType="centerInside"
-                    android:background="@drawable/ic_launcher"/>
+                    android:src="@drawable/actions"
+                    android:background="@null"/>
 
                 <com.taskerlite.source.AutoResizeTextView
                     android:layout_width="wrap_content"
@@ -105,8 +107,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_weight="0.7"
-                    android:scaleType="fitCenter"
-                    android:background="@drawable/trigger"/>
+                    android:scaleType="centerInside"
+                    android:src="@drawable/trigger"
+                    android:background="@null"/>
 
                 <com.taskerlite.source.AutoResizeTextView
                     android:layout_width="wrap_content"
@@ -128,8 +131,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_weight="0.7"
-                    android:scaleType="fitCenter"
-                    android:background="@drawable/delete"/>
+                    android:scaleType="centerInside"
+                    android:src="@drawable/delete"
+                    android:background="@null"/>
 
                 <com.taskerlite.source.AutoResizeTextView
                     android:layout_width="wrap_content"

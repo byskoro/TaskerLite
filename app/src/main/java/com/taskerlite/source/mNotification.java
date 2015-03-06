@@ -3,21 +3,15 @@ package com.taskerlite.source;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Context;
-import android.support.v4.app.NotificationCompat;
-import android.text.Html;
-import android.widget.RemoteViews;
-
 import com.taskerlite.R;
-
-import java.util.ArrayList;
 
 public class mNotification {
 
     private static mNotification instance;
 
-    private static Context context;
+    private Context context;
     private NotificationManager manager;
-    private static int index = 0;
+    private int index = 0;
 
     public static mNotification getInstance(Context context) {
 
