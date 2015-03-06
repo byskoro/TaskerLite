@@ -108,7 +108,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="0.7"
                     android:scaleType="centerInside"
-                    android:src="@drawable/trigger"
+                    android:src="@drawable/task"
                     android:background="@null"/>
 
                 <com.taskerlite.source.AutoResizeTextView
