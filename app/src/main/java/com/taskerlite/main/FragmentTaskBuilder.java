@@ -40,21 +40,19 @@ import java.util.ArrayList;
 
 public class FragmentTaskBuilder extends Fragment implements View.OnClickListener, TextView.OnEditorActionListener {
 
-    private FragmentCallBack dataActivity;
+    private FragmentCallBack  dataActivity;
 
-    private BuilderView taskerView;
-    private Context context;
-    private Profile profile;
-    private int sceneIndex = 0;
+    private BuilderView       taskerView;
+    private Context           context;
+    private Profile           profile;
     private ProfileController profileController;
 
     private int iconSizeElement = Icons.builderSize;
-    private Bitmap pimpaIcon = Icons.getInstance().getPimpaIcon();
-    DelElement gcElement;
+    private DelElement gcElement;
 
-    LinearLayout backBtn, actionElement, taskElement, deleteBtn;
-    EditText nameScene;
-    LinearLayout clearRequestLay;
+    private LinearLayout backBtn, actionElement, taskElement, deleteBtn;
+    private EditText     nameScene;
+    private LinearLayout clearRequestLay;
 
     private Paint textPaint, linePaint;
 
@@ -62,12 +60,10 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
     public void onAttach(Activity activity) {
         super.onAttach(activity);
 
-        dataActivity = (FragmentCallBack) activity;
+        dataActivity      = (FragmentCallBack) activity;
         profileController = dataActivity.getProfileController();
-        profile = dataActivity.getCurrentProfile();
-        sceneIndex = dataActivity.getCurrentProfileIndex();
-
-        context = getActivity();
+        profile           = dataActivity.getCurrentProfile();
+        context           = getActivity();
     }
 
 	@Override
@@ -75,17 +71,18 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
 
 		View view = inflater.inflate(R.layout.fragment_task_builder, container, false);
 
-		taskerView = (BuilderView) view.findViewById(R.id.drawBuilder);
-        taskerView.setViewCallBack(viewCallBack);
-        backBtn = (LinearLayout) view.findViewById(R.id.backBtn);
-        backBtn.setOnClickListener(this);
-        deleteBtn= (LinearLayout) view.findViewById(R.id.deleteBtn);
-        deleteBtn.setOnClickListener(this);
+		taskerView    = (BuilderView) view.findViewById(R.id.drawBuilder);
+        backBtn       = (LinearLayout) view.findViewById(R.id.backBtn);
+        deleteBtn     = (LinearLayout) view.findViewById(R.id.deleteBtn);
         actionElement = (LinearLayout) view.findViewById(R.id.actionElementID);
+        taskElement   = (LinearLayout) view.findViewById(R.id.taskElementID);
+        nameScene     = (EditText) view.findViewById(R.id.sceneName);
+
+        taskerView.setViewCallBack(viewCallBack);
+        backBtn.setOnClickListener(this);
+        deleteBtn.setOnClickListener(this);
         actionElement.setOnClickListener(this);
-        taskElement = (LinearLayout) view.findViewById(R.id.taskElementID);
         taskElement.setOnClickListener(this);
-        nameScene = (EditText) view.findViewById(R.id.sceneName);
         nameScene.setOnEditorActionListener(this);
         nameScene.setTypeface(Typeface.createFromAsset(context.getAssets(), context.getString(R.string.font_name)));
         clearRequestLay = (LinearLayout) view.findViewById(R.id.clearRequestLay);
