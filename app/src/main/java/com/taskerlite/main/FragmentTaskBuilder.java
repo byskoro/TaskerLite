@@ -15,7 +15,6 @@ import android.app.Activity;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -46,24 +45,29 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
     private Context           context;
     private Profile           profile;
     private ProfileController profileController;
-
-    private int iconSizeElement = Icons.builderSize;
-    private DelElement gcElement;
+    private DelElement        gcElement;
 
     private LinearLayout backBtn, actionElement, taskElement, deleteBtn;
-    private EditText     nameScene;
+    private EditText profileName;
     private LinearLayout clearRequestLay;
 
     private Paint textPaint, linePaint;
+    private String fontName, profileNameStr;
+
+    private int iconSizeElement;
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
 
-        dataActivity      = (FragmentCallBack) activity;
-        profileController = dataActivity.getProfileController();
-        profile           = dataActivity.getCurrentProfile();
-        context           = getActivity();
+        dataActivity       = (FragmentCallBack) activity;
+        profileController  = dataActivity.getProfileController();
+        profile            = dataActivity.getCurrentProfile();
+        profileNameStr = profile.getName();
+        context            = getActivity();
+        iconSizeElement    = Icons.builderSize;
+        fontName           = context.getString(R.string.font_name);
+        gcElement          = new DelElement();
     }
 
 	@Override
@@ -76,41 +80,26 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
         deleteBtn     = (LinearLayout) view.findViewById(R.id.deleteBtn);
         actionElement = (LinearLayout) view.findViewById(R.id.actionElementID);
         taskElement   = (LinearLayout) view.findViewById(R.id.taskElementID);
-        nameScene     = (EditText) view.findViewById(R.id.sceneName);
+        profileName = (EditText) view.findViewById(R.id.profileNameID);
 
         taskerView.setViewCallBack(viewCallBack);
         backBtn.setOnClickListener(this);
         deleteBtn.setOnClickListener(this);
         actionElement.setOnClickListener(this);
         taskElement.setOnClickListener(this);
-        nameScene.setOnEditorActionListener(this);
-        nameScene.setTypeface(Typeface.createFromAsset(context.getAssets(), context.getString(R.string.font_name)));
+        profileName.setOnEditorActionListener(this);
+        profileName.setTypeface(Typeface.createFromAsset(context.getAssets(), fontName));
         clearRequestLay = (LinearLayout) view.findViewById(R.id.clearRequestLay);
 
         textPaint = new Paint();
         textPaint.setColor(Color.WHITE);
         textPaint.setTextSize(getResources().getInteger(R.integer.builder_text_size));
-        textPaint.setTypeface(Typeface.createFromAsset(context.getAssets(), context.getString(R.string.font_name)));
+        textPaint.setTypeface(Typeface.createFromAsset(context.getAssets(), fontName));
         textPaint.setTextAlign(Paint.Align.CENTER);
 
         linePaint = new Paint();
         linePaint.setTextAlign(Paint.Align.CENTER);
         linePaint.setStrokeWidth(5);
-
-        gcElement = new DelElement(Icons.deleteSize);
-        clearRequest(nameScene);
-
-        if(!profile.getName().equals("")) {
-
-            nameScene.setText(profile.getName());
-
-        } else{
-
-            ProfileNameDialog nameDialog = new ProfileNameDialog();
-            nameDialog.setCancelable(false);
-            nameDialog.setTargetFragment(this, 0);
-            nameDialog.show(getFragmentManager().beginTransaction(), "profileNameDialog");
-        }
 
 		return view;
 	}
@@ -118,6 +107,18 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
     @Override
     public void onResume() {
         super.onResume();
+
+        if(!profile.getName().equals("")) {
+
+            profileName.setText(profileNameStr);
+
+        } else {
+
+            ProfileNameDialog nameDialog = new ProfileNameDialog();
+            nameDialog.setCancelable(false);
+            nameDialog.setTargetFragment(this, 0);
+            nameDialog.show(getFragmentManager().beginTransaction(), "profileNameDialog");
+        }
 
         handlerLogic.sendEmptyMessageDelayed(1, 50);
     }
@@ -442,9 +443,9 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
         private ArrayList<PressedElement> delElementList = new ArrayList<PressedElement>();
         private int elementSize;
 
-        public DelElement(int elementSize){
+        public DelElement(){
 
-            this.elementSize = elementSize;
+            this.elementSize = Icons.deleteSize;
         }
 
         public void addPressedElement(long id, int x, int y){
@@ -521,7 +522,7 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
                     if(name.length()!=0){
 
                         dataActivity.getCurrentProfile().setName(name);
-                        parentFragment.nameScene.setText(name);
+                        parentFragment.profileName.setText(name);
                         dismiss();
 
                     }else
