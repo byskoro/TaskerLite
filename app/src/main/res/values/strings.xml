@@ -7,7 +7,6 @@
     <string name="profile_delete">Delete profile?</string>
     <string name="font_name">JuraMedium.ttf</string>
 
-
     <!-- preference  -->
     <string name="notification_title">Notification preference</string>
     <string name="notification_state">Notification state</string>

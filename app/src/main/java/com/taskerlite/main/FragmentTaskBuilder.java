@@ -103,9 +103,11 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
         gcElement = new DelElement(Icons.deleteSize);
         clearRequest(nameScene);
 
-        if(!profile.getName().equals(""))
+        if(!profile.getName().equals("")) {
+
             nameScene.setText(profile.getName());
-        else{
+
+        } else{
 
             ProfileNameDialog nameDialog = new ProfileNameDialog();
             nameDialog.setCancelable(false);
