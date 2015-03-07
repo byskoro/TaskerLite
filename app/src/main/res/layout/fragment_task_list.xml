@@ -16,25 +16,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:scaleType="centerInside"
+            android:layout_marginTop="20dp"
             android:src="@drawable/logo"
             android:background="@null"/>
-
-        <com.taskerlite.source.AutoResizeTextView
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/add_btn_half_size"
-            android:layout_marginTop="5dp"
-            android:text="PROFILE LIST"
-            android:maxLines="1"
-            android:gravity="center"
-            android:textColor="#ffffff"
-            android:textSize="500sp" />
 
         <com.baoyz.swipemenulistview.SwipeMenuListView
             android:id="@+id/listView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="20dp"
             android:padding="5dp"
             android:divider="#FFFFFF"
             android:dividerHeight="1.0dp" />
