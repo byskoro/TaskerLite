@@ -79,13 +79,6 @@
         </LinearLayout>
     </LinearLayout>
 
-    <ToggleButton android:id="@+id/your_btn"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textOn="On"
-        android:textOff="Off"
-        android:background="@android:drawable/btn_default" />
-
     <LinearLayout
         android:id="@+id/clearRequestLay"
         android:layout_width="0dp"
