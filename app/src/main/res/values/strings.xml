@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- main info  -->
     <string name="app_name">Tasker Lite</string>
     <string name="profile_name">Profile Name</string>
     <string name="profile_name_short">Name</string>
@@ -23,21 +24,22 @@
     <string name="task_name">Task name</string>
     <string name="action_name">Action name</string>
 
+    <!-- Wifi access point -->
     <string name="boolean_state">State</string>
     <string name="ap_ssid_name">Network name</string>
     <string name="ap_ssid_password">Network password</string>
 
-    <!-- Description of action list  -->
+    <!-- Short description of actions -->
     <string name="a_time_short">Time trigger</string>
     <string name="a_boot_complete_short">Boot trigger</string>
     <string name="a_screen_on">Screen On trigger</string>
     <string name="a_screen_off">Screen Off trigger</string>
 
     <string-array name="actionsList">
-        <item>Trigger by time</item>
-        <item>Boot complete</item>
-        <item>Screen On</item>
-        <item>Screen OFF</item>
+        <item>IF time ...</item>
+        <item>IF android boot complete ...</item>
+        <item>IF screen turn on ...</item>
+        <item>IF screen turn off ...</item>
     </string-array>
 
     <string-array name="actionsIcons">
@@ -47,7 +49,7 @@
         <item>@drawable/a_screen_off</item>
     </string-array>
 
-    <!-- Description of task list  -->
+    <!-- Short description of tasks -->
     <string name="t_app_short">Application</string>
     <string name="t_access_point_short">WIFI access point</string>
     <string name="t_mobile_internet_short">Mobile internet</string>
@@ -57,7 +59,7 @@
     <string name="t_gps_short">GPS</string>
 
     <string-array name="tasksList">
-        <item>Turn on application</item>
+        <item>Run application</item>
         <item>Turn on/off wifi access point</item>
         <item>Turn on/off mobile internet</item>
         <item>Turn on/off WIFI</item>

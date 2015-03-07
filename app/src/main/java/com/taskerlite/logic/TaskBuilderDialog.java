@@ -39,7 +39,7 @@ public class TaskBuilderDialog extends DialogFragment {
         profile = dataActivity.getCurrentProfile();
 
         getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
-        View view = inflater.inflate(R.layout.dialog_action_list, container);
+        View view = inflater.inflate(R.layout.dialog_list, container);
 
         lvMain = (ListView) view.findViewById(R.id.listview);
 
@@ -81,7 +81,7 @@ public class TaskBuilderDialog extends DialogFragment {
         private Context context;
 
         public mAdapter(Context context, String[] roomNames) {
-            super(context, R.layout.dialog_action_list, roomNames);
+            super(context, R.layout.dialog_list, roomNames);
 
             this.context = context;
         }
