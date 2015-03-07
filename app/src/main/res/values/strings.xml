@@ -17,10 +17,10 @@
     <string name="notification_light">Light</string>
     <string name="notification_sound">Sound</string>
 
-    <!-- notification  -->
+    <!-- notification -->
     <string name="app_open">Press to open application</string>
 
-    <!-- text of input  -->
+    <!-- text of input -->
     <string name="task_name">Task name</string>
     <string name="action_name">Action name</string>
 
@@ -30,10 +30,10 @@
     <string name="ap_ssid_password">Network password</string>
 
     <!-- Short description of actions -->
-    <string name="a_time_short">Time trigger</string>
-    <string name="a_boot_complete_short">Boot trigger</string>
-    <string name="a_screen_on">Screen On trigger</string>
-    <string name="a_screen_off">Screen Off trigger</string>
+    <string name="a_time_short">Time</string>
+    <string name="a_boot_complete_short">On boot</string>
+    <string name="a_screen_on">Screen On</string>
+    <string name="a_screen_off">Screen Off</string>
 
     <string-array name="actionsList">
         <item>IF time ...</item>

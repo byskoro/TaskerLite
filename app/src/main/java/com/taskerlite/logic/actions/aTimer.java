@@ -7,6 +7,7 @@ import com.taskerlite.R;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -61,9 +62,6 @@ public class aTimer extends mAction {
 
         private aTimer action;
         private TimePicker timePicker;
-        private EditText nameInput;
-        private Button saveBtn;
-        private LinearLayout clearRequestLay;
 
         public void setParent (aTimer action){
             this.action = action;
@@ -81,48 +79,13 @@ public class aTimer extends mAction {
             timePicker.setCurrentMinute(action.minute);
             timePicker.setCurrentHour(action.hour);
 
-            saveBtn = (Button) view.findViewById(R.id.saveBtnId);
-            saveBtn.setOnClickListener(btnListener);
-            nameInput = (EditText) view.findViewById(R.id.nameId);
-            nameInput.setText(action.getName());
-            nameInput.setOnEditorActionListener(textWatcher);
-
-            clearRequestLay = (LinearLayout) view.findViewById(R.id.clearRequestLay);
-            clearRequest(nameInput);
-
             return view;
         }
 
-        TextView.OnEditorActionListener textWatcher = new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                clearRequest(v);
-                return false;
-            }
-        };
-
-        View.OnClickListener btnListener =  new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                try {
-
-                    action.hour   = timePicker.getCurrentHour();
-                    action.minute = timePicker.getCurrentMinute();
-
-                    String name = String.valueOf(nameInput.getText());
-                    action.setName(name);
-
-                }catch(Exception e){ }
-
-                dismiss();
-            }
-        };
-
-        private void clearRequest(TextView textView){
-            clearRequestLay.requestFocus();
-            InputMethodManager imm = (InputMethodManager)textView.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(textView.getApplicationWindowToken(), 0);
+        @Override
+        public void onDismiss(DialogInterface dialogInterface) {
+            action.hour   = timePicker.getCurrentHour();
+            action.minute = timePicker.getCurrentMinute();
         }
     }
 }

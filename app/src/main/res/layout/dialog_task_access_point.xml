@@ -8,26 +8,12 @@
     android:layout_marginLeft="20dp"
     android:layout_marginRight="20dp"
     android:minWidth="250dp"
-    android:background="@null"
+    android:background="@drawable/dialog_list_bg"
     android:orientation="vertical">
 
-    <TextView
+    <com.taskerlite.source.AutoResizeTextView
         style="@style/logo_text"
         android:text="@string/t_access_point_short" />
-
-    <EditText
-        android:id="@+id/nameId"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:padding="5dp"
-        android:gravity="center_horizontal"
-        android:inputType="text"
-        android:maxLines="1"
-        android:imeOptions="actionDone"
-        android:hint="@string/task_name" />
 
     <EditText
         android:id="@+id/ssidNameId"
@@ -59,6 +45,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:orientation="horizontal">
@@ -92,30 +79,12 @@
         </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <ToggleButton android:id="@+id/your_btn"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/saveBtnId"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:text="Save" />
-
-        <Button
-            android:id="@+id/cancelBtnId"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:text="Cancel" />
-    </LinearLayout>
+        android:textOn="On"
+        android:textOff="Off"
+        android:background="@android:drawable/btn_default" />
 
     <LinearLayout
         android:id="@+id/clearRequestLay"

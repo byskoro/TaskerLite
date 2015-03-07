@@ -6,16 +6,19 @@
     android:layout_marginBottom="10dp"
     android:layout_marginLeft="20dp"
     android:layout_marginRight="20dp"
-    android:background="@null"
+    android:background="@drawable/dialog_list_bg"
+    android:minWidth="250dp"
     android:orientation="vertical">
 
-    <TextView
+    <com.taskerlite.source.AutoResizeTextView
         style="@style/logo_text"
-        android:text="@string/t_app_short"/>
+        android:text="@string/t_app_short"
+        android:background="@color/black"/>
 
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:divider="@null"/>
 
 </LinearLayout>

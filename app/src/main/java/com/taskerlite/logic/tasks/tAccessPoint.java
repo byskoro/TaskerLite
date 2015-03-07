@@ -3,6 +3,7 @@ package com.taskerlite.logic.tasks;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -35,11 +36,12 @@ public class tAccessPoint extends mTask{
     public void start(Context context) {
 
         if(state){
+
             setAccessPointState(true, context);
             String header = context.getResources().getString(R.string.t_access_point_short);
             mNotification.getInstance(context).createInfoNotification(header, getName());
-        }
-        else
+
+        } else
             stop(context);
     }
 
@@ -86,8 +88,7 @@ public class tAccessPoint extends mTask{
     public static class UI extends DialogFragment {
 
         private tAccessPoint task;
-        private EditText nameInput, ssidNameInput, ssidPasswordInput;
-        private Button saveBtn;
+        private EditText ssidNameInput, ssidPasswordInput;
         private SwitchButton switchButton;
         private LinearLayout clearRequestLay;
 
@@ -102,14 +103,9 @@ public class tAccessPoint extends mTask{
 
             View view = inflater.inflate(R.layout.dialog_task_access_point, container);
 
-            saveBtn = (Button) view.findViewById(R.id.saveBtnId);
-            saveBtn.setOnClickListener(btnListener);
             switchButton = (SwitchButton) view.findViewById(R.id.switchBtnId);
             switchButton.setChecked(task.state);
             switchButton.setOnCheckedChangeListener(swBtnListener);
-            nameInput = (EditText) view.findViewById(R.id.nameId);
-            nameInput.setText(task.getName());
-            nameInput.setOnEditorActionListener(textWatcher);
             ssidNameInput = (EditText) view.findViewById(R.id.ssidNameId);
             ssidNameInput.setText(task.ssidName);
             ssidNameInput.setOnEditorActionListener(textWatcher);
@@ -118,7 +114,7 @@ public class tAccessPoint extends mTask{
             ssidPasswordInput.setOnEditorActionListener(textWatcher);
 
             clearRequestLay = (LinearLayout) view.findViewById(R.id.clearRequestLay);
-            clearRequest(nameInput);
+            clearRequest(ssidNameInput);
 
             return view;
         }
@@ -137,27 +133,28 @@ public class tAccessPoint extends mTask{
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
                 if(isChecked){
+
                     ssidNameInput.setVisibility(View.VISIBLE);
                     ssidPasswordInput.setVisibility(View.VISIBLE);
+
                 }else{
+
                     ssidNameInput.setVisibility(View.GONE);
                     ssidPasswordInput.setVisibility(View.GONE);
+
                 }
             }
         };
 
-        View.OnClickListener btnListener =  new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    task.setName(String.valueOf(nameInput.getText()));
-                    task.ssidName = String.valueOf(ssidNameInput.getText());
-                    task.ssidPassword = String.valueOf(ssidPasswordInput.getText());
-                    task.state = switchButton.isChecked();
-                }catch(Exception e){ }
-                dismiss();
-            }
-        };
+        @Override
+        public void onDismiss(DialogInterface dialogInterface) {
+            try {
+                task.setName(String.valueOf(ssidNameInput.getText()));
+                task.ssidName = String.valueOf(ssidNameInput.getText());
+                task.ssidPassword = String.valueOf(ssidPasswordInput.getText());
+                task.state = switchButton.isChecked();
+            }catch(Exception e){ }
+        }
 
         private void clearRequest(TextView textView){
             clearRequestLay.requestFocus();

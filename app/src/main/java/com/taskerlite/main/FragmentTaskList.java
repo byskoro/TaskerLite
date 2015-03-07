@@ -75,10 +75,13 @@ public class FragmentTaskList extends Fragment implements View.OnClickListener{
         logoPicture.post(new Runnable() {
             public void run() {
                 int height = logoPicture.getHeight();
-                int iconSize = (int) getResources().getDimension(R.dimen.add_btn_size);//getInteger(R.integer.icon_size);
+                int weight = logoPicture.getWidth();
+                int iconSize = (int) getResources().getDimension(R.dimen.add_btn_size);
                 RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(new ViewGroup.MarginLayoutParams(iconSize, iconSize));
-                lp.setMargins(Screen.dp2px(context, 20), height - iconSize / 2, 0, 0);
+                lp.setMargins(weight - iconSize, height - iconSize / 2, 0, 0);
                 buttonPlus.setLayoutParams(lp);
+
+                //- Screen.dp2px(context, iconSize )
             }
         });
 
