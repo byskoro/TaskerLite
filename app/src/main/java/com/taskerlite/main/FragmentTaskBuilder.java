@@ -48,11 +48,11 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
     private DelElement        gcElement;
 
     private LinearLayout backBtn, actionElement, taskElement, deleteBtn;
-    private EditText profileName;
+    private EditText     profileName;
     private LinearLayout clearRequestLay;
 
-    private Paint textPaint, linePaint;
-    private String fontName, profileNameStr;
+    private Paint  textPaint, linePaint;
+    private String fontName,  profileNameStr;
 
     private int iconSizeElement;
 
@@ -63,7 +63,7 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
         dataActivity       = (FragmentCallBack) activity;
         profileController  = dataActivity.getProfileController();
         profile            = dataActivity.getCurrentProfile();
-        profileNameStr = profile.getName();
+        profileNameStr     = profile.getName();
         context            = getActivity();
         iconSizeElement    = Icons.builderSize;
         fontName           = context.getString(R.string.font_name);
@@ -98,8 +98,8 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
         textPaint.setTextAlign(Paint.Align.CENTER);
 
         linePaint = new Paint();
-        linePaint.setTextAlign(Paint.Align.CENTER);
         linePaint.setStrokeWidth(5);
+        linePaint.setAntiAlias(true);
 
 		return view;
 	}
