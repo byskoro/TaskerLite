@@ -78,7 +78,7 @@ public class FragmentTaskList extends Fragment implements View.OnClickListener{
                 int weight = logoPicture.getWidth();
                 int iconSize = (int) getResources().getDimension(R.dimen.add_btn_size);
                 RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(new ViewGroup.MarginLayoutParams(iconSize, iconSize));
-                lp.setMargins(weight - iconSize, height - iconSize / 2, 0, 0);
+                lp.setMargins(weight - iconSize - iconSize/2, height - iconSize/2, 0, 0);
                 buttonPlus.setLayoutParams(lp);
 
                 //- Screen.dp2px(context, iconSize )

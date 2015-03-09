@@ -56,7 +56,8 @@ public class tAccessPoint extends mTask{
 
         UI ui = new UI();
         ui.setParent(this);
-        ui.show(fm.beginTransaction(), "A_ACCESS_POINT");
+        ui.show(fm, "");
+        //ui.show(fm.beginTransaction(), "A_ACCESS_POINT");
     }
 
     void setAccessPointState(boolean paramBoolean, Context context) {
@@ -154,6 +155,8 @@ public class tAccessPoint extends mTask{
                 task.ssidPassword = String.valueOf(ssidPasswordInput.getText());
                 task.state = switchButton.isChecked();
             }catch(Exception e){ }
+
+            dismiss();
         }
 
         private void clearRequest(TextView textView){

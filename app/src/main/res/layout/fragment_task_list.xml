@@ -13,20 +13,21 @@
 
         <ImageView
             android:id="@+id/logoId"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:scaleType="centerInside"
-            android:layout_marginTop="20dp"
-            android:src="@drawable/logo"
-            android:background="@null"/>
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.25"
+            android:background="@drawable/logo"/>
 
         <com.baoyz.swipemenulistview.SwipeMenuListView
             android:id="@+id/listView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_marginTop="20dp"
-            android:padding="5dp"
+            android:layout_weight="0.75"
+            android:layout_marginTop="15dp"
+            android:paddingTop="15dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingBottom="15dp"
             android:divider="#FFFFFF"
             android:dividerHeight="1.0dp" />
     </LinearLayout>
@@ -35,6 +36,6 @@
         android:id="@+id/btnPlus"
         android:layout_width="@dimen/add_btn_size"
         android:layout_height="@dimen/add_btn_size"
-        android:background="@android:drawable/ic_menu_compass"/>
+        android:background="@drawable/plus"/>
 
 </RelativeLayout>

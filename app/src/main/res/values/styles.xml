@@ -1,6 +1,6 @@
 <resources>
 
-    <style name="AppTheme" parent="android:Theme.DeviceDefault.NoActionBar.Fullscreen"></style>
+    <style name="AppTheme" parent="android:Theme.DeviceDefault.NoActionBar"></style>
 
     <style name="logo_text">
         <item name="android:textColor">#c4c4c4</item>
