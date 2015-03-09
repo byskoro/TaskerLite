@@ -3,17 +3,13 @@ package com.taskerlite.logic.tasks;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.kyleduo.switchbutton.SwitchButton;
@@ -24,7 +20,11 @@ import java.lang.reflect.Method;
 
 public class tMobileData extends mTask{
 
-    private boolean state = true;
+    private boolean state = false;
+
+    public tMobileData(Context context){
+        setName(context.getString(R.string.off));
+    }
 
     @Override
     public void start(Context context) {
@@ -71,10 +71,7 @@ public class tMobileData extends mTask{
     public static class UI extends DialogFragment {
 
         private tMobileData task;
-        private EditText nameInput;
-        private Button saveBtn;
         private SwitchButton switchButton;
-        private LinearLayout clearRequestLay;
 
         public void setParent (tMobileData task){
             this.task = task;
@@ -89,43 +86,23 @@ public class tMobileData extends mTask{
             TextView taskName = (TextView) view.findViewById(R.id.taskNameId);
             taskName.setText(getString(R.string.t_mobile_internet_short));
 
-            saveBtn = (Button) view.findViewById(R.id.saveBtnId);
-            saveBtn.setOnClickListener(btnListener);
             switchButton = (SwitchButton) view.findViewById(R.id.switchBtnId);
             switchButton.setChecked(task.state);
-            nameInput = (EditText) view.findViewById(R.id.nameId);
-            nameInput.setText(task.getName());
-            nameInput.setOnEditorActionListener(textWatcher);
-
-            clearRequestLay = (LinearLayout) view.findViewById(R.id.clearRequestLay);
-            clearRequest(nameInput);
 
             return view;
         }
 
-        TextView.OnEditorActionListener textWatcher = new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                clearRequest(v);
-                return false;
-            }
-        };
+        @Override
+        public void onDismiss(DialogInterface dialogInterface) {
 
-        View.OnClickListener btnListener =  new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    task.setName(String.valueOf(nameInput.getText()));
-                    task.state = switchButton.isChecked();
-                }catch(Exception e){ }
-                dismiss();
-            }
-        };
+            task.state = switchButton.isChecked();
 
-        private void clearRequest(TextView textView){
-            clearRequestLay.requestFocus();
-            InputMethodManager imm = (InputMethodManager)textView.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(textView.getApplicationWindowToken(), 0);
+            if(task.state)
+                task.setName(getString(R.string.on));
+            else
+                task.setName(getString(R.string.off));
+
+            dismiss();
         }
     }
 }

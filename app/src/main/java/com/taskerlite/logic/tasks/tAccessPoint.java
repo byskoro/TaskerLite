@@ -28,9 +28,13 @@ import java.lang.reflect.Method;
 
 public class tAccessPoint extends mTask{
 
-    private String ssidName = "";
-    private String ssidPassword = "";
-    private boolean state = true;
+    private String  ssidName = "";
+    private String  ssidPassword = "";
+    private boolean state = false;
+
+    public tAccessPoint(Context context){
+        setName(context.getString(R.string.off));
+    }
 
     @Override
     public void start(Context context) {
@@ -57,7 +61,6 @@ public class tAccessPoint extends mTask{
         UI ui = new UI();
         ui.setParent(this);
         ui.show(fm, "");
-        //ui.show(fm.beginTransaction(), "A_ACCESS_POINT");
     }
 
     void setAccessPointState(boolean paramBoolean, Context context) {
@@ -114,6 +117,13 @@ public class tAccessPoint extends mTask{
             ssidPasswordInput.setText(task.ssidPassword);
             ssidPasswordInput.setOnEditorActionListener(textWatcher);
 
+            if(!task.state){
+                ssidNameInput.setVisibility(View.GONE);
+                ssidPasswordInput.setVisibility(View.GONE);
+            }
+
+            switchButton.setSelected(task.state);
+
             clearRequestLay = (LinearLayout) view.findViewById(R.id.clearRequestLay);
             clearRequest(ssidNameInput);
 
@@ -150,10 +160,17 @@ public class tAccessPoint extends mTask{
         @Override
         public void onDismiss(DialogInterface dialogInterface) {
             try {
+
                 task.setName(String.valueOf(ssidNameInput.getText()));
                 task.ssidName = String.valueOf(ssidNameInput.getText());
                 task.ssidPassword = String.valueOf(ssidPasswordInput.getText());
                 task.state = switchButton.isChecked();
+
+                if(task.state)
+                    task.setName(getString(R.string.on));
+                else
+                    task.setName(getString(R.string.off));
+
             }catch(Exception e){ }
 
             dismiss();

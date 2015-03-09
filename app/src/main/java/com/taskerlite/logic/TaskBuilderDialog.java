@@ -56,13 +56,13 @@ public class TaskBuilderDialog extends DialogFragment {
                         profile.addNewTask(new tApp(), TYPES.T_APP, 0, 0);
                     break;
                     case 1:
-                        profile.addNewTask(new tAccessPoint(), TYPES.T_ACCESS_POINT, 0, 0);
+                        profile.addNewTask(new tAccessPoint(getActivity()), TYPES.T_ACCESS_POINT, 0, 0);
                         break;
                     case 2:
-                        profile.addNewTask(new tMobileData(), TYPES.T_THREE_G, 0, 0);
+                        profile.addNewTask(new tMobileData(getActivity()), TYPES.T_THREE_G, 0, 0);
                         break;
                     case 3:
-                        profile.addNewTask(new tWiFi(), TYPES.T_WIFI, 0, 0);
+                        profile.addNewTask(new tWiFi(getActivity()), TYPES.T_WIFI, 0, 0);
                         break;
                     case 4:
                         profile.addNewTask(new tScreen(getActivity()), TYPES.T_SCREEN, 0, 0);

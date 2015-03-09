@@ -10,7 +10,7 @@ import com.taskerlite.source.mNotification;
 public class tScreen extends mTask{
 
     public tScreen(Context context){
-        setName(context.getResources().getString(R.string.t_screen_short));
+        setName(context.getString(R.string.on));
     }
 
     @Override
