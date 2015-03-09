@@ -86,6 +86,8 @@ public class aTimer extends mAction {
         public void onDismiss(DialogInterface dialogInterface) {
             action.hour   = timePicker.getCurrentHour();
             action.minute = timePicker.getCurrentMinute();
+
+            dismiss();
         }
     }
 }
