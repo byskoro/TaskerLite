@@ -108,17 +108,7 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
     public void onResume() {
         super.onResume();
 
-        if(!profile.getName().equals("")) {
-
-            profileName.setText(profileNameStr);
-
-        } else {
-
-            ProfileNameDialog nameDialog = new ProfileNameDialog();
-            nameDialog.setCancelable(false);
-            nameDialog.setTargetFragment(this, 0);
-            nameDialog.show(getFragmentManager().beginTransaction(), "profileNameDialog");
-        }
+        profileName.setText(profileNameStr);
 
         handlerLogic.sendEmptyMessageDelayed(1, 50);
     }
@@ -491,57 +481,6 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
                 this.x = x;
                 this.y=y;
             }
-        }
-    }
-
-    public static class ProfileNameDialog extends DialogFragment {
-
-        private FragmentCallBack dataActivity;
-        private EditText nameInput;
-        private Button saveBtn, cancelBtn;
-
-        private FragmentTaskBuilder parentFragment;
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-            dataActivity   = (FragmentCallBack) getActivity();
-            parentFragment = (FragmentTaskBuilder) this.getTargetFragment();
-
-            getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
-            View view = inflater.inflate(R.layout.dialog_name, container);
-            nameInput = (EditText) view.findViewById(R.id.nameId);
-            saveBtn = (Button) view.findViewById(R.id.saveBtnId);
-            cancelBtn = (Button) view.findViewById(R.id.cancelId);
-
-            saveBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                    String name = String.valueOf(nameInput.getText());
-
-                    if(name.length()!=0){
-
-                        dataActivity.getCurrentProfile().setName(name);
-                        parentFragment.profileName.setText(name);
-                        dismiss();
-
-                    }else
-                        Toast.makeText(getActivity(), "Not correct name", Toast.LENGTH_LONG).show();
-                }
-            });
-
-            cancelBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                    dataActivity.getProfileController().removeProfileFromList(dataActivity.getCurrentProfileIndex());
-                    dataActivity.returnToFragmentList();
-                    dismiss();
-                }
-            });
-
-            return view;
         }
     }
 

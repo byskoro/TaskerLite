@@ -14,19 +14,24 @@ import com.taskerlite.source.Icons;
 import com.taskerlite.source.Screen;
 
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class FragmentTaskList extends Fragment implements View.OnClickListener{
 
@@ -138,8 +143,8 @@ public class FragmentTaskList extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View view) {
 
-        profileController.newProfile();
-        goToBuilderFragment(profileController.getProfileListSize() - 1);
+        ProfileNameDialog nameDialog = new ProfileNameDialog();
+        nameDialog.show(getFragmentManager(), "profileNameDialog");
     }
 
     private void goToBuilderFragment(int index){
@@ -186,6 +191,55 @@ public class FragmentTaskList extends Fragment implements View.OnClickListener{
             }
 
             return convertView;
+        }
+    }
+
+    public static class ProfileNameDialog extends DialogFragment {
+
+        private FragmentCallBack dataActivity;
+        private EditText nameInput;
+        private Button saveBtn, cancelBtn;
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+            dataActivity   = (FragmentCallBack) getActivity();
+
+            getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
+            View view = inflater.inflate(R.layout.dialog_name, container);
+            nameInput = (EditText) view.findViewById(R.id.nameId);
+            saveBtn = (Button) view.findViewById(R.id.saveBtnId);
+            cancelBtn = (Button) view.findViewById(R.id.cancelId);
+
+            saveBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    String name = String.valueOf(nameInput.getText());
+
+                    if(name.length()!=0){
+
+                        dataActivity.getProfileController().newProfile();
+                        dataActivity.getCurrentProfile().setName(name);
+                        dataActivity.setCurrentProfileIndex(dataActivity.getProfileController().getProfileListSize() - 1);
+                        dataActivity.openFragmentBuilder();
+
+                        dismiss();
+
+                    }else
+                        Toast.makeText(getActivity(), "Not correct name", Toast.LENGTH_LONG).show();
+                }
+            });
+
+            cancelBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    dismiss();
+                }
+            });
+
+            return view;
         }
     }
 }
