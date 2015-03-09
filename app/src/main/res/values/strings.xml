@@ -2,7 +2,7 @@
 <resources>
 
     <!-- main info  -->
-    <string name="app_name">Tasker Lite</string>
+    <string name="app_name">iTasker</string>
     <string name="profile_name">Profile Name</string>
     <string name="profile_name_short">Name</string>
     <string name="profile_delete">Delete profile?</string>

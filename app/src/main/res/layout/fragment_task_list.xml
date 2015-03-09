@@ -28,7 +28,7 @@
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
             android:paddingBottom="15dp"
-            android:divider="#FFFFFF"
+            android:divider="#e0e0e0"
             android:dividerHeight="1.0dp" />
     </LinearLayout>
 

@@ -497,21 +497,22 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
     public static class ProfileNameDialog extends DialogFragment {
 
         private FragmentCallBack dataActivity;
-        EditText nameInput;
-        Button saveBtn;
+        private EditText nameInput;
+        private Button saveBtn, cancelBtn;
 
         private FragmentTaskBuilder parentFragment;
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-            dataActivity = (FragmentCallBack) getActivity();
+            dataActivity   = (FragmentCallBack) getActivity();
             parentFragment = (FragmentTaskBuilder) this.getTargetFragment();
 
             getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
-            View view = inflater.inflate(R.layout.dialog_profile_name, container);
+            View view = inflater.inflate(R.layout.dialog_name, container);
             nameInput = (EditText) view.findViewById(R.id.nameId);
             saveBtn = (Button) view.findViewById(R.id.saveBtnId);
+            cancelBtn = (Button) view.findViewById(R.id.cancelId);
 
             saveBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -527,6 +528,16 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
 
                     }else
                         Toast.makeText(getActivity(), "Not correct name", Toast.LENGTH_LONG).show();
+                }
+            });
+
+            cancelBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    dataActivity.getProfileController().removeProfileFromList(dataActivity.getCurrentProfileIndex());
+                    dataActivity.returnToFragmentList();
+                    dismiss();
                 }
             });
 
