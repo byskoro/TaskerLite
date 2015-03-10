@@ -31,7 +31,7 @@ public class tScreen extends mTask{
 
     }
     @Override
-    public void show(FragmentManager fm) {
+    public void show(FragmentManager fm, Context context) {
 
     }
 }

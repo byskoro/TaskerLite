@@ -44,11 +44,15 @@ public class tWiFi extends mTask {
     }
 
     @Override
-    public void show(FragmentManager fm) {
+    public void show(FragmentManager fm, Context context) {
 
-        UI ui = new UI();
-        ui.setParent(this);
-        ui.show(fm.beginTransaction(), "");
+        if(!state) {
+            setName(context.getString(R.string.on));
+            state = true;
+        } else {
+            setName(context.getString(R.string.off));
+            state = false;
+        }
     }
 
     public void wifiOn(Context context) {
@@ -69,44 +73,6 @@ public class tWiFi extends mTask {
             wifiManager.setWifiEnabled(false);
 
         } catch (Exception e) { }
-    }
-
-    public static class UI extends DialogFragment {
-
-        private tWiFi task;
-        private SwitchButton switchButton;
-
-        public void setParent (tWiFi task){
-            this.task = task;
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-            getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
-
-            View view = inflater.inflate(R.layout.dialog_task_custom, container);
-            TextView taskName = (TextView) view.findViewById(R.id.taskNameId);
-            taskName.setText(getString(R.string.t_wifi_short));
-
-            switchButton = (SwitchButton) view.findViewById(R.id.switchBtnId);
-            switchButton.setChecked(task.state);
-
-            return view;
-        }
-
-        @Override
-        public void onDismiss(DialogInterface dialogInterface) {
-
-            task.state = switchButton.isChecked();
-
-            if(task.state)
-                task.setName(getString(R.string.on));
-            else
-                task.setName(getString(R.string.off));
-
-            dismiss();
-        }
     }
 }
 

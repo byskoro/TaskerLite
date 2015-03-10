@@ -244,7 +244,7 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
 
             } else if(findTouchedTask(xPointer, yPointer) != null) {
 
-                findTouchedTask(xPointer, yPointer).getTaskObject().show(getFragmentManager());
+                findTouchedTask(xPointer, yPointer).getTaskObject().show(getFragmentManager(), getActivity());
                 view.playSoundEffect(SoundEffectConstants.CLICK);
 
             } else if (findTouchedAction(xPointer, yPointer) != null){

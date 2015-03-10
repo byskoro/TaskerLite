@@ -45,11 +45,15 @@ public class tMobileData extends mTask{
     }
 
     @Override
-    public void show(FragmentManager fm) {
+    public void show(FragmentManager fm, Context context) {
 
-        UI ui = new UI();
-        ui.setParent(this);
-        ui.show(fm.beginTransaction(), "A_TREE_G");
+        if(!state) {
+            setName(context.getString(R.string.on));
+            state = true;
+        } else {
+            setName(context.getString(R.string.off));
+            state = false;
+        }
     }
 
     private void set3GEnable(boolean paramBoolean, Context context) {
@@ -66,43 +70,5 @@ public class tMobileData extends mTask{
             localMethod.invoke(localConnectivityManager, arrayOfObject);
 
         } catch (Exception localException) { }
-    }
-
-    public static class UI extends DialogFragment {
-
-        private tMobileData task;
-        private SwitchButton switchButton;
-
-        public void setParent (tMobileData task){
-            this.task = task;
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-            getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
-
-            View view = inflater.inflate(R.layout.dialog_task_custom, container);
-            TextView taskName = (TextView) view.findViewById(R.id.taskNameId);
-            taskName.setText(getString(R.string.t_mobile_internet_short));
-
-            switchButton = (SwitchButton) view.findViewById(R.id.switchBtnId);
-            switchButton.setChecked(task.state);
-
-            return view;
-        }
-
-        @Override
-        public void onDismiss(DialogInterface dialogInterface) {
-
-            task.state = switchButton.isChecked();
-
-            if(task.state)
-                task.setName(getString(R.string.on));
-            else
-                task.setName(getString(R.string.off));
-
-            dismiss();
-        }
     }
 }

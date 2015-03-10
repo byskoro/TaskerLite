@@ -57,7 +57,7 @@ public class tApp extends mTask {
     }
 
     @Override
-    public void show(FragmentManager fm) {
+    public void show(FragmentManager fm, Context context) {
 
         UI ui = new UI();
         ui.setParent(this);

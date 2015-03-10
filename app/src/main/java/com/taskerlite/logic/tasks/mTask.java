@@ -9,7 +9,7 @@ public abstract class mTask {
 
 	public abstract void start(Context context);
     public abstract void stop(Context context);
-    public abstract void show(FragmentManager fm);
+    public abstract void show(FragmentManager fm, Context context);
 
     public void setName(String name){
         this.name = name;
