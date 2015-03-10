@@ -8,7 +8,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-public class BuilderView extends View{
+public class BuilderView extends View {
 
     private ViewCallBack viewCallBack;
     private MotionEvent event;

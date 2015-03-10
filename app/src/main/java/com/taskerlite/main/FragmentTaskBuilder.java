@@ -25,6 +25,7 @@ import android.os.Message;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
+import android.view.SoundEffectConstants;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -47,6 +48,7 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
     private ProfileController profileController;
     private DelElement        gcElement;
 
+    private View         view;
     private LinearLayout backBtn, actionElement, taskElement, deleteBtn;
     private EditText     profileName;
     private LinearLayout clearRequestLay;
@@ -73,9 +75,9 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-		View view = inflater.inflate(R.layout.fragment_task_builder, container, false);
+		view = inflater.inflate(R.layout.fragment_task_builder, container, false);
 
-		taskerView    = (BuilderView) view.findViewById(R.id.drawBuilder);
+		taskerView    = (BuilderView)  view.findViewById(R.id.drawBuilder);
         backBtn       = (LinearLayout) view.findViewById(R.id.backBtn);
         deleteBtn     = (LinearLayout) view.findViewById(R.id.deleteBtn);
         actionElement = (LinearLayout) view.findViewById(R.id.actionElementID);
@@ -221,7 +223,7 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
         @Override
         public void shortPress(int xPointer, int yPointer) {
 
-            if(gcElement.deleteListGetSize() != 0){
+            if(gcElement.deleteListGetSize() != 0) {
 
                 if(gcElement.getIdPressedElement(xPointer, yPointer) != 0){
 
@@ -240,13 +242,15 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
                     }
                 }
 
-            }else if(findTouchedTask(xPointer, yPointer) != null) {
+            } else if(findTouchedTask(xPointer, yPointer) != null) {
 
                 findTouchedTask(xPointer, yPointer).getTaskObject().show(getFragmentManager());
+                view.playSoundEffect(SoundEffectConstants.CLICK);
 
             } else if (findTouchedAction(xPointer, yPointer) != null){
 
                 findTouchedAction(xPointer, yPointer).getActionObject().show(getFragmentManager());
+                view.playSoundEffect(SoundEffectConstants.CLICK);
             }
 
             unselectAll();

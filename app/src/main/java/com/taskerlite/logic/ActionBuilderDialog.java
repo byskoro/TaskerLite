@@ -53,7 +53,7 @@ public class ActionBuilderDialog extends DialogFragment {
 
                 switch (position){
                     case 0:
-                        profile.addNewAction(new aTimer(), TYPES.A_TIME, 0, 0);
+                        profile.addNewAction(new aTimer(getActivity()), TYPES.A_TIME, 0, 0);
                         break;
                     case 1:
                         profile.addNewAction(new aBootComplete(getActivity()), TYPES.A_BOOT_COMPLETE, 0, 0);

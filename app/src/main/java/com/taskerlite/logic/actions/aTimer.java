@@ -26,12 +26,14 @@ public class aTimer extends mAction {
 
 	private int hour, minute;
 	
-	public aTimer(){
+	public aTimer(Context context){
 
         Calendar cal = new GregorianCalendar();
 
 		this.hour   = cal.get(Calendar.HOUR_OF_DAY);
 		this.minute = cal.get(Calendar.MINUTE);
+
+        setName(context.getString(R.string.a_time_short));
 	}
 
 	@Override

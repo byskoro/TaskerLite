@@ -1,11 +1,8 @@
 <resources>
 
     <dimen name="add_btn_size">50dp</dimen>
-    <dimen name="add_btn_half_size">30dp</dimen>
+    <dimen name="add_btn_half_size">25dp</dimen>
 
     <dimen name="scene_item_height">70dp</dimen>
-    <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
 
 </resources>
