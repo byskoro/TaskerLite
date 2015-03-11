@@ -81,12 +81,12 @@ public class FragmentTaskList extends Fragment implements View.OnClickListener{
             public void run() {
                 int height = logoPicture.getHeight();
                 int weight = logoPicture.getWidth();
-                int iconSize = (int) getResources().getDimension(R.dimen.add_btn_size);
-                RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(new ViewGroup.MarginLayoutParams(iconSize, iconSize));
-                lp.setMargins(weight - iconSize - iconSize/2, height - iconSize/2, 0, 0);
-                buttonPlus.setLayoutParams(lp);
+                int iW = buttonPlus.getWidth();
+                int iH = buttonPlus.getHeight();
 
-                //- Screen.dp2px(context, iconSize )
+                RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams ( RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                lp.setMargins(weight - iW, height - iH/2, 0, 0);
+                buttonPlus.setLayoutParams(lp);
             }
         });
 
@@ -217,16 +217,15 @@ public class FragmentTaskList extends Fragment implements View.OnClickListener{
 
                     String name = String.valueOf(nameInput.getText());
 
-                    if(name.length()!=0){
+                    if (name.length()!=0){
 
-                        dataActivity.getProfileController().newProfile();
-                        dataActivity.getCurrentProfile().setName(name);
+                        dataActivity.getProfileController().newProfile(name);
                         dataActivity.setCurrentProfileIndex(dataActivity.getProfileController().getProfileListSize() - 1);
                         dataActivity.openFragmentBuilder();
 
                         dismiss();
 
-                    }else
+                    } else
                         Toast.makeText(getActivity(), "Not correct name", Toast.LENGTH_LONG).show();
                 }
             });

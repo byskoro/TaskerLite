@@ -11,7 +11,7 @@ public class ProfileController {
 	
 	private ArrayList<Profile> profileList = new ArrayList<Profile>();
 
-	public void newProfile(){ profileList.add(new Profile("")); }
+	public void newProfile(String name){ profileList.add(new Profile(name)); }
 	public Profile getProfile(int index){ return profileList.get(index); }
 	public ArrayList<Profile> getProfileList() { return profileList; }
     public int getProfileListSize(){ return profileList.size(); }

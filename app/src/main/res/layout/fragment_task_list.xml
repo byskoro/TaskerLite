@@ -34,8 +34,8 @@
 
     <ImageButton
         android:id="@+id/btnPlus"
-        android:layout_width="@dimen/add_btn_size"
-        android:layout_height="@dimen/add_btn_size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="@drawable/plus"/>
 
 </RelativeLayout>
