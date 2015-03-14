@@ -15,7 +15,9 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Message;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import com.taskerlite.source.Types.*;
@@ -24,7 +26,6 @@ public class TService extends Service {
 
     private String previousRawData = "";
     private ProfileController profileController;
-    private ServiceThread serviceThread;
     private WakeLock wakeLock;
 
     @Override
@@ -34,11 +35,9 @@ public class TService extends Service {
         wakeLock = pm.newWakeLock((PowerManager.PARTIAL_WAKE_LOCK), "TAG");
         wakeLock.acquire();
 
-        runAsForeground();
-
+        handlerLogic.sendEmptyMessage(0);
         registerBroadcastReceivers();
-
-        serviceThread = new ServiceThread();
+        runAsForeground();
 
         return Service.START_STICKY;
     }
@@ -47,83 +46,20 @@ public class TService extends Service {
     public void onDestroy() {
         super.onDestroy();
 
-        serviceThread.threadStop();
+        handlerLogic.removeMessages(0);
         wakeLock.release();
 
         getApplicationContext().unregisterReceiver(screenStateReceiver);
     }
 
-    private void registerBroadcastReceivers(){
+    private Handler handlerLogic = new Handler() {
 
-        IntentFilter theFilter = new IntentFilter();
+        public void handleMessage(Message msg) {
 
-        // Screen on/off
-        theFilter.addAction(Intent.ACTION_SCREEN_ON);
-        theFilter.addAction(Intent.ACTION_SCREEN_OFF);
-        getApplicationContext().registerReceiver(screenStateReceiver, theFilter);
-    }
-
-    BroadcastReceiver screenStateReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-
-            String strAction = intent.getAction();
-
-            if (strAction.equals(Intent.ACTION_SCREEN_OFF))
-                checkForAction(TYPES.A_SCREEN_OFF);
-            else if(strAction.equals(Intent.ACTION_SCREEN_ON))
-                checkForAction(TYPES.A_SCREEN_ON);
+            checkForAction(TYPES.A_TIME);
+            handlerLogic.sendEmptyMessageDelayed(0, generateOffsetTime());
         }
     };
-
-    @Override
-    public IBinder onBind(Intent intent) {
-        return null;
-    }
-
-    class ServiceThread extends Thread{
-
-        private  boolean threadState = false;
-
-        public ServiceThread(){
-
-            setName("ServiceThread");
-            threadState = true;
-            start();
-        }
-
-        @Override
-        public void run() {
-
-            while (threadState) {
-
-                try {
-
-                    checkForAction(TYPES.A_TIME);
-
-                }catch (Exception e) { }
-
-                try {
-
-                    Thread.sleep(generateOffsetTime());
-
-                }catch (Exception e) { }
-            }
-        }
-
-        private long generateOffsetTime(){
-
-            Calendar cal = Calendar.getInstance();
-            cal.add(Calendar.MINUTE, 1);
-            cal.set(Calendar.SECOND, 0);
-
-            return cal.getTimeInMillis() - System.currentTimeMillis();
-        }
-
-        public void threadStop(){
-            threadState = false;
-        }
-    }
 
     private void checkForAction(TYPES type){
 
@@ -153,6 +89,43 @@ public class TService extends Service {
                 }
             }
         }
+    }
+
+    private long generateOffsetTime(){
+
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.MINUTE, 1);
+        cal.set(Calendar.SECOND, 0);
+
+        return cal.getTimeInMillis() - System.currentTimeMillis();
+    }
+
+    private void registerBroadcastReceivers(){
+
+        IntentFilter theFilter = new IntentFilter();
+
+        // Screen on/off
+        theFilter.addAction(Intent.ACTION_SCREEN_ON);
+        theFilter.addAction(Intent.ACTION_SCREEN_OFF);
+        getApplicationContext().registerReceiver(screenStateReceiver, theFilter);
+    }
+
+    BroadcastReceiver screenStateReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            String strAction = intent.getAction();
+
+            if (strAction.equals(Intent.ACTION_SCREEN_OFF))
+                checkForAction(TYPES.A_SCREEN_OFF);
+            else if(strAction.equals(Intent.ACTION_SCREEN_ON))
+                checkForAction(TYPES.A_SCREEN_ON);
+        }
+    };
+
+    @Override
+    public IBinder onBind(Intent intent) {
+        return null;
     }
 
     private void runAsForeground(){

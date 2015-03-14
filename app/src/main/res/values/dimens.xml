@@ -1,8 +1,6 @@
 <resources>
 
     <dimen name="add_btn_size">50dp</dimen>
-    <dimen name="add_btn_half_size">25dp</dimen>
-
-    <dimen name="scene_item_height">70dp</dimen>
+    <dimen name="profile_item_height">60dp</dimen>
 
 </resources>

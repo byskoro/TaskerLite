@@ -38,10 +38,10 @@
     <string name="a_screen_off">Screen Off</string>
 
     <string-array name="actionsList">
-        <item>IF time ...</item>
-        <item>IF android boot complete ...</item>
-        <item>IF screen turn on ...</item>
-        <item>IF screen turn off ...</item>
+        <item>Time</item>
+        <item>Android boot complete</item>
+        <item>Screen turn on</item>
+        <item>Screen turn off</item>
     </string-array>
 
     <string-array name="actionsIcons">
@@ -53,7 +53,7 @@
 
     <!-- Short description of tasks -->
     <string name="t_app_short">Application</string>
-    <string name="t_access_point_short">WIFI access point</string>
+    <string name="t_access_point_short">Access point</string>
     <string name="t_mobile_internet_short">Mobile internet</string>
     <string name="t_screen_short">Screen on</string>
     <string name="t_mobile_light_short">Mobile light</string>
@@ -61,11 +61,11 @@
     <string name="t_gps_short">GPS</string>
 
     <string-array name="tasksList">
-        <item>Run application</item>
-        <item>Turn on/off wifi access point</item>
-        <item>Turn on/off mobile internet</item>
-        <item>Turn on/off WIFI</item>
-        <item>Turn on screen</item>
+        <item>Application</item>
+        <item>Access point</item>
+        <item>Mobile internet</item>
+        <item>WIFI</item>
+        <item>Screen on</item>
     </string-array>
 
     <string-array name="tasksIcons">

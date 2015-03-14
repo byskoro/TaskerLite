@@ -17,6 +17,8 @@ import android.app.Activity;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -81,11 +83,10 @@ public class FragmentTaskList extends Fragment implements View.OnClickListener{
             public void run() {
                 int height = logoPicture.getHeight();
                 int weight = logoPicture.getWidth();
-                int iW = buttonPlus.getWidth();
-                int iH = buttonPlus.getHeight();
+                int iconSize = (int) getResources().getDimension(R.dimen.add_btn_size);
 
-                RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams ( RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-                lp.setMargins(weight - iW, height - iH/2, 0, 0);
+                RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams (iconSize, iconSize);
+                lp.setMargins(weight - iconSize - iconSize/2, height - iconSize/2, 0, 0);
                 buttonPlus.setLayoutParams(lp);
             }
         });
@@ -175,20 +176,6 @@ public class FragmentTaskList extends Fragment implements View.OnClickListener{
 
             TextView t = (TextView) convertView.findViewById(R.id.profileNameID);
             t.setText(getItem(position).getName());
-            LinearLayout iconsLay = (LinearLayout) convertView.findViewById(R.id.profileIconsPlaceId);
-            iconsLay.removeAllViews();
-
-            for(ActionElement action : getItem(position).getActionList()){
-                ImageView img = new ImageView(context);
-                img.setBackgroundDrawable(Icons.getInstance().getPreviewIcon(action.getActionType()));
-                iconsLay.addView(img);
-            }
-
-            for(TaskElement task : getItem(position).getTaskList()){
-                ImageView img = new ImageView(context);
-                img.setBackgroundDrawable(Icons.getInstance().getPreviewIcon(task.getTaskType()));
-                iconsLay.addView(img);
-            }
 
             return convertView;
         }
