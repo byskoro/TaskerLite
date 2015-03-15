@@ -96,7 +96,7 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
 
         textPaint = new Paint();
         textPaint.setColor(Color.WHITE);
-        textPaint.setTextSize(getResources().getInteger(R.integer.builder_text_size));
+        textPaint.setTextSize(getResources().getDimension(R.dimen.builder_text_size));
         textPaint.setTypeface(Typeface.createFromAsset(context.getAssets(), fontName));
         textPaint.setTextAlign(Paint.Align.CENTER);
 
@@ -353,14 +353,14 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
                 for(ActionElement action : profile.getActionList()){
                     canvas.drawBitmap(action.getIcon(), action.getX(), action.getY(), null);
                     float textX = action.getX() + iconSizeElement /2;
-                    float textY = action.getY() + iconSizeElement + getResources().getInteger(R.integer.builder_icon_text_margin);
+                    float textY = action.getY() + iconSizeElement + getResources().getDimension(R.dimen.builder_icon_text_margin);
                     canvas.drawText(action.getActionObject().getName(), textX, textY, textPaint);
                 }
 
                 for(TaskElement task : profile.getTaskList()){
                     canvas.drawBitmap(task.getIcon(), task.getX(), task.getY(), null);
                     float textX = task.getX() + iconSizeElement /2;
-                    float textY = task.getY() + iconSizeElement + getResources().getInteger(R.integer.builder_icon_text_margin);
+                    float textY = task.getY() + iconSizeElement + getResources().getDimension(R.dimen.builder_icon_text_margin);
                     canvas.drawText(task.getTaskObject().getName(), textX, textY, textPaint);
                 }
 

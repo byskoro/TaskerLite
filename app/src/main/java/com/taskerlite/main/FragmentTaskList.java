@@ -102,8 +102,7 @@ public class FragmentTaskList extends Fragment implements View.OnClickListener{
         @Override
         public void create(SwipeMenu menu) {
 
-           int bgSize = getResources().getInteger(R.integer.swipe_menu_bg_size);
-           bgSize = Screen.dp2px(context, bgSize);
+           int bgSize = (int)getResources().getDimension(R.dimen.swipe_menu_bg_size);
 
            SwipeMenuItem onItem = new SwipeMenuItem(context);
            onItem.setBackground(null);
