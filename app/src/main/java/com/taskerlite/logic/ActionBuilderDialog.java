@@ -21,6 +21,7 @@ import com.taskerlite.logic.actions.aScreenOff;
 import com.taskerlite.logic.actions.aScreenOn;
 import com.taskerlite.logic.actions.aTimer;
 import com.taskerlite.main.FragmentCallBack;
+import com.taskerlite.source.Fonts;
 import com.taskerlite.source.Types.*;
 
 public class ActionBuilderDialog extends DialogFragment {
@@ -29,6 +30,7 @@ public class ActionBuilderDialog extends DialogFragment {
     private ListView lvMain;
     private RoomArrayAdapter adapter;
     private FragmentCallBack dataActivity;
+    private TextView dialogName;
 
     private String[] actionsDescription;
 
@@ -42,6 +44,11 @@ public class ActionBuilderDialog extends DialogFragment {
         View view = inflater.inflate(R.layout.dialog_list, container);
 
         lvMain = (ListView) view.findViewById(R.id.listview);
+        dialogName = (TextView) view.findViewById(R.id.dialogNameId);
+        dialogName.setText(getString(R.string.actions_list));
+
+        Fonts fonts = new Fonts(getActivity());
+        fonts.setupLayoutTypefaces(view);
 
         actionsDescription = getResources().getStringArray(R.array.actionsList);
 

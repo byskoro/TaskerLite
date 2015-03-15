@@ -57,22 +57,20 @@ public class AutoResizeTextView extends TextView {
 
     public AutoResizeTextView(Context context) {
         super(context);
-        initialize(context);
+        initialize();
     }
 
     public AutoResizeTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        initialize(context);
+        initialize();
     }
 
     public AutoResizeTextView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        initialize(context);
+        initialize();
     }
 
-    private void initialize(Context context) {
-
-        setTypeface(Typeface.createFromAsset(context.getAssets(), context.getString(R.string.font_name)));
+    private void initialize() {
 
         mPaint = new TextPaint(getPaint());
         mMaxTextSize = getTextSize();

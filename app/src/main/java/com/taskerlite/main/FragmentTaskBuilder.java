@@ -8,6 +8,7 @@ import com.taskerlite.logic.ActionElement;
 import com.taskerlite.logic.ProfileController.*;
 import com.taskerlite.logic.TaskElement;
 import com.taskerlite.source.BuilderView;
+import com.taskerlite.source.Fonts;
 import com.taskerlite.source.Icons;
 import com.taskerlite.source.Types;
 import com.taskerlite.source.Vibro;
@@ -102,6 +103,9 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
         linePaint = new Paint();
         linePaint.setStrokeWidth(5);
         linePaint.setAntiAlias(true);
+
+        Fonts fonts = new Fonts(getActivity());
+        fonts.setupLayoutTypefaces(view);
 
 		return view;
 	}
@@ -501,6 +505,9 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
             View view = inflater.inflate(R.layout.dialog_profile_delete, container);
             Button yesBtn = (Button) view.findViewById(R.id.yesBtnId);
             Button noBtn = (Button) view.findViewById(R.id.noBtnId);
+
+            Fonts fonts = new Fonts(getActivity());
+            fonts.setupLayoutTypefaces(view);
 
             yesBtn.setOnClickListener(new View.OnClickListener() {
                 @Override

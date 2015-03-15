@@ -9,6 +9,7 @@
     <string name="font_name">JuraMedium.ttf</string>
     <string name="on">ON</string>
     <string name="off">OFF</string>
+    <string name="app_open">Press to open application</string>
 
     <!-- preference  -->
     <string name="notification_title">Notification preference</string>
@@ -19,19 +20,13 @@
     <string name="notification_light">Light</string>
     <string name="notification_sound">Sound</string>
 
-    <!-- notification -->
-    <string name="app_open">Press to open application</string>
-
-    <!-- text of input -->
-    <string name="task_name">Task name</string>
-    <string name="action_name">Action name</string>
-
     <!-- Wifi access point -->
     <string name="boolean_state">State</string>
     <string name="ap_ssid_name">Network name</string>
     <string name="ap_ssid_password">Network password</string>
 
     <!-- Short description of actions -->
+    <string name="actions_list">Trigger list</string>
     <string name="a_time_short">Time</string>
     <string name="a_boot_complete_short">On boot</string>
     <string name="a_screen_on">Screen On</string>
@@ -52,6 +47,7 @@
     </string-array>
 
     <!-- Short description of tasks -->
+    <string name="task_list">Task list</string>
     <string name="t_app_short">Application</string>
     <string name="t_access_point_short">Access point</string>
     <string name="t_mobile_internet_short">Mobile internet</string>

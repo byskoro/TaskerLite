@@ -21,6 +21,7 @@ import com.taskerlite.logic.tasks.tMobileData;
 import com.taskerlite.logic.tasks.tScreen;
 import com.taskerlite.logic.tasks.tWiFi;
 import com.taskerlite.main.FragmentCallBack;
+import com.taskerlite.source.Fonts;
 import com.taskerlite.source.Types.TYPES;
 
 public class TaskBuilderDialog extends DialogFragment {
@@ -29,6 +30,7 @@ public class TaskBuilderDialog extends DialogFragment {
     private ListView lvMain;
     private mAdapter adapter;
     private FragmentCallBack dataActivity;
+    private TextView dialogName;
 
     private String[] actionsDescription;
 
@@ -42,6 +44,11 @@ public class TaskBuilderDialog extends DialogFragment {
         View view = inflater.inflate(R.layout.dialog_list, container);
 
         lvMain = (ListView) view.findViewById(R.id.listview);
+        dialogName = (TextView) view.findViewById(R.id.dialogNameId);
+        dialogName.setText(getString(R.string.task_list));
+
+        Fonts fonts = new Fonts(getActivity());
+        fonts.setupLayoutTypefaces(view);
 
         actionsDescription = getResources().getStringArray(R.array.tasksList);
 

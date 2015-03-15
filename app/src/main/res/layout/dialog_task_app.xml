@@ -11,7 +11,7 @@
     android:orientation="vertical">
 
     <com.taskerlite.source.AutoResizeTextView
-        style="@style/logo_text"
+        style="@style/dialog_logo_text"
         android:text="@string/t_app_short"
         android:background="@color/black"/>
 

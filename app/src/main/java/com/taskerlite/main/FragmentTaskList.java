@@ -10,6 +10,7 @@ import com.taskerlite.logic.ActionElement;
 import com.taskerlite.logic.ProfileController;
 import com.taskerlite.logic.ProfileController.*;
 import com.taskerlite.logic.TaskElement;
+import com.taskerlite.source.Fonts;
 import com.taskerlite.source.Icons;
 import com.taskerlite.source.Screen;
 
@@ -74,6 +75,9 @@ public class FragmentTaskList extends Fragment implements View.OnClickListener{
         mListView.setMenuCreator(creator);
         mListView.setOnMenuItemClickListener(itemClickListener);
         mListView.setOnItemClickListener(onSceneClickListener);
+
+        Fonts fonts = new Fonts(getActivity());
+        fonts.setupLayoutTypefaces(view);
 
         logoPicture = (ImageView) view.findViewById(R.id.logoId);
         buttonPlus = (ImageButton) view.findViewById(R.id.btnPlus);
@@ -176,6 +180,9 @@ public class FragmentTaskList extends Fragment implements View.OnClickListener{
 
             TextView t = (TextView) convertView.findViewById(R.id.profileNameID);
             t.setText(getItem(position).getName());
+
+            Fonts fonts = new Fonts(getActivity());
+            fonts.setupLayoutTypefaces(convertView);
 
             return convertView;
         }
