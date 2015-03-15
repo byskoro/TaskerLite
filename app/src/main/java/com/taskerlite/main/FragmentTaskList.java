@@ -6,20 +6,16 @@ import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.baoyz.swipemenulistview.SwipeMenuListView.OnMenuItemClickListener;
 import com.taskerlite.R;
-import com.taskerlite.logic.ActionElement;
 import com.taskerlite.logic.ProfileController;
 import com.taskerlite.logic.ProfileController.*;
 import com.taskerlite.logic.TaskElement;
 import com.taskerlite.source.Fonts;
 import com.taskerlite.source.Icons;
-import com.taskerlite.source.Screen;
 
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,7 +27,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -147,8 +142,8 @@ public class FragmentTaskList extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View view) {
 
-        ProfileNameDialog nameDialog = new ProfileNameDialog();
-        nameDialog.show(getFragmentManager(), "profileNameDialog");
+        CreateNewProfile createNewProfile = new CreateNewProfile();
+        createNewProfile.show(getFragmentManager(), "createNewProfile");
     }
 
     private void goToBuilderFragment(int index){
@@ -187,7 +182,7 @@ public class FragmentTaskList extends Fragment implements View.OnClickListener{
         }
     }
 
-    public static class ProfileNameDialog extends DialogFragment {
+    public static class CreateNewProfile extends DialogFragment {
 
         private FragmentCallBack dataActivity;
         private EditText nameInput;
@@ -203,6 +198,9 @@ public class FragmentTaskList extends Fragment implements View.OnClickListener{
             nameInput = (EditText) view.findViewById(R.id.nameId);
             saveBtn = (Button) view.findViewById(R.id.saveBtnId);
             cancelBtn = (Button) view.findViewById(R.id.cancelId);
+
+            Fonts fonts = new Fonts(getActivity());
+            fonts.setupLayoutTypefaces(view);
 
             saveBtn.setOnClickListener(new View.OnClickListener() {
                 @Override

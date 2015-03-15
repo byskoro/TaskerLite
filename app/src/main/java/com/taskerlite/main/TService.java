@@ -3,7 +3,7 @@ package com.taskerlite.main;
 import java.util.Calendar;
 import com.taskerlite.R;
 import com.taskerlite.logic.actions.mAction;
-import com.taskerlite.source.Eeprom;
+import com.taskerlite.source.Settings;
 import com.taskerlite.logic.ProfileController.*;
 import com.taskerlite.logic.*;
 import com.taskerlite.logic.tasks.mTask;
@@ -27,7 +27,7 @@ public class TService extends Service {
     private String previousRawData = "";
     private ProfileController profileController;
     private WakeLock wakeLock;
-    private Eeprom eeprom;
+    private Settings settings;
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -36,7 +36,7 @@ public class TService extends Service {
         wakeLock = pm.newWakeLock((PowerManager.PARTIAL_WAKE_LOCK), "TAG");
         wakeLock.acquire();
 
-        eeprom = Eeprom.getInstance(this);
+        settings = Settings.getInstance(this);
 
         handlerLogic.sendEmptyMessage(0);
         registerBroadcastReceivers();
@@ -67,10 +67,10 @@ public class TService extends Service {
     private void checkForAction(TYPES type){
 
 
-        if(!previousRawData.equals(eeprom.getRawData())){
+        if(!previousRawData.equals(settings.getRawData())){
 
-            profileController = eeprom.getProfileController();
-            previousRawData   = eeprom.getRawData();
+            profileController = settings.getProfileController();
+            previousRawData   = settings.getRawData();
         }
 
         for(Profile profile : profileController.getProfileList()){

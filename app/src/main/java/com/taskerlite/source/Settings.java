@@ -6,36 +6,36 @@ import com.google.gson.GsonBuilder;
 import com.taskerlite.logic.ProfileController;
 
 
-public class Eeprom {
+public class Settings {
 
-    private static Eeprom instance = null;
+    private static Settings instance = null;
     private Context context;
 
-    public static Eeprom getInstance(Context context){
+    public static Settings getInstance(Context context){
 
         if(instance == null)
-            instance = new Eeprom(context);
+            instance = new Settings(context);
 
         return instance;
     }
 
-    public static Eeprom getInstance(){
+    public static Settings getInstance(){
 
         return instance;
     }
 
-    private Eeprom(Context context) {
+    private Settings(Context context) {
         this.context = context;
     }
 
-    public void saveList(ProfileController obj){
+    public void saveList(ProfileController obj) {
 
         SharedPreferences dataPreferences = context.getSharedPreferences("settings", context.MODE_PRIVATE);
         String data = new GsonBuilder().create().toJson(obj);
         dataPreferences.edit().putString("data", data).commit();
     }
 
-    public ProfileController getProfileController(){
+    public ProfileController getProfileController() {
 
         SharedPreferences dataPreferences = context.getSharedPreferences("settings", context.MODE_PRIVATE);
         String data = dataPreferences.getString("data", "N/A");
@@ -55,11 +55,11 @@ public class Eeprom {
         return profileController;
     }
 
-    public String getRawData(){
+    public String getRawData() {
 
         SharedPreferences dataPreferences = context.getSharedPreferences("settings", context.MODE_PRIVATE);
 
-        return dataPreferences.getString("data", "");
+        return dataPreferences.getString("data", "N/A");
     }
 
 }

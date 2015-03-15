@@ -2,7 +2,7 @@ package com.taskerlite.logic;
 
 import com.taskerlite.logic.actions.mAction;
 import com.taskerlite.logic.tasks.mTask;
-import com.taskerlite.source.Eeprom;
+import com.taskerlite.source.Settings;
 import com.taskerlite.source.Types.*;
 
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ public class ProfileController {
 	}
 
     public void saveAllProfile(){
-        Eeprom.getInstance().saveList(this);
+        Settings.getInstance().saveList(this);
     }
 	
 	public class Profile {

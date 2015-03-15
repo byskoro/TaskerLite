@@ -11,7 +11,7 @@
     android:background="@drawable/dialog_list_bg"
     android:orientation="vertical">
 
-    <com.taskerlite.source.AutoResizeTextView
+    <TextView
         style="@style/dialog_logo_text"
         android:text="@string/profile_name"/>
 
