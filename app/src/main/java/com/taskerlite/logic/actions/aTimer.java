@@ -20,6 +20,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
+
+import com.taskerlite.source.Fonts;
 import com.taskerlite.source.Types.*;
 
 public class aTimer extends mAction {
@@ -80,6 +82,9 @@ public class aTimer extends mAction {
             timePicker.setIs24HourView(true);
             timePicker.setCurrentMinute(action.minute);
             timePicker.setCurrentHour(action.hour);
+
+            Fonts fonts = new Fonts(getActivity());
+            fonts.setupLayoutTypefaces(view);
 
             return view;
         }

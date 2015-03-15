@@ -29,7 +29,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            style="@style/dialog_choice_text"
+            style="@style/main_text"
             android:text="Yes" />
 
         <Button
@@ -37,7 +37,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            style="@style/dialog_choice_text"
+            style="@style/main_text"
             android:text="No" />
     </LinearLayout>
 </LinearLayout>

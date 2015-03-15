@@ -22,6 +22,7 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import com.kyleduo.switchbutton.SwitchButton;
 import com.taskerlite.R;
+import com.taskerlite.source.Fonts;
 import com.taskerlite.source.mNotification;
 
 import java.lang.reflect.Method;
@@ -126,6 +127,9 @@ public class tAccessPoint extends mTask{
 
             clearRequestLay = (LinearLayout) view.findViewById(R.id.clearRequestLay);
             clearRequest(ssidNameInput);
+
+            Fonts fonts = new Fonts(getActivity());
+            fonts.setupLayoutTypefaces(view);
 
             return view;
         }

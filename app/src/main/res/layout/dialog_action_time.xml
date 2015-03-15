@@ -10,7 +10,7 @@
     android:minWidth="250dp"
     android:orientation="vertical">
 
-    <com.taskerlite.source.AutoResizeTextView
+    <TextView
         style="@style/dialog_logo_text"
         android:text="@string/a_time_short"/>
 

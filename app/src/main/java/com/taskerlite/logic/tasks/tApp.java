@@ -161,7 +161,7 @@ public class tApp extends mTask {
                 textView.setText(item.loadLabel(context.getPackageManager()));
 
                 Fonts fonts = new Fonts(getActivity());
-                fonts.setupLayoutTypefaces(convertView);
+                fonts.setupLayoutTypefaces(rowView);
 
                 return rowView;
             }

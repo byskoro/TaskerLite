@@ -106,6 +106,10 @@ public class TaskBuilderDialog extends DialogFragment {
 
             TextView textView = (TextView) rowView.findViewById(R.id.textDescriptionId);
             textView.setText(actionsDescription[position]);
+
+            Fonts fonts = new Fonts(getActivity());
+            fonts.setupLayoutTypefaces(rowView);
+
             return rowView;
         }
     }

@@ -7,7 +7,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/profile_item_height"
+        android:layout_height="@dimen/item_height"
         android:orientation="horizontal">
 
         <com.kyleduo.switchbutton.SwitchButton
@@ -24,16 +24,11 @@
             app:thumb_marginRight="3dp"
             app:thumb_marginTop="4dp" />
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
+        <TextView
+            android:id="@+id/profileNameID"
+            style="@style/profile_mame_text"
             android:layout_marginLeft="15dp"
-            android:layout_weight="1">
+            android:text="NAME" />
 
-            <com.taskerlite.source.AutoResizeTextView
-                style="@style/profile_mame_text"
-                android:id="@+id/profileNameID"
-                android:text="NAME" />
-        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

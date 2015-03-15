@@ -2,9 +2,8 @@
 
     <style name="AppTheme" parent="android:Theme.DeviceDefault.NoActionBar"></style>
 
-    <style name="profile_mame_text">
+    <style name="profile_mame_text" parent="@android:style/TextAppearance.Large">
         <item name="android:textColor">#ffffff</item>
-        <item name="android:textSize">500sp</item>
         <item name="android:tag">JuraMedium</item>
         <item name="android:gravity">center_vertical|left</item>
         <item name="android:layout_width">match_parent</item>
@@ -13,27 +12,40 @@
         <item name="android:paddingTop">17dp</item>
     </style>
 
-    <style name="builder_logo_text">
+    <style name="list_text" parent="@android:style/TextAppearance.Medium">
         <item name="android:textColor">#ffffff</item>
-        <item name="android:textSize">12pt</item>
+        <item name="android:tag">JuraMedium</item>
+        <item name="android:gravity">center_vertical|left</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="builder_logo_text" parent="@android:style/TextAppearance.Large">
+        <item name="android:textColor">#ffffff</item>
         <item name="android:tag">JuraMedium</item>
         <item name="android:gravity">center_vertical|center_horizontal</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-    <style name="dialog_logo_text">
+    <style name="builder_controls_text" parent="@android:style/TextAppearance.Small">
         <item name="android:textColor">#ffffff</item>
-        <item name="android:textSize">10pt</item>
+        <item name="android:tag">JuraMedium</item>
+        <item name="android:gravity">center_vertical|center_horizontal</item>
+        <item name="android:layout_marginBottom">3dp</item>
+        <item name="android:layout_marginTop">3dp</item>
+    </style>
+
+    <style name="dialog_logo_text" parent="@android:style/TextAppearance.Large">
+        <item name="android:textColor">#ffffff</item>
         <item name="android:tag">JuraMedium</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-    <style name="dialog_choice_text">
+    <style name="main_text" parent="@android:style/TextAppearance.Medium">
         <item name="android:textColor">#ffffff</item>
-        <item name="android:textSize">8pt</item>
         <item name="android:tag">JuraMedium</item>
         <item name="android:gravity">center_vertical|center_horizontal</item>
     </style>

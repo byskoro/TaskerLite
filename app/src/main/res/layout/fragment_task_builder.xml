@@ -41,7 +41,7 @@
         <LinearLayout
             android:id="@+id/menuBtnID"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="@dimen/item_height"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -55,15 +55,15 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
-                    android:layout_weight="0.7"
+                    android:layout_weight="1"
                     android:scaleType="centerInside"
                     android:src="@drawable/home"
                     android:background="@null"/>
 
-                <com.taskerlite.source.AutoResizeTextView
+                <TextView
+                    style="@style/builder_controls_text"
                     android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.3"
+                    android:layout_height="wrap_content"
                     android:textColor="@color/white"
                     android:text="Back"/>
             </LinearLayout>
@@ -79,15 +79,15 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
-                    android:layout_weight="0.7"
+                    android:layout_weight="1"
                     android:scaleType="centerInside"
                     android:src="@drawable/actions"
                     android:background="@null"/>
 
-                <com.taskerlite.source.AutoResizeTextView
+                <TextView
+                    style="@style/builder_controls_text"
                     android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.3"
+                    android:layout_height="wrap_content"
                     android:textColor="@color/white"
                     android:text="Triger"/>
             </LinearLayout>
@@ -103,15 +103,15 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
-                    android:layout_weight="0.7"
+                    android:layout_weight="1"
                     android:scaleType="centerInside"
                     android:src="@drawable/task"
                     android:background="@null"/>
 
-                <com.taskerlite.source.AutoResizeTextView
+                <TextView
+                    style="@style/builder_controls_text"
                     android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.3"
+                    android:layout_height="wrap_content"
                     android:textColor="@color/white"
                     android:text="Tasks"/>
             </LinearLayout>
@@ -127,16 +127,15 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
-                    android:layout_weight="0.7"
+                    android:layout_weight="1"
                     android:scaleType="centerInside"
                     android:src="@drawable/delete"
                     android:background="@null"/>
 
-                <com.taskerlite.source.AutoResizeTextView
+                <TextView
+                    style="@style/builder_controls_text"
                     android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.3"
-                    android:textColor="@color/white"
+                    android:layout_height="wrap_content"
                     android:text="Delete"/>
             </LinearLayout>
         </LinearLayout>
