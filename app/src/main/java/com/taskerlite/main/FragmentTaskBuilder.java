@@ -91,7 +91,6 @@ public class FragmentTaskBuilder extends Fragment implements View.OnClickListene
         actionElement.setOnClickListener(this);
         taskElement.setOnClickListener(this);
         profileName.setOnEditorActionListener(this);
-        profileName.setTypeface(Typeface.createFromAsset(context.getAssets(), fontName));
         clearRequestLay = (LinearLayout) view.findViewById(R.id.clearRequestLay);
 
         textPaint = new Paint();

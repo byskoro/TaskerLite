@@ -6,7 +6,7 @@
     <string name="profile_name">Profile Name</string>
     <string name="profile_name_short">Name</string>
     <string name="profile_delete">Delete profile?</string>
-    <string name="font_name">JuraMedium.ttf</string>
+    <string name="font_name">fonts/JuraMedium.ttf</string>
     <string name="on">ON</string>
     <string name="off">OFF</string>
     <string name="app_open">Press to open application</string>
