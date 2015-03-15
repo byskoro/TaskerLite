@@ -2,13 +2,36 @@
 
     <style name="AppTheme" parent="android:Theme.DeviceDefault.NoActionBar"></style>
 
+    <style name="profile_mame_text">
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textSize">500sp</item>
+        <item name="android:tag">JuraMedium</item>
+        <item name="android:gravity">center_vertical|left</item>
+    </style>
+
+    <style name="builder_logo_text">
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textSize">12pt</item>
+        <item name="android:tag">JuraMedium</item>
+        <item name="android:gravity">center_vertical|center_horizontal</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
     <style name="dialog_logo_text">
-        <item name="android:textColor">#c4c4c4</item>
+        <item name="android:textColor">#ffffff</item>
         <item name="android:textSize">10pt</item>
         <item name="android:tag">JuraMedium</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="dialog_choice_text">
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textSize">8pt</item>
+        <item name="android:tag">JuraMedium</item>
+        <item name="android:gravity">center_vertical|center_horizontal</item>
     </style>
 
 </resources>

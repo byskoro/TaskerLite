@@ -13,21 +13,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
+            android:padding="10dp"
             android:orientation="horizontal">
 
             <EditText
                 android:id="@+id/profileNameID"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:padding="10dp"
+                style="@style/builder_logo_text"
                 android:inputType="text"
                 android:maxLines="1"
                 android:maxLength="20"
                 android:imeOptions="actionDone"
                 android:textColorHint="#aaa"
-                android:hint="Name"
-                android:gravity="center"
-                android:textSize="30sp" />
+                android:hint="Name"/>
         </LinearLayout>
 
         <LinearLayout

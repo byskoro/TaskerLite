@@ -2,15 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="10dp"
-    android:layout_marginBottom="10dp"
-    android:layout_marginLeft="20dp"
-    android:layout_marginRight="20dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:paddingRight="20dp"
+    android:paddingLeft="20dp"
     android:background="@drawable/dialog_list_bg"
     android:minWidth="250dp"
     android:orientation="vertical">
 
-    <com.taskerlite.source.AutoResizeTextView
+    <TextView
         style="@style/dialog_logo_text"
         android:text="@string/t_app_short"
         android:background="@color/black"/>
@@ -19,6 +19,7 @@
         android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
         android:divider="@null"/>
 
 </LinearLayout>

@@ -19,6 +19,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.taskerlite.R;
+import com.taskerlite.source.Fonts;
 import com.taskerlite.source.mNotification;
 
 import java.util.List;
@@ -111,6 +112,9 @@ public class tApp extends mTask {
             lvMain.setAdapter(adapter);
             lvMain.setOnItemClickListener(listListener);
 
+            Fonts fonts = new Fonts(getActivity());
+            fonts.setupLayoutTypefaces(view);
+
             return view;
         }
 
@@ -155,6 +159,10 @@ public class tApp extends mTask {
                 imageView.setImageDrawable(item.loadIcon(context.getPackageManager()));
                 TextView textView = (TextView) rowView.findViewById(R.id.textDescriptionId);
                 textView.setText(item.loadLabel(context.getPackageManager()));
+
+                Fonts fonts = new Fonts(getActivity());
+                fonts.setupLayoutTypefaces(convertView);
+
                 return rowView;
             }
         }

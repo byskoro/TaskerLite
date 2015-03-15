@@ -26,15 +26,13 @@
 
         <com.taskerlite.source.AutoResizeTextView
             android:id="@+id/profileNameID"
+            style="@style/profile_mame_text"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:layout_marginLeft="15dp"
-            android:paddingTop="17dp"
-            android:paddingBottom="17dp"
-            android:text="NAME"
-            android:tag="JuraMedium"
-            android:textColor="#ffffff"
-            android:textSize="500sp" />
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:text="NAME" />
     </LinearLayout>
 </LinearLayout>
