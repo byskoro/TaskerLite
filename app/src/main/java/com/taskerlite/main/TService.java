@@ -3,6 +3,7 @@ package com.taskerlite.main;
 import java.util.Calendar;
 import com.taskerlite.R;
 import com.taskerlite.logic.actions.mAction;
+import com.taskerlite.receiver.BootComplete;
 import com.taskerlite.source.Settings;
 import com.taskerlite.logic.ProfileController.*;
 import com.taskerlite.logic.*;
@@ -58,6 +59,11 @@ public class TService extends Service {
     private Handler handlerLogic = new Handler() {
 
         public void handleMessage(Message msg) {
+
+            if(BootComplete.isBootComplete) {
+                checkForAction(TYPES.A_BOOT_COMPLETE);
+                BootComplete.isBootComplete = false;
+            }
 
             checkForAction(TYPES.A_TIME);
             handlerLogic.sendEmptyMessageDelayed(0, generateOffsetTime());
