@@ -7,6 +7,10 @@
         <item name="android:textSize">500sp</item>
         <item name="android:tag">JuraMedium</item>
         <item name="android:gravity">center_vertical|left</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:paddingBottom">17dp</item>
+        <item name="android:paddingTop">17dp</item>
     </style>
 
     <style name="builder_logo_text">
