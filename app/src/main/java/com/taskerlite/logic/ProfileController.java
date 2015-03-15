@@ -2,7 +2,7 @@ package com.taskerlite.logic;
 
 import com.taskerlite.logic.actions.mAction;
 import com.taskerlite.logic.tasks.mTask;
-import com.taskerlite.source.Flash;
+import com.taskerlite.source.Eeprom;
 import com.taskerlite.source.Types.*;
 
 import java.util.ArrayList;
@@ -17,14 +17,13 @@ public class ProfileController {
     public int getProfileListSize(){ return profileList.size(); }
 
     public void removeProfileFromList(int index){
-
 		profileList.remove(index);
         profileList.trimToSize();
         saveAllProfile();
 	}
 
     public void saveAllProfile(){
-        Flash.saveList(this);
+        Eeprom.getInstance().saveList(this);
     }
 	
 	public class Profile {
@@ -38,7 +37,6 @@ public class ProfileController {
         }
 		
 		public void addNewAction(mAction actionObject, TYPES actionType, int xCoordinate, int yCoordinate){
-			
 			actionList.add(new ActionElement(actionObject, actionType, xCoordinate, yCoordinate));
 		}
 
@@ -48,7 +46,6 @@ public class ProfileController {
         }
 		
 		public void addNewTask(mTask obj, TYPES objType, int x, int y){
-			
 			taskList.add(new TaskElement(obj, objType, x, y));
 		}
 
@@ -60,7 +57,6 @@ public class ProfileController {
         }
 
         public void invalidateData(){
-
             for(ActionElement action : getActionList())
                 action.invalidateData();
             for(TaskElement task : getTaskList())
