@@ -208,7 +208,7 @@ public class FragmentTaskList extends Fragment implements View.OnClickListener{
 
                     String name = String.valueOf(nameInput.getText());
 
-                    if (name.length()!=0){
+                    if (name.length()!=0) {
 
                         dataActivity.getProfileController().newProfile(name);
                         dataActivity.setCurrentProfileIndex(dataActivity.getProfileController().getProfileListSize() - 1);

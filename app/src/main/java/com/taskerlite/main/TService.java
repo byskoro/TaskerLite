@@ -72,7 +72,6 @@ public class TService extends Service {
 
     private void checkForAction(TYPES type){
 
-
         if(!previousRawData.equals(settings.getRawData())){
 
             profileController = settings.getProfileController();
@@ -146,7 +145,7 @@ public class TService extends Service {
         Notification.Builder builder = new Notification.Builder(this);
         builder.setContentTitle(getString(R.string.app_name));
         builder.setContentText(getString(R.string.app_open));
-        builder.setSmallIcon(android.R.drawable.ic_menu_mylocation);
+        builder.setSmallIcon(R.drawable.ic_launcher);
         builder.setContentIntent(pendingIntent);
         Notification notification;
         if (android.os.Build.VERSION.SDK_INT >= 16) {
