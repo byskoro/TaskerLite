@@ -42,6 +42,8 @@
             android:id="@+id/menuBtnID"
             android:layout_width="match_parent"
             android:layout_height="@dimen/item_height"
+            android:padding="5dp"
+            android:background="@drawable/foot_transparent"
             android:orientation="horizontal">
 
             <LinearLayout
