@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import com.google.gson.GsonBuilder;
 import com.taskerlite.logic.ProfileController;
 
-
 public class Settings {
 
     private static Settings instance = null;

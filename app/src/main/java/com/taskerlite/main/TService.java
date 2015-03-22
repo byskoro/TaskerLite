@@ -1,13 +1,6 @@
 package com.taskerlite.main;
 
-import java.util.Calendar;
 import com.taskerlite.R;
-import com.taskerlite.logic.actions.mAction;
-import com.taskerlite.receiver.BootCompleteBR;
-import com.taskerlite.source.Settings;
-import com.taskerlite.logic.ProfileController.*;
-import com.taskerlite.logic.*;
-import com.taskerlite.logic.tasks.mTask;
 import android.app.ActivityManager;
 import android.app.Notification;
 import android.app.PendingIntent;
@@ -16,11 +9,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.os.Handler;
 import android.os.IBinder;
-import android.os.Message;
-import android.os.PowerManager;
-import android.os.PowerManager.WakeLock;
 import com.taskerlite.source.Types.*;
 
 public class TService extends Service {
