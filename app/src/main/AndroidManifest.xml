@@ -36,13 +36,14 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name=".receiver.BootComplete" >
+        <receiver android:name=".receiver.BootCompleteBR" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
 
         <service android:name=".main.TService" />
+        <receiver android:name=".receiver.AlarmBR" ></receiver>
 
     </application>
 

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import com.taskerlite.R;
 import com.taskerlite.logic.ProfileController;
+import com.taskerlite.receiver.AlarmBR;
 import com.taskerlite.source.Settings;
 import com.taskerlite.logic.ProfileController.Profile;
 import com.taskerlite.source.Icons;
@@ -35,6 +36,10 @@ public class mActivity extends Activity implements FragmentCallBack {
 
         if(!TService.isRunning(this))
             startService(new Intent(this, TService.class));
+
+        AlarmBR alarmBR = new AlarmBR();
+        alarmBR.CancelAlarm(this);
+        alarmBR.setOnetimeTimer(this);
     }
 
     @Override

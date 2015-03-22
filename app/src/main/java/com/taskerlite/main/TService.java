@@ -3,7 +3,7 @@ package com.taskerlite.main;
 import java.util.Calendar;
 import com.taskerlite.R;
 import com.taskerlite.logic.actions.mAction;
-import com.taskerlite.receiver.BootComplete;
+import com.taskerlite.receiver.BootCompleteBR;
 import com.taskerlite.source.Settings;
 import com.taskerlite.logic.ProfileController.*;
 import com.taskerlite.logic.*;
@@ -25,21 +25,13 @@ import com.taskerlite.source.Types.*;
 
 public class TService extends Service {
 
-    private String previousRawData = "";
-    private ProfileController profileController;
-    private WakeLock wakeLock;
-    private Settings settings;
+    SchedulerLogic schedulerLogic;
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
-        PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
-        wakeLock = pm.newWakeLock((PowerManager.PARTIAL_WAKE_LOCK), "TAG");
-        wakeLock.acquire();
+        schedulerLogic = SchedulerLogic.getInstance(getApplicationContext());
 
-        settings = Settings.getInstance(this);
-
-        handlerLogic.sendEmptyMessage(0);
         registerBroadcastReceivers();
         runAsForeground();
 
@@ -50,62 +42,7 @@ public class TService extends Service {
     public void onDestroy() {
         super.onDestroy();
 
-        handlerLogic.removeMessages(0);
-        wakeLock.release();
-
         getApplicationContext().unregisterReceiver(screenStateReceiver);
-    }
-
-    private Handler handlerLogic = new Handler() {
-
-        public void handleMessage(Message msg) {
-
-            if(BootComplete.isBootComplete) {
-                checkForAction(TYPES.A_BOOT_COMPLETE);
-                BootComplete.isBootComplete = false;
-            }
-
-            checkForAction(TYPES.A_TIME);
-            handlerLogic.sendEmptyMessageDelayed(0, generateOffsetTime());
-        }
-    };
-
-    private void checkForAction(TYPES type){
-
-        if(!previousRawData.equals(settings.getRawData())){
-
-            profileController = settings.getProfileController();
-            previousRawData   = settings.getRawData();
-        }
-
-        for(Profile profile : profileController.getProfileList()){
-
-            for(ActionElement action : profile.getActionList()){
-
-                mAction actionObj = action.getActionObject();
-
-                if(actionObj.isMyAction(getApplicationContext(), type)){
-
-                    for(TaskElement task : profile.getTaskList()){
-
-                        if(action.isTaskElementIdPresent(task.getTaskId())){
-
-                            mTask taskObj = task.getTaskObject();
-                            taskObj.start(getApplicationContext());
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    private long generateOffsetTime(){
-
-        Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.MINUTE, 1);
-        cal.set(Calendar.SECOND, 0);
-
-        return cal.getTimeInMillis() - System.currentTimeMillis();
     }
 
     private void registerBroadcastReceivers(){
@@ -125,9 +62,9 @@ public class TService extends Service {
             String strAction = intent.getAction();
 
             if (strAction.equals(Intent.ACTION_SCREEN_OFF))
-                checkForAction(TYPES.A_SCREEN_OFF);
+                schedulerLogic.checkForAction(TYPES.A_SCREEN_OFF);
             else if(strAction.equals(Intent.ACTION_SCREEN_ON))
-                checkForAction(TYPES.A_SCREEN_ON);
+                schedulerLogic.checkForAction(TYPES.A_SCREEN_ON);
         }
     };
 
